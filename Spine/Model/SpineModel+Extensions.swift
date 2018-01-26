@@ -1,5 +1,5 @@
 //
-//  Model+Extensions.swift
+//  SpineModel+Extensions.swift
 //  Spine
 //
 //  Created by Max Gribov on 26/01/2018.

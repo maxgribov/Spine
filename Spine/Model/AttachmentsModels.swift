@@ -8,6 +8,17 @@
 
 import Foundation
 
+enum AttachmentModelType {
+    
+    case region(RegionAttachmentModel)
+    case boundingBox(BoundingBoxAttachmentModel)
+    case mesh (MeshAttachmentModel)
+    case linkedMesh(LinkedMeshAttachmentModel)
+    case path(PathAttachmentModel)
+    case point(PointAttachmentModel)
+    case clipping(ClippingAttachmentModel)
+}
+
 struct SkinModel {
     
     let name: String

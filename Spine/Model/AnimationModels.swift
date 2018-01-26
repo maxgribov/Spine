@@ -8,13 +8,38 @@
 
 import Foundation
 
+enum AnimationGroupModelType {
+    
+    case bones([BoneAnimationModel])
+    case slots([SlotAnimationModel])
+    case ik([IKConstraintAnimationModel])
+    case transform([TransformConstraintAnimationModel])
+    case deform([DeformSkinAnimationModel])
+    case events([EventKeyfarameModel])
+    case draworder([DrawOrderKeyframeModel])
+}
+
+enum BoneAnimationTimelineModelType {
+    
+    case rotate([BoneKeyframeRotateModel])
+    case translate([BoneKeyframeTranslateModel])
+    case scale([BoneKeyframeScaleModel])
+    case shear([BoneKeyframeShearModel])
+}
+
+enum SlotAnimationTimelineModelType {
+    
+    case attachment([SlotKeyframeAttachmentModel])
+    case color([SlotKeyframeColorModel])
+}
+
+//MARK: - Animations
+
 struct AnimationModel {
     
     let name: String
     let groups: [AnimationGroupModelType]
 }
-
-//MARK: - Animations
 
 struct BoneAnimationModel {
     
@@ -259,4 +284,22 @@ struct DrawOrderOffsetModel {
     let offset: Int
     
     //TODO: implement init
+}
+
+//MARK: - Event
+
+struct EventModel {
+    
+    let name: String
+    let int: Int
+    let float: CGFloat
+    let string: String?
+    
+    init(_ name: String, _ int: Int = 0, _ float: CGFloat = 0, _ string: String?) {
+        
+        self.name = name
+        self.int = int
+        self.float = float
+        self.string = string
+    }
 }

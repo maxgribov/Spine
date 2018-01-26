@@ -93,4 +93,60 @@ struct PathConstraintModel {
         self.rotateMix = rotateMix
         self.translateMix = translateMix
     }
+    
+    enum PathPositionModelMode: Int {
+        
+        case fixed = 0
+        case percent
+        
+        init(_ positionMode: Int) {
+            
+            if let positionMode = PathPositionModelMode(rawValue: positionMode) {
+                
+                self = positionMode
+                
+            } else {
+                
+                self = .percent
+            }
+        }
+    }
+    
+    enum PathSpacingModelMode: Int {
+        
+        case length = 0
+        case fixed
+        case percent
+        
+        init(_ spacingMode: Int) {
+            
+            if let spacingMode = PathSpacingModelMode(rawValue: spacingMode) {
+                
+                self = spacingMode
+                
+            } else {
+                
+                self = .length
+            }
+        }
+    }
+    
+    enum PathRotateModelMode: Int {
+        
+        case tangent = 0
+        case chain
+        case chainScale
+        
+        init(_ rotateMode: Int) {
+            
+            if let rotateMode = PathRotateModelMode(rawValue: rotateMode) {
+                
+                self = rotateMode
+                
+            } else {
+                
+                self = .tangent
+            }
+        }
+    }
 }

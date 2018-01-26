@@ -151,6 +151,27 @@ struct BoneModel {
         if let inheritScale = inheritScale { self.inheritScale = inheritScale } else { self.inheritScale = true }
         if let inheritRotation = inheritRotation { self.inheritRotation = inheritRotation } else { self.inheritRotation = true }
     }
+    
+    enum BoneTransformModelType: Int {
+        
+        case normal = 0
+        case onlyTranslation
+        case noRotationOrReflection
+        case noScale
+        case noScaleOrReflection
+        
+        init(_ transform: Int ) {
+            
+            if let transform = BoneTransformModelType(rawValue: transform) {
+                
+                self = transform
+                
+            } else {
+                
+                self = .normal
+            }
+        }
+    }
 }
 
 extension BoneModel: Decodable {
@@ -231,6 +252,26 @@ struct SlotModel {
         self.dark = ColorModel(dark)
         self.attachment = attachment
         if let blend = blend { self.blend = BlendModeModelType(blend) } else { self.blend = .normal }
+    }
+    
+    enum BlendModeModelType: Int {
+        
+        case normal = 0
+        case additive
+        case multiply
+        case screen
+        
+        init(_ blend: Int) {
+            
+            if let blend = BlendModeModelType(rawValue: blend) {
+                
+                self = blend
+                
+            } else {
+                
+                self = .normal
+            }
+        }
     }
 }
 
