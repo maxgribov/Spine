@@ -10,14 +10,17 @@ import Foundation
 
 struct ColorModel {
     
+    let value: String
     let red: Double
     let green: Double
     let blue: Double
     let alpha: Double
-    
+
     init(_ color: String) {
         
         //TODO: create real implementation later
+        
+        value = color
         red = 0
         green = 0
         blue = 0
@@ -27,7 +30,10 @@ struct ColorModel {
     init?(_ color: String?) {
         
         //TODO: create real implementation later
-        if color != nil {
+        
+        if let color = color {
+            
+            value = color
             red = 0
             green = 0
             blue = 0

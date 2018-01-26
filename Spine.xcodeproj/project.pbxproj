@@ -14,8 +14,8 @@
 		779AC340201B4BC200C33B79 /* AttachmentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* AttachmentsModels.swift */; };
 		779AC342201B4C0200C33B79 /* Model+Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC341201B4C0200C33B79 /* Model+Structs.swift */; };
 		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
+		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
 		77F1D5F3201A490400AF499B /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F1D5E9201A490400AF499B /* Spine.framework */; };
-		77F1D5F8201A490400AF499B /* SpineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1D5F7201A490400AF499B /* SpineTests.swift */; };
 		77F1D5FA201A490400AF499B /* Spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F1D5EC201A490400AF499B /* Spine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -37,11 +37,11 @@
 		779AC33F201B4BC200C33B79 /* AttachmentsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsModels.swift; sourceTree = "<group>"; };
 		779AC341201B4C0200C33B79 /* Model+Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Structs.swift"; sourceTree = "<group>"; };
 		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
+		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
 		77F1D5E9201A490400AF499B /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5EC201A490400AF499B /* Spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine.h; sourceTree = "<group>"; };
 		77F1D5ED201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77F1D5F2201A490400AF499B /* SpineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		77F1D5F7201A490400AF499B /* SpineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineTests.swift; sourceTree = "<group>"; };
 		77F1D5F9201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,7 +109,7 @@
 		77F1D5F6201A490400AF499B /* SpineTests */ = {
 			isa = PBXGroup;
 			children = (
-				77F1D5F7201A490400AF499B /* SpineTests.swift */,
+				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
 			);
 			path = SpineTests;
@@ -240,7 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77F1D5F8201A490400AF499B /* SpineTests.swift in Sources */,
+				779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
