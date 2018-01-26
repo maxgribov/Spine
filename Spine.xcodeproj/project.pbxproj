@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
+		779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
+		779AC33C201B4B0800C33B79 /* Model+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33B201B4B0800C33B79 /* Model+Extensions.swift */; };
+		779AC33E201B4B2800C33B79 /* Model+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33D201B4B2800C33B79 /* Model+Enums.swift */; };
+		779AC340201B4BC200C33B79 /* AttachmentsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* AttachmentsModels.swift */; };
+		779AC342201B4C0200C33B79 /* Model+Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC341201B4C0200C33B79 /* Model+Structs.swift */; };
+		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
 		77F1D5F3201A490400AF499B /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F1D5E9201A490400AF499B /* Spine.framework */; };
 		77F1D5F8201A490400AF499B /* SpineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1D5F7201A490400AF499B /* SpineTests.swift */; };
 		77F1D5FA201A490400AF499B /* Spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F1D5EC201A490400AF499B /* Spine.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +30,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		779AC335201B49B900C33B79 /* SkeletonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModel.swift; sourceTree = "<group>"; };
+		779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModels.swift; sourceTree = "<group>"; };
+		779AC33B201B4B0800C33B79 /* Model+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Extensions.swift"; sourceTree = "<group>"; };
+		779AC33D201B4B2800C33B79 /* Model+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Enums.swift"; sourceTree = "<group>"; };
+		779AC33F201B4BC200C33B79 /* AttachmentsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsModels.swift; sourceTree = "<group>"; };
+		779AC341201B4C0200C33B79 /* Model+Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Structs.swift"; sourceTree = "<group>"; };
+		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
 		77F1D5E9201A490400AF499B /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5EC201A490400AF499B /* Spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine.h; sourceTree = "<group>"; };
 		77F1D5ED201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +64,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		779AC334201B499C00C33B79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				779AC335201B49B900C33B79 /* SkeletonModel.swift */,
+				779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */,
+				779AC33F201B4BC200C33B79 /* AttachmentsModels.swift */,
+				779AC343201B4C4D00C33B79 /* AnimationModels.swift */,
+				779AC33B201B4B0800C33B79 /* Model+Extensions.swift */,
+				779AC33D201B4B2800C33B79 /* Model+Enums.swift */,
+				779AC341201B4C0200C33B79 /* Model+Structs.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		77F1D5DF201A490400AF499B = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				77F1D5EC201A490400AF499B /* Spine.h */,
+				779AC334201B499C00C33B79 /* Model */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
 			);
 			path = Spine;
@@ -148,6 +177,7 @@
 				TargetAttributes = {
 					77F1D5E8201A490400AF499B = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					77F1D5F1201A490400AF499B = {
@@ -196,6 +226,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				779AC33E201B4B2800C33B79 /* Model+Enums.swift in Sources */,
+				779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */,
+				779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */,
+				779AC342201B4C0200C33B79 /* Model+Structs.swift in Sources */,
+				779AC340201B4BC200C33B79 /* AttachmentsModels.swift in Sources */,
+				779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */,
+				779AC33C201B4B0800C33B79 /* Model+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +371,7 @@
 		77F1D5FE201A490400AF499B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -347,6 +385,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pro.maxgribov.Spine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +394,7 @@
 		77F1D5FF201A490400AF499B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -376,6 +416,7 @@
 		77F1D601201A490400AF499B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29E66XW7ZX;
 				INFOPLIST_FILE = SpineTests/Info.plist;
@@ -390,6 +431,7 @@
 		77F1D602201A490400AF499B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29E66XW7ZX;
 				INFOPLIST_FILE = SpineTests/Info.plist;
