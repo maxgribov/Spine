@@ -8,15 +8,35 @@
 
 import Foundation
 
+///This section describes the IK constraints
 struct IKConstraintModel {
     
+    ///The constraint name. This is unique for the skeleton.
     let name: String
+    ///The ordinal for the order constraints are applied.
     let order: UInt
+    ///A list of 1 or 2 bone names whose rotation will be controlled by the constraint.
     let bones: [String]
+    ///The name of the target bone.
     let target: String
+    ///A value from 0 to 1 indicating the influence the constraint has on the bones, where 0 means only FK, 1 means only IK, and between is a mix of FK and IK. Assume 1 if omitted.
     let mix: CGFloat
+    ///If true, the bones will bend in the positive rotation direction. Assume false if omitted.
     let blendPositive: Bool
     
+    /**
+     Initializes a new IKConstraintModel.
+     
+     - Parameters:
+         - name: Required
+         - order: Required
+         - bones: Required
+         - target: Required
+         - mix: Optional, default: 1.0
+         - blendPositive: Optional, default false
+     
+     - Returns: new IKConstraintModel.
+     */
     init(_ name: String, _ order: UInt, _ bones: [String], _ target: String, _ mix: CGFloat?, _ blendPositive: Bool?) {
         
         self.name = name
@@ -54,23 +74,71 @@ extension IKConstraintModel: Decodable {
     }
 }
 
+///This section describes the transform constraints.
 struct TransformConstraintModel {
     
+    ///The constraint name. This is unique for the skeleton.
     let name: String
+    ///The ordinal for the order constraints are applied.
     let order: UInt
+    ///The bone whose transform will be controlled by the constraint.
     let bone: String
+    ///The name of the target bone.
     let target: String
+    ///The rotation to offset from the target bone. Assume 0 if omitted.
     let rotation: CGFloat
+    /**
+     The distance to offset from the target bone.
+     
+     - dx: The X distance to offset from the target bone. Assume 0 if omitted.
+     - dy: The Y distance to offset from the target bone. Assume 0 if omitted.
+     */
     let offset: CGVector
+    /**
+     The scale to offset from the target bone.
+     
+     - dx: The X scale to offset from the target bone. Assume 0 if omitted.
+     - dy: The Y scale to offset from the target bone. Assume 0 if omitted.
+     */
     let scale: CGVector
+    ///The Y shear to offset from the target bone. Assume 0 if omitted.
     let shear: CGVector
+    ///A value from 0 to 1 indicating the influence the constraint has on the bones, where 0 means no affect, 1 means only the constraint, and between is a mix of the normal pose and the constraint. Assume 1 if omitted.
     let rotateMix: CGFloat
+    ///See rotateMix.
     let translateMix: CGFloat
+    ///See rotateMix.
     let scaleMix: CGFloat
+    ///See rotateMix.
     let shearMix: CGFloat
+    ///True if the target's local transform is affected, else the world transform is affected. Assume false if omitted.
     let local: Bool
+    ///True if the target's transform is adjusted relatively, else the transform is set absolutely. Assume false if omitted.
     let relative: Bool
     
+    /**
+     Initializes a new TransformConstraintModel.
+     
+     - Parameters:
+        - name: Required
+        - order: Required
+        - bone: Required
+        - target: Required
+        - rotation: Optional, default: 0
+        - x: Optional, default: 0
+        - y: Optional, default: 0
+        - scaleX: Optional, default: 0
+        - scaleY: Optional, default: 0
+        - shearY: Optional, default: 0
+        - rotateMix: Optional, default: 1.0
+        - translateMix: Optional, default: 1.0
+        - scaleMix: Optional, default: 1.0
+        - shearMix: Optional, default: 1.0
+        - local: Optional, default: false
+        - relative: Optional, default: false
+
+     - Returns: new TransformConstraintModel.
+     */
     init(_ name: String, _ order: UInt, _ bone: String, _ target: String, _ rotation: CGFloat?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ shearY: CGFloat?, _ rotateMix: CGFloat?, _ translateMix: CGFloat?, _ scaleMix: CGFloat?, _ shearMix: CGFloat?, _ local: Bool?, _ relative: Bool?) {
         
         self.name = name
@@ -136,21 +204,53 @@ extension TransformConstraintModel: Decodable {
     }
 }
 
+///This section describes the path constraints.
 struct PathConstraintModel {
     
+    ///The constraint name. This is unique for the skeleton.
     let name: String
+    ///The ordinal for the order constraints are applied.
     let order: UInt
+    ///The bones whose rotation and/or translation will be controlled by the constraint.
     let bones: [String]
+    ///The name of the target slot.
     let target: String
+    ///Determines how the path position is calculated: fixed or percent. Assume percent if omitted.
     let positionMode: PathPositionModelMode
+    ///Determines how the spacing between bones is calculated: length, fixed, or percent. Assume length if omitted.
     let spacingMode: PathSpacingModelMode
+    ///Determines how the bone rotation is calculated: tangent, chain, or chain scale. Assume tangent if omitted.
     let rotateMode: PathRotateModelMode
+    ///The rotation to offset from the path rotation. Assume 0 if omitted.
     let rotation: CGFloat
+    ///The path position. Assume 0 if omitted.
     let position: CGFloat
+    ///The spacing between bones. Assume 0 if omitted.
     let spacing: CGFloat
+    ///A value from 0 to 1 indicating the influence the constraint has on the bones, where 0 means no affect, 1 means only the constraint, and between is a mix of the normal pose and the constraint. Assume 1 if omitted.
     let rotateMix: CGFloat
+    // See rotateMix.
     let translateMix: CGFloat
     
+    /**
+     Initializes a new PathConstraintModel.
+     
+     - Parameters:
+         - name: Required
+         - order: Required
+         - bones: Required
+         - target: Required
+         - positionMode: Optional, default: precent
+         - spacingMode: Optional, default: length
+         - rotateMode: Optional, default: tangent
+         - rotation: Optional, default: 0
+         - position: Optional, default: 0
+         - spacing: Optional, default: 0
+         - rotateMix: Optional, default: 1
+         - translateMix: Optional, default: 1
+
+     - Returns: new PathConstraintModel.
+     */
     init(_ name: String, _ order: UInt, _ bones: [String], _ target: String, _ positionMode: String?, _ spacingMode: String?, _ rotateMode: String?, _ rotation: CGFloat?, _ position: CGFloat?, _ spacing: CGFloat?, _ rotateMix: CGFloat?, _ translateMix: CGFloat? ) {
         
         self.name = name
