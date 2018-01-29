@@ -46,7 +46,7 @@ struct SkeletonModel {
         self.hash = hash
         self.spine = spine
         self.size = CGSize(width: width, height: height)
-        if let fps = fps { self.fps = fps } else { self.fps = 30 }
+        self.fps = fps ?? 30
         self.path = path
     }
 }
@@ -142,14 +142,14 @@ struct BoneModel {
         
         self.name = name
         self.parent = parent
-        if let lenght = lenght { self.lenght = lenght } else { self.lenght = 0 }
-        if let transform = transform { self.transform = BoneTransformModelType(transform) } else { self.transform = .normal }
-        if let x = x, let y = y { self.position = CGPoint(x: x, y: y) } else { self.position = CGPoint.zero }
-        if let rotation = rotation { self.rotation = rotation } else { self.rotation = 0 }
-        if let scaleX = scaleX, let scaleY = scaleY { self.scale = CGVector(dx: scaleX, dy: scaleY) } else { self.scale = CGVector(dx: 1.0, dy: 1.0)}
-        if let shearX = shearX, let shearY = shearY { self.shear = CGVector(dx: shearX, dy: shearY) } else { self.shear = CGVector.zero }
-        if let inheritScale = inheritScale { self.inheritScale = inheritScale } else { self.inheritScale = true }
-        if let inheritRotation = inheritRotation { self.inheritRotation = inheritRotation } else { self.inheritRotation = true }
+        self.lenght = lenght ?? 0
+        self.transform = BoneTransformModelType(transform ?? 0)
+        self.position = CGPoint(x: x ?? 0, y: y ?? 0)
+        self.rotation = rotation ?? 0
+        self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
+        self.shear = CGVector(dx: shearX ?? 0, dy: shearY ?? 0)
+        self.inheritScale = inheritScale ?? true
+        self.inheritRotation = inheritRotation ?? true
     }
     
     enum BoneTransformModelType: Int {
@@ -248,10 +248,10 @@ struct SlotModel {
         
         self.name = name
         self.bone = bone
-        if let color = color { self.color = ColorModel(color) } else { self.color = ColorModel("FFFFFFFF") }
+        self.color = ColorModel(color ?? "FFFFFFFF")
         self.dark = ColorModel(dark)
         self.attachment = attachment
-        if let blend = blend { self.blend = BlendModeModelType(blend) } else { self.blend = .normal }
+        self.blend = BlendModeModelType(blend ?? 0)
     }
     
     enum BlendModeModelType: Int {

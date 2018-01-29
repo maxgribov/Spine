@@ -126,7 +126,7 @@ class SkeletonModelTests: XCTestCase {
         }
     }
     
-    func testBoneModelOmmited() {
+    func testBoneModelOmitted() {
         
         //given
         let json = """
@@ -196,7 +196,7 @@ class SkeletonModelTests: XCTestCase {
         }
     }
     
-    func testSlotModelOmmited() {
+    func testSlotModelOmitted() {
         
         //given
         let json = """
