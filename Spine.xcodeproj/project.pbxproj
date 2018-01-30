@@ -12,7 +12,6 @@
 		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
 		779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
 		779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
-		779AC33C201B4B0800C33B79 /* SpineModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33B201B4B0800C33B79 /* SpineModel+Extensions.swift */; };
 		779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
 		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
 		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
@@ -36,7 +35,6 @@
 		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
 		779AC335201B49B900C33B79 /* SkeletonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModel.swift; sourceTree = "<group>"; };
 		779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModels.swift; sourceTree = "<group>"; };
-		779AC33B201B4B0800C33B79 /* SpineModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpineModel+Extensions.swift"; sourceTree = "<group>"; };
 		779AC33F201B4BC200C33B79 /* SkinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModels.swift; sourceTree = "<group>"; };
 		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
 		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */,
 				779AC33F201B4BC200C33B79 /* SkinModels.swift */,
 				779AC343201B4C4D00C33B79 /* AnimationModels.swift */,
-				779AC33B201B4B0800C33B79 /* SpineModel+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,7 +231,6 @@
 				77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */,
 				779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */,
 				779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */,
-				779AC33C201B4B0800C33B79 /* SpineModel+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

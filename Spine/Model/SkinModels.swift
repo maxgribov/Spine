@@ -289,7 +289,14 @@ struct MeshAttachmentModel: AttachmentModel {
         self.hull = hull
         self.edges = edges
         self.color = ColorModel(color ?? "FFFFFFFF")
-        self.size = CGSize(width, height)
+        if let width = width, let height = height  {
+            
+            self.size = CGSize(width: width, height: height)
+            
+        } else {
+            
+            self.size = nil
+        }
     }
 }
 
@@ -322,7 +329,14 @@ struct LinkedMeshAttachmentModel: AttachmentModel {
         self.parent = parent
         self.deform = deform ?? true
         self.color = ColorModel(color ?? "FFFFFFFF")
-        self.size = CGSize(width, height)
+        if let width = width, let height = height  {
+            
+            self.size = CGSize(width: width, height: height)
+            
+        } else {
+            
+            self.size = nil
+        }
     }
 }
 
