@@ -117,6 +117,8 @@ struct BoneModel {
     let inheritScale: Bool
     ///False if rotation from parent bones should not affect this bone. Assume true if omitted.
     let inheritRotation: Bool
+    ///The color of the bone, as it was in Spine. Assume 0x989898FF RGBA if omitted. Nonessential.
+    let color: ColorModel?
     
     /**
      Initializes a new BoneModel.
@@ -135,32 +137,34 @@ struct BoneModel {
          - shearY: Optional, default: 0
          - inheritScale: Optional, default: true
          - inheritRotation: Optional, default: true
+         - color: Optional
 
      - Returns: new BoneModel.
      */
-    init(_ name: String, _ parent: String?, _ lenght: CGFloat?, _ transform: Int?, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ shearX: CGFloat?, _ shearY: CGFloat?, _ inheritScale: Bool?, _ inheritRotation: Bool?) {
+    init(_ name: String, _ parent: String?, _ lenght: CGFloat?, _ transform: String?, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ shearX: CGFloat?, _ shearY: CGFloat?, _ inheritScale: Bool?, _ inheritRotation: Bool?, _ color: String?) {
         
         self.name = name
         self.parent = parent
         self.lenght = lenght ?? 0
-        self.transform = BoneTransformModelType(transform ?? 0)
+        self.transform = BoneTransformModelType(transform ?? "normal")
         self.position = CGPoint(x: x ?? 0, y: y ?? 0)
         self.rotation = rotation ?? 0
         self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
         self.shear = CGVector(dx: shearX ?? 0, dy: shearY ?? 0)
         self.inheritScale = inheritScale ?? true
         self.inheritRotation = inheritRotation ?? true
+        self.color = ColorModel(color)
     }
     
-    enum BoneTransformModelType: Int {
+    enum BoneTransformModelType: String {
         
-        case normal = 0
+        case normal
         case onlyTranslation
         case noRotationOrReflection
         case noScale
         case noScaleOrReflection
         
-        init(_ transform: Int ) {
+        init(_ transform: String ) {
             
             if let transform = BoneTransformModelType(rawValue: transform) {
                 
@@ -190,6 +194,7 @@ extension BoneModel: Decodable {
         case shearY
         case inheritScale
         case inheritRotation
+        case color
     }
     
     init(from decoder: Decoder) throws {
@@ -198,7 +203,7 @@ extension BoneModel: Decodable {
         let name: String = try container.decode(String.self, forKey: .name)
         let parent: String? = try container.decodeIfPresent(String.self, forKey: .parent)
         let lenght: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .length)
-        let transform: Int? = try container.decodeIfPresent(Int.self, forKey: .transform)
+        let transform: String? = try container.decodeIfPresent(String.self, forKey: .transform)
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
@@ -208,8 +213,9 @@ extension BoneModel: Decodable {
         let shearY: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .shearY)
         let inheritScale: Bool? = try container.decodeIfPresent(Bool.self, forKey: .inheritScale)
         let inheritRotation: Bool? = try container.decodeIfPresent(Bool.self, forKey: .inheritRotation)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(name, parent, lenght, transform, x, y, rotation, scaleX, scaleY, shearX, shearY, inheritScale, inheritRotation)
+        self.init(name, parent, lenght, transform, x, y, rotation, scaleX, scaleY, shearX, shearY, inheritScale, inheritRotation, color)
     }
 }
 

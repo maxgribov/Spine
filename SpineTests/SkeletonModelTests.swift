@@ -84,19 +84,20 @@ class SkeletonModelTests: XCTestCase {
         //given
         let json = """
         {
-            "name": "torso",
-            "parent": "root",
-            "length": 75.82,
-            "transform": 1,
-            "x": -37.1,
-            "y": 230.8,
-            "rotation": -74.86,
-            "scaleX": 0.53,
-            "scaleY": 0.47,
+            "name": "back-foot-tip",
+            "parent": "rear-foot",
+            "length": 50.3,
+            "rotation": -0.85,
+            "x": 51.17,
+            "y": 0.24,
+            "transform": "noRotationOrReflection",
+            "scaleX": 0.785,
+            "scaleY": 0.785,
             "shearX": 0.21,
             "shearY": 0.97,
             "inheritScale": false,
-            "inheritRotation": false
+            "inheritRotation": false,
+            "color": "ff000dff",
         }
         """.data(using: .utf8)!
         
@@ -106,19 +107,20 @@ class SkeletonModelTests: XCTestCase {
         //then
         if let bone = bone {
             
-            XCTAssertEqual(bone.name, "torso")
-            XCTAssertEqual(bone.parent, "root")
-            XCTAssertEqual(bone.lenght, 75.82)
-            XCTAssertEqual(bone.transform, .onlyTranslation)
-            XCTAssertEqual(bone.position.x, -37.1)
-            XCTAssertEqual(bone.position.y, 230.8)
-            XCTAssertEqual(bone.rotation, -74.86)
-            XCTAssertEqual(bone.scale.dx, 0.53)
-            XCTAssertEqual(bone.scale.dy, 0.47)
+            XCTAssertEqual(bone.name, "back-foot-tip")
+            XCTAssertEqual(bone.parent, "rear-foot")
+            XCTAssertEqual(bone.lenght, 50.3)
+            XCTAssertEqual(bone.rotation, -0.85)
+            XCTAssertEqual(bone.position.x, 51.17)
+            XCTAssertEqual(bone.position.y, 0.24)
+            XCTAssertEqual(bone.transform, .noRotationOrReflection)
+            XCTAssertEqual(bone.scale.dx, 0.785)
+            XCTAssertEqual(bone.scale.dy, 0.785)
             XCTAssertEqual(bone.shear.dx, 0.21)
             XCTAssertEqual(bone.shear.dy, 0.97)
             XCTAssertEqual(bone.inheritScale, false)
             XCTAssertEqual(bone.inheritRotation, false)
+            XCTAssertEqual(bone.color?.value, "ff000dff")
             
         } else {
             
@@ -131,7 +133,7 @@ class SkeletonModelTests: XCTestCase {
         //given
         let json = """
         {
-            "name": "torso"
+            "name": "back-foot-tip"
         }
         """.data(using: .utf8)!
         
@@ -141,7 +143,7 @@ class SkeletonModelTests: XCTestCase {
         //then
         if let bone = bone {
             
-            XCTAssertEqual(bone.name, "torso")
+            XCTAssertEqual(bone.name, "back-foot-tip")
             XCTAssertNil(bone.parent)
             XCTAssertEqual(bone.lenght, 0)
             XCTAssertEqual(bone.transform, .normal)
@@ -154,6 +156,7 @@ class SkeletonModelTests: XCTestCase {
             XCTAssertEqual(bone.shear.dy, 0)
             XCTAssertEqual(bone.inheritScale, true)
             XCTAssertEqual(bone.inheritRotation, true)
+            XCTAssertNil(bone.color)
             
         } else {
             
