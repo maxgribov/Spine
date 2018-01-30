@@ -91,8 +91,8 @@ class ConstraintsModelsTests: XCTestCase {
             "rotation": 0.5,
             "x": 125.4,
             "y": -24.5,
-            "scaleX": 1.01,
-            "scaleY": 0.52,
+            "scaleX": 4.0E-4,
+            "scaleY": -3.0E-4,
             "shearY": 0.94,
             "rotateMix": 0.55,
             "translateMix": 0.9,
@@ -116,8 +116,8 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(ikConstraint.rotation, 0.5)
             XCTAssertEqual(ikConstraint.offset.dx, 125.4)
             XCTAssertEqual(ikConstraint.offset.dy, -24.5)
-            XCTAssertEqual(ikConstraint.scale.dx, 1.01)
-            XCTAssertEqual(ikConstraint.scale.dy, 0.52)
+            XCTAssertEqual(ikConstraint.scale.dx, 4.0E-4)
+            XCTAssertEqual(ikConstraint.scale.dy, -3.0E-4)
             XCTAssertEqual(ikConstraint.rotateMix, 0.55)
             XCTAssertEqual(ikConstraint.translateMix, 0.9)
             XCTAssertEqual(ikConstraint.scaleMix, 0.1)
@@ -184,7 +184,7 @@ class ConstraintsModelsTests: XCTestCase {
           "target": "slotName",
           "positionMode": "fixed",
           "spacingMode": "percent",
-          "rotateMode": "chain scale",
+          "rotateMode": "chainScale",
           "rotation": 45,
           "position": 204,
           "spacing": 10,

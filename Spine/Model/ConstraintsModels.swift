@@ -308,7 +308,7 @@ struct PathConstraintModel {
         
         case tangent
         case chain
-        case chainScale = "chain scale"
+        case chainScale
         
         init(_ rotateMode: String) {
             
