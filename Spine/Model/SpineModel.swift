@@ -28,11 +28,18 @@ enum CurveModelType {
     case stepped
     case bezier(BezierCurveModel)
     
-    init(_ value: Int) {
+    init(_ value: String?) {
         
-        if value == 1 {
+        if let value = value {
             
-            self = .stepped
+            if value == "stepped" {
+                
+                self = .stepped
+                
+            } else {
+                
+                self = .linear
+            }
             
         } else {
             

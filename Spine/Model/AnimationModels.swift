@@ -101,7 +101,7 @@ struct BoneKeyframeRotateModel: BoneKeyframeModel {
     let curve: CurveModelType
     let angle: CGFloat
     
-    init(_ time: CGFloat, _ curve: Int = 0, _ angle: CGFloat = 0) {
+    init(_ time: CGFloat, _ curve: String?, _ angle: CGFloat = 0) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -123,7 +123,7 @@ struct BoneKeyframeTranslateModel: BoneKeyframeModel {
     let curve: CurveModelType
     let position: CGPoint
     
-    init(_ time: CGFloat, _ curve: Int = 0, _ x: CGFloat = 0, _ y: CGFloat = 0) {
+    init(_ time: CGFloat, _ curve: String?, _ x: CGFloat = 0, _ y: CGFloat = 0) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -145,7 +145,7 @@ struct BoneKeyframeScaleModel: BoneKeyframeModel {
     let curve: CurveModelType
     let scale: CGVector
     
-    init(_ time: CGFloat, _ curve: Int = 0, _ x: CGFloat = 0, _ y: CGFloat = 0) {
+    init(_ time: CGFloat, _ curve: String?, _ x: CGFloat = 0, _ y: CGFloat = 0) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -167,7 +167,7 @@ struct BoneKeyframeShearModel: BoneKeyframeModel {
     let curve: CurveModelType
     let shear: CGVector
     
-    init(_ time: CGFloat, _ curve: Int = 0, _ x: CGFloat = 0, _ y: CGFloat = 0) {
+    init(_ time: CGFloat, _ curve: String?, _ x: CGFloat = 0, _ y: CGFloat = 0) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -201,7 +201,7 @@ struct SlotKeyframeColorModel: KeyframeModel {
     let color: ColorModel
     let curve: CurveModelType
     
-    init(_ time: CGFloat, _ color: String, _ curve: Int = 0) {
+    init(_ time: CGFloat, _ color: String, _ curve: String?) {
         
         self.time = time
         self.color = ColorModel(color)
