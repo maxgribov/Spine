@@ -12,7 +12,6 @@ struct SpineModel {
     
     let skeleton: SkeletonModel
     let bones: [BoneModel]
-    let slots: [SlotModel]
     let skins: [SkinModel]
     let ik: [IKConstraintModel]
     let transform: [TransformConstraintModel]
@@ -75,28 +74,6 @@ enum CurveModelType {
     }
 }
 
-enum VerticeModel {
-    
-    case normal(CGPoint)
-    case weighted(CGFloat)
-    
-    init(_ vertice: [String : CGFloat]) {
-        
-        guard let x = vertice["x"], let y = vertice["y"] else {
-            
-            self = .normal(CGPoint.zero)
-            return
-        }
-        
-        self = .normal(CGPoint(x: x, y: y))
-    }
-    
-    init(_ vertice: CGFloat) {
-        
-        self = .weighted(vertice)
-    }
-}
-
 struct ColorModel {
     
     let value: String
@@ -133,4 +110,13 @@ struct ColorModel {
             return nil
         }
     }
+}
+
+struct SpineNameKey: CodingKey {
+    
+    var stringValue: String
+    var intValue: Int?
+    
+    init?(stringValue: String) { self.stringValue = stringValue }
+    init?(intValue: Int) { self.intValue = intValue; self.stringValue = "\(intValue)" }
 }

@@ -253,7 +253,7 @@ struct DeformKeyframeModel: KeyframeModel {
     
     let time: CGFloat
     let offset: Int
-    let vertices: [VerticeModel]
+    let vertices: [CGFloat]
     let curve: CurveModelType
     
     //TODO: implement init
