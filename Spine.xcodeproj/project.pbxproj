@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77404ED2201BD8E500E51CF5 /* SpineModel.swift */; };
+		7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
 		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
 		779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
 		779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		77404ED2201BD8E500E51CF5 /* SpineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModel.swift; sourceTree = "<group>"; };
+		7755D4232020F14D005275DA /* SkinModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModelsTests.swift; sourceTree = "<group>"; };
 		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
 		779AC335201B49B900C33B79 /* SkeletonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModel.swift; sourceTree = "<group>"; };
 		779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModels.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
 				776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */,
+				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
 			);
 			path = SpineTests;
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */,
+				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
 				779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

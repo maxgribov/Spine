@@ -11,7 +11,7 @@ import Foundation
 struct SkinModel {
     
     let name: String
-    let slots: [SkinSlotModel]
+    let slots: [SkinSlotModel]?
 }
 
 extension SkinModel: Decodable {
@@ -67,22 +67,86 @@ extension SkinModel: Decodable {
                     throw SkinModelDecodingError.attachmentTypeUnknown
                 }
                 
+                let name = attachment.stringValue
+                
                 switch attachmentType {
                     
-                default:
+                case .region:
                     let regionAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: RegionAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let name = attachment.stringValue
                     let path: String? = try regionAttachmentContainer.decodeIfPresent(String.self, forKey: .path)
                     let x: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .x)
                     let y: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .y)
                     let scaleX: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .scaleX)
                     let scaleY: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .scaleY)
                     let rotation: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .rotation)
-                    let width: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .width)
-                    let height: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .height)
+                    let width: CGFloat = try regionAttachmentContainer.decode(CGFloat.self, forKey: .width)
+                    let height: CGFloat = try regionAttachmentContainer.decode(CGFloat.self, forKey: .height)
                     let color: String? = try regionAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
                     
                     attachments.append(AttachmentModelType.region(RegionAttachmentModel(name, path, x, y, scaleX, scaleY, rotation, width, height, color)))
+                    
+                case .boundingBox:
+                    let boundingBoxAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: BoundingBoxAttachmentModel.Keys.self, forKey: attachmentKey)
+                    let vertexCount: UInt = try boundingBoxAttachmentContainer.decode(UInt.self, forKey: .vertexCount)
+                    let vertices: [CGFloat] = try boundingBoxAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
+                    let color: String? = try boundingBoxAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
+                    
+                    attachments.append(AttachmentModelType.boundingBox(BoundingBoxAttachmentModel(name, vertexCount, vertices, color)))
+                    
+                case .mesh:
+                    let meshAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: MeshAttachmentModel.Keys.self, forKey: attachmentKey)
+                    let path: String? = try meshAttachmentContainer.decodeIfPresent(String.self, forKey: .path)
+                    let uvs: [CGFloat] = try meshAttachmentContainer.decode([CGFloat].self, forKey: .uvs)
+                    let triangles: [UInt] = try meshAttachmentContainer.decode([UInt].self, forKey: .triangles)
+                    let vertices: [CGFloat] = try meshAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
+                    let hull: UInt = try meshAttachmentContainer.decode(UInt.self, forKey: .hull)
+                    let edges: [UInt]? = try meshAttachmentContainer.decodeIfPresent([UInt].self, forKey: .edges)
+                    let color: String? = try meshAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
+                    let width: CGFloat? = try meshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .width)
+                    let height: CGFloat? = try meshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .height)
+                    
+                    attachments.append(AttachmentModelType.mesh(MeshAttachmentModel(name, path, uvs, triangles, vertices, hull, edges, color, width, height)))
+                    
+                case .linkedMesh:
+                    let linkedMeshAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: LinkedMeshAttachmentModel.Keys.self, forKey: attachmentKey)
+                    let path: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .path)
+                    let skin: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .skin)
+                    let parent: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .parent)
+                    let deform: Bool? = try linkedMeshAttachmentContainer.decodeIfPresent(Bool.self, forKey: .deform)
+                    let color: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
+                    let width: CGFloat? = try linkedMeshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .width)
+                    let height: CGFloat? = try linkedMeshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .height)
+                    
+                    attachments.append(AttachmentModelType.linkedMesh(LinkedMeshAttachmentModel(name, path, skin, parent, deform, color, width,height)))
+
+                case .path:
+                    let pathAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: PathAttachmentModel.Keys.self, forKey: attachmentKey)
+                    let closed: Bool? = try pathAttachmentContainer.decodeIfPresent(Bool.self, forKey: .closed)
+                    let constantSpeed: Bool? = try pathAttachmentContainer.decodeIfPresent(Bool.self, forKey: .constantSpeed)
+                    let lengths: [CGFloat] = try pathAttachmentContainer.decode([CGFloat].self, forKey: .lengths)
+                    let vertexCount: UInt = try pathAttachmentContainer.decode(UInt.self, forKey: .vertexCount)
+                    let vertices: [CGFloat] = try pathAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
+                    let color: String? = try pathAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
+                    
+                    attachments.append(AttachmentModelType.path(PathAttachmentModel(name, closed, constantSpeed, lengths, vertexCount, vertices, color)))
+                    
+                case .point:
+                    let pointAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: PointAttachmentModel.Keys.self, forKey: attachmentKey)
+                    let x: CGFloat? = try pointAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .x)
+                    let y: CGFloat? = try pointAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .y)
+                    let rotation: CGFloat? = try pointAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .rotation)
+                    let color: String? = try pointAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
+                    
+                    attachments.append(AttachmentModelType.point(PointAttachmentModel(name, x, y, rotation, color)))
+                    
+                case .clipping:
+                    let clippingAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: ClippingAttachmentModel.Keys.self, forKey: attachmentKey)
+                    let end: String = try clippingAttachmentContainer.decode(String.self, forKey: .end)
+                    let vertexCount: UInt = try clippingAttachmentContainer.decode(UInt.self, forKey: .vertexCount)
+                    let vertices: [CGFloat] = try clippingAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
+                    let color: String? = try clippingAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
+                    
+                    attachments.append(AttachmentModelType.clipping(ClippingAttachmentModel(name, end, vertexCount, vertices, color)))
                 }
             }
             
@@ -97,7 +161,7 @@ extension SkinModel: Decodable {
 struct SkinSlotModel {
     
     let name: String
-    let attachments: [AttachmentModelType]
+    let attachments: [AttachmentModelType]?
 }
 
 //MARK: - Attachments
@@ -134,6 +198,20 @@ enum AttachmentModelType {
             self = type
         }
     }
+    
+    var model: AttachmentModel {
+        get {
+            switch self {
+            case .region(let model): return model
+            case .boundingBox(let model): return model
+            case .mesh(let model): return model
+            case .linkedMesh(let model): return model
+            case .path(let model): return model
+            case .point(let model): return model
+            case .clipping(let model): return model
+            }
+        }
+    }
 }
 
 protocol AttachmentModel {
@@ -164,14 +242,14 @@ struct RegionAttachmentModel: AttachmentModel {
         case color
     }
     
-    init(_ name: String, _ path: String?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ rotation: CGFloat?, _ width: CGFloat?, _ height: CGFloat?, _ color: String?) {
+    init(_ name: String, _ path: String?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ rotation: CGFloat?, _ width: CGFloat, _ height: CGFloat, _ color: String?) {
         
         self.name = name
         self.path = path
         self.position = CGPoint(x: x ?? 0, y: y ?? 0)
         self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
         self.rotation = rotation ?? 0
-        self.size = CGSize(width: width ?? 0, height: height ?? 0)
+        self.size = CGSize(width: width, height: height)
         self.color = ColorModel(color ?? "FFFFFFFF")
     }
 }
@@ -179,7 +257,7 @@ struct RegionAttachmentModel: AttachmentModel {
 struct MeshAttachmentModel: AttachmentModel {
     
     let name: String
-    let path: String
+    let path: String?
     let uvs: [CGFloat]
     let triangles: [UInt]
     let vertices: [CGFloat]
@@ -188,7 +266,20 @@ struct MeshAttachmentModel: AttachmentModel {
     let color: ColorModel
     let size: CGSize?
     
-    init(_ name: String, _ path: String, _ uvs: [CGFloat], _ triangles: [UInt], _ vertices: [CGFloat], _ hull: UInt, _ edges: [UInt]?, _ color: String = "FFFFFFFF", _ width: CGFloat?, _ height: CGFloat?) {
+    enum Keys: String, CodingKey {
+        
+        case path
+        case uvs
+        case triangles
+        case vertices
+        case hull
+        case edges
+        case color
+        case width
+        case height
+    }
+    
+    init(_ name: String, _ path: String?, _ uvs: [CGFloat], _ triangles: [UInt], _ vertices: [CGFloat], _ hull: UInt, _ edges: [UInt]?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
         
         self.name = name
         self.path = path
@@ -197,7 +288,7 @@ struct MeshAttachmentModel: AttachmentModel {
         self.vertices = vertices
         self.hull = hull
         self.edges = edges
-        self.color = ColorModel(color)
+        self.color = ColorModel(color ?? "FFFFFFFF")
         self.size = CGSize(width, height)
     }
 }
@@ -212,14 +303,25 @@ struct LinkedMeshAttachmentModel: AttachmentModel {
     let color: ColorModel
     let size: CGSize?
     
-    init(_ name: String, _ path: String?, _ skin: String?, _ parent: String?, _ deform: Bool = true, _ color: String = "FFFFFFFF", _ width: CGFloat?, _ height: CGFloat?) {
+    enum Keys: String, CodingKey {
+        
+        case path
+        case skin
+        case parent
+        case deform
+        case color
+        case width
+        case height
+    }
+    
+    init(_ name: String, _ path: String?, _ skin: String?, _ parent: String?, _ deform: Bool?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
         
         self.name = name
         self.path = path
         self.skin = skin
         self.parent = parent
-        self.deform = deform
-        self.color = ColorModel(color)
+        self.deform = deform ?? true
+        self.color = ColorModel(color ?? "FFFFFFFF")
         self.size = CGSize(width, height)
     }
 }
@@ -231,12 +333,19 @@ struct BoundingBoxAttachmentModel: AttachmentModel {
     let vertices: [CGFloat]
     let color: ColorModel
     
-    init(_ name: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String = "60F000FF") {
+    enum Keys: String, CodingKey {
+        
+        case vertexCount
+        case vertices
+        case color
+    }
+    
+    init(_ name: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
         self.name = name
         self.vertexCount = vertexCount
         self.vertices = vertices
-        self.color = ColorModel(color)
+        self.color = ColorModel(color ?? "60F000FF")
     }
 }
 
@@ -250,15 +359,25 @@ struct PathAttachmentModel: AttachmentModel {
     let vertices: [CGFloat]
     let color: ColorModel
     
-    init(_ name: String, _ closed: Bool = false, _ constantSpeed: Bool = true, _ lengths: [CGFloat], _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String = "FF7F00FF") {
+    enum Keys: String, CodingKey {
+        
+        case closed
+        case constantSpeed
+        case lengths
+        case vertexCount
+        case vertices
+        case color
+    }
+    
+    init(_ name: String, _ closed: Bool?, _ constantSpeed: Bool?, _ lengths: [CGFloat], _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
         self.name = name
-        self.closed = closed
-        self.constantSpeed = constantSpeed
+        self.closed = closed ?? false
+        self.constantSpeed = constantSpeed ?? true
         self.lengths = lengths
         self.vertexCount = vertexCount
         self.vertices = vertices
-        self.color = ColorModel(color)
+        self.color = ColorModel(color ?? "FF7F00FF")
     }
 }
 
@@ -269,29 +388,45 @@ struct PointAttachmentModel: AttachmentModel {
     let rotation: CGFloat
     let color: ColorModel
     
-    init(_ name: String, _ x: CGFloat, _ y: CGFloat, _ rotation: CGFloat, _ color: String = "F1F100FF") {
+    enum Keys: String, CodingKey {
+        
+        case x
+        case y
+        case rotation
+        case color
+    }
+    
+    init(_ name: String, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ color: String?) {
         
         self.name = name
-        self.point = CGPoint(x: x, y: y)
-        self.rotation = rotation
-        self.color = ColorModel(color)
+        self.point = CGPoint(x: x ?? 0, y: y ?? 0)
+        self.rotation = rotation ?? 0
+        self.color = ColorModel(color ?? "F1F100FF")
     }
 }
 
 struct ClippingAttachmentModel: AttachmentModel {
     
     let name: String
-    let end: Int
+    let end: String
     let vertexCount: UInt
     let vertices: [CGFloat]
     let color: ColorModel
     
-    init(_ name: String, _ end: Int, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String = "CE3A3AFF") {
+    enum Keys: String, CodingKey {
+        
+        case end
+        case vertexCount
+        case vertices
+        case color
+    }
+    
+    init(_ name: String, _ end: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
         self.name = name
         self.end = end
         self.vertexCount = vertexCount
         self.vertices = vertices
-        self.color = ColorModel(color)
+        self.color = ColorModel(color ?? "CE3A3AFF")
     }
 }
