@@ -53,7 +53,7 @@ struct SkeletonModel {
 
 extension SkeletonModel: Decodable {
     
-    enum SkeletonKeys: String, CodingKey {
+    enum Keys: String, CodingKey {
         
         case hash
         case spine
@@ -65,7 +65,7 @@ extension SkeletonModel: Decodable {
     
     init(from decoder: Decoder) throws {
         
-        let container = try decoder.container(keyedBy: SkeletonKeys.self)
+        let container = try decoder.container(keyedBy: Keys.self)
         let hash: String = try container.decode(String.self, forKey: .hash)
         let spine: String = try container.decode(String.self, forKey: .spine)
         let width: CGFloat = try container.decode(CGFloat.self, forKey: .width)
@@ -180,7 +180,7 @@ struct BoneModel {
 
 extension BoneModel: Decodable {
 
-    enum BoneKeys: String, CodingKey {
+    enum Keys: String, CodingKey {
         case name
         case parent
         case length
@@ -199,7 +199,7 @@ extension BoneModel: Decodable {
     
     init(from decoder: Decoder) throws {
         
-        let container = try decoder.container(keyedBy: BoneKeys.self)
+        let container = try decoder.container(keyedBy: Keys.self)
         let name: String = try container.decode(String.self, forKey: .name)
         let parent: String? = try container.decodeIfPresent(String.self, forKey: .parent)
         let lenght: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .length)
@@ -283,7 +283,7 @@ struct SlotModel {
 
 extension SlotModel: Decodable {
     
-    enum SlotKeys: String, CodingKey {
+    enum Keys: String, CodingKey {
         
         case name
         case bone
@@ -295,7 +295,7 @@ extension SlotModel: Decodable {
     
     init(from decoder: Decoder) throws {
         
-        let container = try decoder.container(keyedBy: SlotKeys.self)
+        let container = try decoder.container(keyedBy: Keys.self)
         let name: String = try container.decode(String.self, forKey: .name)
         let bone: String = try container.decode(String.self, forKey: .bone)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
