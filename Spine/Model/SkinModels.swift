@@ -70,83 +70,26 @@ extension SkinModel: Decodable {
                 let name = attachment.stringValue
                 
                 switch attachmentType {
-                    
                 case .region:
-                    let regionAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: RegionAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let path: String? = try regionAttachmentContainer.decodeIfPresent(String.self, forKey: .path)
-                    let x: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .x)
-                    let y: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .y)
-                    let scaleX: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .scaleX)
-                    let scaleY: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .scaleY)
-                    let rotation: CGFloat? = try regionAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .rotation)
-                    let width: CGFloat = try regionAttachmentContainer.decode(CGFloat.self, forKey: .width)
-                    let height: CGFloat = try regionAttachmentContainer.decode(CGFloat.self, forKey: .height)
-                    let color: String? = try regionAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    
-                    attachments.append(AttachmentModelType.region(RegionAttachmentModel(name, path, x, y, scaleX, scaleY, rotation, width, height, color)))
+                    attachments.append(AttachmentModelType.region(try RegionAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: RegionAttachmentModel.Keys.self, forKey: attachmentKey))))
                     
                 case .boundingBox:
-                    let boundingBoxAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: BoundingBoxAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let vertexCount: UInt = try boundingBoxAttachmentContainer.decode(UInt.self, forKey: .vertexCount)
-                    let vertices: [CGFloat] = try boundingBoxAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
-                    let color: String? = try boundingBoxAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    
-                    attachments.append(AttachmentModelType.boundingBox(BoundingBoxAttachmentModel(name, vertexCount, vertices, color)))
+                    attachments.append(AttachmentModelType.boundingBox(try BoundingBoxAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: BoundingBoxAttachmentModel.Keys.self, forKey: attachmentKey))))
                     
                 case .mesh:
-                    let meshAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: MeshAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let path: String? = try meshAttachmentContainer.decodeIfPresent(String.self, forKey: .path)
-                    let uvs: [CGFloat] = try meshAttachmentContainer.decode([CGFloat].self, forKey: .uvs)
-                    let triangles: [UInt] = try meshAttachmentContainer.decode([UInt].self, forKey: .triangles)
-                    let vertices: [CGFloat] = try meshAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
-                    let hull: UInt = try meshAttachmentContainer.decode(UInt.self, forKey: .hull)
-                    let edges: [UInt]? = try meshAttachmentContainer.decodeIfPresent([UInt].self, forKey: .edges)
-                    let color: String? = try meshAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    let width: CGFloat? = try meshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .width)
-                    let height: CGFloat? = try meshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .height)
-                    
-                    attachments.append(AttachmentModelType.mesh(MeshAttachmentModel(name, path, uvs, triangles, vertices, hull, edges, color, width, height)))
+                    attachments.append(AttachmentModelType.mesh(try MeshAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: MeshAttachmentModel.Keys.self, forKey: attachmentKey))))
                     
                 case .linkedMesh:
-                    let linkedMeshAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: LinkedMeshAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let path: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .path)
-                    let skin: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .skin)
-                    let parent: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .parent)
-                    let deform: Bool? = try linkedMeshAttachmentContainer.decodeIfPresent(Bool.self, forKey: .deform)
-                    let color: String? = try linkedMeshAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    let width: CGFloat? = try linkedMeshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .width)
-                    let height: CGFloat? = try linkedMeshAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .height)
-                    
-                    attachments.append(AttachmentModelType.linkedMesh(LinkedMeshAttachmentModel(name, path, skin, parent, deform, color, width,height)))
+                    attachments.append(AttachmentModelType.linkedMesh(try LinkedMeshAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: LinkedMeshAttachmentModel.Keys.self, forKey: attachmentKey))))
 
                 case .path:
-                    let pathAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: PathAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let closed: Bool? = try pathAttachmentContainer.decodeIfPresent(Bool.self, forKey: .closed)
-                    let constantSpeed: Bool? = try pathAttachmentContainer.decodeIfPresent(Bool.self, forKey: .constantSpeed)
-                    let lengths: [CGFloat] = try pathAttachmentContainer.decode([CGFloat].self, forKey: .lengths)
-                    let vertexCount: UInt = try pathAttachmentContainer.decode(UInt.self, forKey: .vertexCount)
-                    let vertices: [CGFloat] = try pathAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
-                    let color: String? = try pathAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    
-                    attachments.append(AttachmentModelType.path(PathAttachmentModel(name, closed, constantSpeed, lengths, vertexCount, vertices, color)))
+                    attachments.append(AttachmentModelType.path(try PathAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: PathAttachmentModel.Keys.self, forKey: attachmentKey))))
                     
                 case .point:
-                    let pointAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: PointAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let x: CGFloat? = try pointAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .x)
-                    let y: CGFloat? = try pointAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .y)
-                    let rotation: CGFloat? = try pointAttachmentContainer.decodeIfPresent(CGFloat.self, forKey: .rotation)
-                    let color: String? = try pointAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    
-                    attachments.append(AttachmentModelType.point(PointAttachmentModel(name, x, y, rotation, color)))
+                    attachments.append(AttachmentModelType.point(try PointAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: PointAttachmentModel.Keys.self, forKey: attachmentKey))))
                     
                 case .clipping:
-                    let clippingAttachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: ClippingAttachmentModel.Keys.self, forKey: attachmentKey)
-                    let end: String = try clippingAttachmentContainer.decode(String.self, forKey: .end)
-                    let vertexCount: UInt = try clippingAttachmentContainer.decode(UInt.self, forKey: .vertexCount)
-                    let vertices: [CGFloat] = try clippingAttachmentContainer.decode([CGFloat].self, forKey: .vertices)
-                    let color: String? = try clippingAttachmentContainer.decodeIfPresent(String.self, forKey: .color)
-                    
-                    attachments.append(AttachmentModelType.clipping(ClippingAttachmentModel(name, end, vertexCount, vertices, color)))
+                    attachments.append(AttachmentModelType.clipping(try ClippingAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: ClippingAttachmentModel.Keys.self, forKey: attachmentKey))))
                 }
             }
             
@@ -219,6 +162,8 @@ protocol AttachmentModel {
     var name: String { get }
 }
 
+//MARK: - Region
+
 struct RegionAttachmentModel: AttachmentModel {
     
     let name: String
@@ -228,7 +173,21 @@ struct RegionAttachmentModel: AttachmentModel {
     let rotation: CGFloat
     let size: CGSize
     let color: ColorModel
-    
+
+    init(_ name: String, _ path: String?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ rotation: CGFloat?, _ width: CGFloat, _ height: CGFloat, _ color: String?) {
+        
+        self.name = name
+        self.path = path
+        self.position = CGPoint(x: x ?? 0, y: y ?? 0)
+        self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
+        self.rotation = rotation ?? 0
+        self.size = CGSize(width: width, height: height)
+        self.color = ColorModel(color ?? "FFFFFFFF")
+    }
+}
+
+extension RegionAttachmentModel: SpineDecodableDictionary {
+
     enum Keys: String, CodingKey {
         
         case path
@@ -242,17 +201,64 @@ struct RegionAttachmentModel: AttachmentModel {
         case color
     }
     
-    init(_ name: String, _ path: String?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ rotation: CGFloat?, _ width: CGFloat, _ height: CGFloat, _ color: String?) {
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        self.name = name
-        self.path = path
-        self.position = CGPoint(x: x ?? 0, y: y ?? 0)
-        self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
-        self.rotation = rotation ?? 0
-        self.size = CGSize(width: width, height: height)
-        self.color = ColorModel(color ?? "FFFFFFFF")
+        let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
+        let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
+        let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
+        let scaleX: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .scaleX)
+        let scaleY: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .scaleY)
+        let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
+        let width: CGFloat = try container.decode(CGFloat.self, forKey: .width)
+        let height: CGFloat = try container.decode(CGFloat.self, forKey: .height)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        
+        self.init(name, path, x, y, scaleX, scaleY, rotation, width, height, color)
     }
 }
+
+//MARK: - Bounding Box
+
+struct BoundingBoxAttachmentModel: AttachmentModel {
+    
+    let name: String
+    let vertexCount: UInt
+    let vertices: [CGFloat]
+    let color: ColorModel
+
+    init(_ name: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+        
+        self.name = name
+        self.vertexCount = vertexCount
+        self.vertices = vertices
+        self.color = ColorModel(color ?? "60F000FF")
+    }
+}
+
+extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
+    
+    enum Keys: String, CodingKey {
+        
+        case vertexCount
+        case vertices
+        case color
+    }
+    
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+        
+        let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
+        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        
+        self.init(name, vertexCount, vertices, color)
+    }
+}
+
+//MARK: - Mesh
 
 struct MeshAttachmentModel: AttachmentModel {
     
@@ -265,20 +271,7 @@ struct MeshAttachmentModel: AttachmentModel {
     let edges: [UInt]?
     let color: ColorModel
     let size: CGSize?
-    
-    enum Keys: String, CodingKey {
-        
-        case path
-        case uvs
-        case triangles
-        case vertices
-        case hull
-        case edges
-        case color
-        case width
-        case height
-    }
-    
+
     init(_ name: String, _ path: String?, _ uvs: [CGFloat], _ triangles: [UInt], _ vertices: [CGFloat], _ hull: UInt, _ edges: [UInt]?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
         
         self.name = name
@@ -300,6 +293,41 @@ struct MeshAttachmentModel: AttachmentModel {
     }
 }
 
+extension MeshAttachmentModel: SpineDecodableDictionary {
+    
+    enum Keys: String, CodingKey {
+        
+        case path
+        case uvs
+        case triangles
+        case vertices
+        case hull
+        case edges
+        case color
+        case width
+        case height
+    }
+    
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+        
+        let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
+        let uvs: [CGFloat] = try container.decode([CGFloat].self, forKey: .uvs)
+        let triangles: [UInt] = try container.decode([UInt].self, forKey: .triangles)
+        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
+        let hull: UInt = try container.decode(UInt.self, forKey: .hull)
+        let edges: [UInt]? = try container.decodeIfPresent([UInt].self, forKey: .edges)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        let width: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .width)
+        let height: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .height)
+        
+        self.init(name, path, uvs, triangles, vertices, hull, edges, color, width, height)
+    }
+}
+
+//MARK: - Linked Mesh
+
 struct LinkedMeshAttachmentModel: AttachmentModel {
     
     let name: String
@@ -309,18 +337,7 @@ struct LinkedMeshAttachmentModel: AttachmentModel {
     let deform: Bool
     let color: ColorModel
     let size: CGSize?
-    
-    enum Keys: String, CodingKey {
-        
-        case path
-        case skin
-        case parent
-        case deform
-        case color
-        case width
-        case height
-    }
-    
+
     init(_ name: String, _ path: String?, _ skin: String?, _ parent: String?, _ deform: Bool?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
         
         self.name = name
@@ -340,28 +357,36 @@ struct LinkedMeshAttachmentModel: AttachmentModel {
     }
 }
 
-struct BoundingBoxAttachmentModel: AttachmentModel {
-    
-    let name: String
-    let vertexCount: UInt
-    let vertices: [CGFloat]
-    let color: ColorModel
+extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
-        case vertexCount
-        case vertices
+        case path
+        case skin
+        case parent
+        case deform
         case color
+        case width
+        case height
     }
     
-    init(_ name: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        self.name = name
-        self.vertexCount = vertexCount
-        self.vertices = vertices
-        self.color = ColorModel(color ?? "60F000FF")
+        let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
+        let skin: String? = try container.decodeIfPresent(String.self, forKey: .skin)
+        let parent: String? = try container.decodeIfPresent(String.self, forKey: .parent)
+        let deform: Bool? = try container.decodeIfPresent(Bool.self, forKey: .deform)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        let width: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .width)
+        let height: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .height)
+        
+        self.init(name, path, skin, parent, deform, color, width,height)
     }
 }
+
+//MARK: - Path
 
 struct PathAttachmentModel: AttachmentModel {
     
@@ -372,16 +397,6 @@ struct PathAttachmentModel: AttachmentModel {
     let vertexCount: UInt
     let vertices: [CGFloat]
     let color: ColorModel
-    
-    enum Keys: String, CodingKey {
-        
-        case closed
-        case constantSpeed
-        case lengths
-        case vertexCount
-        case vertices
-        case color
-    }
     
     init(_ name: String, _ closed: Bool?, _ constantSpeed: Bool?, _ lengths: [CGFloat], _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
@@ -395,21 +410,42 @@ struct PathAttachmentModel: AttachmentModel {
     }
 }
 
+extension PathAttachmentModel: SpineDecodableDictionary {
+    
+    enum Keys: String, CodingKey {
+        
+        case closed
+        case constantSpeed
+        case lengths
+        case vertexCount
+        case vertices
+        case color
+    }
+    
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+        
+        let closed: Bool? = try container.decodeIfPresent(Bool.self, forKey: .closed)
+        let constantSpeed: Bool? = try container.decodeIfPresent(Bool.self, forKey: .constantSpeed)
+        let lengths: [CGFloat] = try container.decode([CGFloat].self, forKey: .lengths)
+        let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
+        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        
+        self.init(name, closed, constantSpeed, lengths, vertexCount, vertices, color)
+    }
+}
+
+//MARK: - Point
+
 struct PointAttachmentModel: AttachmentModel {
 
     let name: String
     let point: CGPoint
     let rotation: CGFloat
     let color: ColorModel
-    
-    enum Keys: String, CodingKey {
-        
-        case x
-        case y
-        case rotation
-        case color
-    }
-    
+
     init(_ name: String, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ color: String?) {
         
         self.name = name
@@ -419,6 +455,31 @@ struct PointAttachmentModel: AttachmentModel {
     }
 }
 
+extension PointAttachmentModel: SpineDecodableDictionary {
+    
+    enum Keys: String, CodingKey {
+        
+        case x
+        case y
+        case rotation
+        case color
+    }
+    
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+        
+        let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
+        let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
+        let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        
+        self.init(name, x, y, rotation, color)
+    }
+}
+
+//MARK: - Clipping
+
 struct ClippingAttachmentModel: AttachmentModel {
     
     let name: String
@@ -426,6 +487,18 @@ struct ClippingAttachmentModel: AttachmentModel {
     let vertexCount: UInt
     let vertices: [CGFloat]
     let color: ColorModel
+    
+    init(_ name: String, _ end: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+        
+        self.name = name
+        self.end = end
+        self.vertexCount = vertexCount
+        self.vertices = vertices
+        self.color = ColorModel(color ?? "CE3A3AFF")
+    }
+}
+
+extension ClippingAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
@@ -435,12 +508,15 @@ struct ClippingAttachmentModel: AttachmentModel {
         case color
     }
     
-    init(_ name: String, _ end: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        self.name = name
-        self.end = end
-        self.vertexCount = vertexCount
-        self.vertices = vertices
-        self.color = ColorModel(color ?? "CE3A3AFF")
+        let end: String = try container.decode(String.self, forKey: .end)
+        let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
+        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
+        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
+        
+        self.init(name, end, vertexCount, vertices, color)
     }
 }

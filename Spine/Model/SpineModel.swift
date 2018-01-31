@@ -20,6 +20,14 @@ struct SpineModel {
     let animations: [AnimationModel]
 }
 
+//MARK: - Decodable helpers protocols
+
+protocol SpineDecodableDictionary {
+    
+    associatedtype KeysType: CodingKey
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws
+}
+
 //MARK: - Helpers models
 
 enum CurveModelType {
