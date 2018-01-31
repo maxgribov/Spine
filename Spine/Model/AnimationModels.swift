@@ -256,18 +256,40 @@ struct DeformKeyframeModel: KeyframeModel {
     let vertices: [CGFloat]
     let curve: CurveModelType
     
-    //TODO: implement init
+    init(_ time: CGFloat, _ offset: Int, _ vertices: [CGFloat], _ curve: String?) {
+        
+        self.time = time
+        self.offset = offset
+        self.vertices = vertices
+        self.curve = CurveModelType(curve)
+    }
+    
+    //bezier curve type init
+    init(_ time: CGFloat, _ offset: Int, _ vertices: [CGFloat], _ curve: [CGFloat]) {
+        
+        self.time = time
+        self.offset = offset
+        self.vertices = vertices
+        self.curve = CurveModelType(curve)
+    }
 }
 
 struct EventKeyfarameModel: KeyframeModel {
     
     let time: CGFloat
     let event: String
-    let int: Int
-    let float: CGFloat
-    let string: String
+    let int: Int?
+    let float: CGFloat?
+    let string: String?
     
-    //TODO: implement init
+    init(_ time: CGFloat, _ event: String, _ int: Int?, _ float: CGFloat?, _ string: String?) {
+        
+        self.time = time
+        self.event = event
+        self.int = int
+        self.float = float
+        self.string = string
+    }
 }
 
 struct DrawOrderKeyframeModel: KeyframeModel {
@@ -275,7 +297,20 @@ struct DrawOrderKeyframeModel: KeyframeModel {
     let time: CGFloat
     let offsets: [DrawOrderOffsetModel]
     
-    //TODO: implement init
+    init(_ time: CGFloat, _ offsets: [[String : Any]]) {
+        
+        var offsetsMutable = [DrawOrderOffsetModel]()
+        for dict in offsets {
+            
+            if let offset = DrawOrderOffsetModel(dict) {
+                
+                offsetsMutable.append(offset)
+            }
+        }
+        
+        self.time = time
+        self.offsets = offsetsMutable
+    }
 }
 
 struct DrawOrderOffsetModel {
@@ -283,7 +318,16 @@ struct DrawOrderOffsetModel {
     let slot: String
     let offset: Int
     
-    //TODO: implement init
+    init?(_ dict: [String: Any]) {
+        
+        guard let slot = dict["slot"] as? String, let offset = dict["offset"] as? Int else {
+            
+            return nil
+        }
+        
+        self.slot = slot
+        self.offset = offset
+    }
 }
 
 //MARK: - Event
