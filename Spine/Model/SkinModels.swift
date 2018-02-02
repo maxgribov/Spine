@@ -16,6 +16,29 @@ struct SkinModel {
 
 extension SkinModel: Decodable {
     
+    enum Keys: String {
+        
+        case region
+        case boundingBox = "boundingbox"
+        case mesh
+        case linkedMesh = "linkedmesh"
+        case path
+        case point
+        case clipping
+        
+        init?(_ value: String?) {
+            
+            let typeValue = value ?? "region"
+            
+            guard let type = Keys(rawValue: typeValue) else {
+                
+                return nil
+            }
+            
+            self = type
+        }
+    }
+    
     enum SkinModelDecodingError: Error {
         
         case skinNameMissed
@@ -62,7 +85,7 @@ extension SkinModel: Decodable {
                 let attachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: SpineNameKey.self, forKey: attachmentKey)
                 let attachmentTypeString: String? = try attachmentContainer.decodeIfPresent(String.self, forKey: attachmentTypeKey)
                 
-                guard let attachmentType = AttachmentModelType.Keys(attachmentTypeString) else {
+                guard let attachmentType = Keys(attachmentTypeString) else {
                     
                     throw SkinModelDecodingError.attachmentTypeUnknown
                 }
@@ -118,30 +141,7 @@ enum AttachmentModelType {
     case path(PathAttachmentModel)
     case point(PointAttachmentModel)
     case clipping(ClippingAttachmentModel)
-    
-    enum Keys: String {
-        
-        case region
-        case boundingBox = "boundingbox"
-        case mesh
-        case linkedMesh = "linkedmesh"
-        case path
-        case point
-        case clipping
-        
-        init?(_ value: String?) {
-            
-            let typeValue = value ?? "region"
-            
-            guard let type = Keys(rawValue: typeValue) else {
-                
-                return nil
-            }
-            
-            self = type
-        }
-    }
-    
+
     var model: AttachmentModel {
         get {
             switch self {

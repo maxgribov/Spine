@@ -11,13 +11,58 @@ import Foundation
 struct SpineModel {
     
     let skeleton: SkeletonModel
-    let bones: [BoneModel]
-    let skins: [SkinModel]
-    let ik: [IKConstraintModel]
-    let transform: [TransformConstraintModel]
-    let path: [PathConstraintModel]
-    let events: [EventModel]
-    let animations: [AnimationModel]
+    let bones: [BoneModel]?
+    let slots: [SlotModel]?
+    let skins: [SkinModel]?
+    let ik: [IKConstraintModel]?
+    let transform: [TransformConstraintModel]?
+    let path: [PathConstraintModel]?
+    let events: [EventModel]?
+    let animations: [AnimationModel]?
+}
+
+extension SpineModel: Decodable {
+    
+    enum Keys: String, CodingKey {
+        case skeleton
+        case bones
+        case slots
+        case skins
+        case ik
+        case transform
+        case path
+        case events
+        case animations
+    }
+    
+    init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: Keys.self)
+        self.skeleton = try container.decode(SkeletonModel.self, forKey: .skeleton)
+        self.bones = try container.decodeIfPresent([BoneModel].self, forKey: .bones)
+        self.slots = try container.decodeIfPresent([SlotModel].self, forKey: .slots)
+        
+        //skins
+        self.skins = nil
+        
+        self.ik = try container.decodeIfPresent([IKConstraintModel].self, forKey: .ik)
+        self.transform = try container.decodeIfPresent([TransformConstraintModel].self, forKey: .transform)
+        self.path = try container.decodeIfPresent([PathConstraintModel].self, forKey: .path)
+        
+        //events
+        self.events = nil
+        
+        //animations
+        let animationsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .animations)
+        var animations = [AnimationModel]()
+        for animationKey in animationsContainer.allKeys {
+            
+            let animationContainer = try animationsContainer.nestedContainer(keyedBy: AnimationModel.Keys.self, forKey: animationKey)
+            let animationModel = try AnimationModel(animationKey.stringValue, animationContainer)
+            animations.append(animationModel)
+        }
+        self.animations = animations
+    }
 }
 
 //MARK: - Decodable helpers protocols
@@ -35,6 +80,28 @@ enum CurveModelType {
     case linear
     case stepped
     case bezier(BezierCurveModel)
+    
+    var name: String {
+        get {
+            switch self {
+            case .linear: return "linear"
+            case .stepped: return "stepped"
+            case .bezier(_): return "bezier"
+            }
+        }
+    }
+    
+    var bezierValue: [CGFloat] {
+        
+        get {
+            
+            switch self {
+            case .bezier(let value): return [value.c1, value.c2, value.c3, value.c4]
+            default:
+                return [CGFloat]()
+            }
+        }
+    }
     
     init(_ value: String?) {
         
@@ -87,6 +154,7 @@ enum CurveModelType {
             self.c4 = values[3]
         }
     }
+    
 }
 
 struct ColorModel {
