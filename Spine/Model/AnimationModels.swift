@@ -41,16 +41,16 @@ extension AnimationModel: SpineDecodableDictionary {
 
         var groups = [AnimationGroupModelType]()
         
-        for group in container.allKeys {
+        for groupKey in container.allKeys {
             
-            guard let groupType = Keys(stringValue: group.stringValue) else {
+            guard let groupType = Keys(stringValue: groupKey.stringValue) else {
                 
                 throw AnimationModelDecodingError.animationGroupTypeUnknown
             }
             
             switch groupType {
             case .bones:
-                let bonesAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                let bonesAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: groupKey)
                 
                 var bonesAnimations = [BoneAnimationModel]()
                 
@@ -63,7 +63,7 @@ extension AnimationModel: SpineDecodableDictionary {
                 groups.append(AnimationGroupModelType.bones(bonesAnimations))
                 
             case .slots:
-                let slotsAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                let slotsAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: groupKey)
                 
                 var slotsAnimations = [SlotAnimationModel]()
                 
@@ -76,7 +76,7 @@ extension AnimationModel: SpineDecodableDictionary {
                 groups.append(AnimationGroupModelType.slots(slotsAnimations))
                 
             case .ik:
-                let ikAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                let ikAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: groupKey)
                 
                 var ikAnimations = [IKConstraintAnimationModel]()
                 
@@ -89,7 +89,7 @@ extension AnimationModel: SpineDecodableDictionary {
                 groups.append(AnimationGroupModelType.ik(ikAnimations))
                 
             case .transform:
-                let transformAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                let transformAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: groupKey)
                 
                 var transformAnimations = [TransformConstraintAnimationModel]()
                 
@@ -102,7 +102,7 @@ extension AnimationModel: SpineDecodableDictionary {
                 groups.append(AnimationGroupModelType.transform(transformAnimations))
                 
             case .deform:
-                let deformAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                let deformAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: groupKey)
                 
                 var deformAnimations = [DeformSkinAnimationModel]()
                 
@@ -115,7 +115,7 @@ extension AnimationModel: SpineDecodableDictionary {
                 groups.append(AnimationGroupModelType.deform(deformAnimations))
                 
             case .events:
-                var eventsAnimationGroupContainer = try container.nestedUnkeyedContainer(forKey: group)
+                var eventsAnimationGroupContainer = try container.nestedUnkeyedContainer(forKey: groupKey)
                 
                 var eventAnimationKeyframes = [EventKeyfarameModel]()
                 
@@ -126,7 +126,7 @@ extension AnimationModel: SpineDecodableDictionary {
                 groups.append(AnimationGroupModelType.events(eventAnimationKeyframes))
 
             case .draworder:
-                var draworderAnimationGroupContainer = try container.nestedUnkeyedContainer(forKey: group)
+                var draworderAnimationGroupContainer = try container.nestedUnkeyedContainer(forKey: groupKey)
                 
                 var draworderAnimationKeyframes = [DrawOrderKeyframeModel]()
                 
