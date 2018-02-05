@@ -31,7 +31,6 @@ extension AnimationModel: SpineDecodableDictionary {
     
     enum AnimationModelDecodingError: Error {
         
-        case animationNameMissed
         case animationGroupTypeUnknown
     }
     
