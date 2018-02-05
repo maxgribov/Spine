@@ -86,7 +86,7 @@ class ConstraintsModelsTests: XCTestCase {
         {
             "name": "weapon to hip",
             "order": 1,
-            "bone": "weapon",
+            "bones": [ "front-foot-tip", "back-foot-tip" ],
             "target": "hip",
             "rotation": 0.5,
             "x": 125.4,
@@ -111,7 +111,7 @@ class ConstraintsModelsTests: XCTestCase {
             
             XCTAssertEqual(ikConstraint.name, "weapon to hip")
             XCTAssertEqual(ikConstraint.order, 1)
-            XCTAssertEqual(ikConstraint.bone, "weapon")
+            XCTAssertEqual(ikConstraint.bones, [ "front-foot-tip", "back-foot-tip" ])
             XCTAssertEqual(ikConstraint.target, "hip")
             XCTAssertEqual(ikConstraint.rotation, 0.5)
             XCTAssertEqual(ikConstraint.offset.dx, 125.4)
@@ -138,7 +138,7 @@ class ConstraintsModelsTests: XCTestCase {
         {
             "name": "weapon to hip",
             "order": 1,
-            "bone": "weapon",
+            "bones": [ "rear-foot-ik" ],
             "target": "hip"
         }
         """.data(using: .utf8)!
@@ -151,7 +151,7 @@ class ConstraintsModelsTests: XCTestCase {
             
             XCTAssertEqual(ikConstraint.name, "weapon to hip")
             XCTAssertEqual(ikConstraint.order, 1)
-            XCTAssertEqual(ikConstraint.bone, "weapon")
+            XCTAssertEqual(ikConstraint.bones, [ "rear-foot-ik" ])
             XCTAssertEqual(ikConstraint.target, "hip")
             XCTAssertEqual(ikConstraint.rotation, 0)
             XCTAssertEqual(ikConstraint.offset.dx, 0)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
+		7706409E2028F8460031BD32 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
+		770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
 		773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
 		773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
 		773E8FE22024F04D009E38BD /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
@@ -45,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		7706409B2028D17F0031BD32 /* EventModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModelTests.swift; sourceTree = "<group>"; };
+		7706409D2028F8460031BD32 /* spineboy-pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "spineboy-pro.json"; sourceTree = "<group>"; };
+		7706409F2028F86C0031BD32 /* SpineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModelTests.swift; sourceTree = "<group>"; };
 		773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeRotateModelTests.swift; sourceTree = "<group>"; };
 		773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeTranslateModelTests.swift; sourceTree = "<group>"; };
 		773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeScaleModelTests.swift; sourceTree = "<group>"; };
@@ -92,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		770640A12028F97A0031BD32 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7706409D2028F8460031BD32 /* spineboy-pro.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,12 +166,14 @@
 		77F1D5F6201A490400AF499B /* SpineTests */ = {
 			isa = PBXGroup;
 			children = (
+				7706409F2028F86C0031BD32 /* SpineModelTests.swift */,
 				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
 				776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */,
 				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
 				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
 				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
 				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
+				770640A12028F97A0031BD32 /* Resources */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
 			);
 			path = SpineTests;
@@ -266,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7706409E2028F8460031BD32 /* spineboy-pro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +311,7 @@
 				773E8FF02024F9B2009E38BD /* DeformKeyframeModelTests.swift in Sources */,
 				773E8FE42024F1F4009E38BD /* BoneKeyframeShearModelTests.swift in Sources */,
 				7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */,
+				770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */,
 				776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */,
 				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
 				773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */,

@@ -82,7 +82,7 @@ struct TransformConstraintModel {
     ///The ordinal for the order constraints are applied.
     let order: UInt
     ///The bone whose transform will be controlled by the constraint.
-    let bone: String
+    let bones: [String]
     ///The name of the target bone.
     let target: String
     ///The rotation to offset from the target bone. Assume 0 if omitted.
@@ -139,11 +139,11 @@ struct TransformConstraintModel {
 
      - Returns: new TransformConstraintModel.
      */
-    init(_ name: String, _ order: UInt, _ bone: String, _ target: String, _ rotation: CGFloat?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ shearY: CGFloat?, _ rotateMix: CGFloat?, _ translateMix: CGFloat?, _ scaleMix: CGFloat?, _ shearMix: CGFloat?, _ local: Bool?, _ relative: Bool?) {
+    init(_ name: String, _ order: UInt, _ bones: [String], _ target: String, _ rotation: CGFloat?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ shearY: CGFloat?, _ rotateMix: CGFloat?, _ translateMix: CGFloat?, _ scaleMix: CGFloat?, _ shearMix: CGFloat?, _ local: Bool?, _ relative: Bool?) {
         
         self.name = name
         self.order = order
-        self.bone = bone
+        self.bones = bones
         self.target = target
         self.rotation = rotation ?? 0
         self.offset = CGVector(dx: x ?? 0, dy: y ?? 0)
@@ -164,7 +164,7 @@ extension TransformConstraintModel: Decodable {
         
         case name
         case order
-        case bone
+        case bones
         case target
         case rotation
         case x
@@ -185,7 +185,7 @@ extension TransformConstraintModel: Decodable {
         let container = try decoder.container(keyedBy: TransformConstraintModelKeys.self)
         let name: String = try container.decode(String.self, forKey: .name)
         let order: UInt = try container.decode(UInt.self, forKey: .order)
-        let bone: String = try container.decode(String.self, forKey: .bone)
+        let bones: [String] = try container.decode([String].self, forKey: .bones)
         let target: String = try container.decode(String.self, forKey: .target)
         let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
@@ -200,7 +200,7 @@ extension TransformConstraintModel: Decodable {
         let local: Bool? = try container.decodeIfPresent(Bool.self, forKey: .local)
         let relative: Bool? = try container.decodeIfPresent(Bool.self, forKey: .relative)
         
-        self.init(name, order, bone, target, rotation, x, y, scaleX, scaleY, shearY, rotateMix, translateMix, scaleMix, shearMix, local, relative)
+        self.init(name, order, bones, target, rotation, x, y, scaleX, scaleY, shearY, rotateMix, translateMix, scaleMix, shearMix, local, relative)
     }
 }
 

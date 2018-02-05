@@ -235,7 +235,7 @@ struct SlotModel {
     ///The name of the slot's attachment for the setup pose. Assume no attachment for the setup pose if omitted.
     let attachment: String?
     ///The type of blending to use when drawing the slot's visible attachment: normal, additive, multiply, or screen.
-    let blend: BlendModeModelType
+    let blend: BlendModeModelType?
     
     /**
      Initializes a new SlotModel.
@@ -250,33 +250,30 @@ struct SlotModel {
      
      - Returns: new SlotModel.
      */
-    init(_ name: String, _ bone: String, _ color: String?, _ dark: String?, _ attachment: String?, _ blend: Int?) {
+    init(_ name: String, _ bone: String, _ color: String?, _ dark: String?, _ attachment: String?, _ blend: String?) {
         
         self.name = name
         self.bone = bone
         self.color = ColorModel(color ?? "FFFFFFFF")
         self.dark = ColorModel(dark)
         self.attachment = attachment
-        self.blend = BlendModeModelType(blend ?? 0)
+        self.blend = BlendModeModelType(blend)
     }
     
-    enum BlendModeModelType: Int {
+    enum BlendModeModelType: String {
         
-        case normal = 0
+        case normal
         case additive
         case multiply
         case screen
         
-        init(_ blend: Int) {
+        init?( _ value: String?) {
             
-            if let blend = BlendModeModelType(rawValue: blend) {
-                
-                self = blend
-                
-            } else {
-                
-                self = .normal
+            guard let value = value else {
+                return nil
             }
+            
+            self.init(rawValue: value)
         }
     }
 }
@@ -301,7 +298,7 @@ extension SlotModel: Decodable {
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         let dark: String? = try container.decodeIfPresent(String.self, forKey: .dark)
         let attachment: String? = try container.decodeIfPresent(String.self, forKey: .attachment)
-        let blend: Int? = try container.decodeIfPresent(Int.self, forKey: .blend)
+        let blend: String? = try container.decodeIfPresent(String.self, forKey: .blend)
         
         self.init(name, bone, color, dark, attachment, blend)
     }

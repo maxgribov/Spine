@@ -842,10 +842,10 @@ struct DeformKeyframeModel: KeyframeModel {
     
     let time: CGFloat
     let offset: Int
-    let vertices: [CGFloat]
+    let vertices: [CGFloat]?
     let curve: CurveModelType
     
-    init(_ time: CGFloat, _ offset: Int?, _ vertices: [CGFloat], _ curve: String?) {
+    init(_ time: CGFloat, _ offset: Int?, _ vertices: [CGFloat]?, _ curve: String?) {
         
         self.time = time
         self.offset = offset ?? 0
@@ -854,7 +854,7 @@ struct DeformKeyframeModel: KeyframeModel {
     }
     
     //bezier curve type init
-    init(_ time: CGFloat, _ offset: Int?, _ vertices: [CGFloat], _ curve: [CGFloat]) {
+    init(_ time: CGFloat, _ offset: Int?, _ vertices: [CGFloat]?, _ curve: [CGFloat]) {
         
         self.time = time
         self.offset = offset ?? 0
@@ -878,7 +878,7 @@ extension DeformKeyframeModel: Decodable {
         let container = try decoder.container(keyedBy: Keys.self)
         let time: CGFloat = try container.decode(CGFloat.self, forKey: .time)
         let offset: Int? = try container.decodeIfPresent(Int.self, forKey: .offset)
-        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
+        let vertices: [CGFloat]? = try container.decodeIfPresent([CGFloat].self, forKey: .vertices)
         
         do {
             

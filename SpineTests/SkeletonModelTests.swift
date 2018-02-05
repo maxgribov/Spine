@@ -176,7 +176,7 @@ class SkeletonModelTests: XCTestCase {
             "attachment": "upper_back_arm",
             "color": "FF7F00FF",
             "dark": "F1F100FF",
-            "blend": 1
+            "blend": "additive"
         }
         """.data(using: .utf8)!
         
@@ -220,7 +220,7 @@ class SkeletonModelTests: XCTestCase {
             XCTAssertNil(slot.attachment)
             XCTAssertEqual(slot.color.value, "FFFFFFFF")
             XCTAssertNil(slot.dark)
-            XCTAssertEqual(slot.blend, .normal)
+            XCTAssertNil(slot.blend)
             
         } else {
             
