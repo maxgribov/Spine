@@ -65,7 +65,7 @@ extension SpineModel: Decodable {
     }
 }
 
-//MARK: - Decodable helpers protocols
+//MARK: - Decodable helpers
 
 protocol SpineDecodableDictionary {
     
@@ -76,6 +76,15 @@ protocol SpineDecodableDictionary {
 protocol SpineDecodableArray {
     
     init(_ name: String, _ container: inout UnkeyedDecodingContainer) throws
+}
+
+struct SpineNameKey: CodingKey {
+    
+    var stringValue: String
+    var intValue: Int?
+    
+    init?(stringValue: String) { self.stringValue = stringValue }
+    init?(intValue: Int) { self.intValue = intValue; self.stringValue = "\(intValue)" }
 }
 
 //MARK: - Helpers models
@@ -159,7 +168,6 @@ enum CurveModelType {
             self.c4 = values[3]
         }
     }
-    
 }
 
 struct ColorModel {
@@ -183,28 +191,13 @@ struct ColorModel {
     
     init?(_ color: String?) {
         
-        //TODO: create real implementation later
-        
         if let color = color {
             
-            value = color
-            red = 0
-            green = 0
-            blue = 0
-            alpha = 0
+            self.init(color)
             
         } else {
             
             return nil
         }
     }
-}
-
-struct SpineNameKey: CodingKey {
-    
-    var stringValue: String
-    var intValue: Int?
-    
-    init?(stringValue: String) { self.stringValue = stringValue }
-    init?(intValue: Int) { self.intValue = intValue; self.stringValue = "\(intValue)" }
 }
