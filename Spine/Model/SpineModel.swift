@@ -73,6 +73,11 @@ protocol SpineDecodableDictionary {
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws
 }
 
+protocol SpineDecodableArray {
+    
+    init(_ name: String, _ container: inout UnkeyedDecodingContainer) throws
+}
+
 //MARK: - Helpers models
 
 enum CurveModelType {

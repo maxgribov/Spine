@@ -26,7 +26,7 @@ extension AnimationModel: SpineDecodableDictionary {
         case transform
         case deform
         case events
-        case draworder
+        case draworder = "drawOrder"
     }
     
     enum AnimationModelDecodingError: Error {
@@ -62,57 +62,83 @@ extension AnimationModel: SpineDecodableDictionary {
                 }
                 groups.append(AnimationGroupModelType.bones(bonesAnimations))
                 
-            default:
-                continue
+            case .slots:
+                let slotsAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                
+                var slotsAnimations = [SlotAnimationModel]()
+                
+                for slotAnimationKey in slotsAnimationGroupContainer.allKeys {
+                    
+                    let slotAnimationTimelineContainer = try slotsAnimationGroupContainer.nestedContainer(keyedBy: SlotAnimationModel.Keys.self, forKey: slotAnimationKey)
+                    let slotAnimation = try SlotAnimationModel(slotAnimationKey.stringValue, slotAnimationTimelineContainer)
+                    slotsAnimations.append(slotAnimation)
+                }
+                groups.append(AnimationGroupModelType.slots(slotsAnimations))
+                
+            case .ik:
+                let ikAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                
+                var ikAnimations = [IKConstraintAnimationModel]()
+                
+                for ikAnimationKey in ikAnimationGroupContainer.allKeys {
+                    
+                    var ikAnimationContainer = try ikAnimationGroupContainer.nestedUnkeyedContainer(forKey: ikAnimationKey)
+                    let ikAnimation = try IKConstraintAnimationModel(ikAnimationKey.stringValue, &ikAnimationContainer)
+                    ikAnimations.append(ikAnimation)
+                }
+                groups.append(AnimationGroupModelType.ik(ikAnimations))
+                
+            case .transform:
+                let transformAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                
+                var transformAnimations = [TransformConstraintAnimationModel]()
+                
+                for transformAnimationKey in transformAnimationGroupContainer.allKeys {
+                    
+                    var transformAnimationContainer = try transformAnimationGroupContainer.nestedUnkeyedContainer(forKey: transformAnimationKey)
+                    let transformAnimation = try TransformConstraintAnimationModel(transformAnimationKey.stringValue, &transformAnimationContainer)
+                    transformAnimations.append(transformAnimation)
+                }
+                groups.append(AnimationGroupModelType.transform(transformAnimations))
+                
+            case .deform:
+                let deformAnimationGroupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
+                
+                var deformAnimations = [DeformSkinAnimationModel]()
+                
+                for deformAnimationKey in deformAnimationGroupContainer.allKeys {
+                    
+                    let deformAnimationContainer = try deformAnimationGroupContainer.nestedContainer(keyedBy: DeformSkinAnimationModel.KeysType.self, forKey: deformAnimationKey)
+                    let deformAnimation = try DeformSkinAnimationModel(deformAnimationKey.stringValue, deformAnimationContainer)
+                    deformAnimations.append(deformAnimation)
+                }
+                groups.append(AnimationGroupModelType.deform(deformAnimations))
+                
+            case .events:
+                var eventsAnimationGroupContainer = try container.nestedUnkeyedContainer(forKey: group)
+                
+                var eventAnimationKeyframes = [EventKeyfarameModel]()
+                
+                while !eventsAnimationGroupContainer.isAtEnd {
+                    
+                    eventAnimationKeyframes.append(try eventsAnimationGroupContainer.decode(EventKeyfarameModel.self))
+                }
+                groups.append(AnimationGroupModelType.events(eventAnimationKeyframes))
+
+            case .draworder:
+                var draworderAnimationGroupContainer = try container.nestedUnkeyedContainer(forKey: group)
+                
+                var draworderAnimationKeyframes = [DrawOrderKeyframeModel]()
+                
+                while !draworderAnimationGroupContainer.isAtEnd {
+                    
+                    draworderAnimationKeyframes.append(try draworderAnimationGroupContainer.decode(DrawOrderKeyframeModel.self))
+                }
+                groups.append(AnimationGroupModelType.draworder(draworderAnimationKeyframes))
             }
         }
         
         self.name = name
-        self.groups = groups
-        
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: SpineNameKey.self)
-        
-        guard let animationName = container.allKeys.first?.stringValue,
-            let animationNameKey = SpineNameKey(stringValue: animationName) else {
-                
-                throw AnimationModelDecodingError.animationNameMissed
-        }
-        
-        let animationGroupsContainer = try container.nestedContainer(keyedBy: Keys.self, forKey: animationNameKey)
-        
-        var groups = [AnimationGroupModelType]()
-
-        for group in animationGroupsContainer.allKeys {
-            
-            guard let groupType = Keys(stringValue: group.stringValue) else {
-                
-                throw AnimationModelDecodingError.animationGroupTypeUnknown
-            }
-            
-            switch groupType {
-            case .bones:
-                let bonesAnimationGroupContainer = try animationGroupsContainer.nestedContainer(keyedBy: SpineNameKey.self, forKey: group)
-                
-                var bonesAnimations = [BoneAnimationModel]()
-                
-                for boneAnimationKey in bonesAnimationGroupContainer.allKeys {
-                    
-                    let boneAnimationTimelineContainer = try bonesAnimationGroupContainer.nestedContainer(keyedBy: BoneAnimationModel.Keys.self, forKey: boneAnimationKey)
-                    let boneAnimation = try BoneAnimationModel(boneAnimationKey.stringValue, boneAnimationTimelineContainer)
-                    bonesAnimations.append(boneAnimation)
-                }
-                groups.append(AnimationGroupModelType.bones(bonesAnimations))
-
-            default:
-                continue
-            }
-        }
-        
-        self.name = animationName
         self.groups = groups
     }
 }
@@ -232,7 +258,6 @@ extension BoneAnimationModel: SpineDecodableDictionary {
         self.bone = name
         self.timelines = timelines
     }
-    
 }
 
 //MARK: - Slot Animation Model
@@ -243,29 +268,6 @@ struct SlotAnimationModel: AnimationGroupModel {
     let timelines: [SlotAnimationTimelineModelType]
 }
 
-enum SlotAnimationTimelineModelType {
-    
-    case attachment([SlotKeyframeAttachmentModel])
-    case color([SlotKeyframeColorModel])
-    
-    var identifier: String {
-        
-        switch self {
-        case .attachment(_): return "attachment"
-        case .color(_): return "color"
-        }
-    }
-    
-    var models: [SlotKeyframeModel] {
-        
-        switch self {
-        case .attachment(let model): return model
-        case .color(let model): return model
-        }
-    }
-}
-
-//TODO: write tests
 extension SlotAnimationModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
@@ -298,11 +300,52 @@ extension SlotAnimationModel: SpineDecodableDictionary {
     }
 }
 
+enum SlotAnimationTimelineModelType {
+    
+    case attachment([SlotKeyframeAttachmentModel])
+    case color([SlotKeyframeColorModel])
+    
+    var identifier: String {
+        
+        switch self {
+        case .attachment(_): return "attachment"
+        case .color(_): return "color"
+        }
+    }
+    
+    var models: [SlotKeyframeModel] {
+        
+        switch self {
+        case .attachment(let model): return model
+        case .color(let model): return model
+        }
+    }
+}
+
+//MARK: - IK Constraint Animation Model
+
 struct IKConstraintAnimationModel: AnimationGroupModel {
     
     let constraint: String
     let keyframes: [IKConstraintKeyframeModel]
 }
+
+extension IKConstraintAnimationModel: SpineDecodableArray {
+    
+    init(_ name: String, _ container: inout UnkeyedDecodingContainer) throws {
+
+        var keyframes = [IKConstraintKeyframeModel]()
+        while !container.isAtEnd {
+
+            keyframes.append(try container.decode(IKConstraintKeyframeModel.self))
+        }
+        
+        self.constraint = name
+        self.keyframes = keyframes
+    }
+}
+
+//MARK: - Transform Constraint Animation Model
 
 struct TransformConstraintAnimationModel: AnimationGroupModel {
     
@@ -310,10 +353,47 @@ struct TransformConstraintAnimationModel: AnimationGroupModel {
     let keyframes: [TransformConstraintKeyframeModel]
 }
 
+extension TransformConstraintAnimationModel: SpineDecodableArray {
+    
+    init(_ name: String, _ container: inout UnkeyedDecodingContainer) throws {
+        
+        var keyframes = [TransformConstraintKeyframeModel]()
+        while !container.isAtEnd {
+            
+            keyframes.append(try container.decode(TransformConstraintKeyframeModel.self))
+        }
+        
+        self.constraint = name
+        self.keyframes = keyframes
+    }
+}
+
+//MARK: - Deform Skin Animation Model
+
 struct DeformSkinAnimationModel: AnimationGroupModel {
     
     let skin: String
     let slots: [DeformSlotAnimationModel]
+}
+
+extension DeformSkinAnimationModel: SpineDecodableDictionary {
+
+    typealias KeysType = SpineNameKey
+
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+
+        var slots = [DeformSlotAnimationModel]()
+
+        for slotKey in container.allKeys {
+
+            let slotContainer = try container.nestedContainer(keyedBy: DeformSlotAnimationModel.KeysType.self, forKey: slotKey)
+            let slotAnimation = try DeformSlotAnimationModel(slotKey.stringValue, slotContainer)
+            slots.append(slotAnimation)
+        }
+        
+        self.skin = name
+        self.slots = slots
+    }
 }
 
 struct DeformSlotAnimationModel {
@@ -322,10 +402,45 @@ struct DeformSlotAnimationModel {
     let meshes: [DeformMeshAnimationModel]
 }
 
+extension DeformSlotAnimationModel: SpineDecodableDictionary {
+
+    typealias KeysType = SpineNameKey
+
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+
+        var meshes = [DeformMeshAnimationModel]()
+
+        for meshKey in container.allKeys {
+
+            var meshContainer = try container.nestedUnkeyedContainer(forKey: meshKey)
+            let meshAnimation = try DeformMeshAnimationModel(meshKey.stringValue, &meshContainer)
+            meshes.append(meshAnimation)
+        }
+        
+        self.slot = name
+        self.meshes = meshes
+    }
+}
+
 struct DeformMeshAnimationModel {
     
     let mesh: String
     let keyframes: [DeformKeyframeModel]
+}
+
+extension DeformMeshAnimationModel: SpineDecodableArray {
+
+    init(_ name: String, _ container: inout UnkeyedDecodingContainer) throws {
+
+        var keyframes = [DeformKeyframeModel]()
+        while !container.isAtEnd {
+
+            keyframes.append(try container.decode(DeformKeyframeModel.self))
+        }
+
+        self.mesh = name
+        self.keyframes = keyframes
+    }
 }
 
 //MARK: - Keyframes
