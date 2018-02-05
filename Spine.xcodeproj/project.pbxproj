@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
 		773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
 		773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
 		773E8FE22024F04D009E38BD /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7706409B2028D17F0031BD32 /* EventModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModelTests.swift; sourceTree = "<group>"; };
 		773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeRotateModelTests.swift; sourceTree = "<group>"; };
 		773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeTranslateModelTests.swift; sourceTree = "<group>"; };
 		773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeScaleModelTests.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
 				776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */,
 				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
+				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
 				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
 				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
@@ -292,6 +295,7 @@
 				773E8FF42024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift in Sources */,
 				773E8FF02024F9B2009E38BD /* DeformKeyframeModelTests.swift in Sources */,
 				773E8FE42024F1F4009E38BD /* BoneKeyframeShearModelTests.swift in Sources */,
+				7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */,
 				776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */,
 				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
 				773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */,

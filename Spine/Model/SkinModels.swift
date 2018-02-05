@@ -8,126 +8,94 @@
 
 import Foundation
 
+//MARK: - Skin Model
+
 struct SkinModel {
     
     let name: String
     let slots: [SkinSlotModel]?
 }
 
-extension SkinModel: Decodable {
+extension SkinModel: SpineDecodableDictionary {
     
-    enum Keys: String {
-        
-        case region
-        case boundingBox = "boundingbox"
-        case mesh
-        case linkedMesh = "linkedmesh"
-        case path
-        case point
-        case clipping
-        
-        init?(_ value: String?) {
-            
-            let typeValue = value ?? "region"
-            
-            guard let type = Keys(rawValue: typeValue) else {
-                
-                return nil
-            }
-            
-            self = type
-        }
-    }
+    typealias KeysType = SpineNameKey
     
-    enum SkinModelDecodingError: Error {
-        
-        case skinNameMissed
-        case slotNameMissed
-        case attachmentNameMissed
-        case attachmentTypeUnknown
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: SpineNameKey.self)
-        
-        guard let skinName = container.allKeys.first?.stringValue,
-            let skinKey = SpineNameKey(stringValue: skinName) else {
-                
-                throw SkinModelDecodingError.skinNameMissed
-        }
-
-        // Slots
-        let slotsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: skinKey)
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
         var slots = [SkinSlotModel]()
         
-        for slot in slotsContainer.allKeys {
+        for slotKey in container.allKeys {
             
-            guard let slotKey = SpineNameKey(stringValue: slot.stringValue) else {
-                
-                throw SkinModelDecodingError.slotNameMissed
-            }
-            
-            //attachments
-            let attachmentsContainer = try slotsContainer.nestedContainer(keyedBy: SpineNameKey.self, forKey: slotKey)
-            
-            var attachments = [AttachmentModelType]()
-            
-            for attachment in attachmentsContainer.allKeys {
-                
-                guard let attachmentKey = SpineNameKey(stringValue: attachment.stringValue),
-                      let attachmentTypeKey =  SpineNameKey(stringValue: "type") else {
-                    
-                    throw SkinModelDecodingError.attachmentNameMissed
-                }
-                
-                let attachmentContainer = try attachmentsContainer.nestedContainer(keyedBy: SpineNameKey.self, forKey: attachmentKey)
-                let attachmentTypeString: String? = try attachmentContainer.decodeIfPresent(String.self, forKey: attachmentTypeKey)
-                
-                guard let attachmentType = Keys(attachmentTypeString) else {
-                    
-                    throw SkinModelDecodingError.attachmentTypeUnknown
-                }
-                
-                let name = attachment.stringValue
-                
-                switch attachmentType {
-                case .region:
-                    attachments.append(AttachmentModelType.region(try RegionAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: RegionAttachmentModel.Keys.self, forKey: attachmentKey))))
-                    
-                case .boundingBox:
-                    attachments.append(AttachmentModelType.boundingBox(try BoundingBoxAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: BoundingBoxAttachmentModel.Keys.self, forKey: attachmentKey))))
-                    
-                case .mesh:
-                    attachments.append(AttachmentModelType.mesh(try MeshAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: MeshAttachmentModel.Keys.self, forKey: attachmentKey))))
-                    
-                case .linkedMesh:
-                    attachments.append(AttachmentModelType.linkedMesh(try LinkedMeshAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: LinkedMeshAttachmentModel.Keys.self, forKey: attachmentKey))))
-
-                case .path:
-                    attachments.append(AttachmentModelType.path(try PathAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: PathAttachmentModel.Keys.self, forKey: attachmentKey))))
-                    
-                case .point:
-                    attachments.append(AttachmentModelType.point(try PointAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: PointAttachmentModel.Keys.self, forKey: attachmentKey))))
-                    
-                case .clipping:
-                    attachments.append(AttachmentModelType.clipping(try ClippingAttachmentModel(name, try attachmentsContainer.nestedContainer(keyedBy: ClippingAttachmentModel.Keys.self, forKey: attachmentKey))))
-                }
-            }
-            
-            slots.append(SkinSlotModel(name: slot.stringValue, attachments: attachments))
+            let slotContainer = try container.nestedContainer(keyedBy: SkinSlotModel.KeysType.self, forKey: slotKey)
+            let slot = try SkinSlotModel(slotKey.stringValue, slotContainer)
+            slots.append(slot)
         }
         
-        self.name = skinName
+        self.name = name
         self.slots = slots
     }
 }
+
+//MARK: - Skin Slot Model
 
 struct SkinSlotModel {
     
     let name: String
     let attachments: [AttachmentModelType]?
+}
+
+extension SkinSlotModel: SpineDecodableDictionary {
+    
+    enum SkinSlotModelDecodingError: Error {
+        
+        case attachmentTypeUnknown
+    }
+    
+    typealias KeysType = SpineNameKey
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
+        
+        var attachments = [AttachmentModelType]()
+        
+        for attachmentKey in container.allKeys {
+            
+            let attachmentContainer = try container.nestedContainer(keyedBy: AttachmentModelKeys.self, forKey: attachmentKey)
+            let attachmentTypeString: String? = try attachmentContainer.decodeIfPresent(String.self, forKey: AttachmentModelKeys.type)
+            
+            guard let attachmentType = AttachmentModelTypeKeys(attachmentTypeString) else {
+                
+                throw SkinSlotModelDecodingError.attachmentTypeUnknown
+            }
+            
+            let name = attachmentKey.stringValue
+            
+            switch attachmentType {
+            case .region:
+                attachments.append(AttachmentModelType.region(try RegionAttachmentModel(name, try container.nestedContainer(keyedBy: RegionAttachmentModel.Keys.self, forKey: attachmentKey))))
+                
+            case .boundingBox:
+                attachments.append(AttachmentModelType.boundingBox(try BoundingBoxAttachmentModel(name, try container.nestedContainer(keyedBy: BoundingBoxAttachmentModel.Keys.self, forKey: attachmentKey))))
+                
+            case .mesh:
+                attachments.append(AttachmentModelType.mesh(try MeshAttachmentModel(name, try container.nestedContainer(keyedBy: MeshAttachmentModel.Keys.self, forKey: attachmentKey))))
+                
+            case .linkedMesh:
+                attachments.append(AttachmentModelType.linkedMesh(try LinkedMeshAttachmentModel(name, try container.nestedContainer(keyedBy: LinkedMeshAttachmentModel.Keys.self, forKey: attachmentKey))))
+                
+            case .path:
+                attachments.append(AttachmentModelType.path(try PathAttachmentModel(name, try container.nestedContainer(keyedBy: PathAttachmentModel.Keys.self, forKey: attachmentKey))))
+                
+            case .point:
+                attachments.append(AttachmentModelType.point(try PointAttachmentModel(name, try container.nestedContainer(keyedBy: PointAttachmentModel.Keys.self, forKey: attachmentKey))))
+                
+            case .clipping:
+                attachments.append(AttachmentModelType.clipping(try ClippingAttachmentModel(name, try container.nestedContainer(keyedBy: ClippingAttachmentModel.Keys.self, forKey: attachmentKey))))
+            }
+        }
+        
+        self.name = name
+        self.attachments = attachments
+    }
 }
 
 //MARK: - Attachments
@@ -160,6 +128,34 @@ enum AttachmentModelType {
 protocol AttachmentModel {
 
     var name: String { get }
+}
+
+enum AttachmentModelKeys: String, CodingKey {
+    
+    case type
+}
+
+enum AttachmentModelTypeKeys: String {
+    
+    case region
+    case boundingBox = "boundingbox"
+    case mesh
+    case linkedMesh = "linkedmesh"
+    case path
+    case point
+    case clipping
+    
+    init?(_ value: String?) {
+        
+        let typeValue = value ?? "region"
+        
+        guard let type = AttachmentModelTypeKeys(rawValue: typeValue) else {
+            
+            return nil
+        }
+        
+        self = type
+    }
 }
 
 //MARK: - Region

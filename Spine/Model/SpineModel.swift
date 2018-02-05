@@ -43,25 +43,69 @@ extension SpineModel: Decodable {
         self.slots = try container.decodeIfPresent([SlotModel].self, forKey: .slots)
         
         //skins
-        self.skins = nil
-        
+        if container.contains(.skins) {
+            
+            let skinsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .skins)
+            var skins = [SkinModel]()
+            
+            for skinKey in skinsContainer.allKeys {
+                
+                let skinContainer = try skinsContainer.nestedContainer(keyedBy: SkinModel.KeysType.self, forKey: skinKey)
+                let skin = try SkinModel(skinKey.stringValue, skinContainer)
+                skins.append(skin)
+            }
+            
+            self.skins = skins
+            
+        } else {
+            
+            self.skins = nil
+        }
+
         self.ik = try container.decodeIfPresent([IKConstraintModel].self, forKey: .ik)
         self.transform = try container.decodeIfPresent([TransformConstraintModel].self, forKey: .transform)
         self.path = try container.decodeIfPresent([PathConstraintModel].self, forKey: .path)
         
         //events
-        self.events = nil
-        
-        //animations
-        let animationsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .animations)
-        var animations = [AnimationModel]()
-        for animationKey in animationsContainer.allKeys {
+        if container.contains(.events) {
             
-            let animationContainer = try animationsContainer.nestedContainer(keyedBy: AnimationModel.Keys.self, forKey: animationKey)
-            let animationModel = try AnimationModel(animationKey.stringValue, animationContainer)
-            animations.append(animationModel)
+            let eventsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .events)
+            var events = [EventModel]()
+            
+            for eventKey in eventsContainer.allKeys {
+                
+                let eventContainer = try eventsContainer.nestedContainer(keyedBy: EventModel.Keys.self, forKey: eventKey)
+                let event = try EventModel(eventKey.stringValue, eventContainer)
+                events.append(event)
+            }
+            
+            self.events = events
+            
+        } else {
+            
+            self.events = nil
         }
-        self.animations = animations
+
+        //animations
+        if container.contains(.animations) {
+            
+            let animationsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .animations)
+            
+            var animations = [AnimationModel]()
+            
+            for animationKey in animationsContainer.allKeys {
+                
+                let animationContainer = try animationsContainer.nestedContainer(keyedBy: AnimationModel.Keys.self, forKey: animationKey)
+                let animation = try AnimationModel(animationKey.stringValue, animationContainer)
+                animations.append(animation)
+            }
+            
+            self.animations = animations
+            
+        } else {
+            
+            self.animations = nil
+        }
     }
 }
 

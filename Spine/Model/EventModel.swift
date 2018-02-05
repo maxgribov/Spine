@@ -24,7 +24,7 @@ struct EventModel {
     }
 }
 
-extension EventModel: Decodable {
+extension EventModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
@@ -34,14 +34,14 @@ extension EventModel: Decodable {
         case string
     }
     
-    init(from decoder: Decoder) throws {
+    typealias KeysType = Keys
+    
+    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        let container = try decoder.container(keyedBy: Keys.self)
-        let event: String = try container.decode(String.self, forKey: .event)
         let int: Int? = try container.decodeIfPresent(Int.self, forKey: .int)
         let float: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .float)
         let string: String? = try container.decodeIfPresent(String.self, forKey: .string)
         
-        self.init(event, int, float, string)
+        self.init(name, int, float, string)
     }
 }
