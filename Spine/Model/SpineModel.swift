@@ -24,6 +24,7 @@ struct SpineModel {
 extension SpineModel: Decodable {
     
     enum Keys: String, CodingKey {
+        
         case skeleton
         case bones
         case slots
