@@ -8,18 +8,18 @@
 
 import SpriteKit
 
-class SkeletonNode: SKNode {
+public class SkeletonNode: SKNode {
     
     let model: SkeletonModel
     
-    init(_ model: SpineModel) {
+    public init(_ model: SpineModel) {
 
         self.model = model.skeleton
         super.init()
         self.createBones(model.bones)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

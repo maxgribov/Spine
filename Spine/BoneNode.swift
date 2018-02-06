@@ -15,8 +15,9 @@ class BoneNode: SKSpriteNode {
     init(_ model: BoneModel) {
 
         self.model = model
-        super.init(texture: nil, color: UIColor(model.color), size: CGSize.zero)
+        super.init(texture: nil, color: UIColor(model.color), size: CGSize(width: model.lenght, height: 5))
         self.name = model.name
+        self.anchorPoint = CGPoint(x: 0, y: 0.5)
         self.setDefaultPose()
     }
     

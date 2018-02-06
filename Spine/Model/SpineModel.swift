@@ -10,7 +10,7 @@ import Foundation
 
 let degreeToRadiansFactor: CGFloat = CGFloat.pi / 180.0
 
-struct SpineModel {
+public struct SpineModel {
     
     let skeleton: SkeletonModel
     let bones: [BoneModel]?
@@ -38,7 +38,7 @@ extension SpineModel: Decodable {
         case animations
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
         self.skeleton = try container.decode(SkeletonModel.self, forKey: .skeleton)
