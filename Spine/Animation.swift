@@ -39,7 +39,7 @@ extension SKAction {
     
     class func bone(animation: BoneAnimationModel) -> SKAction {
         
-        return SKAction.run(SKAction.group(animation.timelines.map({ SKAction.bone(timeline: $0)})), onChildWithName: animation.bone)
+        return SKAction.run(SKAction.group(animation.timelines.map({ SKAction.bone(timeline: $0)})), onChildWithName: "//\(animation.bone)")
     }
     
     class func bone(timeline: BoneAnimationTimelineModelType) -> SKAction {
@@ -58,18 +58,23 @@ extension SKAction {
     
     class func bone(keyframe: BoneKeyframeRotateModel) -> SKAction {
         
-        return SKAction.rotate(toAngle: keyframe.angle * degreeToRadiansFactor, duration: keyframe.time)
+        let angle = keyframe.angle * degreeToRadiansFactor
+        
+        return SKAction.rotate(byAngle: angle, duration: keyframe.time)
     }
     
     class func bone(keyframe: BoneKeyframeTranslateModel) -> SKAction {
         
-        return SKAction.move(to: keyframe.position, duration: keyframe.time)
+        let vector = CGVector(dx: keyframe.position.x, dy: keyframe.position.y)
+        return SKAction.move(by: vector, duration: keyframe.time)
     }
     
     class func bone(keyframe: BoneKeyframeScaleModel) -> SKAction {
         
-        return SKAction.group([SKAction.scaleX(to: keyframe.scale.dx, duration: keyframe.time),
-                               SKAction.scaleY(to: keyframe.scale.dy, duration: keyframe.time)])
+        return SKAction.scaleX(by: keyframe.scale.dx, y: keyframe.scale.dy, duration: keyframe.time)
+        
+//        return SKAction.group([SKAction.scaleX(to: keyframe.scale.dx, duration: keyframe.time),
+//                               SKAction.scaleY(to: keyframe.scale.dy, duration: keyframe.time)])
     }
     
     class func bone(keyframe: BoneKeyframeShearModel) -> SKAction {
