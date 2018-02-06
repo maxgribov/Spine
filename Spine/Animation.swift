@@ -58,7 +58,7 @@ extension SKAction {
     
     class func bone(keyframe: BoneKeyframeRotateModel) -> SKAction {
         
-        return SKAction.rotate(toAngle: keyframe.angle, duration: keyframe.time)
+        return SKAction.rotate(toAngle: keyframe.angle * degreeToRadiansFactor, duration: keyframe.time)
     }
     
     class func bone(keyframe: BoneKeyframeTranslateModel) -> SKAction {
