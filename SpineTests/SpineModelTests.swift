@@ -77,7 +77,7 @@ class SpineModelTests: XCTestCase {
                     XCTAssertEqual(bone.parent, "hip")
                     XCTAssertEqual(bone.position.x, 1.02)
                     XCTAssertEqual(bone.position.y, 5.62)
-                    XCTAssertEqual(bone.color?.value, "abe323ff")
+                    XCTAssertEqual(bone.color.value, "abe323ff")
                     XCTAssertEqual(bone.lenght, 26.24)
                     XCTAssertEqual(bone.rotation, 19.61)
                     

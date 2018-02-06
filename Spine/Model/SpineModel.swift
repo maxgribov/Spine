@@ -8,6 +8,8 @@
 
 import Foundation
 
+let degreeToRadiansFactor: CGFloat = CGFloat.pi / 180.0
+
 struct SpineModel {
     
     let skeleton: SkeletonModel
@@ -216,32 +218,34 @@ enum CurveModelType {
 }
 
 struct ColorModel {
-    
+
+    let red: CGFloat
+    let green: CGFloat
+    let blue: CGFloat
+    let alpha: CGFloat
     let value: String
-    let red: Double
-    let green: Double
-    let blue: Double
-    let alpha: Double
     
-    init(_ color: String) {
+    init(_ value: String) {
+
+        var rgbaValue: UInt32 = 0
+        Scanner(string: value).scanHexInt32(&rgbaValue)
         
-        //TODO: create real implementation later
+        red = CGFloat((rgbaValue & 0xFF000000) >> 24) / 255.0
+        green = CGFloat((rgbaValue & 0x00FF0000) >> 16) / 255.0
+        blue = CGFloat((rgbaValue & 0x0000FF00) >> 8) / 255.0
+        alpha = CGFloat(rgbaValue & 0x000000FF) / 255.0
         
-        value = color
-        red = 0
-        green = 0
-        blue = 0
-        alpha = 0
+        self.value = value
     }
     
-    init?(_ color: String?) {
-        
-        if let color = color {
-            
-            self.init(color)
-            
+    init?(_ value: String?) {
+
+        if let value = value {
+
+            self.init(value)
+
         } else {
-            
+
             return nil
         }
     }

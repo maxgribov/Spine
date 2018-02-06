@@ -120,7 +120,7 @@ class SkeletonModelTests: XCTestCase {
             XCTAssertEqual(bone.shear.dy, 0.97)
             XCTAssertEqual(bone.inheritScale, false)
             XCTAssertEqual(bone.inheritRotation, false)
-            XCTAssertEqual(bone.color?.value, "ff000dff")
+            XCTAssertEqual(bone.color.value, "ff000dff")
             
         } else {
             
@@ -156,7 +156,7 @@ class SkeletonModelTests: XCTestCase {
             XCTAssertEqual(bone.shear.dy, 0)
             XCTAssertEqual(bone.inheritScale, true)
             XCTAssertEqual(bone.inheritRotation, true)
-            XCTAssertNil(bone.color)
+            XCTAssertEqual(bone.color.value, "989898FF")
             
         } else {
             

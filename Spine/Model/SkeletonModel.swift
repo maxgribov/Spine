@@ -118,7 +118,7 @@ struct BoneModel {
     ///False if rotation from parent bones should not affect this bone. Assume true if omitted.
     let inheritRotation: Bool
     ///The color of the bone, as it was in Spine. Assume 0x989898FF RGBA if omitted. Nonessential.
-    let color: ColorModel?
+    let color: ColorModel
     
     /**
      Initializes a new BoneModel.
@@ -137,7 +137,7 @@ struct BoneModel {
          - shearY: Optional, default: 0
          - inheritScale: Optional, default: true
          - inheritRotation: Optional, default: true
-         - color: Optional
+         - color: Optional, default: 0x989898FF
 
      - Returns: new BoneModel.
      */
@@ -153,7 +153,7 @@ struct BoneModel {
         self.shear = CGVector(dx: shearX ?? 0, dy: shearY ?? 0)
         self.inheritScale = inheritScale ?? true
         self.inheritRotation = inheritRotation ?? true
-        self.color = ColorModel(color)
+        self.color = ColorModel(color ?? "989898FF")
     }
     
     enum BoneTransformModelType: String {
