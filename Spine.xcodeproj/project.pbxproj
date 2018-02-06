@@ -31,6 +31,8 @@
 		779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
 		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
 		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
+		77DBA2A7202A19D900D35306 /* CharacterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* CharacterNode.swift */; };
+		77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
 		77E6FFB62029C8510078923C /* BoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* BoneNode.swift */; };
 		77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
 		77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */; };
@@ -74,6 +76,8 @@
 		779AC33F201B4BC200C33B79 /* SkinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModels.swift; sourceTree = "<group>"; };
 		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
 		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
+		77DBA2A6202A19D900D35306 /* CharacterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNode.swift; sourceTree = "<group>"; };
+		77DBA2A8202A1FE400D35306 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		77E6FFB52029C8510078923C /* BoneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneNode.swift; sourceTree = "<group>"; };
 		77E6FFB72029D2110078923C /* ColorModelTets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModelTets.swift; sourceTree = "<group>"; };
 		77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -165,8 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				77F1D5EC201A490400AF499B /* Spine.h */,
+				77DBA2A6202A19D900D35306 /* CharacterNode.swift */,
 				77E6FFBB2029EEBF0078923C /* SkeletonNode.swift */,
 				77E6FFB52029C8510078923C /* BoneNode.swift */,
+				77DBA2A8202A1FE400D35306 /* Animation.swift */,
 				779AC334201B499C00C33B79 /* Model */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
 				77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */,
@@ -308,6 +314,8 @@
 				779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */,
 				779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */,
 				77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */,
+				77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */,
+				77DBA2A7202A19D900D35306 /* CharacterNode.swift in Sources */,
 				77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */,
 				779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */,
 				773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */,
