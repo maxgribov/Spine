@@ -10,6 +10,19 @@ import SpriteKit
 
 class Slot: SKNode {
     
+    let model: SlotModel
+    
+    init(_ model: SlotModel) {
+        
+        self.model = model
+        super.init()
+        self.name = Slot.generateName(model.name)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     class func generateName(_ name: String) -> String {
         
         return "slot:\(name)"
