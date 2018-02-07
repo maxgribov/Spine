@@ -38,7 +38,7 @@ public class CharacterNode: SKNode {
         
         if let animations = model.animations {
             
-            self.animations = animations.map({ Animation($0)})
+            self.animations = animations.map({ Animation($0, model)})
         }
     }
     

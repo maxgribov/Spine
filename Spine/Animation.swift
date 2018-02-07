@@ -13,18 +13,26 @@ public class Animation {
     let name: String
     let action: SKAction
     
-    init(_ model: AnimationModel) {
+    init(_ animationModel: AnimationModel, _ model: SpineModel) {
         
-        self.name = model.name
+        self.name = animationModel.name
         
         var actions = [SKAction]()
         
-        for group in model.groups {
+        for group in animationModel.groups {
             
             switch group {
             case .bones(let bonesAnimationModels):
-                let bonesActions = bonesAnimationModels.map({ SKAction.bone(animation: $0)})
-                actions.append(contentsOf: bonesActions)
+                actions.append(contentsOf: bonesAnimationModels.map({ (boneAnimationModel) -> SKAction in
+                    
+                    guard let bone = model.bones?.filter({ $0.name == boneAnimationModel.bone }).first else {
+                        
+                        //for some reason can't find bone for this animation model
+                        return SKAction()
+                    }
+                    
+                    return SKAction.bone(boneAnimationModel, bone)
+                }))
             default:
                 continue
                 
@@ -37,52 +45,74 @@ public class Animation {
 
 extension SKAction {
     
-    class func bone(animation: BoneAnimationModel) -> SKAction {
+    class func bone(_ model: BoneAnimationModel, _ bone: BoneModel) -> SKAction {
         
-        return SKAction.run(SKAction.group(animation.timelines.map({ SKAction.bone(timeline: $0)})), onChildWithName: "//\(animation.bone)")
+        return SKAction.run(SKAction.group(model.timelines.map({ SKAction.bone(timeline: $0, bone)})), onChildWithName: "//\(model.bone)")
     }
     
-    class func bone(timeline: BoneAnimationTimelineModelType) -> SKAction {
+    class func bone(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
+        
+        var lastTime: CFTimeInterval = 0
         
         switch timeline {
         case .rotate(let rotateKeyframes):
-            return SKAction.sequence(rotateKeyframes.map({ SKAction.bone(keyframe: $0)}))
-        case .scale(let scaleKeyframes):
-            return SKAction.sequence(scaleKeyframes.map({ SKAction.bone(keyframe: $0)}))
+            return SKAction.sequence(rotateKeyframes.map({ (keyframe) -> SKAction in
+                
+                let duration = keyframe.time - lastTime
+                lastTime = keyframe.time
+                return SKAction.bone(keyframe: keyframe, duration: duration, bone.rotation)
+            }))
+            
         case .translate(let translateKeyframes):
-            return SKAction.sequence(translateKeyframes.map({ SKAction.bone(keyframe: $0)}))
+            return SKAction.sequence(translateKeyframes.map({ (keyframe) -> SKAction in
+                
+                let duration = keyframe.time - lastTime
+                lastTime = keyframe.time
+                return SKAction.bone(keyframe: keyframe, duration: duration, bone.position)
+            }))
+
+        case .scale(let scaleKeyframes):
+            return SKAction.sequence(scaleKeyframes.map({ (keyframe) -> SKAction in
+                
+                let duration = keyframe.time - lastTime
+                lastTime = keyframe.time
+                return SKAction.bone(keyframe: keyframe, duration: duration, bone.scale)
+            }))
+
         case .shear(let shearKeyframes):
-            return SKAction.sequence(shearKeyframes.map({ SKAction.bone(keyframe: $0)}))
+            return SKAction.sequence(shearKeyframes.map({ (keyframe) -> SKAction in
+                
+                let duration = keyframe.time - lastTime
+                lastTime = keyframe.time
+                return SKAction.bone(keyframe: keyframe, duration: duration, bone.shear)
+            }))
         }
     }
     
-    class func bone(keyframe: BoneKeyframeRotateModel) -> SKAction {
-        
-        let angle = keyframe.angle * degreeToRadiansFactor
-        
-        return SKAction.rotate(byAngle: angle, duration: keyframe.time)
+    class func bone(keyframe: BoneKeyframeRotateModel, duration: CFTimeInterval, _ defaultAngle: CGFloat) -> SKAction {
+
+        let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
+        return SKAction.rotate(toAngle: angle, duration: duration)
+    }
+
+    class func bone(keyframe: BoneKeyframeTranslateModel, duration: CFTimeInterval, _ defaultPosition: CGPoint) -> SKAction {
+
+        let position = CGPoint(x: defaultPosition.x + keyframe.position.x, y: defaultPosition.y + keyframe.position.y)
+        return SKAction.move(to: position, duration: duration)
     }
     
-    class func bone(keyframe: BoneKeyframeTranslateModel) -> SKAction {
-        
-        let vector = CGVector(dx: keyframe.position.x, dy: keyframe.position.y)
-        return SKAction.move(by: vector, duration: keyframe.time)
+    class func bone(keyframe: BoneKeyframeScaleModel, duration: CFTimeInterval, _ defaultScale: CGVector) -> SKAction {
+
+        let scaleX = defaultScale.dx + keyframe.scale.dx
+        let scaleY = defaultScale.dy + keyframe.scale.dy
+        return SKAction.group([SKAction.scaleX(to: scaleX, duration: duration),
+                               SKAction.scaleY(to: scaleY, duration: duration)])
     }
     
-    class func bone(keyframe: BoneKeyframeScaleModel) -> SKAction {
+    class func bone(keyframe: BoneKeyframeShearModel, duration: CFTimeInterval, _ defaultShear: CGVector) -> SKAction {
         
-        return SKAction.scaleX(by: keyframe.scale.dx, y: keyframe.scale.dy, duration: keyframe.time)
-        
-//        return SKAction.group([SKAction.scaleX(to: keyframe.scale.dx, duration: keyframe.time),
-//                               SKAction.scaleY(to: keyframe.scale.dy, duration: keyframe.time)])
-    }
-    
-    class func bone(keyframe: BoneKeyframeShearModel) -> SKAction {
-        
-        return SKAction.customAction(withDuration: keyframe.time, actionBlock: { (node, time) in
-            
-            //TODO: Implement shear action here in future
-        })
+        //TODO: Implement shear action here in future
+        return SKAction()
     }
 }
 
