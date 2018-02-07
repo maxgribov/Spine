@@ -49,7 +49,8 @@ extension SKAction {
     
     class func bone(_ model: BoneAnimationModel, _ bone: BoneModel) -> SKAction {
         
-        return SKAction.run(SKAction.group(model.timelines.map({ SKAction.bone(timeline: $0, bone)})), onChildWithName: "//\(model.bone)")
+        let boneName = Bone.generateName(model.bone)
+        return SKAction.run(SKAction.group(model.timelines.map({ SKAction.bone(timeline: $0, bone)})), onChildWithName: "//\(boneName)")
     }
     
     class func bone(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {

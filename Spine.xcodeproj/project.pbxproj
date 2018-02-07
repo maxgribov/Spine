@@ -33,6 +33,7 @@
 		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
 		77DBA2A7202A19D900D35306 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Character.swift */; };
 		77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
+		77E05F3A202B8530003AFD42 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E05F39202B8530003AFD42 /* Slot.swift */; };
 		77E6FFB62029C8510078923C /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
 		77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
 		77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */; };
@@ -78,6 +79,7 @@
 		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
 		77DBA2A6202A19D900D35306 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		77DBA2A8202A1FE400D35306 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		77E05F39202B8530003AFD42 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		77E6FFB52029C8510078923C /* Bone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bone.swift; sourceTree = "<group>"; };
 		77E6FFB72029D2110078923C /* ColorModelTets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModelTets.swift; sourceTree = "<group>"; };
 		77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				77DBA2A6202A19D900D35306 /* Character.swift */,
 				77E6FFBB2029EEBF0078923C /* Skeleton.swift */,
 				77E6FFB52029C8510078923C /* Bone.swift */,
+				77E05F39202B8530003AFD42 /* Slot.swift */,
 				77DBA2A8202A1FE400D35306 /* Animation.swift */,
 				779AC334201B499C00C33B79 /* Model */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
@@ -316,6 +319,7 @@
 				77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */,
 				77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */,
 				77DBA2A7202A19D900D35306 /* Character.swift in Sources */,
+				77E05F3A202B8530003AFD42 /* Slot.swift in Sources */,
 				77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */,
 				779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */,
 				773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */,

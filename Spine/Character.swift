@@ -52,3 +52,4 @@ public class Character: SKNode {
         self.run(animation.action)
     }
 }
+

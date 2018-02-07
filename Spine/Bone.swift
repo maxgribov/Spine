@@ -11,12 +11,12 @@ import SpriteKit
 class Bone: SKSpriteNode {
     
     let model: BoneModel
-    
+
     init(_ model: BoneModel) {
 
         self.model = model
         super.init(texture: nil, color: UIColor(model.color), size: CGSize(width: model.lenght, height: 5))
-        self.name = model.name
+        self.name = Bone.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0, y: 0.5)
         self.setDefaultPose()
     }
@@ -31,5 +31,10 @@ class Bone: SKSpriteNode {
         self.zRotation = model.rotation * degreeToRadiansFactor
         self.xScale = model.scale.dx
         self.yScale = model.scale.dy
+    }
+    
+    class func generateName(_ name: String) -> String {
+        
+        return "bone:\(name)"
     }
 }

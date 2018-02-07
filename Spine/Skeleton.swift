@@ -23,21 +23,22 @@ public class Skeleton: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func createBones(_ bones: [BoneModel]?)  {
+    func createBones(_ models: [BoneModel]?)  {
         
-        if let bones = bones {
+        if let models = models {
         
-            let boneNodes: [Bone] = bones.map { Bone($0) }
+            let bones: [Bone] = models.map { Bone($0) }
             
-            for boneNode in boneNodes {
+            for bone in bones {
                 
-                if let parentNode = boneNodes.filter( { $0.name == boneNode.model.parent }).first {
+                if let parentName = bone.model.parent,
+                   let parentNode = bones.filter( { $0.name == Bone.generateName(parentName) }).first {
                     
-                    parentNode.addChild(boneNode)
+                    parentNode.addChild(bone)
 
                 } else {
                     
-                    self.addChild(boneNode)
+                    self.addChild(bone)
                 }
             }
         }
