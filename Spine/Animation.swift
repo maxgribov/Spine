@@ -43,6 +43,8 @@ public class Animation {
     }
 }
 
+//MARK: - Bones Actions
+
 extension SKAction {
     
     class func bone(_ model: BoneAnimationModel, _ bone: BoneModel) -> SKAction {

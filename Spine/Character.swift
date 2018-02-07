@@ -1,5 +1,5 @@
 //
-//  CharacterNode.swift
+//  Character.swift
 //  Spine
 //
 //  Created by Max Gribov on 06/02/2018.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public class CharacterNode: SKNode {
+public class Character: SKNode {
     
     var animations: [Animation]?
     public var animationsNames: [String]? {
@@ -26,7 +26,7 @@ public class CharacterNode: SKNode {
     public init(_ model: SpineModel) {
         
         super.init()
-        self.addChild(SkeletonNode(model))
+        self.addChild(Skeleton(model))
         self.createAnimations(model)
     }
     

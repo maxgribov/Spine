@@ -1,5 +1,5 @@
 //
-//  SkeletonNode.swift
+//  Skeleton.swift
 //  Spine
 //
 //  Created by Max Gribov on 06/02/2018.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public class SkeletonNode: SKNode {
+public class Skeleton: SKNode {
     
     let model: SkeletonModel
     
@@ -27,7 +27,7 @@ public class SkeletonNode: SKNode {
         
         if let bones = bones {
         
-            let boneNodes: [BoneNode] = bones.map { BoneNode($0) }
+            let boneNodes: [Bone] = bones.map { Bone($0) }
             
             for boneNode in boneNodes {
                 

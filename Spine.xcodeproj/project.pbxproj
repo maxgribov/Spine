@@ -31,12 +31,12 @@
 		779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
 		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
 		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
-		77DBA2A7202A19D900D35306 /* CharacterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* CharacterNode.swift */; };
+		77DBA2A7202A19D900D35306 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Character.swift */; };
 		77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
-		77E6FFB62029C8510078923C /* BoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* BoneNode.swift */; };
+		77E6FFB62029C8510078923C /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
 		77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
 		77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */; };
-		77E6FFBC2029EEBF0078923C /* SkeletonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFBB2029EEBF0078923C /* SkeletonNode.swift */; };
+		77E6FFBC2029EEBF0078923C /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFBB2029EEBF0078923C /* Skeleton.swift */; };
 		77F1D5F3201A490400AF499B /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F1D5E9201A490400AF499B /* Spine.framework */; };
 		77F1D5FA201A490400AF499B /* Spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F1D5EC201A490400AF499B /* Spine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -76,12 +76,12 @@
 		779AC33F201B4BC200C33B79 /* SkinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModels.swift; sourceTree = "<group>"; };
 		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
 		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
-		77DBA2A6202A19D900D35306 /* CharacterNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNode.swift; sourceTree = "<group>"; };
+		77DBA2A6202A19D900D35306 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		77DBA2A8202A1FE400D35306 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
-		77E6FFB52029C8510078923C /* BoneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneNode.swift; sourceTree = "<group>"; };
+		77E6FFB52029C8510078923C /* Bone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bone.swift; sourceTree = "<group>"; };
 		77E6FFB72029D2110078923C /* ColorModelTets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModelTets.swift; sourceTree = "<group>"; };
 		77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
-		77E6FFBB2029EEBF0078923C /* SkeletonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonNode.swift; sourceTree = "<group>"; };
+		77E6FFBB2029EEBF0078923C /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		77F1D5E9201A490400AF499B /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5EC201A490400AF499B /* Spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine.h; sourceTree = "<group>"; };
 		77F1D5ED201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,9 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				77F1D5EC201A490400AF499B /* Spine.h */,
-				77DBA2A6202A19D900D35306 /* CharacterNode.swift */,
-				77E6FFBB2029EEBF0078923C /* SkeletonNode.swift */,
-				77E6FFB52029C8510078923C /* BoneNode.swift */,
+				77DBA2A6202A19D900D35306 /* Character.swift */,
+				77E6FFBB2029EEBF0078923C /* Skeleton.swift */,
+				77E6FFB52029C8510078923C /* Bone.swift */,
 				77DBA2A8202A1FE400D35306 /* Animation.swift */,
 				779AC334201B499C00C33B79 /* Model */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
@@ -309,13 +309,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77E6FFBC2029EEBF0078923C /* SkeletonNode.swift in Sources */,
-				77E6FFB62029C8510078923C /* BoneNode.swift in Sources */,
+				77E6FFBC2029EEBF0078923C /* Skeleton.swift in Sources */,
+				77E6FFB62029C8510078923C /* Bone.swift in Sources */,
 				779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */,
 				779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */,
 				77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */,
 				77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */,
-				77DBA2A7202A19D900D35306 /* CharacterNode.swift in Sources */,
+				77DBA2A7202A19D900D35306 /* Character.swift in Sources */,
 				77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */,
 				779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */,
 				773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */,

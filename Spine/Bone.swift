@@ -1,5 +1,5 @@
 //
-//  BoneNode.swift
+//  Bone.swift
 //  Spine
 //
 //  Created by Max Gribov on 06/02/2018.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class BoneNode: SKSpriteNode {
+class Bone: SKSpriteNode {
     
     let model: BoneModel
     
