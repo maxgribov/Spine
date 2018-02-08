@@ -13,7 +13,7 @@ class Skin {
     let model: SkinModel
     let atlases: [String : SKTextureAtlas]?
     
-    init(model: SkinModel, folderName: String?) {
+    init(_ model: SkinModel, _ folder: String?) {
         
         self.model = model
         
@@ -29,9 +29,9 @@ class Skin {
 
             var atlasPath = atlasName
             
-            if let folderName = folderName {
+            if let folder = folder {
                 
-                atlasPath = "\(folderName)/\(atlasName)"
+                atlasPath = "\(folder)/\(atlasName)"
             }
             
             atlases[atlasName] = SKTextureAtlas(named: atlasPath)
@@ -46,11 +46,12 @@ class Skin {
 func atlasName(from name: String, path: String?) -> String {
     
     let actualName = path ?? name
-    let actualNameSplitted = actualName.components(separatedBy: "/")
+    var actualNameSplitted = actualName.components(separatedBy: "/")
     
-    if actualNameSplitted.count > 1, let firstPart = actualNameSplitted.first {
+    if actualNameSplitted.count > 1 {
         
-        return firstPart
+        actualNameSplitted.removeLast()
+        return actualNameSplitted.joined(separator: "/")
         
     } else {
         

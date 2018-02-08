@@ -36,6 +36,8 @@
 		77DBA2A7202A19D900D35306 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Character.swift */; };
 		77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
 		77E05F3A202B8530003AFD42 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E05F39202B8530003AFD42 /* Slot.swift */; };
+		77E5A8C5202CDFC000ACDC0D /* SkinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */; };
+		77E5A8C7202CED6F00ACDC0D /* NamePrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C6202CED6F00ACDC0D /* NamePrefix.swift */; };
 		77E6FFB62029C8510078923C /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
 		77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
 		77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */; };
@@ -84,6 +86,8 @@
 		77DBA2A6202A19D900D35306 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		77DBA2A8202A1FE400D35306 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		77E05F39202B8530003AFD42 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
+		77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinTests.swift; sourceTree = "<group>"; };
+		77E5A8C6202CED6F00ACDC0D /* NamePrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamePrefix.swift; sourceTree = "<group>"; };
 		77E6FFB52029C8510078923C /* Bone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bone.swift; sourceTree = "<group>"; };
 		77E6FFB72029D2110078923C /* ColorModelTets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModelTets.swift; sourceTree = "<group>"; };
 		77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				776656E2202B9D3A00750189 /* Attachment.swift */,
 				776656E6202BADBB00750189 /* Skin.swift */,
 				77DBA2A8202A1FE400D35306 /* Animation.swift */,
+				77E5A8C6202CED6F00ACDC0D /* NamePrefix.swift */,
 				779AC334201B499C00C33B79 /* Model */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
 				77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */,
@@ -198,6 +203,7 @@
 				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
 				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
 				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
+				77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */,
 				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
 				770640A12028F97A0031BD32 /* Resources */,
 				77E6FFB72029D2110078923C /* ColorModelTets.swift */,
@@ -318,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77E5A8C7202CED6F00ACDC0D /* NamePrefix.swift in Sources */,
 				77E6FFBC2029EEBF0078923C /* Skeleton.swift in Sources */,
 				776656E7202BADBB00750189 /* Skin.swift in Sources */,
 				77E6FFB62029C8510078923C /* Bone.swift in Sources */,
@@ -349,6 +356,7 @@
 				77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */,
 				770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */,
 				776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */,
+				77E5A8C5202CDFC000ACDC0D /* SkinTests.swift in Sources */,
 				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
 				773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */,
 				773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */,

@@ -10,12 +10,41 @@ import SpriteKit
 
 public class Character: SKNode {
     
+    var bones: [Bone]? {
+        get {
+            return children.filter({ (node) -> Bool in
+                
+                guard let name = node.name else {
+                    return false
+                }
+               
+                return name.contains(Bone.namePrefix)
+                
+            }) as? [Bone]
+        }
+    }
+    
+    var slots: [Slot]? {
+        get {
+            return children.filter({ (node) -> Bool in
+                
+                guard let name = node.name else {
+                    return false
+                }
+                
+                return name.contains(Slot.namePrefix)
+                
+            }) as? [Slot]
+        }
+    }
+    
+    var skins: [Skin]?
+    
     var animations: [Animation]?
     public var animationsNames: [String]? {
-        get{
+        get {
             
             guard let animations = animations else {
-                
                 return nil
             }
             
@@ -23,10 +52,12 @@ public class Character: SKNode {
         }
     }
     
-    public init(_ model: SpineModel) {
+    public init(_ model: SpineModel, atlasFolder: String?) {
         
         super.init()
         self.addChild(Skeleton(model))
+        self.createSlots(model)
+        self.createSkins(model, folder: atlasFolder)
         self.createAnimations(model)
     }
     
@@ -34,12 +65,35 @@ public class Character: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func createSlots(_ model: SpineModel) {
+        
+        if let slotsModels = model.slots {
+            
+            for slotModel in slotsModels {
+                
+                let boneName = Bone.generateName(slotModel.bone)
+                if let bone = childNode(withName: "//\(boneName)") {
+                    
+                    bone.addChild(Slot(slotModel))
+                }
+            }
+        }
+    }
+    
+    func createSkins(_ model: SpineModel, folder: String? ) {
+        
+        self.skins = model.skins?.map({ (skinModel) -> Skin in
+            
+            return Skin(skinModel, folder)
+        })
+    }
+    
     func createAnimations(_ model: SpineModel) {
         
-        if let animations = model.animations {
+        self.animations = model.animations?.map({ (animationModel) -> Animation in
             
-            self.animations = animations.map({ Animation($0, model)})
-        }
+            return Animation(animationModel, model)
+        })
     }
     
     public func runAnimation(_ name: String) {

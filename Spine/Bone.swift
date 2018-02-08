@@ -8,8 +8,9 @@
 
 import SpriteKit
 
-class Bone: SKSpriteNode {
+class Bone: SKSpriteNode, NamePrefix {
     
+    public static let namePrefix = "bone:"
     let model: BoneModel
 
     init(_ model: BoneModel) {
@@ -31,10 +32,5 @@ class Bone: SKSpriteNode {
         self.zRotation = model.rotation * degreeToRadiansFactor
         self.xScale = model.scale.dx
         self.yScale = model.scale.dy
-    }
-    
-    class func generateName(_ name: String) -> String {
-        
-        return "bone:\(name)"
     }
 }

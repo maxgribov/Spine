@@ -8,8 +8,9 @@
 
 import SpriteKit
 
-class Slot: SKNode {
+class Slot: SKNode, NamePrefix {
     
+    public static let namePrefix = "slot:"
     let model: SlotModel
     
     init(_ model: SlotModel) {
@@ -21,10 +22,5 @@ class Slot: SKNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    class func generateName(_ name: String) -> String {
-        
-        return "slot:\(name)"
     }
 }

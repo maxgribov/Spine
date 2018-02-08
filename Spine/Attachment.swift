@@ -8,21 +8,13 @@
 
 import SpriteKit
 
-protocol Attachment: class {
+protocol Attachment: NamePrefix {
     
-    static func generateName(_ name: String) -> String
-}
-
-extension Attachment {
-    
-     static func generateName(_ name: String) -> String {
-        
-        return "attachment:\(name)"
-    }
 }
 
 class RegionAttachment: SKSpriteNode, Attachment {
     
+    public static let namePrefix = "attachment:"
     let model: RegionAttachmentModel
     
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {
