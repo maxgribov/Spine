@@ -8,8 +8,35 @@
 
 import SpriteKit
 
-protocol Attachment: NamePrefix {
+typealias SKNodeNamePrefix = SKNode & NamePrefix
+
+protocol Attachment: SKNodeNamePrefix {
+
+}
+
+class AttachmentBuilder {
     
+    class func attachment(of type: AttachmentModelType, texture: SKTexture) -> Attachment? {
+        
+        switch type {
+        case .region(let regionModel): return RegionAttachment(regionModel, texture)
+        default: return nil
+        }
+    }
+    
+    class func attachment(of type: AttachmentModelType) -> Attachment? {
+        
+        return nil
+    }
+    
+    class func textureRequired(for type: AttachmentModelType) -> Bool {
+        
+        switch type {
+        case .region(_), .mesh(_), .linkedMesh(_): return true
+        default:
+            return false
+        }
+    }
 }
 
 class RegionAttachment: SKSpriteNode, Attachment {

@@ -123,6 +123,20 @@ enum AttachmentModelType {
             }
         }
     }
+    
+    var modelName: String {
+        get {
+            switch self {
+            case .region(let model): return model.path ?? model.name
+            case .boundingBox(let model): return model.name
+            case .mesh(let model): return model.path ?? model.name
+            case .linkedMesh(let model): return model.path ?? model.name
+            case .path(let model): return model.name
+            case .point(let model): return model.name
+            case .clipping(let model): return model.name
+            }
+        }
+    }
 }
 
 protocol AttachmentModel {

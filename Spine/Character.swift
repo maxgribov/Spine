@@ -39,6 +39,35 @@ public class Character: SKNode {
     }
     
     var skins: [Skin]?
+    public var atlases: [SKTextureAtlas]? {
+        get {
+            
+            var atlasesMutable = [SKTextureAtlas]()
+            
+            guard let skins = skins else {
+                
+                return nil
+            }
+            
+            for skin in skins {
+                
+                guard let skinAtlaces = skin.atlases else {
+                    
+                    continue
+                }
+                
+                for atlasName in skinAtlaces.keys {
+                    
+                    if let atlas = skinAtlaces[atlasName] {
+                        
+                        atlasesMutable.append(atlas)
+                    }
+                }
+            }
+            
+            return atlasesMutable
+        }
+    }
     
     var animations: [Animation]?
     public var animationsNames: [String]? {
@@ -64,6 +93,48 @@ public class Character: SKNode {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public func applySkin(named: String? = nil) {
+        
+        var skinsNames: Set = ["default"]
+        if let named = named {
+            skinsNames.insert(named)
+        }
+        
+        guard let skins = skins?.filter({ skinsNames.contains($0.model.name) }),
+              let slots = slots else {
+            
+            return
+        }
+        
+        for slot in slots {
+            
+            slot.removeAllChildren()
+            
+            for skin in skins {
+                
+                guard let attachmentName = slot.model.attachment,
+                    let attachment = skin.attachment(named: attachmentName, slotName: slot.model.name) as? SKNode else {
+                        
+                        continue
+                }
+                
+                slot.addChild(attachment)
+            }
+        }
+    }
+    
+    public func runAnimation(named: String) {
+        
+        guard let animation = animations?.first(where: { $0.name == named }) else {
+            
+            return
+        }
+        
+        self.run(animation.action)
+    }
+    
+    //MARK: - Private Setup Helpers
     
     func createSlots(_ model: SpineModel) {
         
@@ -96,14 +167,6 @@ public class Character: SKNode {
         })
     }
     
-    public func runAnimation(_ name: String) {
-        
-        guard let animation = animations?.first(where: { $0.name == name }) else {
-            
-            return
-        }
-        
-        self.run(animation.action)
-    }
+
 }
 
