@@ -27,12 +27,12 @@ class SlotKeyframeAttachmentModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.name, "front-fist-open")
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -52,12 +52,12 @@ class SlotKeyframeAttachmentModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.0667)
+            XCTAssertEqual(keyframe.time, 0.0667, accuracy: TimeInterval.ulpOfOne)
             XCTAssertNil(keyframe.name)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

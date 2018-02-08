@@ -245,24 +245,24 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "bones" }).first, "bones group should not be nil")
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "slots" }).first, "slots group should not be nil")
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "ik" }).first, "ik group should not be nil")
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "transform" }).first, "transform group should not be nil")
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "deform" }).first, "deform group should not be nil")
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "events" }).first, "events group should not be nil")
-                XCTAssertNotNil(idleAnimation.groups.filter({ $0.identifier == "draworder" }).first, "draworder group should not be nil")
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "bones" }))
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "slots" }))
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "ik" }))
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "transform" }))
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "deform" }))
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "events" }))
+                XCTAssertNotNil(idleAnimation.groups.first(where: { $0.identifier == "draworder" }))
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
         
     }
@@ -409,17 +409,17 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let bonesGroup = idleAnimation.groups.filter({ $0.identifier == "bones" }).first {
+                if let bonesGroup = idleAnimation.groups.first(where: { $0.identifier == "bones" }) {
                     
                     if let bonesAnimationModels = bonesGroup.models as? [BoneAnimationModel] {
                         
-                        if let boneAnimationsModels = bonesAnimationModels.filter({ $0.bone == "bone-name" }).first {
+                        if let boneAnimationsModels = bonesAnimationModels.first(where: { $0.bone == "bone-name" }) {
 
                             // bone rotate keyframes
                             
-                            if let boneAnimationsRotateTimeline = boneAnimationsModels.timelines.filter({ $0.identifier == "rotate"}).first {
+                            if let boneAnimationsRotateTimeline = boneAnimationsModels.timelines.first(where: { $0.identifier == "rotate" }) {
                                 
                                 if let boneAnimationRotateModels = boneAnimationsRotateTimeline.models  as? [BoneKeyframeRotateModel] {
                                     
@@ -427,17 +427,17 @@ class AnimationModelsTests: XCTestCase {
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "boneAnimationRotateModels should not be nil")
+                                    XCTFail("boneAnimationRotateModels should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "boneAnimationsRotateTimeline should not be nil")
+                                XCTFail("boneAnimationsRotateTimeline should not be nil")
                             }
                             
                             // bone translate keyframes
                             
-                            if let boneAnimationsTranslateTimeline = boneAnimationsModels.timelines.filter({ $0.identifier == "translate"}).first {
+                            if let boneAnimationsTranslateTimeline = boneAnimationsModels.timelines.first(where: { $0.identifier == "translate" }) {
                                 
                                 if let boneAnimationTranslateModels = boneAnimationsTranslateTimeline.models  as? [BoneKeyframeTranslateModel] {
                                     
@@ -445,17 +445,17 @@ class AnimationModelsTests: XCTestCase {
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "boneAnimationTranslateModels should not be nil")
+                                    XCTFail("boneAnimationTranslateModels should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "boneAnimationsTranslateTimeline should not be nil")
+                                XCTFail("boneAnimationsTranslateTimeline should not be nil")
                             }
                             
                             // bone scale keyframes
                             
-                            if let boneAnimationsScaleTimeline = boneAnimationsModels.timelines.filter({ $0.identifier == "scale"}).first {
+                            if let boneAnimationsScaleTimeline = boneAnimationsModels.timelines.first(where: { $0.identifier == "scale" }) {
                                 
                                 if let boneAnimationScaleModels = boneAnimationsScaleTimeline.models  as? [BoneKeyframeScaleModel] {
                                     
@@ -463,17 +463,17 @@ class AnimationModelsTests: XCTestCase {
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "boneAnimationScaleModels should not be nil")
+                                    XCTFail("boneAnimationScaleModels should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "boneAnimationsScaleTimeline should not be nil")
+                                XCTFail("boneAnimationsScaleTimeline should not be nil")
                             }
                             
                             // bone shear keyframes
                             
-                            if let boneAnimationsShearTimeline = boneAnimationsModels.timelines.filter({ $0.identifier == "shear"}).first {
+                            if let boneAnimationsShearTimeline = boneAnimationsModels.timelines.first(where: { $0.identifier == "shear" }) {
                                 
                                 if let boneAnimationShearModels = boneAnimationsShearTimeline.models  as? [BoneKeyframeShearModel] {
                                     
@@ -481,37 +481,37 @@ class AnimationModelsTests: XCTestCase {
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "boneAnimationShearModels should not be nil")
+                                    XCTFail("boneAnimationShearModels should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "boneAnimationsShearTimeline should not be nil")
+                                XCTFail("boneAnimationsShearTimeline should not be nil")
                             }
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "boneAnimationsModels should not be nil")
+                            XCTFail("boneAnimationsModels should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "bonesAnimationModels should not be nil")
+                        XCTFail("bonesAnimationModels should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "bonesGroup should not be nil")
+                    XCTFail("bonesGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+           XCTFail("animations should not be nil")
         }
         
     }
@@ -569,17 +569,17 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let slotsGroup = idleAnimation.groups.filter({ $0.identifier == "slots" }).first {
+                if let slotsGroup = idleAnimation.groups.first(where: { $0.identifier == "slots" }) {
                     
                     if let slotsAnimationModels = slotsGroup.models as? [SlotAnimationModel] {
                         
-                        if let slotAnimationsModels = slotsAnimationModels.filter({ $0.slot == "slot-name" }).first {
+                        if let slotAnimationsModels = slotsAnimationModels.first(where: { $0.slot == "slot-name" }) {
                             
                             // slot attachment keyframes
                             
-                            if let slotAnimationsAttachmentTimeline = slotAnimationsModels.timelines.filter({ $0.identifier == "attachment"}).first {
+                            if let slotAnimationsAttachmentTimeline = slotAnimationsModels.timelines.first(where: { $0.identifier == "attachment" }) {
                                 
                                 if let slotAnimationAttachmentModels = slotAnimationsAttachmentTimeline.models  as? [SlotKeyframeAttachmentModel] {
                                     
@@ -587,17 +587,17 @@ class AnimationModelsTests: XCTestCase {
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "slotAnimationAttachmentModels should not be nil")
+                                    XCTFail("slotAnimationAttachmentModels should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "slotAnimationsAttachmentTimeline should not be nil")
+                                XCTFail("slotAnimationsAttachmentTimeline should not be nil")
                             }
                             
                             // slot color keyframes
                             
-                            if let slotAnimationsColorTimeline = slotAnimationsModels.timelines.filter({ $0.identifier == "color"}).first {
+                            if let slotAnimationsColorTimeline = slotAnimationsModels.timelines.first(where: { $0.identifier == "color" }) {
                                 
                                 if let slotAnimationColorModels = slotAnimationsColorTimeline.models  as? [SlotKeyframeColorModel] {
                                     
@@ -605,37 +605,37 @@ class AnimationModelsTests: XCTestCase {
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "slotAnimationColorModels should not be nil")
+                                    XCTFail("slotAnimationColorModels should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "slotAnimationsColorTimeline should not be nil")
+                                XCTFail("slotAnimationsColorTimeline should not be nil")
                             }
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "slotAnimationsModels should not be nil")
+                            XCTFail("slotAnimationsModels should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "slotsAnimationModels should not be nil")
+                        XCTFail("slotsAnimationModels should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slotsGroup should not be nil")
+                    XCTFail("slotsGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
         
     }
@@ -676,40 +676,40 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let ikGroup = idleAnimation.groups.filter({ $0.identifier == "ik" }).first {
+                if let ikGroup = idleAnimation.groups.first(where: { $0.identifier == "ik" }) {
                     
                     if let ikConstraintsAnimationModels = ikGroup.models as? [IKConstraintAnimationModel] {
                         
-                        if let ikConstraintAnimationsModel = ikConstraintsAnimationModels.filter({ $0.constraint == "constraint-name" }).first {
+                        if let ikConstraintAnimationsModel = ikConstraintsAnimationModels.first(where: { $0.constraint == "constraint-name" }) {
                             
                             XCTAssertTrue(ikConstraintAnimationsModel.keyframes.count == 2)
 
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "ikConstraintAnimationsModel should not be nil")
+                            XCTFail("ikConstraintAnimationsModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "ikConstraintsAnimationModels should not be nil")
+                        XCTFail("ikConstraintsAnimationModels should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "ikGroup should not be nil")
+                    XCTFail("ikGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
         
     }
@@ -752,40 +752,40 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let transformGroup = idleAnimation.groups.filter({ $0.identifier == "transform" }).first {
+                if let transformGroup = idleAnimation.groups.first(where: { $0.identifier == "transform" }) {
                     
                     if let transformConstraintsAnimationModels = transformGroup.models as? [TransformConstraintAnimationModel] {
                         
-                        if let transformConstraintAnimationsModel = transformConstraintsAnimationModels.filter({ $0.constraint == "constraint-name" }).first {
+                        if let transformConstraintAnimationsModel = transformConstraintsAnimationModels.first(where: { $0.constraint == "constraint-name" }) {
                             
                             XCTAssertTrue(transformConstraintAnimationsModel.keyframes.count == 2)
                             
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "transformConstraintAnimationsModel should not be nil")
+                            XCTFail("transformConstraintAnimationsModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "transformConstraintsAnimationModels should not be nil")
+                        XCTFail("transformConstraintsAnimationModels should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "transformGroup should not be nil")
+                    XCTFail("transformGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
         
     }
@@ -831,54 +831,54 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let deformGroup = idleAnimation.groups.filter({ $0.identifier == "deform" }).first {
+                if let deformGroup = idleAnimation.groups.first(where: { $0.identifier == "deform" }) {
                     
                     if let deformSkinsAnimationModels = deformGroup.models as? [DeformSkinAnimationModel] {
                         
-                        if let deformSkinAnimationModel = deformSkinsAnimationModels.filter({ $0.skin == "skin-name" }).first {
+                        if let deformSkinAnimationModel = deformSkinsAnimationModels.first(where: { $0.skin == "skin-name" }) {
                             
-                            if let deformSlotAnimationModel = deformSkinAnimationModel.slots.filter({ $0.slot == "slot-name" }).first {
+                            if let deformSlotAnimationModel = deformSkinAnimationModel.slots.first(where: { $0.slot == "slot-name" }) {
                                 
-                                if let deformMeshAnimationModel = deformSlotAnimationModel.meshes.filter({ $0.mesh == "mesh-attachment-name" }).first {
+                                if let deformMeshAnimationModel = deformSlotAnimationModel.meshes.first(where: { $0.mesh == "mesh-attachment-name" }) {
                                     
                                     XCTAssertTrue(deformMeshAnimationModel.keyframes.count == 2)
                                     
                                 } else {
                                     
-                                    XCTAssertNotNil(nil, "deformMeshAnimationModel should not be nil")
+                                    XCTFail("deformMeshAnimationModel should not be nil")
                                 }
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "deformSlotAnimationModel should not be nil")
+                                XCTFail("deformSlotAnimationModel should not be nil")
                                 
                             }
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "deformSkinAnimationModel should not be nil")
+                            XCTFail("deformSkinAnimationModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "deformSkinsAnimationModels should not be nil")
+                        XCTFail("deformSkinsAnimationModels should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "deformGroup should not be nil")
+                    XCTFail("deformGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
         
     }
@@ -920,9 +920,9 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let eventsGroup = idleAnimation.groups.filter({ $0.identifier == "events" }).first {
+                if let eventsGroup = idleAnimation.groups.first(where: { $0.identifier == "events" }) {
                     
                     if let eventsAnimationKeyframes = eventsGroup.models as? [EventKeyfarameModel] {
                         
@@ -930,22 +930,22 @@ class AnimationModelsTests: XCTestCase {
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "eventsAnimationKeyframes should not be nil")
+                        XCTFail("eventsAnimationKeyframes should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "eventsGroup should not be nil")
+                    XCTFail("eventsGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
         
     }
@@ -987,47 +987,40 @@ class AnimationModelsTests: XCTestCase {
         //then
         if let animations = spineModel?.animations {
             
-            if let idleAnimation = animations.filter({ $0.name == "idle" }).first {
+            if let idleAnimation = animations.first(where: { $0.name == "idle" }) {
                 
-                if let drawOrederGroup = idleAnimation.groups.filter({ $0.identifier == "draworder" }).first {
+                if let drawOrederGroup = idleAnimation.groups.first(where: { $0.identifier == "draworder" }) {
                     
                     if let drawOrderAnimationKeyframes = drawOrederGroup.models as? [DrawOrderKeyframeModel] {
                         
                         if let drawOrderAnimationKeyframe = drawOrderAnimationKeyframes.first {
                             
-                            XCTAssertEqual(drawOrderAnimationKeyframe.time, 0.3)
+                            XCTAssertEqual(drawOrderAnimationKeyframe.time, 0.3, accuracy: TimeInterval.ulpOfOne)
                             XCTAssertTrue(drawOrderAnimationKeyframe.offsets.count == 2)
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "drawOrderAnimationKeyframe should not be nil")
+                            XCTFail("drawOrderAnimationKeyframe should not be nil")
                         }
 
                     } else {
                         
-                        XCTAssertNotNil(nil, "drawOrderAnimationKeyframes should not be nil")
+                        XCTFail("drawOrderAnimationKeyframes should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "drawOrederGroup should not be nil")
+                    XCTFail("drawOrederGroup should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "idleAnimation should not be nil")
+                XCTFail("idleAnimation should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "animations should not be nil")
+            XCTFail("animations should not be nil")
         }
-        
     }
-    
 }
-
-
-
-
-

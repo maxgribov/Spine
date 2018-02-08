@@ -30,15 +30,15 @@ class TransformConstraintKeyframeModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
-            XCTAssertEqual(keyframe.rotateMix, 0.784)
-            XCTAssertEqual(keyframe.translateMix, 0.659)
-            XCTAssertEqual(keyframe.scaleMix, 0.423)
-            XCTAssertEqual(keyframe.shearMix, 0.358)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
+            XCTAssertEqual(keyframe.rotateMix, 0.784, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.translateMix, 0.659, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scaleMix, 0.423, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shearMix, 0.358, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -57,15 +57,15 @@ class TransformConstraintKeyframeModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.0667)
-            XCTAssertEqual(keyframe.rotateMix, 1.0)
-            XCTAssertEqual(keyframe.translateMix, 1.0)
-            XCTAssertEqual(keyframe.scaleMix, 1.0)
-            XCTAssertEqual(keyframe.shearMix, 1.0)
+            XCTAssertEqual(keyframe.time, 0.0667, accuracy: TimeInterval.ulpOfOne)
+            XCTAssertEqual(keyframe.rotateMix, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.translateMix, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scaleMix, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shearMix, 1.0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

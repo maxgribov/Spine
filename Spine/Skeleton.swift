@@ -32,7 +32,7 @@ public class Skeleton: SKNode {
             for bone in bones {
                 
                 if let parentName = bone.model.parent,
-                   let parentNode = bones.filter( { $0.name == Bone.generateName(parentName) }).first {
+                   let parentNode = bones.first(where: { $0.name == Bone.generateName(parentName) }) {
                     
                     parentNode.addChild(bone)
 

@@ -44,7 +44,7 @@ public class Character: SKNode {
     
     public func runAnimation(_ name: String) {
         
-        guard let animation = animations?.filter({ $0.name == name }).first else {
+        guard let animation = animations?.first(where: { $0.name == name }) else {
             
             return
         }

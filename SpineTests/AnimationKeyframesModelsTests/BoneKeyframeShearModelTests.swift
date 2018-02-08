@@ -28,14 +28,14 @@ class BoneKeyframeShearModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
-            XCTAssertEqual(keyframe.shear.dx, 0)
-            XCTAssertEqual(keyframe.shear.dy, 4.63)
+            XCTAssertEqual(keyframe.shear.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dy, 4.63, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -57,14 +57,14 @@ class BoneKeyframeShearModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.43)
+            XCTAssertEqual(keyframe.time, 0.43, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
-            XCTAssertEqual(keyframe.shear.dx, -5.74)
-            XCTAssertEqual(keyframe.shear.dy, 4.63)
+            XCTAssertEqual(keyframe.shear.dx, -5.74, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dy, 4.63, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -86,15 +86,19 @@ class BoneKeyframeShearModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.123)
+            XCTAssertEqual(keyframe.time, 1.123, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
-            XCTAssertEqual(keyframe.curve.bezierValue, [0.823, 0.24, 0.867, 0.66])
-            XCTAssertEqual(keyframe.shear.dx, 1.67)
-            XCTAssertEqual(keyframe.shear.dy, 34.481)
+            XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dx, 1.67, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dy, 34.481, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -113,14 +117,14 @@ class BoneKeyframeShearModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.28)
+            XCTAssertEqual(keyframe.time, 1.28, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
-            XCTAssertEqual(keyframe.shear.dx, 0)
-            XCTAssertEqual(keyframe.shear.dy, 0)
+            XCTAssertEqual(keyframe.shear.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dy, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -140,14 +144,14 @@ class BoneKeyframeShearModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.667)
+            XCTAssertEqual(keyframe.time, 1.667, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
-            XCTAssertEqual(keyframe.shear.dx, 0)
-            XCTAssertEqual(keyframe.shear.dy, 0)
+            XCTAssertEqual(keyframe.shear.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dy, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -167,15 +171,19 @@ class BoneKeyframeShearModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.923)
+            XCTAssertEqual(keyframe.time, 1.923, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
-            XCTAssertEqual(keyframe.curve.bezierValue, [0.823, 0.24, 0.867, 0.66])
-            XCTAssertEqual(keyframe.shear.dx, 0)
-            XCTAssertEqual(keyframe.shear.dy, 0)
+            XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.shear.dy, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

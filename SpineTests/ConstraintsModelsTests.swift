@@ -37,12 +37,12 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(ikConstraint.order, 2)
             XCTAssertEqual(ikConstraint.bones, ["left thigh", "left shin"])
             XCTAssertEqual(ikConstraint.target, "left ankle")
-            XCTAssertEqual(ikConstraint.mix, 0.5)
+            XCTAssertEqual(ikConstraint.mix, 0.5, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(ikConstraint.blendPositive, true)
 
         } else {
             
-            XCTAssertNotNil(nil, "ikConstraint should not be nil")
+            XCTFail("ikConstraint should not be nil")
         }
     }
     
@@ -68,12 +68,12 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(ikConstraint.order, 2)
             XCTAssertEqual(ikConstraint.bones, ["left thigh", "left shin"])
             XCTAssertEqual(ikConstraint.target, "left ankle")
-            XCTAssertEqual(ikConstraint.mix, 1)
+            XCTAssertEqual(ikConstraint.mix, 1, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(ikConstraint.blendPositive, false)
             
         } else {
             
-            XCTAssertNotNil(nil, "ikConstraint should not be nil")
+            XCTFail("ikConstraint should not be nil")
         }
     }
     
@@ -113,21 +113,21 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(ikConstraint.order, 1)
             XCTAssertEqual(ikConstraint.bones, [ "front-foot-tip", "back-foot-tip" ])
             XCTAssertEqual(ikConstraint.target, "hip")
-            XCTAssertEqual(ikConstraint.rotation, 0.5)
-            XCTAssertEqual(ikConstraint.offset.dx, 125.4)
-            XCTAssertEqual(ikConstraint.offset.dy, -24.5)
-            XCTAssertEqual(ikConstraint.scale.dx, 0.463)
-            XCTAssertEqual(ikConstraint.scale.dy, 0.813)
-            XCTAssertEqual(ikConstraint.rotateMix, 0.55)
-            XCTAssertEqual(ikConstraint.translateMix, 0.9)
-            XCTAssertEqual(ikConstraint.scaleMix, 0.1)
-            XCTAssertEqual(ikConstraint.shearMix, 0.6)
+            XCTAssertEqual(ikConstraint.rotation, 0.5, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.offset.dx, 125.4, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.offset.dy, -24.5, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.scale.dx, 0.463, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.scale.dy, 0.813, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.rotateMix, 0.55, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.translateMix, 0.9, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.scaleMix, 0.1, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.shearMix, 0.6, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(ikConstraint.local, true)
             XCTAssertEqual(ikConstraint.relative, true)
             
         } else {
             
-            XCTAssertNotNil(nil, "TransformConstraint should not be nil")
+            XCTFail("TransformConstraint should not be nil")
         }
     }
     
@@ -153,21 +153,21 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(ikConstraint.order, 1)
             XCTAssertEqual(ikConstraint.bones, [ "rear-foot-ik" ])
             XCTAssertEqual(ikConstraint.target, "hip")
-            XCTAssertEqual(ikConstraint.rotation, 0)
-            XCTAssertEqual(ikConstraint.offset.dx, 0)
-            XCTAssertEqual(ikConstraint.offset.dy, 0)
-            XCTAssertEqual(ikConstraint.scale.dx, 0)
-            XCTAssertEqual(ikConstraint.scale.dy, 0)
-            XCTAssertEqual(ikConstraint.rotateMix, 1.0)
-            XCTAssertEqual(ikConstraint.translateMix, 1.0)
-            XCTAssertEqual(ikConstraint.scaleMix, 1.0)
-            XCTAssertEqual(ikConstraint.shearMix, 1.0)
+            XCTAssertEqual(ikConstraint.rotation, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.offset.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.offset.dy, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.scale.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.scale.dy, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.rotateMix, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.translateMix, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.scaleMix, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(ikConstraint.shearMix, 1.0, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(ikConstraint.local, false)
             XCTAssertEqual(ikConstraint.relative, false)
             
         } else {
             
-            XCTAssertNotNil(nil, "TransformConstraint should not be nil")
+            XCTFail("TransformConstraint should not be nil")
         }
     }
     
@@ -206,15 +206,15 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(pathConstraint.positionMode, .fixed)
             XCTAssertEqual(pathConstraint.spacingMode, .percent)
             XCTAssertEqual(pathConstraint.rotateMode, .chainScale)
-            XCTAssertEqual(pathConstraint.rotation, 45)
-            XCTAssertEqual(pathConstraint.position, 204)
-            XCTAssertEqual(pathConstraint.spacing, 10)
-            XCTAssertEqual(pathConstraint.rotateMix, 0)
-            XCTAssertEqual(pathConstraint.translateMix, 0.5)
+            XCTAssertEqual(pathConstraint.rotation, 45, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.position, 204, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.spacing, 10, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.rotateMix, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.translateMix, 0.5, accuracy: CGFloat.ulpOfOne)
 
         } else {
             
-            XCTAssertNotNil(nil, "pathConstraint should not be nil")
+            XCTFail("pathConstraint should not be nil")
         }
     }
     
@@ -243,15 +243,15 @@ class ConstraintsModelsTests: XCTestCase {
             XCTAssertEqual(pathConstraint.positionMode, .percent)
             XCTAssertEqual(pathConstraint.spacingMode, .length)
             XCTAssertEqual(pathConstraint.rotateMode, .tangent)
-            XCTAssertEqual(pathConstraint.rotation, 0)
-            XCTAssertEqual(pathConstraint.position, 0)
-            XCTAssertEqual(pathConstraint.spacing, 0)
-            XCTAssertEqual(pathConstraint.rotateMix, 1)
-            XCTAssertEqual(pathConstraint.translateMix, 1)
+            XCTAssertEqual(pathConstraint.rotation, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.position, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.spacing, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.rotateMix, 1, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(pathConstraint.translateMix, 1, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "pathConstraint should not be nil")
+            XCTFail("pathConstraint should not be nil")
         }
     }
 }

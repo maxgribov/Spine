@@ -26,13 +26,13 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
-            XCTAssertEqual(keyframe.angle, 55.63)
+            XCTAssertEqual(keyframe.angle, 55.63, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -52,13 +52,13 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.8)
+            XCTAssertEqual(keyframe.time, 0.8, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
-            XCTAssertEqual(keyframe.angle, -70.59)
+            XCTAssertEqual(keyframe.angle, -70.59, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -79,14 +79,18 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.96)
+            XCTAssertEqual(keyframe.time, 0.96, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
-            XCTAssertEqual(keyframe.curve.bezierValue, [0.98, -0.26, 0.717, 1])
-            XCTAssertEqual(keyframe.angle, -80.61)
+            XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.98, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], -0.26, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.717, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 1, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.angle, -80.61, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -105,13 +109,13 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.2333)
+            XCTAssertEqual(keyframe.time, 1.2333, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
-            XCTAssertEqual(keyframe.angle, 0)
+            XCTAssertEqual(keyframe.angle, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -131,13 +135,13 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.6)
+            XCTAssertEqual(keyframe.time, 1.6, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
-            XCTAssertEqual(keyframe.angle, 0)
+            XCTAssertEqual(keyframe.angle, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -157,14 +161,18 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.9667)
+            XCTAssertEqual(keyframe.time, 1.9667, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
-            XCTAssertEqual(keyframe.curve.bezierValue, [0.98, -0.26, 0.717, 1])
-            XCTAssertEqual(keyframe.angle, 0)
+            XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.98, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], -0.26, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.717, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 1, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.angle, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

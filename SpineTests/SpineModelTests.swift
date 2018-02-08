@@ -46,8 +46,8 @@ class SpineModelTests: XCTestCase {
             //then
             XCTAssertEqual(model.skeleton.hash, "FrNJhva2RVZ1bbIjdNspNttett4")
             XCTAssertEqual(model.skeleton.spine, "3.6.32")
-            XCTAssertEqual(model.skeleton.size.width, 419.84)
-            XCTAssertEqual(model.skeleton.size.height, 686.08)
+            XCTAssertEqual(model.skeleton.size.width, 419.84, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(model.skeleton.size.height, 686.08, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(model.skeleton.path, "./images/")
             
         } catch {
@@ -72,14 +72,14 @@ class SpineModelTests: XCTestCase {
                 
                 XCTAssertTrue(bones.count == 65)
                 
-                if let bone = bones.filter({ $0.name == "aim-constraint-target" }).first {
+                if let bone = bones.first(where: { $0.name == "aim-constraint-target" }) {
                     
                     XCTAssertEqual(bone.parent, "hip")
-                    XCTAssertEqual(bone.position.x, 1.02)
-                    XCTAssertEqual(bone.position.y, 5.62)
+                    XCTAssertEqual(bone.position.x, 1.02, accuracy: CGFloat.ulpOfOne)
+                    XCTAssertEqual(bone.position.y, 5.62, accuracy: CGFloat.ulpOfOne)
                     XCTAssertEqual(bone.color.value, "abe323ff")
-                    XCTAssertEqual(bone.lenght, 26.24)
-                    XCTAssertEqual(bone.rotation, 19.61)
+                    XCTAssertEqual(bone.lenght, 26.24, accuracy: CGFloat.ulpOfOne)
+                    XCTAssertEqual(bone.rotation, 19.61, accuracy: CGFloat.ulpOfOne)
                     
                 } else {
                     

@@ -39,20 +39,20 @@ class EventModelTests: XCTestCase {
         //then
         if let events = spineModel?.events {
             
-            if let event = events.filter({ $0.name == "footstep" }).first {
+            if let event = events.first(where: { $0.name == "footstep" }) {
                 
                 XCTAssertEqual(event.int, 1)
-                XCTAssertEqual(event.float, 1.0)
+                XCTAssertEqual(event.float, 1.0, accuracy: CGFloat.ulpOfOne)
                 XCTAssertEqual(event.string, "string-value")
                 
             } else {
                 
-                XCTAssertNotNil(nil, "event should not be nil")
+                XCTFail("event should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "events should not be nil")
+            XCTFail("events should not be nil")
         }  
     }
     
@@ -80,22 +80,20 @@ class EventModelTests: XCTestCase {
         //then
         if let events = spineModel?.events {
             
-            if let event = events.filter({ $0.name == "footstep-omitted"}).first {
+            if let event = events.first(where: { $0.name == "footstep-omitted"}) {
 
                 XCTAssertEqual(event.int, 0)
-                XCTAssertEqual(event.float, 0)
+                XCTAssertEqual(event.float, 0, accuracy: CGFloat.ulpOfOne)
                 XCTAssertNil(event.string)
                 
             } else {
                 
-                XCTAssertNotNil(nil, "event should not be nil")
+                XCTFail("event should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "events should not be nil")
+            XCTFail("events should not be nil")
         }
-        
     }
-    
 }

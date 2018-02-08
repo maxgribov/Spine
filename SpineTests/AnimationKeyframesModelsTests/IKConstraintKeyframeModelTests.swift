@@ -28,13 +28,13 @@ class IKConstraintKeyframeModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
-            XCTAssertEqual(keyframe.mix, 0.75)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
+            XCTAssertEqual(keyframe.mix, 0.75, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(keyframe.blendPositive, true)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -53,13 +53,13 @@ class IKConstraintKeyframeModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.1333)
-            XCTAssertEqual(keyframe.mix, 1.0)
+            XCTAssertEqual(keyframe.time, 0.1333, accuracy: TimeInterval.ulpOfOne)
+            XCTAssertEqual(keyframe.mix, 1.0, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(keyframe.blendPositive, false)
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

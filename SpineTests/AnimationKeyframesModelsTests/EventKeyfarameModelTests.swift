@@ -30,15 +30,23 @@ class EventKeyfarameModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.event, "footstep")
             XCTAssertEqual(keyframe.int, -3)
-            XCTAssertEqual(keyframe.float, 0.123)
+            if let floatValue = keyframe.float {
+                
+                XCTAssertEqual(floatValue, 0.123, accuracy: CGFloat.ulpOfOne)
+                
+            } else {
+                
+                XCTFail("floatValue should not be nil")
+            }
+            
             XCTAssertEqual(keyframe.string, "some-string")
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -58,7 +66,7 @@ class EventKeyfarameModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 1.1333)
+            XCTAssertEqual(keyframe.time, 1.1333, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.event, "footstep")
             XCTAssertNil(keyframe.int)
             XCTAssertNil(keyframe.float)
@@ -66,7 +74,7 @@ class EventKeyfarameModelTests: XCTestCase {
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

@@ -146,7 +146,7 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
                 XCTAssertEqual(skin.name, "skin-name")
                 
@@ -220,28 +220,28 @@ class SkinModelsTests: XCTestCase {
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "unexpected slot name")
+                                XCTFail("unexpected slot name")
                             }
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachments should not be nil")
+                            XCTFail("attachments should not be nil")
                         }
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slots should not be nil")
+                    XCTFail("slots should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
         
     }
@@ -288,71 +288,71 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "region-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "region-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "region-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "region-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? RegionAttachmentModel {
                             
                             XCTAssertEqual(attachmentModel.path, "dust")
-                            XCTAssertEqual(attachmentModel.position.x, -31.79)
-                            XCTAssertEqual(attachmentModel.position.y, 25.97)
-                            XCTAssertEqual(attachmentModel.scale.dx, 0.463)
-                            XCTAssertEqual(attachmentModel.scale.dy, 0.813)
-                            XCTAssertEqual(attachmentModel.rotation, -83.07)
-                            XCTAssertEqual(attachmentModel.size.width, 96)
-                            XCTAssertEqual(attachmentModel.size.height, 73)
+                            XCTAssertEqual(attachmentModel.position.x, -31.79, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.position.y, 25.97, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.scale.dx, 0.463, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.scale.dy, 0.813, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.rotation, -83.07, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.size.width, 96, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.size.height, 73, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.color.value, "ce3a3aff")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "region-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "region-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? RegionAttachmentModel {
                             
                             XCTAssertNil(attachmentOmittedModel.path)
-                            XCTAssertEqual(attachmentOmittedModel.position.x, 0)
-                            XCTAssertEqual(attachmentOmittedModel.position.y, 0)
-                            XCTAssertEqual(attachmentOmittedModel.scale.dx, 1.0)
-                            XCTAssertEqual(attachmentOmittedModel.scale.dy, 1.0)
-                            XCTAssertEqual(attachmentOmittedModel.rotation, 0)
-                            XCTAssertEqual(attachmentOmittedModel.size.width, 96)
-                            XCTAssertEqual(attachmentOmittedModel.size.height, 73)
+                            XCTAssertEqual(attachmentOmittedModel.position.x, 0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.position.y, 0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.scale.dx, 1.0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.scale.dy, 1.0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.rotation, 0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.size.width, 96, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.size.height, 73, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.color.value, "FFFFFFFF")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
     
@@ -374,13 +374,13 @@ class SkinModelsTests: XCTestCase {
                             "boundingBox-attachment": {
                                 "type": "boundingbox",
                                 "vertexCount": 6,
-                                "vertices": [-19.14, -70.3, 40.8, -118.08, 257.78, -115.62, 285.17, 57.18, 120.77, 164.95, -5.07, 76.95],
+                                "vertices": [-19.14, -70.3, 40.8 ],
                                 "color": "ffffff3e"
                             },
                             "boundingBox-attachment-omitted": {
                                 "type": "boundingbox",
                                 "vertexCount": 6,
-                                "vertices": [-19.14, -70.3, 40.8, -118.08, 257.78, -115.62, 285.17, 57.18, 120.77, 164.95, -5.07]
+                                "vertices": [-19.14, -70.3, 40.8 ]
                             }
                         }
                     }
@@ -394,59 +394,65 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "boundingBox-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "boundingBox-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "boundingBox-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "boundingBox-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? BoundingBoxAttachmentModel {
                             
                             XCTAssertEqual(attachmentModel.vertexCount, 6)
-                            XCTAssertEqual(attachmentModel.vertices, [ -19.14, -70.3, 40.8, -118.08, 257.78, -115.62, 285.17, 57.18, 120.77, 164.95, -5.07, 76.95 ])
+                            XCTAssertTrue(attachmentModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentModel.vertices[0], -19.14, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[1], -70.3, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[2], 40.8, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.color.value, "ffffff3e")
-                            
+
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "boundingBox-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "boundingBox-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? BoundingBoxAttachmentModel {
                             
                             XCTAssertEqual(attachmentOmittedModel.vertexCount, 6)
-                            XCTAssertEqual(attachmentOmittedModel.vertices, [ -19.14, -70.3, 40.8, -118.08, 257.78, -115.62, 285.17, 57.18, 120.77, 164.95, -5.07 ])
+                            XCTAssertTrue(attachmentOmittedModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[0], -19.14, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[1], -70.3, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[2], 40.8, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.color.value, "60F000FF")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
     
@@ -468,20 +474,20 @@ class SkinModelsTests: XCTestCase {
                             "mesh-attachment": {
                                 "type": "mesh",
                                 "path": "dust",
-                                "uvs": [0.59417, 0.23422, 0.62257, 0.30336, 0.6501, 0.37036, 0.67637],
-                                "triangles": [8, 9, 3, 4, 8, 3, 5, 8, 4, 6, 8, 5, 8, 6, 7, 11, 12, 13],
-                                "vertices": [2, 38, 18.17, 41.57, 0.72255, 39, 12.46, 46.05, 0.27745],
+                                "uvs": [0.59417, 0.23422, 0.62257],
+                                "triangles": [8, 9, 3],
+                                "vertices": [2, 38, 18.17],
                                 "hull": 15,
-                                "edges": [14, 16, 16, 18, 18, 20, 4, 18, 20, 22, 22, 24, 24, 26, 26],
+                                "edges": [14, 16, 16],
                                 "color": "ffffff00",
                                 "width": 126,
                                 "height": 69
                             },
                             "mesh-attachment-omitted": {
                                 "type": "mesh",
-                                "uvs": [0.59417, 0.23422, 0.62257, 0.30336, 0.6501, 0.37036],
-                                "triangles": [8, 9, 3, 4, 8, 3, 5, 8, 4, 6, 8, 5, 8, 6, 7, 11, 12],
-                                "vertices": [2, 38, 18.17, 41.57, 0.72255, 39, 12.46, 46.05],
+                                "uvs": [0.59417, 0.23422, 0.62257],
+                                "triangles": [8, 9, 3],
+                                "vertices": [2, 38, 18.17],
                                 "hull": 15
                             }
                         }
@@ -496,26 +502,38 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "mesh-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "mesh-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "mesh-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "mesh-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? MeshAttachmentModel {
                             
                             XCTAssertEqual(attachmentModel.path, "dust")
-                            XCTAssertEqual(attachmentModel.uvs, [ 0.59417, 0.23422, 0.62257, 0.30336, 0.6501, 0.37036, 0.67637 ])
-                            XCTAssertEqual(attachmentModel.triangles, [ 8, 9, 3, 4, 8, 3, 5, 8, 4, 6, 8, 5, 8, 6, 7, 11, 12, 13 ])
-                            XCTAssertEqual(attachmentModel.vertices, [ 2, 38, 18.17, 41.57, 0.72255, 39, 12.46, 46.05, 0.27745 ])
+                            XCTAssertTrue(attachmentModel.uvs.count == 3)
+                            XCTAssertEqual(attachmentModel.uvs[0], 0.59417, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.uvs[1], 0.23422, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.uvs[2], 0.62257, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertTrue(attachmentModel.triangles.count == 3)
+                            XCTAssertEqual(attachmentModel.triangles[0], 8)
+                            XCTAssertEqual(attachmentModel.triangles[1], 9)
+                            XCTAssertEqual(attachmentModel.triangles[2], 3)
+                            XCTAssertTrue(attachmentModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentModel.vertices[0], 2, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[1], 38, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[2], 18.17, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.hull, 15)
                             if let edges = attachmentModel.edges {
                                 
-                                XCTAssertEqual(edges, [ 14, 16, 16, 18, 18, 20, 4, 18, 20, 22, 22, 24, 24, 26, 26 ])
+                                XCTAssertTrue(edges.count == 3)
+                                XCTAssertEqual(edges[0], 14)
+                                XCTAssertEqual(edges[1], 16)
+                                XCTAssertEqual(edges[2], 16)
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "edges should not be nil")
+                                XCTFail("edges should not be nil")
                             }
                             
                             XCTAssertEqual(attachmentModel.color.value, "ffffff00")
@@ -527,27 +545,36 @@ class SkinModelsTests: XCTestCase {
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "size should not be nil")
+                                XCTFail("size should not be nil")
                             }
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "mesh-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "mesh-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? MeshAttachmentModel {
                             
                             XCTAssertNil(attachmentOmittedModel.path)
-                            XCTAssertEqual(attachmentOmittedModel.uvs, [ 0.59417, 0.23422, 0.62257, 0.30336, 0.6501, 0.37036 ])
-                            XCTAssertEqual(attachmentOmittedModel.triangles, [ 8, 9, 3, 4, 8, 3, 5, 8, 4, 6, 8, 5, 8, 6, 7, 11, 12 ])
-                            XCTAssertEqual(attachmentOmittedModel.vertices, [ 2, 38, 18.17, 41.57, 0.72255, 39, 12.46, 46.05 ])
+                            XCTAssertTrue(attachmentOmittedModel.uvs.count == 3)
+                            XCTAssertEqual(attachmentOmittedModel.uvs[0], 0.59417, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.uvs[1], 0.23422, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.uvs[2], 0.62257, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertTrue(attachmentOmittedModel.triangles.count == 3)
+                            XCTAssertEqual(attachmentOmittedModel.triangles[0], 8)
+                            XCTAssertEqual(attachmentOmittedModel.triangles[1], 9)
+                            XCTAssertEqual(attachmentOmittedModel.triangles[2], 3)
+                            XCTAssertTrue(attachmentOmittedModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[0], 2, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[1], 38, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[2], 18.17, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.hull, 15)
                             XCTAssertNil(attachmentOmittedModel.edges)
                             XCTAssertEqual(attachmentOmittedModel.color.value, "FFFFFFFF")
@@ -555,27 +582,27 @@ class SkinModelsTests: XCTestCase {
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
     
@@ -619,11 +646,11 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "linkedMesh-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "linkedMesh-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "linkedMesh-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "linkedMesh-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? LinkedMeshAttachmentModel {
                             
@@ -634,25 +661,25 @@ class SkinModelsTests: XCTestCase {
                             XCTAssertEqual(attachmentModel.color.value, "fffffffe")
                             if let size = attachmentModel.size {
                                 
-                                XCTAssertEqual(size.width, 96)
-                                XCTAssertEqual(size.height, 73)
+                                XCTAssertEqual(size.width, 96, accuracy: CGFloat.ulpOfOne)
+                                XCTAssertEqual(size.height, 73, accuracy: CGFloat.ulpOfOne)
                                 
                             } else {
                                 
-                                XCTAssertNotNil(nil, "size should not be nil")
+                                XCTFail("size should not be nil")
                             }
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "linkedMesh-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "linkedMesh-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? LinkedMeshAttachmentModel {
                             
@@ -665,27 +692,27 @@ class SkinModelsTests: XCTestCase {
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
     
@@ -708,16 +735,16 @@ class SkinModelsTests: XCTestCase {
                                 "type": "path",
                                 "closed": true,
                                 "constantSpeed": true,
-                                "lengths": [185.21, 354.53, 478.3, 608.52, 786, 1058.49, 1138.97, 1223.96],
+                                "lengths": [185.21, 354.53, 478.3],
                                 "vertexCount": 66,
-                                "vertices": [1, 111, 11.23, 41.87, 1, 1, 111, 0.79, 41.95, 1, 1, 111],
+                                "vertices": [1, 111, 11.23],
                                 "color": "ff8819ff"
                             },
                             "path-attachment-omitted": {
                                 "type": "path",
-                                "lengths": [185.21, 354.53, 478.3, 608.52, 786, 1058.49, 1138.97],
+                                "lengths": [185.21, 354.53, 478.3],
                                 "vertexCount": 66,
-                                "vertices": [1, 111, 11.23, 41.87, 1, 1, 111, 0.79, 41.95, 1, 1]
+                                "vertices": [1, 111, 11.23]
                             }
                         }
                     }
@@ -731,65 +758,77 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "path-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "path-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "path-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "path-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? PathAttachmentModel {
                             
                             XCTAssertEqual(attachmentModel.closed, true)
                             XCTAssertEqual(attachmentModel.constantSpeed, true)
-                            XCTAssertEqual(attachmentModel.lengths, [ 185.21, 354.53, 478.3, 608.52, 786, 1058.49, 1138.97, 1223.96 ])
+                            XCTAssertTrue(attachmentModel.lengths.count == 3)
+                            XCTAssertEqual(attachmentModel.lengths[0], 185.21, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.lengths[1], 354.53, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.lengths[2], 478.3, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.vertexCount, 66)
-                            XCTAssertEqual(attachmentModel.vertices, [ 1, 111, 11.23, 41.87, 1, 1, 111, 0.79, 41.95, 1, 1, 111])
+                            XCTAssertTrue(attachmentModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentModel.vertices[0], 1, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[1], 111, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[2], 11.23, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.color.value, "ff8819ff")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "path-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "path-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? PathAttachmentModel {
                             
                             XCTAssertEqual(attachmentOmittedModel.closed, false)
                             XCTAssertEqual(attachmentOmittedModel.constantSpeed, true)
-                            XCTAssertEqual(attachmentOmittedModel.lengths, [ 185.21, 354.53, 478.3, 608.52, 786, 1058.49, 1138.97 ])
+                            XCTAssertTrue(attachmentOmittedModel.lengths.count == 3)
+                            XCTAssertEqual(attachmentOmittedModel.lengths[0], 185.21, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.lengths[1], 354.53, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.lengths[2], 478.3, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.vertexCount, 66)
-                            XCTAssertEqual(attachmentOmittedModel.vertices, [ 1, 111, 11.23, 41.87, 1, 1, 111, 0.79, 41.95, 1, 1 ])
+                            XCTAssertTrue(attachmentOmittedModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[0], 1, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[1], 111, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[2], 11.23, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.color.value, "FF7F00FF")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
     
@@ -830,61 +869,61 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "point-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "point-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "point-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "point-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? PointAttachmentModel {
                             
-                            XCTAssertEqual(attachmentModel.point.x, -20.11)
-                            XCTAssertEqual(attachmentModel.point.y, 21.6)
-                            XCTAssertEqual(attachmentModel.rotation, 360.5)
+                            XCTAssertEqual(attachmentModel.point.x, -20.11, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.point.y, 21.6, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.rotation, 360.5, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.color.value, "fffffffe")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "point-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "point-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? PointAttachmentModel {
                             
-                            XCTAssertEqual(attachmentOmittedModel.point.x, 0)
-                            XCTAssertEqual(attachmentOmittedModel.point.y, 0)
-                            XCTAssertEqual(attachmentOmittedModel.rotation, 0)
+                            XCTAssertEqual(attachmentOmittedModel.point.x, 0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.point.y, 0, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.rotation, 0, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.color.value, "F1F100FF")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
     
@@ -907,14 +946,14 @@ class SkinModelsTests: XCTestCase {
                                 "type": "clipping",
                                 "end": "dust",
                                 "vertexCount": 9,
-                                "vertices": [66.76, 509.48, 19.98, 434.54, 5.34, 336.28, 22.19, 247.93, 77.98, 159.54],
+                                "vertices": [66.76, 509.48, 19.98],
                                 "color": "ce3a3aff"
                             },
                             "clipping-attachment-omitted": {
                                 "type": "clipping",
                                 "end": "dust",
                                 "vertexCount": 9,
-                                "vertices": [66.76, 509.48, 19.98, 434.54, 5.34, 336.28, 22.19, 247.93, 77.98]
+                                "vertices": [66.76, 509.48, 19.98]
                             }
                         }
                     }
@@ -928,65 +967,66 @@ class SkinModelsTests: XCTestCase {
         //then
         if let skins = spineModel?.skins {
             
-            if let skin = skins.filter({ $0.name == "skin-name" }).first {
+            if let skin = skins.first(where: { $0.name == "skin-name" }) {
                 
-                if let slot = skin.slots?.filter({ $0.name == "clipping-slot" }).first {
+                if let slot = skin.slots?.first(where: { $0.name == "clipping-slot" }) {
                     
-                    if let attachment = slot.attachments?.filter({ $0.model.name == "clipping-attachment" }).first {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "clipping-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? ClippingAttachmentModel {
                             
                             XCTAssertEqual(attachmentModel.end, "dust")
                             XCTAssertEqual(attachmentModel.vertexCount, 9)
-                            XCTAssertEqual(attachmentModel.vertices, [ 66.76, 509.48, 19.98, 434.54, 5.34, 336.28, 22.19, 247.93, 77.98, 159.54 ])
+                            XCTAssertTrue(attachmentModel.vertices.count == 3)
+                            XCTAssertEqual(attachmentModel.vertices[0], 66.76, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[1], 509.48, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentModel.vertices[2], 19.98, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.color.value, "ce3a3aff")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachment should not be nil")
+                        XCTFail("attachment should not be nil")
                     }
                     
-                    if let attachmentOmitted = slot.attachments?.filter({ $0.model.name == "clipping-attachment-omitted" }).first {
+                    if let attachmentOmitted = slot.attachments?.first(where: { $0.model.name == "clipping-attachment-omitted" }) {
                         
                         if let attachmentOmittedModel = attachmentOmitted.model as? ClippingAttachmentModel {
                             
                             XCTAssertEqual(attachmentOmittedModel.end, "dust")
                             XCTAssertEqual(attachmentOmittedModel.vertexCount, 9)
-                            XCTAssertEqual(attachmentOmittedModel.vertices, [ 66.76, 509.48, 19.98, 434.54, 5.34, 336.28, 22.19, 247.93, 77.98 ])
+                            XCTAssertEqual(attachmentOmittedModel.vertices[0], 66.76, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[1], 509.48, accuracy: CGFloat.ulpOfOne)
+                            XCTAssertEqual(attachmentOmittedModel.vertices[2], 19.98, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentOmittedModel.color.value, "CE3A3AFF")
                             
                         } else {
                             
-                            XCTAssertNotNil(nil, "attachmentModel should not be nil")
+                            XCTFail("attachmentModel should not be nil")
                         }
                         
                     } else {
                         
-                        XCTAssertNotNil(nil, "attachmentOmitted should not be nil")
+                        XCTFail("attachmentOmitted should not be nil")
                     }
                     
                 } else {
                     
-                    XCTAssertNotNil(nil, "slot should not be nil")
+                    XCTFail("slot should not be nil")
                 }
                 
             } else {
                 
-                XCTAssertNotNil(nil, "skin should not be nil")
+                XCTFail("skin should not be nil")
             }
             
         } else {
             
-            XCTAssertNotNil(nil, "skins should not be nil")
+            XCTFail("skins should not be nil")
         }
     }
 }
-
-
-
-

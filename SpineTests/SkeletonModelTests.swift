@@ -35,14 +35,14 @@ class SkeletonModelTests: XCTestCase {
             
             XCTAssertEqual(skeleton.hash, "5WtEfO08B0TzTg2mDqj4IHYpUZ4")
             XCTAssertEqual(skeleton.spine, "3.1.05")
-            XCTAssertEqual(skeleton.size.width, 470.86)
-            XCTAssertEqual(skeleton.size.height, 731.44)
-            XCTAssertEqual(skeleton.fps, 29.5)
+            XCTAssertEqual(skeleton.size.width, 470.86, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(skeleton.size.height, 731.44, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(skeleton.fps, 29.5, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(skeleton.path!, "./images/")
  
         } else {
-            
-            XCTAssertNotNil(nil, "skeleton should not be nil")
+
+            XCTFail("skeleton should not be nil")
         }
     }
     
@@ -66,14 +66,14 @@ class SkeletonModelTests: XCTestCase {
             
             XCTAssertEqual(skeleton.hash, "5WtEfO08B0TzTg2mDqj4IHYpUZ4")
             XCTAssertEqual(skeleton.spine, "3.1.05")
-            XCTAssertEqual(skeleton.size.width, 470.86)
-            XCTAssertEqual(skeleton.size.height, 731.44)
-            XCTAssertEqual(skeleton.fps, 30.0)
+            XCTAssertEqual(skeleton.size.width, 470.86, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(skeleton.size.height, 731.44, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(skeleton.fps, 30.0, accuracy: CGFloat.ulpOfOne)
             XCTAssertNil(skeleton.path)
             
         } else {
             
-            XCTAssertNotNil(nil, "skeleton should not be nil")
+            XCTFail("skeleton should not be nil")
         }
     }
     
@@ -109,22 +109,22 @@ class SkeletonModelTests: XCTestCase {
             
             XCTAssertEqual(bone.name, "back-foot-tip")
             XCTAssertEqual(bone.parent, "rear-foot")
-            XCTAssertEqual(bone.lenght, 50.3)
-            XCTAssertEqual(bone.rotation, -0.85)
-            XCTAssertEqual(bone.position.x, 51.17)
-            XCTAssertEqual(bone.position.y, 0.24)
+            XCTAssertEqual(bone.lenght, 50.3, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.rotation, -0.85, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.position.x, 51.17, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.position.y, 0.24, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(bone.transform, .noRotationOrReflection)
-            XCTAssertEqual(bone.scale.dx, 0.785)
-            XCTAssertEqual(bone.scale.dy, 0.785)
-            XCTAssertEqual(bone.shear.dx, 0.21)
-            XCTAssertEqual(bone.shear.dy, 0.97)
+            XCTAssertEqual(bone.scale.dx, 0.785, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.scale.dy, 0.785, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.shear.dx, 0.21, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.shear.dy, 0.97, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(bone.inheritScale, false)
             XCTAssertEqual(bone.inheritRotation, false)
             XCTAssertEqual(bone.color.value, "ff000dff")
             
         } else {
             
-            XCTAssertNotNil(nil, "bone should not be nil")
+            XCTFail("bone should not be nil")
         }
     }
     
@@ -145,22 +145,22 @@ class SkeletonModelTests: XCTestCase {
             
             XCTAssertEqual(bone.name, "back-foot-tip")
             XCTAssertNil(bone.parent)
-            XCTAssertEqual(bone.lenght, 0)
+            XCTAssertEqual(bone.lenght, 0, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(bone.transform, .normal)
-            XCTAssertEqual(bone.position.x, 0)
-            XCTAssertEqual(bone.position.y, 0)
-            XCTAssertEqual(bone.rotation, 0)
-            XCTAssertEqual(bone.scale.dx, 1.0)
-            XCTAssertEqual(bone.scale.dy, 1.0)
-            XCTAssertEqual(bone.shear.dx, 0)
-            XCTAssertEqual(bone.shear.dy, 0)
+            XCTAssertEqual(bone.position.x, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.position.y, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.rotation, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.scale.dx, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.scale.dy, 1.0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.shear.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(bone.shear.dy, 0, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(bone.inheritScale, true)
             XCTAssertEqual(bone.inheritRotation, true)
             XCTAssertEqual(bone.color.value, "989898FF")
             
         } else {
             
-            XCTAssertNotNil(nil, "bone should not be nil")
+            XCTFail("bone should not be nil")
         }
     }
     
@@ -195,7 +195,7 @@ class SkeletonModelTests: XCTestCase {
 
         } else {
             
-            XCTAssertNotNil(nil, "slot should not be nil")
+            XCTFail("slot should not be nil")
         }
     }
     
@@ -224,7 +224,7 @@ class SkeletonModelTests: XCTestCase {
             
         } else {
             
-            XCTAssertNotNil(nil, "slot should not be nil")
+            XCTFail("slot should not be nil")
         }
     }
 }

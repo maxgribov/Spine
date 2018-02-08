@@ -27,13 +27,13 @@ class SlotKeyframeColorModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0)
+            XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
             XCTAssertEqual(keyframe.color.value, "ffffff3e")
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -54,13 +54,13 @@ class SlotKeyframeColorModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.0667)
+            XCTAssertEqual(keyframe.time, 0.0667, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
             XCTAssertEqual(keyframe.color.value, "ffffff00")
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -81,14 +81,18 @@ class SlotKeyframeColorModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.1333)
+            XCTAssertEqual(keyframe.time, 0.1333, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
-            XCTAssertEqual(keyframe.curve.bezierValue, [0.823, 0.24, 0.867, 0.66])
+            XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: CGFloat.ulpOfOne)
             XCTAssertEqual(keyframe.color.value, "fffffffe")
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
 }

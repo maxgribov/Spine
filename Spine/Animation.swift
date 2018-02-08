@@ -55,7 +55,7 @@ extension SKAction {
     
     class func bone(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
         
-        var lastTime: CFTimeInterval = 0
+        var lastTime: TimeInterval = 0
         
         switch timeline {
         case .rotate(let rotateKeyframes):
@@ -92,19 +92,19 @@ extension SKAction {
         }
     }
     
-    class func bone(keyframe: BoneKeyframeRotateModel, duration: CFTimeInterval, _ defaultAngle: CGFloat) -> SKAction {
+    class func bone(keyframe: BoneKeyframeRotateModel, duration: TimeInterval, _ defaultAngle: CGFloat) -> SKAction {
 
         let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
         return SKAction.rotate(toAngle: angle, duration: duration)
     }
 
-    class func bone(keyframe: BoneKeyframeTranslateModel, duration: CFTimeInterval, _ defaultPosition: CGPoint) -> SKAction {
+    class func bone(keyframe: BoneKeyframeTranslateModel, duration: TimeInterval, _ defaultPosition: CGPoint) -> SKAction {
 
         let position = CGPoint(x: defaultPosition.x + keyframe.position.x, y: defaultPosition.y + keyframe.position.y)
         return SKAction.move(to: position, duration: duration)
     }
     
-    class func bone(keyframe: BoneKeyframeScaleModel, duration: CFTimeInterval, _ defaultScale: CGVector) -> SKAction {
+    class func bone(keyframe: BoneKeyframeScaleModel, duration: TimeInterval, _ defaultScale: CGVector) -> SKAction {
 
         let scaleX = defaultScale.dx + keyframe.scale.dx
         let scaleY = defaultScale.dy + keyframe.scale.dy
@@ -112,7 +112,7 @@ extension SKAction {
                                SKAction.scaleY(to: scaleY, duration: duration)])
     }
     
-    class func bone(keyframe: BoneKeyframeShearModel, duration: CFTimeInterval, _ defaultShear: CGVector) -> SKAction {
+    class func bone(keyframe: BoneKeyframeShearModel, duration: TimeInterval, _ defaultShear: CGVector) -> SKAction {
         
         //TODO: Implement shear action here in future
         return SKAction()

@@ -35,30 +35,30 @@ class DrawOrderKeyframeModelTests: XCTestCase {
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.3)
+            XCTAssertEqual(keyframe.time, 0.3, accuracy: TimeInterval.ulpOfOne)
             
-            if let offset1 = keyframe.offsets.filter({ $0.slot == "smoke-puff1-bg2" }).first {
+            if let offset1 = keyframe.offsets.first(where: { $0.slot == "smoke-puff1-bg2" }){
                 
                 XCTAssertEqual(offset1.offset, 24)
                 
             } else {
                 
-                XCTAssertNotNil(nil, "offset1 should not be nil")
+                XCTFail("offset1 should not be nil")
             }
             
-            if let offset2 = keyframe.offsets.filter({ $0.slot == "smoke-puff1-fg4" }).first {
+            if let offset2 = keyframe.offsets.first(where: { $0.slot == "smoke-puff1-fg4" }) {
                 
                 XCTAssertEqual(offset2.offset, -4)
                 
             } else {
                 
-                XCTAssertNotNil(nil, "offset2 should not be nil")
+                XCTFail("offset2 should not be nil")
             }
             
             
         } else {
             
-            XCTAssertNotNil(nil, "keyframe should not be nil")
+            XCTFail("keyframe should not be nil")
         }
     }
     
@@ -83,7 +83,7 @@ class DrawOrderKeyframeModelTests: XCTestCase {
             
         } else {
             
-            XCTAssertNotNil(nil, "offset should not be nil")
+            XCTFail("offset should not be nil")
         }
     }
 }
