@@ -200,6 +200,7 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
 
     enum Keys: String, CodingKey {
         
+        case name
         case path
         case x
         case y
@@ -215,6 +216,7 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
@@ -225,7 +227,7 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
         let height: CGFloat = try container.decode(CGFloat.self, forKey: .height)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(name, path, x, y, scaleX, scaleY, rotation, width, height, color)
+        self.init(actualName ?? name, path, x, y, scaleX, scaleY, rotation, width, height, color)
     }
 }
 
@@ -251,6 +253,7 @@ extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
+        case name
         case vertexCount
         case vertices
         case color
@@ -260,11 +263,12 @@ extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
         let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(name, vertexCount, vertices, color)
+        self.init(actualName ?? name, vertexCount, vertices, color)
     }
 }
 
@@ -307,6 +311,7 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
+        case name
         case path
         case uvs
         case triangles
@@ -322,6 +327,7 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
         let uvs: [CGFloat] = try container.decode([CGFloat].self, forKey: .uvs)
         let triangles: [UInt] = try container.decode([UInt].self, forKey: .triangles)
@@ -332,7 +338,7 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
         let width: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .width)
         let height: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .height)
         
-        self.init(name, path, uvs, triangles, vertices, hull, edges, color, width, height)
+        self.init(actualName ?? name, path, uvs, triangles, vertices, hull, edges, color, width, height)
     }
 }
 
@@ -371,6 +377,7 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
+        case name
         case path
         case skin
         case parent
@@ -384,6 +391,7 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
         let skin: String? = try container.decodeIfPresent(String.self, forKey: .skin)
         let parent: String? = try container.decodeIfPresent(String.self, forKey: .parent)
@@ -392,7 +400,7 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
         let width: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .width)
         let height: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .height)
         
-        self.init(name, path, skin, parent, deform, color, width,height)
+        self.init(actualName ?? name, path, skin, parent, deform, color, width,height)
     }
 }
 
@@ -424,6 +432,7 @@ extension PathAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
+        case name
         case closed
         case constantSpeed
         case lengths
@@ -436,6 +445,7 @@ extension PathAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let closed: Bool? = try container.decodeIfPresent(Bool.self, forKey: .closed)
         let constantSpeed: Bool? = try container.decodeIfPresent(Bool.self, forKey: .constantSpeed)
         let lengths: [CGFloat] = try container.decode([CGFloat].self, forKey: .lengths)
@@ -443,7 +453,7 @@ extension PathAttachmentModel: SpineDecodableDictionary {
         let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(name, closed, constantSpeed, lengths, vertexCount, vertices, color)
+        self.init(actualName ?? name, closed, constantSpeed, lengths, vertexCount, vertices, color)
     }
 }
 
@@ -469,6 +479,7 @@ extension PointAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
+        case name
         case x
         case y
         case rotation
@@ -479,12 +490,13 @@ extension PointAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(name, x, y, rotation, color)
+        self.init(actualName ?? name, x, y, rotation, color)
     }
 }
 
@@ -512,6 +524,7 @@ extension ClippingAttachmentModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
+        case name
         case end
         case vertexCount
         case vertices
@@ -522,11 +535,12 @@ extension ClippingAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let end: String = try container.decode(String.self, forKey: .end)
         let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
         let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(name, end, vertexCount, vertices, color)
+        self.init(actualName ?? name, end, vertexCount, vertices, color)
     }
 }

@@ -27,6 +27,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "region-slot": {
                             "region-attachment": {
+                                "name": "region-attachment-name",
                                 "path": "dust",
                                 "x": -31.79,
                                 "y": 25.97,
@@ -44,6 +45,7 @@ class SkinModelsTests: XCTestCase {
                         },
                         "boundingBox-slot": {
                             "boundingBox-attachment": {
+                                "name": "boundingBox-attachment-name",
                                 "type": "boundingbox",
                                 "vertexCount": 6,
                                 "vertices": [-19.14, -70.3, 40.8, -118.08, 257.78, -115.62, 285.17, 57.18, 120.77, 164.95, -5.07, 76.95],
@@ -57,6 +59,7 @@ class SkinModelsTests: XCTestCase {
                         },
                         "mesh-slot": {
                             "mesh-attachment": {
+                                "name": "mesh-attachment-name",
                                 "type": "mesh",
                                 "path": "dust",
                                 "uvs": [0.59417, 0.23422, 0.62257, 0.30336, 0.6501, 0.37036, 0.67637, 0.38404, 0.72068, 0.4071, 0.76264, 0.42894, 1, 0.70375],
@@ -78,6 +81,7 @@ class SkinModelsTests: XCTestCase {
                         },
                         "linkedMesh-slot": {
                             "linkedMesh-attachment": {
+                                "name": "linkedMesh-attachment-name",
                                 "type": "linkedmesh",
                                 "path": "dust",
                                 "skin": "front-foot",
@@ -93,6 +97,7 @@ class SkinModelsTests: XCTestCase {
                         },
                         "path-slot": {
                             "path-attachment": {
+                                "name": "path-attachment-name",
                                 "type": "path",
                                 "closed": true,
                                 "constantSpeed": true,
@@ -110,6 +115,7 @@ class SkinModelsTests: XCTestCase {
                         },
                         "point-slot": {
                             "point-attachment": {
+                                "name": "point-attachment-name",
                                 "type": "point",
                                 "x": -20.11,
                                 "y": 21.6,
@@ -122,6 +128,7 @@ class SkinModelsTests: XCTestCase {
                         },
                         "clipping-slot": {
                             "clipping-attachment": {
+                                "name": "clipping-attachment-name",
                                 "type": "clipping",
                                 "end": "dust",
                                 "vertexCount": 9,
@@ -166,7 +173,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["region-attachment", "region-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["region-attachment-name", "region-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is RegionAttachmentModel)
                                 }
                                 
@@ -174,7 +181,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["boundingBox-attachment", "boundingBox-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["boundingBox-attachment-name", "boundingBox-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is BoundingBoxAttachmentModel)
                                 }
                                 
@@ -182,7 +189,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["mesh-attachment", "mesh-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["mesh-attachment-name", "mesh-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is MeshAttachmentModel)
                                 }
                                 
@@ -190,7 +197,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["linkedMesh-attachment", "linkedMesh-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["linkedMesh-attachment-name", "linkedMesh-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is LinkedMeshAttachmentModel)
                                 }
                                 
@@ -198,7 +205,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["path-attachment", "path-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["path-attachment-name", "path-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is PathAttachmentModel)
                                 }
                                 
@@ -206,7 +213,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["point-attachment", "point-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["point-attachment-name", "point-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is PointAttachmentModel)
                                 }
                                 
@@ -214,7 +221,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["clipping-attachment", "clipping-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["clipping-attachment-name", "clipping-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is ClippingAttachmentModel)
                                 }
                                 
@@ -262,6 +269,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "region-slot": {
                             "region-attachment": {
+                                "name": "region-attachment-name",
                                 "path": "dust",
                                 "x": -31.79,
                                 "y": 25.97,
@@ -292,7 +300,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "region-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "region-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "region-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? RegionAttachmentModel {
                             
@@ -372,6 +380,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "boundingBox-slot": {
                             "boundingBox-attachment": {
+                                "name": "boundingBox-attachment-name",
                                 "type": "boundingbox",
                                 "vertexCount": 6,
                                 "vertices": [-19.14, -70.3, 40.8 ],
@@ -398,7 +407,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "boundingBox-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "boundingBox-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "boundingBox-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? BoundingBoxAttachmentModel {
                             
@@ -472,6 +481,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "mesh-slot": {
                             "mesh-attachment": {
+                                "name": "mesh-attachment-name",
                                 "type": "mesh",
                                 "path": "dust",
                                 "uvs": [0.59417, 0.23422, 0.62257],
@@ -506,7 +516,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "mesh-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "mesh-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "mesh-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? MeshAttachmentModel {
                             
@@ -622,6 +632,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "linkedMesh-slot": {
                             "linkedMesh-attachment": {
+                                "name": "linkedMesh-attachment-name",
                                 "type": "linkedmesh",
                                 "path": "dust",
                                 "skin": "front-foot",
@@ -650,7 +661,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "linkedMesh-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "linkedMesh-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "linkedMesh-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? LinkedMeshAttachmentModel {
                             
@@ -732,6 +743,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "path-slot": {
                             "path-attachment": {
+                                "name": "path-attachment-name",
                                 "type": "path",
                                 "closed": true,
                                 "constantSpeed": true,
@@ -762,7 +774,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "path-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "path-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "path-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? PathAttachmentModel {
                             
@@ -848,6 +860,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "point-slot": {
                             "point-attachment": {
+                                "name": "point-attachment-name",
                                 "type": "point",
                                 "x": -20.11,
                                 "y": 21.6,
@@ -873,7 +886,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "point-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "point-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "point-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? PointAttachmentModel {
                             
@@ -943,6 +956,7 @@ class SkinModelsTests: XCTestCase {
                     "skin-name": {
                         "clipping-slot": {
                             "clipping-attachment": {
+                                "name": "clipping-attachment-name",
                                 "type": "clipping",
                                 "end": "dust",
                                 "vertexCount": 9,
@@ -971,7 +985,7 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "clipping-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "clipping-attachment" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "clipping-attachment-name" }) {
                         
                         if let attachmentModel = attachment.model as? ClippingAttachmentModel {
                             
