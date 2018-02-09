@@ -25,13 +25,8 @@ public class Animation {
             case .bones(let bonesAnimationModels):
                 actions.append(contentsOf: bonesAnimationModels.map({ (boneAnimationModel) -> SKAction in
                     
-                    guard let bone = model.bones?.filter({ $0.name == boneAnimationModel.bone }).first else {
-                        
-                        //for some reason can't find bone for this animation model
-                        return SKAction()
-                    }
-                    
-                    return SKAction.bone(boneAnimationModel, bone)
+                    let bone = model.bones?.filter({ $0.name == boneAnimationModel.bone }).first
+                    return BoneAnimationBuilder.action(boneAnimationModel, bone)
                 }))
             default:
                 continue
@@ -63,15 +58,20 @@ func timingFunction(_ model: CurveModelType) -> SKActionTimingFunction {
 
 //MARK: - Bones Actions
 
-extension SKAction {
+class BoneAnimationBuilder {
     
-    class func bone(_ model: BoneAnimationModel, _ bone: BoneModel) -> SKAction {
+    class func action(_ model: BoneAnimationModel, _ bone: BoneModel?) -> SKAction {
+        
+        guard let bone = bone else {
+            
+            return SKAction()
+        }
         
         let boneName = Bone.generateName(model.bone)
-        return SKAction.run(SKAction.group(model.timelines.map({ SKAction.bone(timeline: $0, bone)})), onChildWithName: "//\(boneName)")
+        return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: "//\(boneName)")
     }
     
-    class func bone(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
+    class func action(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
         
         var lastTime: TimeInterval = 0
         
@@ -81,7 +81,7 @@ extension SKAction {
                 
                 let duration = keyframe.time - lastTime
                 lastTime = keyframe.time
-                return SKAction.bone(keyframe: keyframe, duration: duration, bone.rotation)
+                return BoneAnimationBuilder.action(keyframe: keyframe, duration: duration, bone.rotation)
             }))
             
         case .translate(let translateKeyframes):
@@ -89,51 +89,83 @@ extension SKAction {
                 
                 let duration = keyframe.time - lastTime
                 lastTime = keyframe.time
-                return SKAction.bone(keyframe: keyframe, duration: duration, bone.position)
+                return BoneAnimationBuilder.action(keyframe: keyframe, duration: duration, bone.position)
             }))
-
+            
         case .scale(let scaleKeyframes):
             return SKAction.sequence(scaleKeyframes.map({ (keyframe) -> SKAction in
                 
                 let duration = keyframe.time - lastTime
                 lastTime = keyframe.time
-                return SKAction.bone(keyframe: keyframe, duration: duration, bone.scale)
+                return BoneAnimationBuilder.action(keyframe: keyframe, duration: duration, bone.scale)
             }))
-
+            
         case .shear(let shearKeyframes):
             return SKAction.sequence(shearKeyframes.map({ (keyframe) -> SKAction in
                 
                 let duration = keyframe.time - lastTime
                 lastTime = keyframe.time
-                return SKAction.bone(keyframe: keyframe, duration: duration, bone.shear)
+                return BoneAnimationBuilder.action(keyframe: keyframe, duration: duration, bone.shear)
             }))
         }
     }
     
-    class func bone(keyframe: BoneKeyframeRotateModel, duration: TimeInterval, _ defaultAngle: CGFloat) -> SKAction {
-
+    class func action(keyframe: BoneKeyframeRotateModel, duration: TimeInterval, _ defaultAngle: CGFloat) -> SKAction {
+        
         let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
-        return SKAction.rotate(toAngle: angle, duration: duration)
-    }
-
-    class func bone(keyframe: BoneKeyframeTranslateModel, duration: TimeInterval, _ defaultPosition: CGPoint) -> SKAction {
-
-        let position = CGPoint(x: defaultPosition.x + keyframe.position.x, y: defaultPosition.y + keyframe.position.y)
-        return SKAction.move(to: position, duration: duration)
+        let action = SKAction.rotate(toAngle: angle, duration: duration)
+        switch keyframe.curve {
+        case .linear:
+            action.timingMode = .linear
+        case .stepped:
+            action.timingFunction = timingFunction(keyframe.curve)
+        case .bezier(_):
+            action.timingMode = .linear
+//            action.timingFunction = timingFunction(keyframe.curve)
+        }
+        
+        return action
     }
     
-    class func bone(keyframe: BoneKeyframeScaleModel, duration: TimeInterval, _ defaultScale: CGVector) -> SKAction {
+    class func action(keyframe: BoneKeyframeTranslateModel, duration: TimeInterval, _ defaultPosition: CGPoint) -> SKAction {
+        
+        let position = CGPoint(x: defaultPosition.x + keyframe.position.x, y: defaultPosition.y + keyframe.position.y)
+        let action = SKAction.move(to: position, duration: duration)
+        switch keyframe.curve {
+        case .linear:
+            action.timingMode = .linear
+        case .stepped:
+            action.timingFunction = timingFunction(keyframe.curve)
+        case .bezier(_):
+            action.timingMode = .linear
+//            action.timingFunction = timingFunction(keyframe.curve)
+        }
 
+        return action
+    }
+    
+    class func action(keyframe: BoneKeyframeScaleModel, duration: TimeInterval, _ defaultScale: CGVector) -> SKAction {
+        
         let scaleX = defaultScale.dx + keyframe.scale.dx
         let scaleY = defaultScale.dy + keyframe.scale.dy
-        return SKAction.group([SKAction.scaleX(to: scaleX, duration: duration),
-                               SKAction.scaleY(to: scaleY, duration: duration)])
+        let action = SKAction.group([SKAction.scaleX(to: scaleX, duration: duration),
+                                     SKAction.scaleY(to: scaleY, duration: duration)])
+        switch keyframe.curve {
+        case .linear:
+            action.timingMode = .linear
+        case .stepped:
+            action.timingFunction = timingFunction(keyframe.curve)
+        case .bezier(_):
+            action.timingMode = .linear
+//            action.timingFunction = timingFunction(keyframe.curve)
+        }
+        
+        return action
     }
     
-    class func bone(keyframe: BoneKeyframeShearModel, duration: TimeInterval, _ defaultShear: CGVector) -> SKAction {
+    class func action(keyframe: BoneKeyframeShearModel, duration: TimeInterval, _ defaultShear: CGVector) -> SKAction {
         
         //TODO: Implement shear action here in future
         return SKAction()
     }
 }
-
