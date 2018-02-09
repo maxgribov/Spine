@@ -98,7 +98,7 @@ public class Character: SKNode {
                         
                         continue
                 }
-                
+                attachment.zPosition = 1.0
                 slot.addChild(attachment)
             }
         }
@@ -117,16 +117,23 @@ public class Character: SKNode {
     //MARK: - Private Setup Helpers
     
     func createSlots(_ model: SpineModel) {
-        
+
         if let slotsModels = model.slots {
+            
+            var slotOrder: CGFloat = 0
             
             for slotModel in slotsModels {
                 
                 let boneName = Bone.generateName(slotModel.bone)
                 if let bone = childNode(withName: "//\(boneName)") {
                     
-                    bone.addChild(Slot(slotModel))
+                    let slot = Slot(slotModel)
+                    slot.zPosition = slotOrder
+                    
+                    bone.addChild(slot)
                 }
+                
+                slotOrder = slotOrder + 0.01
             }
         }
     }
