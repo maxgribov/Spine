@@ -11,31 +11,11 @@ import SpriteKit
 public class Character: SKNode {
     
     var bones: [Bone]? {
-        get {
-            return children.filter({ (node) -> Bool in
-                
-                guard let name = node.name else {
-                    return false
-                }
-               
-                return name.contains(Bone.namePrefix)
-                
-            }) as? [Bone]
-        }
+        get { return self["//\(Bone.namePrefix)*"] as? [Bone]  }
     }
     
     var slots: [Slot]? {
-        get {
-            return children.filter({ (node) -> Bool in
-                
-                guard let name = node.name else {
-                    return false
-                }
-                
-                return name.contains(Slot.namePrefix)
-                
-            }) as? [Slot]
-        }
+        get { return self["//\(Slot.namePrefix)*"] as? [Slot] }
     }
     
     var skins: [Skin]?

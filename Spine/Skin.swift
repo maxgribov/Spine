@@ -51,7 +51,7 @@ class Skin {
         if AttachmentBuilder.textureRequired(for: attachmentType) {
             
             guard let attachmentAtlasName = atlasName(for: attachmentType),
-                let texture = texture(with: attachmentType.modelName, from: attachmentAtlasName) else {
+                let texture = texture(with: textureName(from: attachmentType.modelName), from: attachmentAtlasName) else {
                     
                     return nil
             }
@@ -76,6 +76,13 @@ class Skin {
 }
 
 //MARK: - Atlases Names Helpers
+
+func textureName(from name: String ) -> String {
+    
+    let splittedName = name.components(separatedBy: "/")
+    
+    return splittedName.last ?? name
+}
 
 func atlasName(from name: String, path: String?) -> String {
     
