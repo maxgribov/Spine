@@ -19,9 +19,29 @@ class SkinTests: XCTestCase {
         
         //given
         let name = "head"
+        let actualName: String? = nil
+        let path: String? = nil
         
         //when
-        let theAtlasName = atlasName(from: name, path: nil)
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
+        
+        //then
+        XCTAssertEqual(theAtlasName, "default")
+    }
+    
+    func testAtlasActualNameDefault() {
+        
+        //{
+        //    "head": { "name": "head", "x": 28.55, "y": 12.25, "rotation": -99.95, "width": 103, "height": 66 }
+        //}
+        
+        //given
+        let name = "head"
+        let actualName: String? = "head"
+        let path: String? = nil
+
+        //when
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
         
         //then
         XCTAssertEqual(theAtlasName, "default")
@@ -35,12 +55,32 @@ class SkinTests: XCTestCase {
         
         //given
         let name = "goblin/head"
+        let actualName: String? = nil
+        let path: String? = nil
         
         //when
-        let theAtlasName = atlasName(from: name, path: nil)
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
         
         //then
         XCTAssertEqual(theAtlasName, "goblin")
+    }
+    
+    func testAtlasActualNameNotDefault() {
+        
+        //{
+        //    "head": { "name": "goblins/head", "x": 28.55, "y": 12.25, "rotation": -99.95, "width": 103, "height": 66 }
+        //}
+        
+        //given
+        let name = "head"
+        let actualName: String? = "goblins/head"
+        let path: String? = nil
+        
+        //when
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
+        
+        //then
+        XCTAssertEqual(theAtlasName, "goblins")
     }
     
     func testAtlasNameWithPathDefault() {
@@ -51,10 +91,11 @@ class SkinTests: XCTestCase {
         
         //given
         let name = "dagger"
+        let actualName: String? = nil
         let path = "dagger"
         
         //when
-        let theAtlasName = atlasName(from: name, path: path)
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
         
         //then
         XCTAssertEqual(theAtlasName, "default")
@@ -68,10 +109,11 @@ class SkinTests: XCTestCase {
         
         //given
         let name = "pelvis"
+        let actualName: String? = nil
         let path = "goblin/pelvis"
         
         //when
-        let theAtlasName = atlasName(from: name, path: path)
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
         
         //then
         XCTAssertEqual(theAtlasName, "goblin")
@@ -85,9 +127,29 @@ class SkinTests: XCTestCase {
         
         //given
         let name = "goblis/male/top/head"
+        let actualName: String? = nil
+        let path: String? = nil
         
         //when
-        let theAtlasName = atlasName(from: name, path: nil)
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
+        
+        //then
+        XCTAssertEqual(theAtlasName, "goblis/male/top")
+    }
+    
+    func testAtlasActualNameNotDefaultLong() {
+        
+        //{
+        //    "head": { "name": "goblis/male/top/head", "x": 28.55, "y": 12.25, "rotation": -99.95, "width": 103, "height": 66 }
+        //}
+        
+        //given
+        let name = "head"
+        let actualName: String? = "goblis/male/top/head"
+        let path: String? = nil
+        
+        //when
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
         
         //then
         XCTAssertEqual(theAtlasName, "goblis/male/top")
@@ -101,10 +163,31 @@ class SkinTests: XCTestCase {
         
         //given
         let name = "pelvis"
+        let actualName: String? = nil
         let path = "goblis/female/pelvis"
         
+        
         //when
-        let theAtlasName = atlasName(from: name, path: path)
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
+        
+        //then
+        XCTAssertEqual(theAtlasName, "goblis/female")
+    }
+    
+    func testAtlasActualNameWithPathNotDefaultLong() {
+        
+        //{
+        //    "pelvis": { "name": "goblis/pelvis", "path": "goblis/female/pelvis", "x": 4, "y": 1, "width": 62, "height": 43 }
+        //}
+        
+        //given
+        let name = "pelvis"
+        let actualName: String? = "goblis/pelvis"
+        let path = "goblis/female/pelvis"
+        
+        
+        //when
+        let theAtlasName = atlasName(from: name, actualName: actualName, path: path)
         
         //then
         XCTAssertEqual(theAtlasName, "goblis/female")

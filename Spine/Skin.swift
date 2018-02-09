@@ -85,15 +85,15 @@ func textureName(from name: String ) -> String {
     return splittedName.last ?? name
 }
 
-func atlasName(from name: String, path: String?) -> String {
+func atlasName(from name: String, actualName: String?, path: String?) -> String {
     
-    let actualName = path ?? name
-    var actualNameSplitted = actualName.components(separatedBy: "/")
+    let nameWithPath = path ?? actualName ?? name
+    var nameWithPathSplitted = nameWithPath.components(separatedBy: "/")
     
-    if actualNameSplitted.count > 1 {
+    if nameWithPathSplitted.count > 1 {
         
-        actualNameSplitted.removeLast()
-        return actualNameSplitted.joined(separator: "/")
+        nameWithPathSplitted.removeLast()
+        return nameWithPathSplitted.joined(separator: "/")
         
     } else {
         
@@ -104,9 +104,9 @@ func atlasName(from name: String, path: String?) -> String {
 func atlasName(for attachmentType: AttachmentModelType ) -> String? {
     
     switch attachmentType {
-    case .region(let region): return atlasName(from: region.name, path: region.path)
-    case .mesh(let mesh): return atlasName(from: mesh.name, path: mesh.path)
-    case .linkedMesh(let linkedMesh): return atlasName(from: linkedMesh.name, path: linkedMesh.path)
+    case .region(let region): return atlasName(from: region.name, actualName: region.actualName, path: region.path)
+    case .mesh(let mesh): return atlasName(from: mesh.name, actualName: mesh.actualName, path: mesh.path)
+    case .linkedMesh(let linkedMesh): return atlasName(from: linkedMesh.name, actualName: linkedMesh.actualName, path: linkedMesh.path)
     default: return nil
     }
 }
