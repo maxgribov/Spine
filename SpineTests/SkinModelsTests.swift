@@ -173,7 +173,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["region-attachment-name", "region-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["region-attachment", "region-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is RegionAttachmentModel)
                                 }
                                 
@@ -181,7 +181,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["boundingBox-attachment-name", "boundingBox-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["boundingBox-attachment", "boundingBox-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is BoundingBoxAttachmentModel)
                                 }
                                 
@@ -189,7 +189,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["mesh-attachment-name", "mesh-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["mesh-attachment", "mesh-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is MeshAttachmentModel)
                                 }
                                 
@@ -197,7 +197,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["linkedMesh-attachment-name", "linkedMesh-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["linkedMesh-attachment", "linkedMesh-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is LinkedMeshAttachmentModel)
                                 }
                                 
@@ -205,7 +205,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["path-attachment-name", "path-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["path-attachment", "path-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is PathAttachmentModel)
                                 }
                                 
@@ -213,7 +213,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["point-attachment-name", "point-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["point-attachment", "point-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is PointAttachmentModel)
                                 }
                                 
@@ -221,7 +221,7 @@ class SkinModelsTests: XCTestCase {
                                 
                                 for attachment in attachments {
                                     
-                                    XCTAssertTrue(["clipping-attachment-name", "clipping-attachment-omitted"].contains(attachment.model.name))
+                                    XCTAssertTrue(["clipping-attachment", "clipping-attachment-omitted"].contains(attachment.model.name))
                                     XCTAssertTrue(attachment.model is ClippingAttachmentModel)
                                 }
                                 
@@ -300,10 +300,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "region-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "region-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "region-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? RegionAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "region-attachment-name")
                             XCTAssertEqual(attachmentModel.path, "dust")
                             XCTAssertEqual(attachmentModel.position.x, -31.79, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.position.y, 25.97, accuracy: CGFloat.ulpOfOne)
@@ -407,10 +408,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "boundingBox-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "boundingBox-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "boundingBox-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? BoundingBoxAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "boundingBox-attachment-name")
                             XCTAssertEqual(attachmentModel.vertexCount, 6)
                             XCTAssertTrue(attachmentModel.vertices.count == 3)
                             XCTAssertEqual(attachmentModel.vertices[0], -19.14, accuracy: CGFloat.ulpOfOne)
@@ -516,10 +518,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "mesh-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "mesh-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "mesh-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? MeshAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "mesh-attachment-name")
                             XCTAssertEqual(attachmentModel.path, "dust")
                             XCTAssertTrue(attachmentModel.uvs.count == 3)
                             XCTAssertEqual(attachmentModel.uvs[0], 0.59417, accuracy: CGFloat.ulpOfOne)
@@ -661,10 +664,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "linkedMesh-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "linkedMesh-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "linkedMesh-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? LinkedMeshAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "linkedMesh-attachment-name")
                             XCTAssertEqual(attachmentModel.path, "dust")
                             XCTAssertEqual(attachmentModel.skin, "front-foot")
                             XCTAssertEqual(attachmentModel.parent, "dust")
@@ -774,10 +778,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "path-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "path-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "path-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? PathAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "path-attachment-name")
                             XCTAssertEqual(attachmentModel.closed, true)
                             XCTAssertEqual(attachmentModel.constantSpeed, true)
                             XCTAssertTrue(attachmentModel.lengths.count == 3)
@@ -886,10 +891,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "point-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "point-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "point-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? PointAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "point-attachment-name")
                             XCTAssertEqual(attachmentModel.point.x, -20.11, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.point.y, 21.6, accuracy: CGFloat.ulpOfOne)
                             XCTAssertEqual(attachmentModel.rotation, 360.5, accuracy: CGFloat.ulpOfOne)
@@ -985,10 +991,11 @@ class SkinModelsTests: XCTestCase {
                 
                 if let slot = skin.slots?.first(where: { $0.name == "clipping-slot" }) {
                     
-                    if let attachment = slot.attachments?.first(where: { $0.model.name == "clipping-attachment-name" }) {
+                    if let attachment = slot.attachments?.first(where: { $0.model.name == "clipping-attachment" }) {
                         
                         if let attachmentModel = attachment.model as? ClippingAttachmentModel {
                             
+                            XCTAssertEqual(attachmentModel.actualName, "clipping-attachment-name")
                             XCTAssertEqual(attachmentModel.end, "dust")
                             XCTAssertEqual(attachmentModel.vertexCount, 9)
                             XCTAssertTrue(attachmentModel.vertices.count == 3)

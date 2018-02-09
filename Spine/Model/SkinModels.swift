@@ -142,6 +142,7 @@ enum AttachmentModelType {
 protocol AttachmentModel {
 
     var name: String { get }
+    var actualName: String? { get }
 }
 
 enum AttachmentModelKeys: String, CodingKey {
@@ -177,6 +178,7 @@ enum AttachmentModelTypeKeys: String {
 struct RegionAttachmentModel: AttachmentModel {
     
     let name: String
+    let actualName: String?
     let path: String?
     let position: CGPoint
     let scale: CGVector
@@ -184,9 +186,10 @@ struct RegionAttachmentModel: AttachmentModel {
     let size: CGSize
     let color: ColorModel
 
-    init(_ name: String, _ path: String?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ rotation: CGFloat?, _ width: CGFloat, _ height: CGFloat, _ color: String?) {
+    init(_ name: String, _ actualName: String?, _ path: String?, _ x: CGFloat?, _ y: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ rotation: CGFloat?, _ width: CGFloat, _ height: CGFloat, _ color: String?) {
         
         self.name = name
+        self.actualName = actualName
         self.path = path
         self.position = CGPoint(x: x ?? 0, y: y ?? 0)
         self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
@@ -227,7 +230,7 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
         let height: CGFloat = try container.decode(CGFloat.self, forKey: .height)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(actualName ?? name, path, x, y, scaleX, scaleY, rotation, width, height, color)
+        self.init(name, actualName, path, x, y, scaleX, scaleY, rotation, width, height, color)
     }
 }
 
@@ -236,13 +239,15 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
 struct BoundingBoxAttachmentModel: AttachmentModel {
     
     let name: String
+    let actualName: String?
     let vertexCount: UInt
     let vertices: [CGFloat]
     let color: ColorModel
 
-    init(_ name: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+    init(_ name: String, _ actualName: String?, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
         self.name = name
+        self.actualName = actualName
         self.vertexCount = vertexCount
         self.vertices = vertices
         self.color = ColorModel(color ?? "60F000FF")
@@ -268,7 +273,7 @@ extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
         let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(actualName ?? name, vertexCount, vertices, color)
+        self.init(name, actualName, vertexCount, vertices, color)
     }
 }
 
@@ -277,6 +282,7 @@ extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
 struct MeshAttachmentModel: AttachmentModel {
     
     let name: String
+    let actualName: String?
     let path: String?
     let uvs: [CGFloat]
     let triangles: [UInt]
@@ -286,9 +292,10 @@ struct MeshAttachmentModel: AttachmentModel {
     let color: ColorModel
     let size: CGSize?
 
-    init(_ name: String, _ path: String?, _ uvs: [CGFloat], _ triangles: [UInt], _ vertices: [CGFloat], _ hull: UInt, _ edges: [UInt]?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
+    init(_ name: String, _ actualName: String?, _ path: String?, _ uvs: [CGFloat], _ triangles: [UInt], _ vertices: [CGFloat], _ hull: UInt, _ edges: [UInt]?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
         
         self.name = name
+        self.actualName = actualName
         self.path = path
         self.uvs = uvs
         self.triangles = triangles
@@ -338,7 +345,7 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
         let width: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .width)
         let height: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .height)
         
-        self.init(actualName ?? name, path, uvs, triangles, vertices, hull, edges, color, width, height)
+        self.init(name, actualName, path, uvs, triangles, vertices, hull, edges, color, width, height)
     }
 }
 
@@ -347,6 +354,7 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
 struct LinkedMeshAttachmentModel: AttachmentModel {
     
     let name: String
+    let actualName: String?
     let path: String?
     let skin: String?
     let parent: String?
@@ -354,9 +362,10 @@ struct LinkedMeshAttachmentModel: AttachmentModel {
     let color: ColorModel
     let size: CGSize?
 
-    init(_ name: String, _ path: String?, _ skin: String?, _ parent: String?, _ deform: Bool?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
+    init(_ name: String, _ actualName: String?, _ path: String?, _ skin: String?, _ parent: String?, _ deform: Bool?, _ color: String?, _ width: CGFloat?, _ height: CGFloat?) {
         
         self.name = name
+        self.actualName = actualName
         self.path = path
         self.skin = skin
         self.parent = parent
@@ -400,7 +409,7 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
         let width: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .width)
         let height: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .height)
         
-        self.init(actualName ?? name, path, skin, parent, deform, color, width,height)
+        self.init(name, actualName, path, skin, parent, deform, color, width,height)
     }
 }
 
@@ -409,6 +418,7 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
 struct PathAttachmentModel: AttachmentModel {
     
     let name: String
+    let actualName: String?
     let closed: Bool
     let constantSpeed: Bool
     let lengths: [CGFloat]
@@ -416,9 +426,10 @@ struct PathAttachmentModel: AttachmentModel {
     let vertices: [CGFloat]
     let color: ColorModel
     
-    init(_ name: String, _ closed: Bool?, _ constantSpeed: Bool?, _ lengths: [CGFloat], _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+    init(_ name: String, _ actualName: String?, _ closed: Bool?, _ constantSpeed: Bool?, _ lengths: [CGFloat], _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
         self.name = name
+        self.actualName = actualName
         self.closed = closed ?? false
         self.constantSpeed = constantSpeed ?? true
         self.lengths = lengths
@@ -453,7 +464,7 @@ extension PathAttachmentModel: SpineDecodableDictionary {
         let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(actualName ?? name, closed, constantSpeed, lengths, vertexCount, vertices, color)
+        self.init(name, actualName, closed, constantSpeed, lengths, vertexCount, vertices, color)
     }
 }
 
@@ -462,13 +473,15 @@ extension PathAttachmentModel: SpineDecodableDictionary {
 struct PointAttachmentModel: AttachmentModel {
 
     let name: String
+    let actualName: String?
     let point: CGPoint
     let rotation: CGFloat
     let color: ColorModel
 
-    init(_ name: String, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ color: String?) {
+    init(_ name: String, _ actualName: String?, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ color: String?) {
         
         self.name = name
+        self.actualName = actualName
         self.point = CGPoint(x: x ?? 0, y: y ?? 0)
         self.rotation = rotation ?? 0
         self.color = ColorModel(color ?? "F1F100FF")
@@ -496,7 +509,7 @@ extension PointAttachmentModel: SpineDecodableDictionary {
         let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(actualName ?? name, x, y, rotation, color)
+        self.init(name, actualName, x, y, rotation, color)
     }
 }
 
@@ -505,14 +518,16 @@ extension PointAttachmentModel: SpineDecodableDictionary {
 struct ClippingAttachmentModel: AttachmentModel {
     
     let name: String
+    let actualName: String?
     let end: String
     let vertexCount: UInt
     let vertices: [CGFloat]
     let color: ColorModel
     
-    init(_ name: String, _ end: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
+    init(_ name: String, _ actualName: String?, _ end: String, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
         
         self.name = name
+        self.actualName = actualName
         self.end = end
         self.vertexCount = vertexCount
         self.vertices = vertices
@@ -541,6 +556,6 @@ extension ClippingAttachmentModel: SpineDecodableDictionary {
         let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
         let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
         
-        self.init(actualName ?? name, end, vertexCount, vertices, color)
+        self.init(name, actualName, end, vertexCount, vertices, color)
     }
 }
