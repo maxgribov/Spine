@@ -45,10 +45,10 @@ class DeformKeyframeModelTests: XCTestCase {
             }
             XCTAssertEqual(keyframe.curve.name, "bezier")
             XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
-            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.25, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[1], 0, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.75, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[3], 1, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.25, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.75, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 1, accuracy: Float.ulpOfOne)
 
         } else {
             

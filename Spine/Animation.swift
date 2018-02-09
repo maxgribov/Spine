@@ -43,6 +43,24 @@ public class Animation {
     }
 }
 
+func timingFunction(_ model: CurveModelType) -> SKActionTimingFunction {
+    
+    switch model {
+    case .linear: return { time in time }
+    case .stepped: return { time in return time < 1.0 ? 0 : 1.0 }
+    case .bezier(let bezierModel):
+        return { time in
+
+            let part1 = pow(1 - time, 3) * bezierModel.p0
+            let part2 = 3 * time * pow(1 - time, 2) * bezierModel.p1
+            let part3 = 3 * pow(time, 2) * (1 - time) * bezierModel.p2
+            let part4 = pow(time, 3) * bezierModel.p3
+
+            return part1 + part2 + part3 + part4
+        }
+    }
+}
+
 //MARK: - Bones Actions
 
 extension SKAction {

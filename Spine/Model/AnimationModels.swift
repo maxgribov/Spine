@@ -470,7 +470,7 @@ struct BoneKeyframeRotateModel: BoneKeyframeModel {
     }
     
     //bezier curve init
-    init(_ time: TimeInterval, _ curve: [CGFloat], _ angle: CGFloat?) {
+    init(_ time: TimeInterval, _ curve: [Float], _ angle: CGFloat?) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -495,7 +495,7 @@ extension BoneKeyframeRotateModel: Decodable {
         
         do {
             
-            let bezierCurve: [CGFloat] = try container.decode([CGFloat].self, forKey: .curve)
+            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
             self.init(time, bezierCurve, angle)
             
         } catch {
@@ -522,7 +522,7 @@ struct BoneKeyframeTranslateModel: BoneKeyframeModel {
     }
     
     //bezier curve init
-    init(_ time: TimeInterval, _ curve: [CGFloat], _ x: CGFloat?, _ y: CGFloat?) {
+    init(_ time: TimeInterval, _ curve: [Float], _ x: CGFloat?, _ y: CGFloat?) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -549,7 +549,7 @@ extension BoneKeyframeTranslateModel: Decodable {
         
         do {
             
-            let bezierCurve: [CGFloat] = try container.decode([CGFloat].self, forKey: .curve)
+            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
             self.init(time, bezierCurve, x, y)
             
         } catch {
@@ -576,7 +576,7 @@ struct BoneKeyframeScaleModel: BoneKeyframeModel {
     }
     
     //bezier curve init
-    init(_ time: TimeInterval, _ curve: [CGFloat], _ x: CGFloat?, _ y: CGFloat?) {
+    init(_ time: TimeInterval, _ curve: [Float], _ x: CGFloat?, _ y: CGFloat?) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -603,7 +603,7 @@ extension BoneKeyframeScaleModel: Decodable {
         
         do {
             
-            let bezierCurve: [CGFloat] = try container.decode([CGFloat].self, forKey: .curve)
+            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
             self.init(time, bezierCurve, x, y)
             
         } catch {
@@ -630,7 +630,7 @@ struct BoneKeyframeShearModel: BoneKeyframeModel {
     }
     
     //bezier curve init
-    init(_ time: TimeInterval, _ curve: [CGFloat], _ x: CGFloat?, _ y: CGFloat?) {
+    init(_ time: TimeInterval, _ curve: [Float], _ x: CGFloat?, _ y: CGFloat?) {
         
         self.time = time
         self.curve = CurveModelType(curve)
@@ -657,7 +657,7 @@ extension BoneKeyframeShearModel: Decodable {
         
         do {
             
-            let bezierCurve: [CGFloat] = try container.decode([CGFloat].self, forKey: .curve)
+            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
             self.init(time, bezierCurve, x, y)
             
         } catch {
@@ -720,7 +720,7 @@ struct SlotKeyframeColorModel: SlotKeyframeModel {
     }
     
     //bezier curve type init
-    init(_ time: TimeInterval, _ color: String, _ curve: [CGFloat]) {
+    init(_ time: TimeInterval, _ color: String, _ curve: [Float]) {
         
         self.time = time
         self.color = ColorModel(color)
@@ -745,7 +745,7 @@ extension SlotKeyframeColorModel: Decodable {
         
         do {
             
-            let bezierCurve: [CGFloat] = try container.decode([CGFloat].self, forKey: .curve)
+            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
             self.init(time, color, bezierCurve)
             
         } catch {
@@ -854,7 +854,7 @@ struct DeformKeyframeModel: KeyframeModel {
     }
     
     //bezier curve type init
-    init(_ time: TimeInterval, _ offset: Int?, _ vertices: [CGFloat]?, _ curve: [CGFloat]) {
+    init(_ time: TimeInterval, _ offset: Int?, _ vertices: [CGFloat]?, _ curve: [Float]) {
         
         self.time = time
         self.offset = offset ?? 0
@@ -882,7 +882,7 @@ extension DeformKeyframeModel: Decodable {
         
         do {
             
-            let bezierCurve: [CGFloat] = try container.decode([CGFloat].self, forKey: .curve)
+            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
             self.init(time, offset, vertices, bezierCurve)
             
         } catch {

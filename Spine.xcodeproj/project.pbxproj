@@ -33,6 +33,7 @@
 		779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
 		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
 		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
+		779B7141202E4D060031DD4F /* AnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B7140202E4D060031DD4F /* AnimationTests.swift */; };
 		77DBA2A7202A19D900D35306 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Character.swift */; };
 		77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
 		77E05F3A202B8530003AFD42 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E05F39202B8530003AFD42 /* Slot.swift */; };
@@ -83,6 +84,7 @@
 		779AC33F201B4BC200C33B79 /* SkinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModels.swift; sourceTree = "<group>"; };
 		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
 		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
+		779B7140202E4D060031DD4F /* AnimationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTests.swift; sourceTree = "<group>"; };
 		77DBA2A6202A19D900D35306 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		77DBA2A8202A1FE400D35306 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		77E05F39202B8530003AFD42 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -157,6 +159,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		779B7143202E4D390031DD4F /* Model Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7706409F2028F86C0031BD32 /* SpineModelTests.swift */,
+				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
+				776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */,
+				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
+				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
+				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
+				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
+			);
+			path = "Model Tests";
+			sourceTree = "<group>";
+		};
 		77F1D5DF201A490400AF499B = {
 			isa = PBXGroup;
 			children = (
@@ -197,14 +213,9 @@
 		77F1D5F6201A490400AF499B /* SpineTests */ = {
 			isa = PBXGroup;
 			children = (
-				7706409F2028F86C0031BD32 /* SpineModelTests.swift */,
-				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
-				776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */,
-				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
-				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
-				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
+				779B7140202E4D060031DD4F /* AnimationTests.swift */,
 				77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */,
-				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
+				779B7143202E4D390031DD4F /* Model Tests */,
 				770640A12028F97A0031BD32 /* Resources */,
 				77E6FFB72029D2110078923C /* ColorModelTets.swift */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
@@ -348,6 +359,7 @@
 			files = (
 				77880A422024BB50004DC555 /* AnimationModelsTests.swift in Sources */,
 				773E8FE62024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift in Sources */,
+				779B7141202E4D060031DD4F /* AnimationTests.swift in Sources */,
 				773E8FF22024FAD9009E38BD /* EventKeyfarameModelTests.swift in Sources */,
 				773E8FF42024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift in Sources */,
 				773E8FF02024F9B2009E38BD /* DeformKeyframeModelTests.swift in Sources */,

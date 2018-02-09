@@ -84,10 +84,10 @@ class SlotKeyframeColorModelTests: XCTestCase {
             XCTAssertEqual(keyframe.time, 0.1333, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
             XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
-            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: Float.ulpOfOne)
             XCTAssertEqual(keyframe.color.value, "fffffffe")
             
         } else {

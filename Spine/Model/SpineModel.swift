@@ -152,14 +152,14 @@ enum CurveModelType {
         }
     }
     
-    var bezierValue: [CGFloat] {
+    var bezierValue: [Float] {
         
         get {
             
             switch self {
-            case .bezier(let value): return [value.c1, value.c2, value.c3, value.c4]
+            case .bezier(let value): return [value.p0, value.p1, value.p2, value.p3]
             default:
-                return [CGFloat]()
+                return [Float]()
             }
         }
     }
@@ -183,7 +183,7 @@ enum CurveModelType {
         }
     }
     
-    init(_ value: [CGFloat]) {
+    init(_ value: [Float]) {
         
         if let curve = BezierCurveModel(value) {
             
@@ -197,22 +197,22 @@ enum CurveModelType {
     
     struct BezierCurveModel {
         
-        let c1: CGFloat
-        let c2: CGFloat
-        let c3: CGFloat
-        let c4: CGFloat
+        let p0: Float
+        let p1: Float
+        let p2: Float
+        let p3: Float
         
-        init?(_ values: [CGFloat]) {
+        init?(_ values: [Float]) {
             
             guard values.count == 4 else {
                 
                 return nil
             }
             
-            self.c1 = values[0]
-            self.c2 = values[1]
-            self.c3 = values[2]
-            self.c4 = values[3]
+            self.p0 = values[0]
+            self.p1 = values[1]
+            self.p2 = values[2]
+            self.p3 = values[3]
         }
     }
 }

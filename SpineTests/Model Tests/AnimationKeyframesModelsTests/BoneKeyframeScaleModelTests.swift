@@ -1,5 +1,5 @@
 //
-//  BoneKeyframeRotateModelTests.swift
+//  BoneKeyframeScaleModelTests.swift
 //  SpineTests
 //
 //  Created by Max Gribov on 02/02/2018.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Spine
 
-class BoneKeyframeRotateModelTests: XCTestCase {
+class BoneKeyframeScaleModelTests: XCTestCase {
     
     func testLinear() {
         
@@ -17,18 +17,21 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         let json = """
             {
                 "time": 0,
-                "angle": 55.63
+                "x": 0.645,
+                "y": 1.426
             }
             """.data(using: .utf8)!
         
         //when
-        let keyframe = try? JSONDecoder().decode(BoneKeyframeRotateModel.self, from: json)
+        let keyframe = try? JSONDecoder().decode(BoneKeyframeScaleModel.self, from: json)
         
+        //then
         if let keyframe = keyframe {
             
             XCTAssertEqual(keyframe.time, 0, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
-            XCTAssertEqual(keyframe.angle, 55.63, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dx, 0.645, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dy, 1.426, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
@@ -41,20 +44,23 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         //given
         let json = """
             {
-                "time": 0.8,
+                "time": 0.4,
                 "curve": "stepped",
-                "angle": -70.59
+                "x": 0.685,
+                "y": 1.516
             }
             """.data(using: .utf8)!
         
         //when
-        let keyframe = try? JSONDecoder().decode(BoneKeyframeRotateModel.self, from: json)
+        let keyframe = try? JSONDecoder().decode(BoneKeyframeScaleModel.self, from: json)
         
+        //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.8, accuracy: TimeInterval.ulpOfOne)
+            XCTAssertEqual(keyframe.time, 0.4, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
-            XCTAssertEqual(keyframe.angle, -70.59, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dx, 0.685, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dy, 1.516, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
@@ -67,26 +73,28 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         //given
         let json = """
             {
-                "time": 0.96,
-                "curve": [0.98, -0.26, 0.717, 1],
-                "angle": -80.61
+                "time": 1,
+                "curve": [0.823, 0.24, 0.867, 0.66],
+                "x": 0.67,
+                "y": 1.481
             }
             """.data(using: .utf8)!
         
         //when
-        let keyframe = try? JSONDecoder().decode(BoneKeyframeRotateModel.self, from: json)
+        let keyframe = try? JSONDecoder().decode(BoneKeyframeScaleModel.self, from: json)
         
         //then
         if let keyframe = keyframe {
             
-            XCTAssertEqual(keyframe.time, 0.96, accuracy: TimeInterval.ulpOfOne)
+            XCTAssertEqual(keyframe.time, 1, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
             XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
-            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.98, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[1], -0.26, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.717, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[3], 1, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.angle, -80.61, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dx, 0.67, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dy, 1.481, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
@@ -104,14 +112,15 @@ class BoneKeyframeRotateModelTests: XCTestCase {
             """.data(using: .utf8)!
         
         //when
-        let keyframe = try? JSONDecoder().decode(BoneKeyframeRotateModel.self, from: json)
+        let keyframe = try? JSONDecoder().decode(BoneKeyframeScaleModel.self, from: json)
         
         //then
         if let keyframe = keyframe {
             
             XCTAssertEqual(keyframe.time, 1.2333, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "linear")
-            XCTAssertEqual(keyframe.angle, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dy, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
@@ -130,14 +139,15 @@ class BoneKeyframeRotateModelTests: XCTestCase {
             """.data(using: .utf8)!
         
         //when
-        let keyframe = try? JSONDecoder().decode(BoneKeyframeRotateModel.self, from: json)
+        let keyframe = try? JSONDecoder().decode(BoneKeyframeScaleModel.self, from: json)
         
         //then
         if let keyframe = keyframe {
             
             XCTAssertEqual(keyframe.time, 1.6, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "stepped")
-            XCTAssertEqual(keyframe.angle, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dy, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
@@ -151,12 +161,12 @@ class BoneKeyframeRotateModelTests: XCTestCase {
         let json = """
             {
                 "time": 1.9667,
-                "curve": [0.98, -0.26, 0.717, 1]
+                "curve": [0.823, 0.24, 0.867, 0.66]
             }
             """.data(using: .utf8)!
         
         //when
-        let keyframe = try? JSONDecoder().decode(BoneKeyframeRotateModel.self, from: json)
+        let keyframe = try? JSONDecoder().decode(BoneKeyframeScaleModel.self, from: json)
         
         //then
         if let keyframe = keyframe {
@@ -164,11 +174,12 @@ class BoneKeyframeRotateModelTests: XCTestCase {
             XCTAssertEqual(keyframe.time, 1.9667, accuracy: TimeInterval.ulpOfOne)
             XCTAssertEqual(keyframe.curve.name, "bezier")
             XCTAssertTrue(keyframe.curve.bezierValue.count == 4)
-            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.98, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[1], -0.26, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.717, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.curve.bezierValue[3], 1, accuracy: CGFloat.ulpOfOne)
-            XCTAssertEqual(keyframe.angle, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[0], 0.823, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[1], 0.24, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[2], 0.867, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.curve.bezierValue[3], 0.66, accuracy: Float.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dx, 0, accuracy: CGFloat.ulpOfOne)
+            XCTAssertEqual(keyframe.scale.dy, 0, accuracy: CGFloat.ulpOfOne)
             
         } else {
             
