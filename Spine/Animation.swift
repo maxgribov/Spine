@@ -38,21 +38,14 @@ public class Animation {
     }
 }
 
-func timingFunction(_ model: CurveModelType) -> SKActionTimingFunction {
+func setTiming(_ action: SKAction, _ curve: CurveModelType)  {
     
-    switch model {
-    case .linear: return { time in time }
-    case .stepped: return { time in return time < 1.0 ? 0 : 1.0 }
+    switch curve {
+    case .linear: action.timingMode = .linear
+    case .stepped: action.timingFunction = { time in return time < 1.0 ? 0 : 1.0 }
     case .bezier(let bezierModel):
-        return { time in
-
-            let part1 = pow(1 - time, 3) * bezierModel.p0
-            let part2 = 3 * time * pow(1 - time, 2) * bezierModel.p1
-            let part3 = 3 * pow(time, 2) * (1 - time) * bezierModel.p2
-            let part4 = pow(time, 3) * bezierModel.p3
-
-            return part1 + part2 + part3 + part4
-        }
+        let solver = BezierCurveSolver(bezierModel)
+        action.timingFunction = solver.timingFunction()
     }
 }
 
@@ -114,15 +107,7 @@ class BoneAnimationBuilder {
         
         let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
         let action = SKAction.rotate(toAngle: angle, duration: duration)
-        switch keyframe.curve {
-        case .linear:
-            action.timingMode = .linear
-        case .stepped:
-            action.timingFunction = timingFunction(keyframe.curve)
-        case .bezier(_):
-            action.timingMode = .linear
-//            action.timingFunction = timingFunction(keyframe.curve)
-        }
+        setTiming(action, keyframe.curve)
         
         return action
     }
@@ -131,15 +116,7 @@ class BoneAnimationBuilder {
         
         let position = CGPoint(x: defaultPosition.x + keyframe.position.x, y: defaultPosition.y + keyframe.position.y)
         let action = SKAction.move(to: position, duration: duration)
-        switch keyframe.curve {
-        case .linear:
-            action.timingMode = .linear
-        case .stepped:
-            action.timingFunction = timingFunction(keyframe.curve)
-        case .bezier(_):
-            action.timingMode = .linear
-//            action.timingFunction = timingFunction(keyframe.curve)
-        }
+        setTiming(action, keyframe.curve)
 
         return action
     }
@@ -150,15 +127,7 @@ class BoneAnimationBuilder {
         let scaleY = defaultScale.dy + keyframe.scale.dy
         let action = SKAction.group([SKAction.scaleX(to: scaleX, duration: duration),
                                      SKAction.scaleY(to: scaleY, duration: duration)])
-        switch keyframe.curve {
-        case .linear:
-            action.timingMode = .linear
-        case .stepped:
-            action.timingFunction = timingFunction(keyframe.curve)
-        case .bezier(_):
-            action.timingMode = .linear
-//            action.timingFunction = timingFunction(keyframe.curve)
-        }
+        setTiming(action, keyframe.curve)
         
         return action
     }

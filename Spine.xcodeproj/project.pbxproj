@@ -24,6 +24,7 @@
 		773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF52024FE2D009E38BD /* EventModel.swift */; };
 		77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77404ED2201BD8E500E51CF5 /* SpineModel.swift */; };
 		7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
+		775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
 		776656E3202B9D3A00750189 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
 		776656E7202BADBB00750189 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E6202BADBB00750189 /* Skin.swift */; };
 		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
@@ -75,6 +76,7 @@
 		773E8FF52024FE2D009E38BD /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		77404ED2201BD8E500E51CF5 /* SpineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModel.swift; sourceTree = "<group>"; };
 		7755D4232020F14D005275DA /* SkinModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModelsTests.swift; sourceTree = "<group>"; };
+		775D969320336DCC00137B38 /* BezierCurveSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveSolver.swift; sourceTree = "<group>"; };
 		776656E2202B9D3A00750189 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		776656E6202BADBB00750189 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
 		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				776656E2202B9D3A00750189 /* Attachment.swift */,
 				77DBA2A8202A1FE400D35306 /* Animation.swift */,
 				77E5A8C6202CED6F00ACDC0D /* NamePrefix.swift */,
+				775D969320336DCC00137B38 /* BezierCurveSolver.swift */,
 				779AC334201B499C00C33B79 /* Model */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
 				77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */,
@@ -338,6 +341,7 @@
 				77E5A8C7202CED6F00ACDC0D /* NamePrefix.swift in Sources */,
 				77E6FFBC2029EEBF0078923C /* Skeleton.swift in Sources */,
 				776656E7202BADBB00750189 /* Skin.swift in Sources */,
+				775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */,
 				77E6FFB62029C8510078923C /* Bone.swift in Sources */,
 				779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */,
 				779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */,
