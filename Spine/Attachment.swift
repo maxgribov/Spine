@@ -12,6 +12,7 @@ typealias SKNodeNamePrefix = SKNode & NamePrefix
 
 protocol Attachment: SKNodeNamePrefix {
 
+    var model: AttachmentModel { get }
 }
 
 extension Attachment {
@@ -50,11 +51,16 @@ class AttachmentBuilder {
 
 class RegionAttachment: SKSpriteNode, Attachment {
 
-    let model: RegionAttachmentModel
+    var model: AttachmentModel {
+        get {
+            return concreteModel
+        }
+    }
+    let concreteModel: RegionAttachmentModel
     
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {
         
-        self.model = model
+        self.concreteModel = model
         super.init(texture: texture, color: UIColor(model.color), size: model.size)
         self.name = RegionAttachment.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -67,9 +73,9 @@ class RegionAttachment: SKSpriteNode, Attachment {
     
     func setDefaultPose() {
         
-        self.position = model.position
-        self.zRotation = model.rotation * degreeToRadiansFactor
-        self.xScale = model.scale.dx
-        self.yScale = model.scale.dy
+        self.position = concreteModel.position
+        self.zRotation = concreteModel.rotation * degreeToRadiansFactor
+        self.xScale = concreteModel.scale.dx
+        self.yScale = concreteModel.scale.dy
     }
 }

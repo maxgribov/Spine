@@ -40,6 +40,24 @@ class Skin {
         self.atlases = atlases
     }
     
+    func attachment(_ model: AttachmentModelType) -> Attachment? {
+        
+        if AttachmentBuilder.textureRequired(for: model) {
+            
+            guard let attachmentAtlasName = atlasName(for: model),
+                let texture = texture(with: textureName(from: model.modelName), from: attachmentAtlasName) else {
+                    
+                    return nil
+            }
+            
+            return AttachmentBuilder.attachment(of: model, texture: texture)
+            
+        } else {
+            
+            return AttachmentBuilder.attachment(of: model)
+        }
+    }
+    
     func attachment(named: String, slotName: String) -> Attachment? {
         
         guard let slotModel = model.slots?.first(where: { $0.name == slotName }),

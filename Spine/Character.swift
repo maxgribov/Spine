@@ -19,8 +19,6 @@ public class Character: SKNode {
     }
     
     var skins: [Skin]?
-    var skinsApplied: [Skin]?
-    
     public var atlases: [SKTextureAtlas]? {
         get {
             
@@ -83,29 +81,44 @@ public class Character: SKNode {
             skinsNames.insert(named)
         }
         
-        guard let skins = skins?.filter({ skinsNames.contains($0.model.name) }),
-              let slots = slots else {
+        guard let skins = skins?.filter({ skinsNames.contains($0.model.name) }) else {
             
             return
         }
         
-        for slot in slots {
+        for skin in skins {
             
-            slot.removeAllChildren()
-            
-            for skin in skins {
+            guard let slotsModels = skin.model.slots else {
                 
-                guard let attachmentName = slot.model.attachment,
-                    let attachment = skin.attachment(named: attachmentName, slotName: slot.model.name) as? SKNode else {
-                        
-                        continue
+                continue
+            }
+            
+            for slotModel in slotsModels {
+
+                guard let slot = slots?.first(where: { $0.model.name == slotModel.name }),
+                      let attachmentsModels = slotModel.attachments else {
+                    
+                    continue
                 }
-                attachment.zPosition = 1.0
-                slot.addChild(attachment)
+                
+                for attachmentModel in attachmentsModels {
+                    
+                    if let attachment = skin.attachment(attachmentModel), let attachmentNode = attachment as? SKNode {
+                        
+                        if slot.model.attachment == attachment.model.name {
+                            
+                            attachmentNode.isHidden = false
+                            
+                        } else {
+                            
+                            attachmentNode.isHidden = true
+                        }
+                        
+                        slot.addChild(attachmentNode)
+                    }
+                }
             }
         }
-        
-        skinsApplied = skins
     }
     
     public func runAnimation(named: String) {
@@ -157,7 +170,5 @@ public class Character: SKNode {
             return Animation(animationModel, model)
         })
     }
-    
-
 }
 
