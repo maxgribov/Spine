@@ -28,6 +28,12 @@ public class Animation {
                     let bone = model.bones?.filter({ $0.name == boneAnimationModel.bone }).first
                     return BoneAnimationBuilder.action(boneAnimationModel, bone)
                 }))
+            case .slots(let slotsAnimationModels):
+                actions.append(contentsOf: slotsAnimationModels.map({ (slotAnimationModel) -> SKAction in
+                    
+                    return SlotAnimationBuilder.action(slotAnimationModel)
+                }))
+
             default:
                 continue
                 
@@ -43,9 +49,93 @@ func setTiming(_ action: SKAction, _ curve: CurveModelType)  {
     switch curve {
     case .linear: action.timingMode = .linear
     case .stepped: action.timingFunction = { time in return time < 1.0 ? 0 : 1.0 }
-    case .bezier(let bezierModel):
-        let solver = BezierCurveSolver(bezierModel)
-        action.timingFunction = solver.timingFunction()
+    case .bezier(let bezierModel): action.timingFunction = BezierCurveSolver(bezierModel).solve
+    }
+}
+
+class SlotAnimationBuilder {
+    
+    class func action(_ model: SlotAnimationModel) -> SKAction {
+
+        var actions = [SKAction]()
+        
+        for timeline in model.timelines {
+            
+            switch timeline {
+            case .attachment(let attachmentKeyframes):
+                actions.append(SlotAnimationBuilder.action(attachmentKeyframes, model.slot))
+            case .color(let colorKeyframes):
+                actions.append(SlotAnimationBuilder.action(colorKeyframes, model.slot))
+            }
+        }
+        
+        return SKAction.group(actions)
+    }
+    
+    class func action(_ keyframes: [SlotKeyframeAttachmentModel], _ slot: String) -> SKAction {
+
+        var actions = [SKAction]()
+        var lastTime: TimeInterval = 0
+        var prevAttachmentName: String?
+        
+        for keyframe in keyframes {
+            
+            var keyframeActions = [SKAction]()
+            
+            if let prevAttachmentName = prevAttachmentName {
+                
+                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(prevAttachmentName))"))
+            }
+            
+            let duration = keyframe.time - lastTime
+            keyframeActions.append(SKAction.wait(forDuration: duration))
+            
+            if let attachmentName = keyframe.name {
+                
+                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"))
+            }
+            
+            let keyframeAction = SKAction.sequence(keyframeActions)
+            actions.append(keyframeAction)
+            
+            lastTime = keyframe.time
+            prevAttachmentName = keyframe.name
+        }
+
+        return SKAction.sequence(actions)
+    }
+    
+    class func action(_ keyframes: [SlotKeyframeColorModel], _ slot: String) -> SKAction {
+        
+        //color action
+        var actions = [SKAction]()
+        var lastTime: TimeInterval = 0
+        
+        for keyframe in keyframes {
+            
+            let duration = keyframe.time - lastTime
+            let color = UIColor(keyframe.color)
+            let action = SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: duration)
+            setTiming(action, keyframe.curve)
+            
+            actions.append(action)
+            
+            lastTime = keyframe.time
+        }
+        
+        let colorAction = SKAction.sequence(actions)
+        
+        let slotColorAction = SKAction.customAction(withDuration: 0) { (node, time) in
+            
+            let sprites = node.children.filter { $0 is SKSpriteNode }
+            
+            for sprite in sprites {
+                
+                sprite.run(colorAction)
+            }
+        }
+        
+        return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))")
     }
 }
 

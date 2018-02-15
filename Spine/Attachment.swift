@@ -14,6 +14,15 @@ protocol Attachment: SKNodeNamePrefix {
 
 }
 
+extension Attachment {
+    
+    static var namePrefix: String {
+        get{
+            return "attachment:"
+        }
+    }
+}
+
 class AttachmentBuilder {
     
     class func attachment(of type: AttachmentModelType, texture: SKTexture) -> Attachment? {
@@ -40,8 +49,7 @@ class AttachmentBuilder {
 }
 
 class RegionAttachment: SKSpriteNode, Attachment {
-    
-    public static let namePrefix = "attachment:"
+
     let model: RegionAttachmentModel
     
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {

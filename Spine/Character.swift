@@ -9,7 +9,7 @@
 import SpriteKit
 
 public class Character: SKNode {
-    
+
     var bones: [Bone]? {
         get { return self["//\(Bone.namePrefix)*"] as? [Bone]  }
     }
@@ -19,6 +19,8 @@ public class Character: SKNode {
     }
     
     var skins: [Skin]?
+    var skinsApplied: [Skin]?
+    
     public var atlases: [SKTextureAtlas]? {
         get {
             
@@ -62,7 +64,7 @@ public class Character: SKNode {
     }
     
     public init(_ model: SpineModel, atlasFolder: String?) {
-        
+
         super.init()
         self.addChild(Skeleton(model))
         self.createSlots(model)
@@ -102,6 +104,8 @@ public class Character: SKNode {
                 slot.addChild(attachment)
             }
         }
+        
+        skinsApplied = skins
     }
     
     public func runAnimation(named: String) {

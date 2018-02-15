@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SpriteKit
 @testable import Spine
 
 class AnimationTests: XCTestCase {
@@ -15,51 +16,47 @@ class AnimationTests: XCTestCase {
 
         //given
         let model = CurveModelType.linear
+        let action = SKAction()
         
         //when
-        let function = timingFunction(model)
+        setTiming(action, model)
         
         //then
-        XCTAssertEqual(function(0), 0, accuracy: Float.ulpOfOne)
-        XCTAssertEqual(function(1.0), 1.0, accuracy: Float.ulpOfOne)
-        XCTAssertEqual(function(0.5), 0.5, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(action.timingMode, .linear)
+        //TODO: figure out how to test it later
+        //XCTAssertNil(action.timingFunction)
+
     }
     
     func testTimeFunctionStepped() {
         
         //given
         let model = CurveModelType.stepped
+        let action = SKAction()
         
         //when
-        let function = timingFunction(model)
-        
+        setTiming(action, model)
+
         //then
-        XCTAssertEqual(function(0), 0, accuracy: Float.ulpOfOne)
-        XCTAssertEqual(function(1.0), 1.0, accuracy: Float.ulpOfOne)
-        XCTAssertEqual(function(0.5), 0, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(action.timingFunction(0), 0, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(action.timingFunction(1.0), 1.0, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(action.timingFunction(0.5), 0, accuracy: Float.ulpOfOne)
     }
     
     func testTimeFunctionBezier() {
         
         //given
-        let bezierValues: [Float] = [0.591, 0, 0.642, 1]
-        let time: Float = 0.53
         
-        let part1 = pow(1 - time, 3) * bezierValues[0]
-        let part2 = 3 * time * pow(1 - time, 2) * bezierValues[1]
-        let part3 = 3 * pow(time, 2) * (1 - time) * bezierValues[2]
-        let part4 = pow(time, 3) * bezierValues[3]
-        let result = part1 + part2 + part3 + part4
-        
+        let bezierValues: [Float] = [1, 0, 0, 1]
         let model = CurveModelType.bezier(CurveModelType.BezierCurveModel(bezierValues)!)
+        let action = SKAction()
         
         //when
-        let function = timingFunction(model)
-        
-        //then
-        XCTAssertEqual(function(time), result, accuracy: Float.ulpOfOne)
-    }
-    
+        setTiming(action, model)
 
-    
+        //then
+        XCTAssertEqual(action.timingFunction(0), 0, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(action.timingFunction(0.5), 0.5, accuracy: Float.ulpOfOne)
+        XCTAssertEqual(action.timingFunction(1.0), 1.0, accuracy: Float.ulpOfOne)
+    }
 }
