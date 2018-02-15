@@ -82,31 +82,33 @@ class SlotAnimationBuilder {
             
             var keyframeActions = [SKAction]()
             
-            if let prevAttachmentName = prevAttachmentName {
-                
-                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(prevAttachmentName))"))
-            }
-            
             let duration = keyframe.time - lastTime
             keyframeActions.append(SKAction.wait(forDuration: duration))
             
-            if let attachmentName = keyframe.name {
+            if let prevAttachmentName = prevAttachmentName {
                 
-                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"))
+                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName))
             }
             
+            if let attachmentName = keyframe.name {
+                
+                let childName = "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
+                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName))
+                
+                prevAttachmentName = childName
+            }
+
             let keyframeAction = SKAction.sequence(keyframeActions)
             actions.append(keyframeAction)
             
             lastTime = keyframe.time
-            prevAttachmentName = keyframe.name
         }
 
         return SKAction.sequence(actions)
     }
     
     class func action(_ keyframes: [SlotKeyframeColorModel], _ slot: String) -> SKAction {
-        
+
         //color action
         var actions = [SKAction]()
         var lastTime: TimeInterval = 0

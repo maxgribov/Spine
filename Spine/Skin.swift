@@ -45,7 +45,8 @@ class Skin {
         if AttachmentBuilder.textureRequired(for: model) {
             
             guard let attachmentAtlasName = atlasName(for: model),
-                let texture = texture(with: textureName(from: model.modelName), from: attachmentAtlasName) else {
+                let textureName = textureName(for: model),
+                let texture = texture(with: textureName, from: attachmentAtlasName) else {
                     
                     return nil
             }
@@ -55,30 +56,6 @@ class Skin {
         } else {
             
             return AttachmentBuilder.attachment(of: model)
-        }
-    }
-    
-    func attachment(named: String, slotName: String) -> Attachment? {
-        
-        guard let slotModel = model.slots?.first(where: { $0.name == slotName }),
-              let attachmentType = slotModel.attachments?.first(where: { $0.modelName == named }) else {
-            
-            return nil
-        }
-        
-        if AttachmentBuilder.textureRequired(for: attachmentType) {
-            
-            guard let attachmentAtlasName = atlasName(for: attachmentType),
-                let texture = texture(with: textureName(from: attachmentType.modelName), from: attachmentAtlasName) else {
-                    
-                    return nil
-            }
-            
-            return AttachmentBuilder.attachment(of: attachmentType, texture: texture)
-            
-        } else {
-            
-            return AttachmentBuilder.attachment(of: attachmentType)
         }
     }
     
@@ -96,11 +73,22 @@ class Skin {
 
 //MARK: - Atlases Names Helpers
 
-func textureName(from name: String ) -> String {
+func textureName(from name: String, actualName: String? ) -> String {
     
-    let splittedName = name.components(separatedBy: "/")
+    let resultName = actualName ?? name
+    let splittedResultName = resultName.components(separatedBy: "/")
     
-    return splittedName.last ?? name
+    return splittedResultName.last ?? name
+}
+
+func textureName(for attachmentType: AttachmentModelType ) -> String? {
+    
+    switch attachmentType {
+    case .region(let region): return textureName(from: region.name, actualName: region.actualName)
+    case .mesh(let mesh): return textureName(from: mesh.name, actualName: mesh.actualName)
+    case .linkedMesh(let linkedMesh): return textureName(from: linkedMesh.name, actualName: linkedMesh.actualName)
+    default: return nil
+    }
 }
 
 func atlasName(from name: String, actualName: String?, path: String?) -> String {
