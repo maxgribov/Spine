@@ -11,11 +11,11 @@ import SpriteKit
 public class Character: SKNode {
 
     var bones: [Bone]? {
-        get { return self["//\(Bone.namePrefix)*"] as? [Bone]  }
+        get { return self["//\(Bone.prefix)*"] as? [Bone]  }
     }
     
     var slots: [Slot]? {
-        get { return self["//\(Slot.namePrefix)*"] as? [Slot] }
+        get { return self["//\(Slot.prefix)*"] as? [Slot] }
     }
     
     var skins: [Skin]?
@@ -117,6 +117,8 @@ public class Character: SKNode {
                         slot.addChild(attachmentNode)
                     }
                 }
+                
+                slot.dropToDefaults()
             }
         }
     }

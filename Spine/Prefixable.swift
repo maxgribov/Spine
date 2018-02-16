@@ -1,5 +1,5 @@
 //
-//  NamePrefix.swift
+//  Prefixable.swift
 //  Spine
 //
 //  Created by Max Gribov on 08/02/2018.
@@ -8,16 +8,16 @@
 
 import Foundation
 
-protocol NamePrefix {
+protocol Prefixable {
     
-    static var namePrefix: String { get }
+    static var prefix: String { get }
     static func generateName(_ name: String) -> String
 }
 
-extension NamePrefix {
+extension Prefixable {
     
     static func generateName(_ name: String) -> String {
         
-        return "\(namePrefix)\(name)"
+        return "\(prefix)\(name)"
     }
 }

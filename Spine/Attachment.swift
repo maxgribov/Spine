@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-typealias SKNodeNamePrefix = SKNode & NamePrefix
+typealias SKNodeNamePrefix = SKNode & Prefixable
 
 protocol Attachment: SKNodeNamePrefix {
 
@@ -17,11 +17,7 @@ protocol Attachment: SKNodeNamePrefix {
 
 extension Attachment {
     
-    static var namePrefix: String {
-        get{
-            return "attachment:"
-        }
-    }
+    static var prefix: String { get { return "attachment:" } }
 }
 
 class AttachmentBuilder {
@@ -51,11 +47,7 @@ class AttachmentBuilder {
 
 class RegionAttachment: SKSpriteNode, Attachment {
 
-    var model: AttachmentModel {
-        get {
-            return concreteModel
-        }
-    }
+    var model: AttachmentModel { get { return concreteModel } }
     let concreteModel: RegionAttachmentModel
     
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {

@@ -8,9 +8,9 @@
 
 import SpriteKit
 
-class Bone: SKSpriteNode, NamePrefix {
+class Bone: SKSpriteNode, Prefixable, Defaultable {
     
-    public static let namePrefix = "bone:"
+    public static let prefix = "bone:"
     let model: BoneModel
 
     init(_ model: BoneModel) {
@@ -19,14 +19,16 @@ class Bone: SKSpriteNode, NamePrefix {
         super.init(texture: nil, color: UIColor(model.color), size: CGSize(width: model.lenght, height: 5))
         self.name = Bone.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0, y: 0.5)
-        self.setDefaultPose()
+        self.dropToDefaults()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDefaultPose() {
+    //MARK: Defaultable
+    
+    func dropToDefaults() {
         
         self.position = model.position
         self.zRotation = model.rotation * degreeToRadiansFactor
