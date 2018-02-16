@@ -28,32 +28,14 @@ class Slot: SKNode, Prefixable, Defaultable {
     
     func dropToDefaults() {
         
-        if let sprites = children.filter({ $0 is SKSpriteNode }) as? [SKSpriteNode] {
-            
+        if let sprites = children.filter({ $0 is RegionAttachment }) as? [RegionAttachment] {
+
             for sprite in sprites {
-                
-                sprite.color = Slot.color(with: model.color)
-                sprite.colorBlendFactor = Slot.colorBlendFactor(with: model.color)
-                sprite.alpha = Slot.alpha(with: model.color)
+
+                sprite.color = UIColor(model.color)
+                sprite.colorBlendFactor = 1.0
+                sprite.isHidden = sprite.model.name == model.attachment ? false : true
             }
         }
-    }
-    
-    //TODO:  find a better place for this methods in the future
-    
-    class func color(with model: ColorModel) -> UIColor {
-        
-        return UIColor(red: model.red, green: model.green, blue: model.blue, alpha: 1.0)
-    }
-    
-    class func colorBlendFactor(with model: ColorModel) -> CGFloat {
-        
-        //color default value is FFFFFFFF... if color part if FFFFFF (means white) so we don't need apply color to sprite
-        return model.value.hasPrefix("FFFFFF") ? 0 : 1.0
-    }
-
-    class func alpha(with model: ColorModel) -> CGFloat {
-        
-        return model.alpha
     }
 }

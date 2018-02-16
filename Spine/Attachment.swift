@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-typealias SKNodeNamePrefix = SKNode & Prefixable
+typealias SKNodeNamePrefix = SKNode & Prefixable & Defaultable
 
 protocol Attachment: SKNodeNamePrefix {
 
@@ -56,14 +56,16 @@ class RegionAttachment: SKSpriteNode, Attachment {
         super.init(texture: texture, color: UIColor(model.color), size: model.size)
         self.name = RegionAttachment.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.setDefaultPose()
+        self.dropToDefaults()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDefaultPose() {
+    //MARK: Defaultable
+    
+    func dropToDefaults() {
         
         self.position = concreteModel.position
         self.zRotation = concreteModel.rotation * degreeToRadiansFactor

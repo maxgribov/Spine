@@ -77,7 +77,9 @@ public class Character: SKNode {
     public func applySkin(named: String? = nil) {
         
         var skinsNames: Set = ["default"]
+        
         if let named = named {
+            
             skinsNames.insert(named)
         }
         
@@ -103,17 +105,9 @@ public class Character: SKNode {
                 
                 for attachmentModel in attachmentsModels {
                     
-                    if let attachment = skin.attachment(attachmentModel), let attachmentNode = attachment as? SKNode {
-                        
-                        if slot.model.attachment == attachment.model.name {
-                            
-                            attachmentNode.isHidden = false
-                            
-                        } else {
-                            
-                            attachmentNode.isHidden = true
-                        }
-                        
+                    if let attachment = skin.attachment(attachmentModel),
+                       let attachmentNode = attachment as? SKNode {
+
                         slot.addChild(attachmentNode)
                     }
                 }
