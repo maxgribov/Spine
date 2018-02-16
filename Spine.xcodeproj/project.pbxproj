@@ -172,6 +172,7 @@
 				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
 				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
 				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
+				77E6FFB72029D2110078923C /* ColorModelTets.swift */,
 				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
 			);
 			path = "Model Tests";
@@ -223,7 +224,6 @@
 				77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */,
 				779B7143202E4D390031DD4F /* Model Tests */,
 				770640A12028F97A0031BD32 /* Resources */,
-				77E6FFB72029D2110078923C /* ColorModelTets.swift */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
 			);
 			path = SpineTests;
