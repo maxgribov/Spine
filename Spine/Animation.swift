@@ -116,8 +116,7 @@ class SlotAnimationBuilder {
         for keyframe in keyframes {
             
             let duration = keyframe.time - lastTime
-            let color = UIColor(keyframe.color)
-            let action = SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: duration)
+            let action = SKAction.colorize(with: createColor(with: keyframe.color), colorBlendFactor: 1.0, duration: duration)
             setTiming(action, keyframe.curve)
             
             actions.append(action)

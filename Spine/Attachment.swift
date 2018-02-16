@@ -53,7 +53,7 @@ class RegionAttachment: SKSpriteNode, Attachment {
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {
         
         self.concreteModel = model
-        super.init(texture: texture, color: UIColor(model.color), size: model.size)
+        super.init(texture: texture, color: createColor(with: model.color), size: model.size)
         self.name = RegionAttachment.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.dropToDefaults()

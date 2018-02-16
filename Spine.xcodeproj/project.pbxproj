@@ -28,6 +28,7 @@
 		776656E3202B9D3A00750189 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
 		776656E7202BADBB00750189 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E6202BADBB00750189 /* Skin.swift */; };
 		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
+		77869DE92037856F00404AC8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DE82037856F00404AC8 /* Color.swift */; };
 		77880A422024BB50004DC555 /* AnimationModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77880A412024BB50004DC555 /* AnimationModelsTests.swift */; };
 		779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
 		779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
@@ -42,7 +43,6 @@
 		77E5A8C7202CED6F00ACDC0D /* Prefixable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */; };
 		77E6FFB62029C8510078923C /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
 		77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
-		77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */; };
 		77E6FFBC2029EEBF0078923C /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFBB2029EEBF0078923C /* Skeleton.swift */; };
 		77F1D5F3201A490400AF499B /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F1D5E9201A490400AF499B /* Spine.framework */; };
 		77F1D5FA201A490400AF499B /* Spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F1D5EC201A490400AF499B /* Spine.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,6 +81,7 @@
 		776656E2202B9D3A00750189 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		776656E6202BADBB00750189 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
 		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
+		77869DE82037856F00404AC8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		77880A412024BB50004DC555 /* AnimationModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModelsTests.swift; sourceTree = "<group>"; };
 		779AC335201B49B900C33B79 /* SkeletonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModel.swift; sourceTree = "<group>"; };
 		779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModels.swift; sourceTree = "<group>"; };
@@ -95,7 +96,6 @@
 		77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prefixable.swift; sourceTree = "<group>"; };
 		77E6FFB52029C8510078923C /* Bone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bone.swift; sourceTree = "<group>"; };
 		77E6FFB72029D2110078923C /* ColorModelTets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModelTets.swift; sourceTree = "<group>"; };
-		77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		77E6FFBB2029EEBF0078923C /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		77F1D5E9201A490400AF499B /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5EC201A490400AF499B /* Spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine.h; sourceTree = "<group>"; };
@@ -148,6 +148,24 @@
 				773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */,
 			);
 			path = AnimationKeyframesModelsTests;
+			sourceTree = "<group>";
+		};
+		77869DEA2037888600404AC8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */,
+				77F75104203760050065AECE /* Defaultable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		77869DEB203788BC00404AC8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				77869DE82037856F00404AC8 /* Color.swift */,
+				775D969320336DCC00137B38 /* BezierCurveSolver.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		779AC334201B499C00C33B79 /* Model */ = {
@@ -207,12 +225,10 @@
 				776656E6202BADBB00750189 /* Skin.swift */,
 				776656E2202B9D3A00750189 /* Attachment.swift */,
 				77DBA2A8202A1FE400D35306 /* Animation.swift */,
-				77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */,
-				77F75104203760050065AECE /* Defaultable.swift */,
-				775D969320336DCC00137B38 /* BezierCurveSolver.swift */,
 				779AC334201B499C00C33B79 /* Model */,
+				77869DEA2037888600404AC8 /* Protocols */,
+				77869DEB203788BC00404AC8 /* Utilities */,
 				77F1D5ED201A490400AF499B /* Info.plist */,
-				77E6FFB92029D6A00078923C /* UIColor+Extensions.swift */,
 			);
 			path = Spine;
 			sourceTree = "<group>";
@@ -348,7 +364,6 @@
 				77E6FFB62029C8510078923C /* Bone.swift in Sources */,
 				779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */,
 				779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */,
-				77E6FFBA2029D6A00078923C /* UIColor+Extensions.swift in Sources */,
 				77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */,
 				776656E3202B9D3A00750189 /* Attachment.swift in Sources */,
 				77DBA2A7202A19D900D35306 /* Character.swift in Sources */,
@@ -358,6 +373,7 @@
 				773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */,
 				779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */,
 				77F75105203760050065AECE /* Defaultable.swift in Sources */,
+				77869DE92037856F00404AC8 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
