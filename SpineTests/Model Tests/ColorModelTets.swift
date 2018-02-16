@@ -85,4 +85,29 @@ class ColorModelTets: XCTestCase {
         XCTAssertEqual(colorModel.blue, 0)
         XCTAssertEqual(colorModel.alpha, 0)
     }
+    
+    func testMix() {
+        
+        //given
+        let modelOne = ColorModel("ffffff16")
+        let modelTwo = ColorModel("11ff002c")
+        
+        //when
+        let mixedModel = modelOne.mix(with: modelTwo)
+        
+        //then
+        XCTAssertEqual(mixedModel.value, "11ff0004")
+    }
+    
+    func testOptionalInt() {
+        
+        //given
+        let colorValue: String? = nil
+        
+        //when
+        let colorModel = ColorModel(colorValue)
+        
+        //then
+        XCTAssertNil(colorModel)
+    }
 }

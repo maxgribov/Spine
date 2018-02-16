@@ -59,6 +59,12 @@ class RegionAttachment: SKSpriteNode, Attachment {
         self.dropToDefaults()
     }
     
+    func setColor(with model: ColorModel) {
+        
+        let resultColorModel = concreteModel.color.mix(with: model)
+        self.color = createColor(with: resultColorModel)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

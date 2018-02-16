@@ -249,4 +249,19 @@ struct ColorModel {
             return nil
         }
     }
+    
+    func mix(with model: ColorModel) -> ColorModel {
+        
+        var rgbaValue: UInt32 = 0
+        Scanner(string: value).scanHexInt32(&rgbaValue)
+        
+        var rgbaModelValue: UInt32 = 0
+        Scanner(string: model.value).scanHexInt32(&rgbaModelValue)
+        
+        let rgbaResultValue: UInt32 = rgbaValue & rgbaModelValue
+        
+        let stringValue = String(format:"%2x", rgbaResultValue)
+        
+        return ColorModel(stringValue)
+    }
 }

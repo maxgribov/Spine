@@ -32,7 +32,7 @@ class Slot: SKNode, Prefixable, Defaultable {
 
             for sprite in sprites {
 
-                sprite.color = createColor(with: model.color)
+                sprite.setColor(with: model.color)
                 sprite.colorBlendFactor = 1.0
                 sprite.isHidden = sprite.model.name == model.attachment ? false : true
             }
