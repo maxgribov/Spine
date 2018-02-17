@@ -31,6 +31,7 @@ class AttachmentBuilder {
             }
             return RegionAttachment(regionModel, texture)
         case .boundingBox(let boundingBoxModel): return BoundingBoxAttachment(boundingBoxModel)
+        case .point(let pointModel): return PointAttachment(pointModel)
         default: return nil
         }
     }
@@ -111,5 +112,34 @@ class BoundingBoxAttachment: SKShapeNode, Attachment {
     
     func dropToDefaults() {
 
+    }
+}
+
+class PointAttachment: SKShapeNode, Attachment {
+    
+    var model: AttachmentModel { get { return concreteModel } }
+    let concreteModel: PointAttachmentModel
+    
+    init(_ model: PointAttachmentModel) {
+        
+        self.concreteModel = model
+        super.init()
+        let circleRadius: CGFloat = 5.0
+        let curcleRect = CGRect(x: -circleRadius, y: -circleRadius, width: circleRadius * 2, height: circleRadius * 2)
+        self.path = CGPath(ellipseIn: curcleRect, transform: nil)
+        self.fillColor = createColor(with: concreteModel.color)
+        self.dropToDefaults()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Defaultable
+    
+    func dropToDefaults() {
+        
+        self.position = concreteModel.point
+        self.zRotation = concreteModel.rotation * degreeToRadiansFactor
     }
 }

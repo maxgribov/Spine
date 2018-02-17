@@ -118,6 +118,10 @@ public class Character: SKNode {
                         } else if let boundingBox = attachment as? BoundingBoxAttachment {
                             
                             boundingBoxes.append(boundingBox)
+                            
+                        } else if let point = attachment as? PointAttachment {
+                            
+                            slot.addChild(point)
                         }
                     }
                 }
