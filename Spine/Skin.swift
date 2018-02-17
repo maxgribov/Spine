@@ -51,11 +51,11 @@ class Skin {
                     return nil
             }
             
-            return AttachmentBuilder.attachment(of: model, texture: texture)
+            return AttachmentBuilder.attachment(for: model, texture)
             
         } else {
             
-            return AttachmentBuilder.attachment(of: model)
+            return AttachmentBuilder.attachment(for: model)
         }
     }
     

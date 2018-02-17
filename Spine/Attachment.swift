@@ -22,18 +22,14 @@ extension Attachment {
 
 class AttachmentBuilder {
     
-    class func attachment(of type: AttachmentModelType, texture: SKTexture) -> Attachment? {
+    class func attachment(for type: AttachmentModelType, _ texture: SKTexture? = nil) -> Attachment? {
         
         switch type {
-        case .region(let regionModel): return RegionAttachment(regionModel, texture)
-        case .boundingBox(let boundingBoxModel): return BoundingBoxAttachment(boundingBoxModel)
-        default: return nil
-        }
-    }
-    
-    class func attachment(of type: AttachmentModelType) -> Attachment? {
-        
-        switch type {
+        case .region(let regionModel):
+            guard let texture = texture else {
+                return nil
+            }
+            return RegionAttachment(regionModel, texture)
         case .boundingBox(let boundingBoxModel): return BoundingBoxAttachment(boundingBoxModel)
         default: return nil
         }
