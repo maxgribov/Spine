@@ -53,93 +53,6 @@ func setTiming(_ action: SKAction, _ curve: CurveModelType)  {
     }
 }
 
-class SlotAnimationBuilder {
-    
-    class func action(_ model: SlotAnimationModel) -> SKAction {
-
-        var actions = [SKAction]()
-        
-        for timeline in model.timelines {
-            
-            switch timeline {
-            case .attachment(let attachmentKeyframes):
-                actions.append(SlotAnimationBuilder.action(attachmentKeyframes, model.slot))
-            case .color(let colorKeyframes):
-                actions.append(SlotAnimationBuilder.action(colorKeyframes, model.slot))
-            }
-        }
-        
-        return SKAction.group(actions)
-    }
-    
-    class func action(_ keyframes: [SlotKeyframeAttachmentModel], _ slot: String) -> SKAction {
-
-        var actions = [SKAction]()
-        var lastTime: TimeInterval = 0
-        var prevAttachmentName: String?
-        
-        for keyframe in keyframes {
-            
-            var keyframeActions = [SKAction]()
-            
-            let duration = keyframe.time - lastTime
-            keyframeActions.append(SKAction.wait(forDuration: duration))
-            
-            if let prevAttachmentName = prevAttachmentName {
-                
-                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName))
-            }
-            
-            if let attachmentName = keyframe.name {
-                
-                let childName = "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
-                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName))
-                
-                prevAttachmentName = childName
-            }
-
-            let keyframeAction = SKAction.sequence(keyframeActions)
-            actions.append(keyframeAction)
-            
-            lastTime = keyframe.time
-        }
-
-        return SKAction.sequence(actions)
-    }
-    
-    class func action(_ keyframes: [SlotKeyframeColorModel], _ slot: String) -> SKAction {
-
-        //color action
-        var actions = [SKAction]()
-        var lastTime: TimeInterval = 0
-        
-        for keyframe in keyframes {
-            
-            let duration = keyframe.time - lastTime
-            let action = SKAction.colorize(with: createColor(with: keyframe.color), colorBlendFactor: 1.0, duration: duration)
-            setTiming(action, keyframe.curve)
-            
-            actions.append(action)
-            
-            lastTime = keyframe.time
-        }
-        
-        let colorAction = SKAction.sequence(actions)
-        
-        let slotColorAction = SKAction.customAction(withDuration: 0) { (node, time) in
-            
-            let sprites = node.children.filter { $0 is SKSpriteNode }
-            
-            for sprite in sprites {
-                
-                sprite.run(colorAction)
-            }
-        }
-        
-        return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))")
-    }
-}
-
 //MARK: - Bones Actions
 
 class BoneAnimationBuilder {
@@ -227,5 +140,94 @@ class BoneAnimationBuilder {
         
         //TODO: Implement shear action here in future
         return SKAction()
+    }
+}
+
+//MARK: - Slot
+
+class SlotAnimationBuilder {
+    
+    class func action(_ model: SlotAnimationModel) -> SKAction {
+        
+        var actions = [SKAction]()
+        
+        for timeline in model.timelines {
+            
+            switch timeline {
+            case .attachment(let attachmentKeyframes):
+                actions.append(SlotAnimationBuilder.action(attachmentKeyframes, model.slot))
+            case .color(let colorKeyframes):
+                actions.append(SlotAnimationBuilder.action(colorKeyframes, model.slot))
+            }
+        }
+        
+        return SKAction.group(actions)
+    }
+    
+    class func action(_ keyframes: [SlotKeyframeAttachmentModel], _ slot: String) -> SKAction {
+        
+        var actions = [SKAction]()
+        var lastTime: TimeInterval = 0
+        var prevAttachmentName: String?
+        
+        for keyframe in keyframes {
+            
+            var keyframeActions = [SKAction]()
+            
+            let duration = keyframe.time - lastTime
+            keyframeActions.append(SKAction.wait(forDuration: duration))
+            
+            if let prevAttachmentName = prevAttachmentName {
+                
+                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName))
+            }
+            
+            if let attachmentName = keyframe.name {
+                
+                let childName = "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
+                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName))
+                
+                prevAttachmentName = childName
+            }
+            
+            let keyframeAction = SKAction.sequence(keyframeActions)
+            actions.append(keyframeAction)
+            
+            lastTime = keyframe.time
+        }
+        
+        return SKAction.sequence(actions)
+    }
+    
+    class func action(_ keyframes: [SlotKeyframeColorModel], _ slot: String) -> SKAction {
+        
+        //color action
+        var actions = [SKAction]()
+        var lastTime: TimeInterval = 0
+        
+        for keyframe in keyframes {
+            
+            let duration = keyframe.time - lastTime
+            let action = SKAction.colorize(with: createColor(with: keyframe.color), colorBlendFactor: 1.0, duration: duration)
+            setTiming(action, keyframe.curve)
+            
+            actions.append(action)
+            
+            lastTime = keyframe.time
+        }
+        
+        let colorAction = SKAction.sequence(actions)
+        
+        let slotColorAction = SKAction.customAction(withDuration: 0) { (node, time) in
+            
+            let sprites = node.children.filter { $0 is SKSpriteNode }
+            
+            for sprite in sprites {
+                
+                sprite.run(colorAction)
+            }
+        }
+        
+        return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))")
     }
 }

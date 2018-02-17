@@ -37,5 +37,13 @@ class Slot: SKNode, Prefixable, Defaultable {
                 sprite.isHidden = sprite.model.name == model.attachment ? false : true
             }
         }
+        
+        if let points = children.filter({ $0 is PointAttachment }) as? [PointAttachment] {
+            
+            for point in points {
+
+                point.isHidden = true
+            }
+        }
     }
 }
