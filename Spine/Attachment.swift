@@ -26,13 +26,17 @@ class AttachmentBuilder {
         
         switch type {
         case .region(let regionModel): return RegionAttachment(regionModel, texture)
+        case .boundingBox(let boundingBoxModel): return BoundingBoxAttachment(boundingBoxModel)
         default: return nil
         }
     }
     
     class func attachment(of type: AttachmentModelType) -> Attachment? {
         
-        return nil
+        switch type {
+        case .boundingBox(let boundingBoxModel): return BoundingBoxAttachment(boundingBoxModel)
+        default: return nil
+        }
     }
     
     class func textureRequired(for type: AttachmentModelType) -> Bool {
@@ -77,5 +81,39 @@ class RegionAttachment: SKSpriteNode, Attachment {
         self.zRotation = concreteModel.rotation * degreeToRadiansFactor
         self.xScale = concreteModel.scale.dx
         self.yScale = concreteModel.scale.dy
+    }
+}
+
+class BoundingBoxAttachment: SKShapeNode, Attachment {
+    
+    var model: AttachmentModel { get { return concreteModel } }
+    let concreteModel: BoundingBoxAttachmentModel
+
+    init(_ model: BoundingBoxAttachmentModel) {
+        
+        self.concreteModel = model
+        super.init()
+        
+        if let path = CGPath.path(with: model.vertices) {
+            
+            self.path = path
+            self.fillColor = createColor(with: model.color)
+            self.zPosition = 100.0
+            self.alpha = 0.5
+            
+            let physicsBody = SKPhysicsBody(polygonFrom: path)
+            physicsBody.isDynamic = false
+            self.physicsBody = physicsBody
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Defaultable
+    
+    func dropToDefaults() {
+
     }
 }

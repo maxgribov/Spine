@@ -74,6 +74,8 @@ public class Character: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Skins
+    
     public func applySkin(named: String? = nil) {
         
         var skinsNames: Set = ["default"]
@@ -103,12 +105,37 @@ public class Character: SKNode {
                     continue
                 }
                 
+                var boundingBoxes = [BoundingBoxAttachment]()
+                
                 for attachmentModel in attachmentsModels {
                     
-                    if let attachment = skin.attachment(attachmentModel),
-                       let attachmentNode = attachment as? SKNode {
-
-                        slot.addChild(attachmentNode)
+                    if let attachment = skin.attachment(attachmentModel) {
+                        
+                        if let region = attachment as? RegionAttachment {
+                            
+                            slot.addChild(region)
+                            
+                        } else if let boundingBox = attachment as? BoundingBoxAttachment {
+                            
+                            boundingBoxes.append(boundingBox)
+                        }
+                    }
+                }
+                
+                //TODO: if debug mode add bounding boxes as childs to slot
+                
+                if boundingBoxes.count > 1 {
+                    
+                    let physicBodies = boundingBoxes.flatMap({ $0.physicsBody })
+                    let compositePhysicBody = SKPhysicsBody(bodies: physicBodies)
+                    compositePhysicBody.isDynamic = false
+                    slot.physicsBody = compositePhysicBody
+                    
+                } else {
+                    
+                    if let boundingBox = boundingBoxes.first {
+                        
+                        slot.physicsBody = boundingBox.physicsBody
                     }
                 }
                 
@@ -125,6 +152,42 @@ public class Character: SKNode {
         }
         
         self.run(animation.action)
+    }
+    
+    //MARK: - Physics
+    
+    public func setBitMasks(category: UInt32, collision: UInt32) {
+        
+        if let slots = slots {
+            
+            for slot in slots {
+                
+                slot.physicsBody?.categoryBitMask = category
+                slot.physicsBody?.collisionBitMask = collision
+            }
+        }
+    }
+    
+    public func setCategoryBitMask(_ mask: UInt32) {
+        
+        if let slots = slots {
+            
+            for slot in slots {
+                
+                slot.physicsBody?.categoryBitMask = mask
+            }
+        }
+    }
+    
+    public func setCollisionBitMask(_ mask: UInt32) {
+        
+        if let slots = slots {
+            
+            for slot in slots {
+                
+                slot.physicsBody?.collisionBitMask = mask
+            }
+        }
     }
     
     //MARK: - Private Setup Helpers
