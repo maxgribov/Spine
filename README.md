@@ -32,4 +32,4 @@ Unofficial Spine runtime.
 | - Transform Constraint | + | - | - |
 | - Path Constraint | + | - | - |
 | **Events** | + | - | - |
-| **Draw Order** | + | + | - |
+| **Draw Order** | + | + | + |
