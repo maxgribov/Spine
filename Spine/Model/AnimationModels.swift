@@ -942,21 +942,29 @@ extension EventKeyfarameModel: Decodable {
 struct DrawOrderKeyframeModel: KeyframeModel, AnimationGroupModel {
     
     let time: TimeInterval
-    let offsets: [DrawOrderOffsetModel]
+    let offsets: [DrawOrderOffsetModel]?
     
-    init(_ time: TimeInterval, _ offsets: [[String : Any]]) {
+    init(_ time: TimeInterval, _ offsets: [[String : Any]]?) {
         
-        var offsetsMutable = [DrawOrderOffsetModel]()
-        for dict in offsets {
+        if let offsets = offsets {
             
-            if let offset = DrawOrderOffsetModel(dict) {
+            var offsetsMutable = [DrawOrderOffsetModel]()
+            for dict in offsets {
                 
-                offsetsMutable.append(offset)
+                if let offset = DrawOrderOffsetModel(dict) {
+                    
+                    offsetsMutable.append(offset)
+                }
             }
+
+            self.offsets = offsetsMutable
+            
+        } else {
+            
+            self.offsets = nil
         }
         
         self.time = time
-        self.offsets = offsetsMutable
     }
 }
 
@@ -972,7 +980,7 @@ extension DrawOrderKeyframeModel: Decodable {
         
         let container = try decoder.container(keyedBy: Keys.self)
         let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
-        let offsets: [DrawOrderOffsetModel] = try container.decode([DrawOrderOffsetModel].self, forKey: .offsets)
+        let offsets: [DrawOrderOffsetModel]? = try container.decodeIfPresent([DrawOrderOffsetModel].self, forKey: .offsets)
         
         self.time = time
         self.offsets = offsets

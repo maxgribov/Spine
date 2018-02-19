@@ -33,6 +33,8 @@ public class Animation {
                     
                     return SlotAnimationBuilder.action(slotAnimationModel)
                 }))
+            case .draworder(let draworderKeyframes):
+                actions.append(DrawOrderAnimationBuilder.action(draworderKeyframes, model.slots))
 
             default:
                 continue
@@ -229,5 +231,162 @@ class SlotAnimationBuilder {
         }
         
         return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))")
+    }
+}
+
+//MARK: - Draw Order
+
+class DrawOrderAnimationBuilder {
+    
+    class func action(_ keyframes: [DrawOrderKeyframeModel], _ slots: [SlotModel]?) -> SKAction {
+        
+        guard let slots = slots else {
+            
+            return SKAction()
+        }
+        
+        var slotsData = [SlotData]()
+        
+        for (index, slot) in slots.enumerated() {
+            
+            slotsData.append(SlotData(slot.name, order: index))
+        }
+        
+        var actions = [SKAction]()
+        var lastTime: TimeInterval = 0
+        
+        for keyframe in keyframes {
+            
+            let duration = keyframe.time - lastTime
+            let delayAction = SKAction.wait(forDuration: duration)
+            if let keyframeAction = DrawOrderAnimationBuilder.action(&slotsData, keyframe.offsets) {
+                
+                actions.append(SKAction.sequence([delayAction, keyframeAction]))
+                
+            } else {
+                
+                actions.append(delayAction)
+            }
+
+            lastTime = keyframe.time
+        }
+        
+        return SKAction.sequence(actions)
+    }
+    
+    fileprivate class func action(_ slotsData: inout [SlotData], _ offsets: [DrawOrderOffsetModel]?) -> SKAction? {
+        
+        let slotsNewOrders = calculateSlotsNewOrders(slotsData, offsets)
+        
+        var actions = [SKAction]()
+        
+        for slotNewOrder in slotsNewOrders {
+            
+            let action = SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in
+                
+                if let slot = node as? Slot {
+                    
+                    slot.setOrder(to: slotNewOrder.order)
+                }
+            })
+            
+            actions.append(SKAction.run(action, onChildWithName: "//\(Slot.generateName(slotNewOrder.name))"))
+        }
+        
+        applyNewOrders(&slotsData, slotsNewOrders)
+        
+        if actions.count > 0 {
+            
+            return SKAction.group(actions)
+            
+        } else {
+            
+            return nil
+        }
+    }
+}
+
+fileprivate struct SlotData {
+    
+    let initialOrder: Int
+    let name: String
+    var order: Int
+    
+    init(_ name: String, order: Int) {
+        
+        self.initialOrder = order
+        self.name = name
+        self.order = self.initialOrder
+    }
+}
+
+fileprivate struct SlotNewOrder {
+    
+    let name: String
+    let order: Int
+    
+    init(_ name: String, newOrder: Int ) {
+        
+        self.name = name
+        self.order = newOrder
+    }
+}
+
+fileprivate func calculateSlotsNewOrders(_ slots: [SlotData], _ offsets: [DrawOrderOffsetModel]?) -> [SlotNewOrder] {
+    
+    var orders = [SlotNewOrder]()
+    
+    if let offsets = offsets {
+        
+        var slotsOrdered = slots.sorted(by: { $0.order < $1.order })
+        
+        for slot in slotsOrdered {
+            
+            guard let shift = offsets.first(where: { $0.slot == slot.name }),
+                let index = slotsOrdered.index(where: { $0.name == slot.name }) else {
+                    
+                    continue
+            }
+            
+            let newIndex = slot.initialOrder + shift.offset
+            
+            slotsOrdered.remove(at: index)
+            slotsOrdered.insert(slot, at: newIndex)
+        }
+        
+        for (index, slot) in slotsOrdered.enumerated() {
+            
+            if slot.order != index {
+                
+                orders.append(SlotNewOrder(slot.name, newOrder: index ))
+            }
+        }
+        
+    } else {
+
+        for slot in slots {
+            
+            if slot.initialOrder != slot.order {
+                
+                orders.append(SlotNewOrder(slot.name, newOrder: slot.initialOrder))
+            }
+        }
+    }
+    
+    return orders
+}
+
+fileprivate func applyNewOrders(_ slotsData: inout [SlotData], _ orders: [SlotNewOrder]) {
+    
+    for order in orders {
+        
+        if var slotData = slotsData.first(where: { $0.name == order.name }) {
+            
+            slotData.order = order.order
+            if let index = slotsData.index(where: { $0.name == slotData.name }){
+                
+                slotsData[index] = slotData
+            }
+        }
     }
 }

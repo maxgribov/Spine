@@ -996,8 +996,16 @@ class AnimationModelsTests: XCTestCase {
                         if let drawOrderAnimationKeyframe = drawOrderAnimationKeyframes.first {
                             
                             XCTAssertEqual(drawOrderAnimationKeyframe.time, 0.3, accuracy: TimeInterval.ulpOfOne)
-                            XCTAssertTrue(drawOrderAnimationKeyframe.offsets.count == 2)
                             
+                            if let offsets = drawOrderAnimationKeyframe.offsets {
+                                
+                                XCTAssertTrue(offsets.count == 2)
+                                
+                            } else {
+                                
+                                XCTFail("offsets should not be nil")
+                            }
+    
                         } else {
                             
                             XCTFail("drawOrderAnimationKeyframe should not be nil")
