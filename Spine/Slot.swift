@@ -12,12 +12,19 @@ class Slot: SKNode, Prefixable, Defaultable {
     
     public static let prefix = "slot:"
     let model: SlotModel
+    let initialOrder: Int
     
-    init(_ model: SlotModel) {
+    init(_ model: SlotModel, _ order: Int) {
         
         self.model = model
+        self.initialOrder = order
         super.init()
         self.name = Slot.generateName(model.name)
+    }
+    
+    func setOrder(to order: Int) {
+        
+        self.zPosition = CGFloat(order) * 0.01
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,6 +34,8 @@ class Slot: SKNode, Prefixable, Defaultable {
     //MARK: Defaultable
     
     func dropToDefaults() {
+        
+        setOrder(to: initialOrder)
         
         if let sprites = children.filter({ $0 is RegionAttachment }) as? [RegionAttachment] {
 

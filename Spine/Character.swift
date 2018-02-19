@@ -73,7 +73,7 @@ public class Character: SKNode {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     //MARK: - Skins
     
     public func applySkin(named: String? = nil) {
@@ -200,20 +200,18 @@ public class Character: SKNode {
 
         if let slotsModels = model.slots {
             
-            var slotOrder: CGFloat = 0
+            var slotOrder: Int = 0
             
             for slotModel in slotsModels {
                 
                 let boneName = Bone.generateName(slotModel.bone)
                 if let bone = childNode(withName: "//\(boneName)") {
                     
-                    let slot = Slot(slotModel)
-                    slot.zPosition = slotOrder
-                    
+                    let slot = Slot(slotModel, slotOrder)
                     bone.addChild(slot)
                 }
                 
-                slotOrder = slotOrder + 0.01
+                slotOrder += 1
             }
         }
     }
