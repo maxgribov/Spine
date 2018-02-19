@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EventModel {
+public struct EventModel {
     
     let name: String
     let int: Int

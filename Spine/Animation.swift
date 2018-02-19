@@ -33,6 +33,8 @@ public class Animation {
                     
                     return SlotAnimationBuilder.action(slotAnimationModel)
                 }))
+            case .events(let eventsKeyframes):
+                actions.append(EventAnimationBuilder.action(eventsKeyframes))
             case .draworder(let draworderKeyframes):
                 actions.append(DrawOrderAnimationBuilder.action(draworderKeyframes, model.slots))
 
@@ -231,6 +233,49 @@ class SlotAnimationBuilder {
         }
         
         return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))")
+    }
+}
+
+//MARK: - Event
+
+class EventAnimationBuilder {
+    
+    class func action(_ keyframes: [EventKeyfarameModel]) -> SKAction {
+        
+        var actions = [SKAction]()
+        var lastTime: TimeInterval = 0
+        
+        for keyframe in keyframes {
+            
+            let duration = keyframe.time - lastTime
+            let delayAction = SKAction.wait(forDuration: duration)
+            let keyframeAction = EventAnimationBuilder.action(keyframe)
+            actions.append(SKAction.sequence([delayAction, keyframeAction]))
+            
+            lastTime = keyframe.time
+        }
+        
+        //empty action in order to eliminate double-triggering of the last event
+        actions.append(SKAction.sequence([SKAction.wait(forDuration: 0.01), SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in })]))
+        
+        return SKAction.sequence(actions)
+    }
+    
+    class func action(_ keyframe: EventKeyfarameModel) -> SKAction {
+        
+        let event = EventAnimationBuilder.event(with: keyframe)
+        return SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in
+
+            if let character = node as? Character, let eventTrigger = character.eventTriggered {
+
+                eventTrigger(event)
+            }
+        })
+    }
+    
+    class func event(with keyframe: EventKeyfarameModel) -> EventModel {
+        
+        return EventModel(keyframe.event, keyframe.int, keyframe.float, keyframe.string)
     }
 }
 
