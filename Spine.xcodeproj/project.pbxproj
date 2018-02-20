@@ -31,6 +31,7 @@
 		7745035C203CAA8C00BED2D9 /* Skeleton+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */; };
 		7745035E203CAB4200BED2D9 /* Skeleton+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */; };
 		77450360203CAC6900BED2D9 /* Skeleton+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */; };
+		774D0C90203CD62900EC5156 /* Skeleton+Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */; };
 		7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
 		775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
 		776656E3202B9D3A00750189 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
@@ -92,6 +93,7 @@
 		7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Atlases.swift"; sourceTree = "<group>"; };
 		7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Physics.swift"; sourceTree = "<group>"; };
 		7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Animations.swift"; sourceTree = "<group>"; };
+		774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Defaultable.swift"; sourceTree = "<group>"; };
 		7755D4232020F14D005275DA /* SkinModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModelsTests.swift; sourceTree = "<group>"; };
 		775D969320336DCC00137B38 /* BezierCurveSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveSolver.swift; sourceTree = "<group>"; };
 		776656E2202B9D3A00750189 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */,
 				770D466A203CADC60046092C /* Skeleton+Skins.swift */,
 				770D466C203CC6BE0046092C /* SKAction+Spine.swift */,
+				774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */,
 				77F75105203760050065AECE /* Defaultable.swift in Sources */,
 				77869DE92037856F00404AC8 /* Color.swift in Sources */,
+				774D0C90203CD62900EC5156 /* Skeleton+Defaultable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
