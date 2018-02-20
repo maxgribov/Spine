@@ -266,7 +266,7 @@ class EventAnimationBuilder {
         let event = EventAnimationBuilder.event(with: keyframe)
         return SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in
 
-            if let character = node as? Character, let eventTrigger = character.eventTriggered {
+            if let character = node as? Skeleton, let eventTrigger = character.eventTriggered {
 
                 eventTrigger(event)
             }
