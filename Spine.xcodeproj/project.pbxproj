@@ -11,6 +11,7 @@
 		7706409E2028F8460031BD32 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
 		770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
 		770D466B203CADC60046092C /* Skeleton+Skins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466A203CADC60046092C /* Skeleton+Skins.swift */; };
+		770D466D203CC6BE0046092C /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
 		773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
 		773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
 		773E8FE22024F04D009E38BD /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
@@ -71,6 +72,7 @@
 		7706409D2028F8460031BD32 /* spineboy-pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "spineboy-pro.json"; sourceTree = "<group>"; };
 		7706409F2028F86C0031BD32 /* SpineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModelTests.swift; sourceTree = "<group>"; };
 		770D466A203CADC60046092C /* Skeleton+Skins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Skins.swift"; sourceTree = "<group>"; };
+		770D466C203CC6BE0046092C /* SKAction+Spine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKAction+Spine.swift"; sourceTree = "<group>"; };
 		773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeRotateModelTests.swift; sourceTree = "<group>"; };
 		773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeTranslateModelTests.swift; sourceTree = "<group>"; };
 		773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeScaleModelTests.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */,
 				7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */,
 				770D466A203CADC60046092C /* Skeleton+Skins.swift */,
+				770D466C203CC6BE0046092C /* SKAction+Spine.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				77E5A8C7202CED6F00ACDC0D /* Prefixable.swift in Sources */,
 				776656E7202BADBB00750189 /* Skin.swift in Sources */,
 				775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */,
+				770D466D203CC6BE0046092C /* SKAction+Spine.swift in Sources */,
 				77E6FFB62029C8510078923C /* Bone.swift in Sources */,
 				779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */,
 				779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */,

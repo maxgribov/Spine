@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public extension Skeleton {
+extension Skeleton {
 
     public var animationsNames: [String]? {
         get {
@@ -30,11 +30,14 @@ public extension Skeleton {
         return animation.action
     }
     
-    public func runAnimation(named: String) {
+    public func dropToDefaultsAction() -> SKAction {
         
-        if let animation = animation(named: named) {
-            
-            self.run(animation)
-        }
+        return SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in
+
+            if let skeleton = node as? Skeleton {
+                
+                skeleton.dropToDefaults()
+            }
+        })
     }
 }

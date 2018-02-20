@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public class Animation {
+class Animation {
     
     let name: String
     let action: SKAction
@@ -40,11 +40,21 @@ public class Animation {
 
             default:
                 continue
-                
             }
         }
         
-        self.action = SKAction.group(actions)
+        let longestDuration = actions.reduce(0, { (duration, action) -> TimeInterval in
+            
+            return action.duration > duration ? action.duration : duration
+        })
+        
+        let actionsCorrected = actions.map({ (action) -> SKAction in
+            
+            let delayDuration = longestDuration - action.duration
+            return delayDuration > 0 ? SKAction.sequence([action, SKAction.wait(forDuration: delayDuration)]) : action
+        })
+        
+        self.action = SKAction.group(actionsCorrected)
     }
 }
 
@@ -69,7 +79,7 @@ class BoneAnimationBuilder {
         }
         
         let boneName = Bone.generateName(model.bone)
-        return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: "//\(boneName)")
+        return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: "//\(boneName)", inheritDuration: true)
     }
     
     class func action(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
@@ -147,7 +157,7 @@ class BoneAnimationBuilder {
     }
 }
 
-//MARK: - Slot
+//MARK: - Slot Actions
 
 class SlotAnimationBuilder {
     
@@ -183,13 +193,13 @@ class SlotAnimationBuilder {
             
             if let prevAttachmentName = prevAttachmentName {
                 
-                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName))
+                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName, inheritDuration: true))
             }
             
             if let attachmentName = keyframe.name {
                 
                 let childName = "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
-                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName))
+                keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName, inheritDuration: true))
                 
                 prevAttachmentName = childName
             }
@@ -232,11 +242,11 @@ class SlotAnimationBuilder {
             }
         }
         
-        return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))")
+        return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))", inheritDuration: true)
     }
 }
 
-//MARK: - Event
+//MARK: - Event Actions
 
 class EventAnimationBuilder {
     
@@ -279,7 +289,7 @@ class EventAnimationBuilder {
     }
 }
 
-//MARK: - Draw Order
+//MARK: - Draw Order Actions
 
 class DrawOrderAnimationBuilder {
     
@@ -335,7 +345,7 @@ class DrawOrderAnimationBuilder {
                 }
             })
             
-            actions.append(SKAction.run(action, onChildWithName: "//\(Slot.generateName(slotNewOrder.name))"))
+            actions.append(SKAction.run(action, onChildWithName: "//\(Slot.generateName(slotNewOrder.name))", inheritDuration: true))
         }
         
         applyNewOrders(&slotsData, slotsNewOrders)

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public extension Skeleton {
+extension Skeleton {
     
     public var atlases: [SKTextureAtlas]? {
         get {

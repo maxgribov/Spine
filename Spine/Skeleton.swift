@@ -102,3 +102,22 @@ public class Skeleton: SKNode {
     }
 }
 
+extension Skeleton: Defaultable {
+    
+    func dropToDefaults() {
+
+        for child in self[".//*"] {
+            
+            if child.hasActions() {
+                
+                child.removeAllActions()
+            }
+            
+            if let defaultableChild = child as? Defaultable {
+                
+                defaultableChild.dropToDefaults()
+            }
+        }
+    }
+}
+
