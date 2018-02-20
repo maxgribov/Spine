@@ -31,5 +31,5 @@ Unofficial Spine runtime.
 | - IK Constraint | + | - | - |
 | - Transform Constraint | + | - | - |
 | - Path Constraint | + | - | - |
-| **Events** | + | - | - |
+| **Events** | + | + | + |
 | **Draw Order** | + | + | + |
