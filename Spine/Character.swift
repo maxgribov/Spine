@@ -64,7 +64,7 @@ public class Character: SKNode {
     public init(_ model: SpineModel, atlasFolder: String?) {
 
         super.init()
-        self.addChild(Skeleton(model))
+        self.createBones(model.bones)
         self.createSlots(model)
         self.createSkins(model, folder: atlasFolder)
         self.createAnimations(model)
@@ -197,6 +197,27 @@ public class Character: SKNode {
     }
     
     //MARK: - Private Setup Helpers
+    
+    func createBones(_ models: [BoneModel]?)  {
+        
+        if let models = models {
+            
+            let bones: [Bone] = models.map { Bone($0) }
+            
+            for bone in bones {
+                
+                if let parentName = bone.model.parent,
+                    let parentNode = bones.first(where: { $0.name == Bone.generateName(parentName) }) {
+                    
+                    parentNode.addChild(bone)
+                    
+                } else {
+                    
+                    self.addChild(bone)
+                }
+            }
+        }
+    }
     
     func createSlots(_ model: SpineModel) {
 
