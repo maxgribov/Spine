@@ -23,6 +23,9 @@
 		773E8FF42024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */; };
 		773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF52024FE2D009E38BD /* EventModel.swift */; };
 		77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77404ED2201BD8E500E51CF5 /* SpineModel.swift */; };
+		77450355203C71AA00BED2D9 /* CGPathExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */; };
+		77450358203C745B00BED2D9 /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450357203C745B00BED2D9 /* ColorTests.swift */; };
+		7745035A203C76A500BED2D9 /* BoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450359203C76A500BED2D9 /* BoneTests.swift */; };
 		7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
 		775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
 		776656E3202B9D3A00750189 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
@@ -77,6 +80,9 @@
 		773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawOrderKeyframeModelTests.swift; sourceTree = "<group>"; };
 		773E8FF52024FE2D009E38BD /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		77404ED2201BD8E500E51CF5 /* SpineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModel.swift; sourceTree = "<group>"; };
+		77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPathExtensionTests.swift; sourceTree = "<group>"; };
+		77450357203C745B00BED2D9 /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
+		77450359203C76A500BED2D9 /* BoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneTests.swift; sourceTree = "<group>"; };
 		7755D4232020F14D005275DA /* SkinModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModelsTests.swift; sourceTree = "<group>"; };
 		775D969320336DCC00137B38 /* BezierCurveSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveSolver.swift; sourceTree = "<group>"; };
 		776656E2202B9D3A00750189 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
@@ -150,6 +156,22 @@
 				773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */,
 			);
 			path = AnimationKeyframesModelsTests;
+			sourceTree = "<group>";
+		};
+		77450353203C716200BED2D9 /* Extensions Tests */ = {
+			isa = PBXGroup;
+			children = (
+				77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */,
+			);
+			path = "Extensions Tests";
+			sourceTree = "<group>";
+		};
+		77450356203C742B00BED2D9 /* Utilites Tests */ = {
+			isa = PBXGroup;
+			children = (
+				77450357203C745B00BED2D9 /* ColorTests.swift */,
+			);
+			path = "Utilites Tests";
 			sourceTree = "<group>";
 		};
 		77869DEA2037888600404AC8 /* Protocols */ = {
@@ -249,7 +271,10 @@
 			children = (
 				779B7140202E4D060031DD4F /* AnimationTests.swift */,
 				77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */,
+				77450359203C76A500BED2D9 /* BoneTests.swift */,
 				779B7143202E4D390031DD4F /* Model Tests */,
+				77450356203C742B00BED2D9 /* Utilites Tests */,
+				77450353203C716200BED2D9 /* Extensions Tests */,
 				770640A12028F97A0031BD32 /* Resources */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
 			);
@@ -394,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77880A422024BB50004DC555 /* AnimationModelsTests.swift in Sources */,
+				7745035A203C76A500BED2D9 /* BoneTests.swift in Sources */,
 				773E8FE62024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift in Sources */,
 				779B7141202E4D060031DD4F /* AnimationTests.swift in Sources */,
 				773E8FF22024FAD9009E38BD /* EventKeyfarameModelTests.swift in Sources */,
@@ -404,6 +430,8 @@
 				77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */,
 				770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */,
 				776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */,
+				77450358203C745B00BED2D9 /* ColorTests.swift in Sources */,
+				77450355203C71AA00BED2D9 /* CGPathExtensionTests.swift in Sources */,
 				77E5A8C5202CDFC000ACDC0D /* SkinTests.swift in Sources */,
 				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
 				773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */,
