@@ -13,7 +13,7 @@ extension Skeleton {
     public var atlases: [SKTextureAtlas]? {
         get {
             
-            var atlasesMutable = [SKTextureAtlas]()
+            var atlasesMutable = Set<SKTextureAtlas>()
             
             guard let skins = skins else {
                 
@@ -31,12 +31,44 @@ extension Skeleton {
                     
                     if let atlas = skinAtlaces[atlasName] {
                         
-                        atlasesMutable.append(atlas)
+                        atlasesMutable.insert(atlas)
                     }
                 }
             }
             
-            return atlasesMutable
+            return Array(atlasesMutable)
+        }
+    }
+    
+    public func preloadTextureAtlases(withCompletionHandler completionHandler: @escaping (_ succeed: Bool) -> Swift.Void){
+        
+        guard let atlases = atlases else {
+            
+            completionHandler(false)
+            return
+        }
+        
+        SKTextureAtlas.preloadTextureAtlases(atlases) {
+            
+            completionHandler(true)
+        }
+    }
+    
+    public class func preloadTextureAtlases(_ skeletons: [Skeleton], withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
+        
+        var atlasesMutable = Set<SKTextureAtlas>()
+        
+        for skeleton in skeletons {
+            
+            if let atlases = skeleton.atlases {
+                
+                atlasesMutable = atlasesMutable.union(atlases)
+            }
+        }
+        
+        SKTextureAtlas.preloadTextureAtlases(Array(atlasesMutable)) {
+            
+            completionHandler()
         }
     }
 }
