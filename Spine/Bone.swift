@@ -10,7 +10,7 @@ import SpriteKit
 
 class Bone: SKSpriteNode, Prefixable, Defaultable {
     
-    public static let prefix = "bone:"
+    static let prefix = "bone:"
     let model: BoneModel
 
     init(_ model: BoneModel) {

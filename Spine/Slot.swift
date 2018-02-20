@@ -10,7 +10,7 @@ import SpriteKit
 
 class Slot: SKNode, Prefixable, Defaultable {
     
-    public static let prefix = "slot:"
+    static let prefix = "slot:"
     let model: SlotModel
     let initialOrder: Int
     
