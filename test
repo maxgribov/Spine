@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e # exit on failure
-
-xcodebuild test
--scheme Spine
--destination "platform=iOS Simulator,name=iPhone 6,OS=11.1"
