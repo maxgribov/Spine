@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)
+
 # Spine
 Unofficial Spine runtime.
 
