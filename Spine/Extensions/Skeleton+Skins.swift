@@ -10,6 +10,15 @@ import SpriteKit
 
 extension Skeleton {
     
+    /**
+     Applies a skin with a specific name if possible. Attachments that belong to the 'default' skin will be added to the slots anyway.
+     
+     See more information about skins:
+     http://esotericsoftware.com/spine-skins
+     
+     - parameter named: The name of the skin you want to apply.
+     If a skin with that name is not found or skipped it will be added only attachments for the 'default' skin.
+     */
     public func applySkin(named: String? = nil) {
         
         var skinsNames: Set = ["default"]
@@ -59,9 +68,7 @@ extension Skeleton {
                         }
                     }
                 }
-                
-                //TODO: if debug mode add bounding boxes as childs to slot
-                
+
                 if boundingBoxes.count > 1 {
                     
                     let physicBodies = boundingBoxes.flatMap({ $0.physicsBody })

@@ -12,13 +12,14 @@ extension Skeleton {
     
     /**
      Representation of Spine's *Point Attachments*
-     
-     [Spine Point Attachments]:http://esotericsoftware.com/spine-point-attachments
-     
+
      Not all point attachments in the slot can be active.
      This property returns **all points** attached to all slots regardless of whether they are currently active or not.
      
      Each point attachment represented with 'SKNode` class.
+     
+     See more information about point attachments:
+     http://esotericsoftware.com/spine-point-attachments
      */
     public var points: [SKNode]? {
         get {
@@ -45,13 +46,14 @@ extension Skeleton {
     
     /**
      Representation of Spine's *Point Attachments*
-     
-     [Spine Point Attachments]:http://esotericsoftware.com/spine-point-attachments
-     
+
      Not all point attachments in the slot can be active.
      This property returns **only active** points attached to all slots.
      
      Each point attachment represented with 'SKNode` class.
+     
+     See more information about point attachments:
+     http://esotericsoftware.com/spine-point-attachments
      */
     public var activePoints: [SKNode]? {
         get {

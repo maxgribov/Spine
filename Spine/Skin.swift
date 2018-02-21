@@ -13,7 +13,7 @@ class Skin {
     let model: SkinModel
     let atlases: [String : SKTextureAtlas]?
     
-    init(_ model: SkinModel, _ folder: String?) {
+    init(_ model: SkinModel, atlas folder: String?) {
         
         self.model = model
         

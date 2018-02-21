@@ -210,13 +210,13 @@
 		77869DEE20386A5A00404AC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */,
 				7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */,
 				7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */,
 				7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */,
 				770D466A203CADC60046092C /* Skeleton+Skins.swift */,
-				774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */,
 				774D0C91203D95A200EC5156 /* Skeleton+Points.swift */,
+				774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */,
+				77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */,
 				770D466C203CC6BE0046092C /* SKAction+Spine.swift */,
 			);
 			path = Extensions;

@@ -10,9 +10,25 @@ import SpriteKit
 
 public class Skeleton: SKNode {
     
+    /**
+     Cloasure that is called each time an event animation is triggered.
+     The events represented by the 'EventModel' model
+     
+     See more information about events:
+     http://esotericsoftware.com/spine-events
+     */
     public var eventTriggered: ((EventModel) ->())?
 
-    public init(_ model: SpineModel, atlas folder: String?) {
+    /**
+     Creates a skeleton node with an 'SpineModel' and *optional* atlas folder name.
+     
+     See more information about Spine:
+     http://esotericsoftware.com/spine-basic-concepts
+     
+     - parameter model: the skeleton model.
+     - parameter folder: name of the folder with image atlases. *optional*
+     */
+    public init(_ model: SpineModel, atlas folder: String? = nil) {
 
         super.init()
         self.createBones(model)
@@ -21,7 +37,19 @@ public class Skeleton: SKNode {
         self.createAnimations(model)
     }
     
-    public convenience init?(fromJSON name: String, atlas folder: String?, skin: String? = nil) {
+    /**
+     Сreates a skeleton node based on the json file stored in the bundle application.
+     
+     The initializer may fail, so returning value *optional*
+     
+     See more information about Spine:
+     http://esotericsoftware.com/spine-basic-concepts
+     
+     - parameter name: Spine JSON file name.
+     - parameter folder: name of the folder with image atlases. *optional*
+     - parameter skin: the name of the skin that you want to apply to 'Skeleton'. *optional*
+     */
+    public convenience init?(fromJSON name: String, atlas folder: String? = nil, skin: String? = nil) {
         
         guard let url = Bundle.main.url(forResource: name, withExtension: "json"),
               let json = try? Data(contentsOf: url),
@@ -89,7 +117,7 @@ public class Skeleton: SKNode {
         
         self.skins = model.skins?.map({ (skinModel) -> Skin in
             
-            return Skin(skinModel, folder)
+            return Skin(skinModel, atlas: folder)
         })
     }
     

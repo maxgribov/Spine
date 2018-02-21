@@ -10,6 +10,10 @@ import SpriteKit
 
 extension Skeleton {
     
+    /**
+     A list of all texture atlases for all of the `Slots` of the `Skeleton`.
+     Each atlas is represented only once.
+     */
     public var atlases: [SKTextureAtlas]? {
         get {
             
@@ -40,6 +44,12 @@ extension Skeleton {
         }
     }
     
+    /**
+     Preloads all the atlases for the 'Skeleton' and invokes the callback
+     
+     - parameter completionHandler: the closure that is called when the preload is complete.
+     - parameter succeed: preload operation completion flag
+     */
     public func preloadTextureAtlases(withCompletionHandler completionHandler: @escaping (_ succeed: Bool) -> Swift.Void){
         
         guard let atlases = atlases else {
@@ -54,6 +64,12 @@ extension Skeleton {
         }
     }
     
+    /**
+     Preloads all the atlases for the `Skeletons` in list and invokes the callback
+     
+     - parameter skeletons: list of skeletons whose atlases will be preloaded.
+     - parameter completionHandler: the closure that is called when the preload is complete.
+     */
     public class func preloadTextureAtlases(_ skeletons: [Skeleton], withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
         
         var atlasesMutable = Set<SKTextureAtlas>()
