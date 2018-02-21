@@ -2,4 +2,4 @@
 osx_image: xcode9.2
 language: swift
 script:
-  - xcodebuild -scheme Spine -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=11.2' build test
+  - xcodebuild -scheme Spine -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=8.0' build test
