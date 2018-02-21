@@ -124,6 +124,7 @@ class PointAttachment: SKShapeNode, Attachment {
         
         self.concreteModel = model
         super.init()
+        self.name = PointAttachment.generateName(model.name)
         let circleRadius: CGFloat = 5.0
         let curcleRect = CGRect(x: -circleRadius, y: -circleRadius, width: circleRadius * 2, height: circleRadius * 2)
         self.path = CGPath(ellipseIn: curcleRect, transform: nil)
