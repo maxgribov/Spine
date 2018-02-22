@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77689EFB203EEB10002E0FDB"
-               BuildableName = "Spine_watchOS.framework"
+               BuildableName = "Spine.framework"
                BlueprintName = "Spine-watchOS"
                ReferencedContainer = "container:Spine.xcodeproj">
             </BuildableReference>
@@ -48,7 +48,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689EFB203EEB10002E0FDB"
-            BuildableName = "Spine_watchOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-watchOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689EFB203EEB10002E0FDB"
-            BuildableName = "Spine_watchOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-watchOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
