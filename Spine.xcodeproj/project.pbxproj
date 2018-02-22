@@ -140,6 +140,31 @@
 		77689EE7203EE9E5002E0FDB /* CGPathExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */; };
 		77689EE8203EE9E5002E0FDB /* Skeleton+PointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */; };
 		77689EE9203EE9E9002E0FDB /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
+		77689F00203EEB10002E0FDB /* Spine_watchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 77689EFE203EEB10002E0FDB /* Spine_watchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77689F04203EEB64002E0FDB /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Skeleton.swift */; };
+		77689F05203EEB64002E0FDB /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
+		77689F06203EEB64002E0FDB /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E05F39202B8530003AFD42 /* Slot.swift */; };
+		77689F07203EEB64002E0FDB /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E6202BADBB00750189 /* Skin.swift */; };
+		77689F08203EEB64002E0FDB /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
+		77689F09203EEB64002E0FDB /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
+		77689F0A203EEB68002E0FDB /* SpineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77404ED2201BD8E500E51CF5 /* SpineModel.swift */; };
+		77689F0B203EEB68002E0FDB /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
+		77689F0C203EEB68002E0FDB /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
+		77689F0D203EEB68002E0FDB /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
+		77689F0E203EEB68002E0FDB /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF52024FE2D009E38BD /* EventModel.swift */; };
+		77689F0F203EEB68002E0FDB /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
+		77689F10203EEB6C002E0FDB /* Prefixable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */; };
+		77689F11203EEB6C002E0FDB /* Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F75104203760050065AECE /* Defaultable.swift */; };
+		77689F12203EEB6F002E0FDB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DE82037856F00404AC8 /* Color.swift */; };
+		77689F13203EEB6F002E0FDB /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
+		77689F14203EEB73002E0FDB /* Skeleton+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */; };
+		77689F15203EEB73002E0FDB /* Skeleton+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */; };
+		77689F16203EEB73002E0FDB /* Skeleton+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */; };
+		77689F17203EEB73002E0FDB /* Skeleton+Skins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466A203CADC60046092C /* Skeleton+Skins.swift */; };
+		77689F18203EEB73002E0FDB /* Skeleton+Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C91203D95A200EC5156 /* Skeleton+Points.swift */; };
+		77689F19203EEB73002E0FDB /* Skeleton+Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */; };
+		77689F1A203EEB73002E0FDB /* CGPath+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */; };
+		77689F1B203EEB73002E0FDB /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
 		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
 		77869DE92037856F00404AC8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DE82037856F00404AC8 /* Color.swift */; };
 		77869DF020386A8D00404AC8 /* CGPath+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */; };
@@ -228,6 +253,9 @@
 		77689EA5203EE993002E0FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77689EAA203EE994002E0FDB /* Spine-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spine-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77689EB1203EE994002E0FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77689EFC203EEB10002E0FDB /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77689EFE203EEB10002E0FDB /* Spine_watchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine_watchOS.h; sourceTree = "<group>"; };
+		77689EFF203EEB10002E0FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
 		77869DE82037856F00404AC8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Spine.swift"; sourceTree = "<group>"; };
@@ -281,6 +309,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				77689EAB203EE994002E0FDB /* Spine.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689EF8203EEB10002E0FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +414,15 @@
 			path = "Spine-tvOSTests";
 			sourceTree = "<group>";
 		};
+		77689EFD203EEB10002E0FDB /* Spine-watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				77689EFE203EEB10002E0FDB /* Spine_watchOS.h */,
+				77689EFF203EEB10002E0FDB /* Info.plist */,
+			);
+			path = "Spine-watchOS";
+			sourceTree = "<group>";
+		};
 		77869DEA2037888600404AC8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,6 +493,7 @@
 				77689E5F203EE2A3002E0FDB /* Spine-macOSTests */,
 				77689EA3203EE993002E0FDB /* Spine-tvOS */,
 				77689EAE203EE994002E0FDB /* Spine-tvOSTests */,
+				77689EFD203EEB10002E0FDB /* Spine-watchOS */,
 				77F1D5EA201A490400AF499B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -462,6 +507,7 @@
 				77689E5B203EE2A3002E0FDB /* Spine-macOSTests.xctest */,
 				77689EA2203EE993002E0FDB /* Spine.framework */,
 				77689EAA203EE994002E0FDB /* Spine-tvOSTests.xctest */,
+				77689EFC203EEB10002E0FDB /* Spine.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -516,6 +562,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				77689EB2203EE994002E0FDB /* Spine_tvOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689EF9203EEB10002E0FDB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689F00203EEB10002E0FDB /* Spine_watchOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +656,24 @@
 			productReference = 77689EAA203EE994002E0FDB /* Spine-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		77689EFB203EEB10002E0FDB /* Spine-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77689F03203EEB10002E0FDB /* Build configuration list for PBXNativeTarget "Spine-watchOS" */;
+			buildPhases = (
+				77689EF7203EEB10002E0FDB /* Sources */,
+				77689EF8203EEB10002E0FDB /* Frameworks */,
+				77689EF9203EEB10002E0FDB /* Headers */,
+				77689EFA203EEB10002E0FDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Spine-watchOS";
+			productName = "Spine-watchOS";
+			productReference = 77689EFC203EEB10002E0FDB /* Spine.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		77F1D5E8201A490400AF499B /* Spine-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77F1D5FD201A490400AF499B /* Build configuration list for PBXNativeTarget "Spine-iOS" */;
@@ -664,6 +736,10 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
+					77689EFB203EEB10002E0FDB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+					};
 					77F1D5E8201A490400AF499B = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
@@ -693,6 +769,7 @@
 				77689E5A203EE2A3002E0FDB /* Spine-macOSTests */,
 				77689EA1203EE993002E0FDB /* Spine-tvOS */,
 				77689EA9203EE994002E0FDB /* Spine-tvOSTests */,
+				77689EFB203EEB10002E0FDB /* Spine-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -725,6 +802,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				77689EE9203EE9E9002E0FDB /* spineboy-pro.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689EFA203EEB10002E0FDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,6 +951,37 @@
 				77689ED1203EE9D1002E0FDB /* AnimationTests.swift in Sources */,
 				77689ED4203EE9D7002E0FDB /* SpineModelTests.swift in Sources */,
 				77689EE8203EE9E5002E0FDB /* Skeleton+PointsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689EF7203EEB10002E0FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689F18203EEB73002E0FDB /* Skeleton+Points.swift in Sources */,
+				77689F14203EEB73002E0FDB /* Skeleton+Atlases.swift in Sources */,
+				77689F0F203EEB68002E0FDB /* AnimationModels.swift in Sources */,
+				77689F16203EEB73002E0FDB /* Skeleton+Animations.swift in Sources */,
+				77689F04203EEB64002E0FDB /* Skeleton.swift in Sources */,
+				77689F06203EEB64002E0FDB /* Slot.swift in Sources */,
+				77689F19203EEB73002E0FDB /* Skeleton+Defaultable.swift in Sources */,
+				77689F13203EEB6F002E0FDB /* BezierCurveSolver.swift in Sources */,
+				77689F0A203EEB68002E0FDB /* SpineModel.swift in Sources */,
+				77689F07203EEB64002E0FDB /* Skin.swift in Sources */,
+				77689F0B203EEB68002E0FDB /* SkeletonModel.swift in Sources */,
+				77689F10203EEB6C002E0FDB /* Prefixable.swift in Sources */,
+				77689F11203EEB6C002E0FDB /* Defaultable.swift in Sources */,
+				77689F1B203EEB73002E0FDB /* SKAction+Spine.swift in Sources */,
+				77689F12203EEB6F002E0FDB /* Color.swift in Sources */,
+				77689F0C203EEB68002E0FDB /* ConstraintsModels.swift in Sources */,
+				77689F1A203EEB73002E0FDB /* CGPath+Spine.swift in Sources */,
+				77689F0D203EEB68002E0FDB /* SkinModels.swift in Sources */,
+				77689F0E203EEB68002E0FDB /* EventModel.swift in Sources */,
+				77689F17203EEB73002E0FDB /* Skeleton+Skins.swift in Sources */,
+				77689F05203EEB64002E0FDB /* Bone.swift in Sources */,
+				77689F09203EEB64002E0FDB /* Animation.swift in Sources */,
+				77689F15203EEB73002E0FDB /* Skeleton+Physics.swift in Sources */,
+				77689F08203EEB64002E0FDB /* Attachment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,6 +1238,56 @@
 			};
 			name = Release;
 		};
+		77689F01203EEB10002E0FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Spine-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.maxgribov.Spine-watchOS";
+				PRODUCT_NAME = Spine;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		77689F02203EEB10002E0FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Spine-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.maxgribov.Spine-watchOS";
+				PRODUCT_NAME = Spine;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
 		77F1D5FB201A490400AF499B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1354,6 +1519,15 @@
 			buildConfigurations = (
 				77689EB7203EE994002E0FDB /* Debug */,
 				77689EB8203EE994002E0FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77689F03203EEB10002E0FDB /* Build configuration list for PBXNativeTarget "Spine-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77689F01203EEB10002E0FDB /* Debug */,
+				77689F02203EEB10002E0FDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
