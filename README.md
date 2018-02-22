@@ -3,7 +3,19 @@
 # Spine
 Unofficial Spine runtime.
 
-#### Implemented Features
+## Installing
+
+### CocoaPods
+Add the pod to your podfile
+```
+pod 'Spine'
+```
+run
+```
+pod install
+```
+## Implemented Features
+
 | Name | Model | Feature | Animation |
 | --- | :---: | :---: | :---: |
 | **Bones** |  |  |  |
@@ -35,3 +47,13 @@ Unofficial Spine runtime.
 | - Path Constraint | + | - | - |
 | **Events** | + | + | + |
 | **Draw Order** | + | + | + |
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Spine user guide: http://esotericsoftware.com/spine-user-guide
+* Spine JSON format documentation: http://esotericsoftware.com/spine-json-format
