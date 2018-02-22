@@ -48,6 +48,13 @@ pod install
 | **Events** | + | + | + |
 | **Draw Order** | + | + | + |
 
+## System Requirements
+
+**Swift 4.0**
+* iOS 8.0+
+* macOS 10.10+
+* tvOS 9.0+
+* watchOS 3.0+
 
 ## License
 
