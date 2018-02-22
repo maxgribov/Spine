@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77689EA1203EE993002E0FDB"
-               BuildableName = "Spine_tvOS.framework"
+               BuildableName = "Spine.framework"
                BlueprintName = "Spine-tvOS"
                ReferencedContainer = "container:Spine.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689EA1203EE993002E0FDB"
-            BuildableName = "Spine_tvOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-tvOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689EA1203EE993002E0FDB"
-            BuildableName = "Spine_tvOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-tvOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689EA1203EE993002E0FDB"
-            BuildableName = "Spine_tvOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-tvOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
