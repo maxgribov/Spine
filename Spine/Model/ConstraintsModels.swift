@@ -6,7 +6,7 @@
 //  Copyright © 2018 Max Gribov. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
 
 ///This section describes the IK constraints
 struct IKConstraintModel {

@@ -38,6 +38,57 @@
 		775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
 		776656E3202B9D3A00750189 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
 		776656E7202BADBB00750189 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E6202BADBB00750189 /* Skin.swift */; };
+		77689E5C203EE2A3002E0FDB /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77689E53203EE2A3002E0FDB /* Spine.framework */; };
+		77689E63203EE2A3002E0FDB /* Spine_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 77689E55203EE2A3002E0FDB /* Spine_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77689E6B203EE2C5002E0FDB /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Skeleton.swift */; };
+		77689E6C203EE2C8002E0FDB /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
+		77689E6D203EE2D2002E0FDB /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E05F39202B8530003AFD42 /* Slot.swift */; };
+		77689E6E203EE2D5002E0FDB /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E6202BADBB00750189 /* Skin.swift */; };
+		77689E6F203EE2D8002E0FDB /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
+		77689E70203EE2DB002E0FDB /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
+		77689E71203EE2E0002E0FDB /* SpineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77404ED2201BD8E500E51CF5 /* SpineModel.swift */; };
+		77689E72203EE2E0002E0FDB /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
+		77689E73203EE2E0002E0FDB /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
+		77689E74203EE2E0002E0FDB /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
+		77689E75203EE2E0002E0FDB /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF52024FE2D009E38BD /* EventModel.swift */; };
+		77689E76203EE2E0002E0FDB /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
+		77689E77203EE2EA002E0FDB /* Prefixable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */; };
+		77689E78203EE2EA002E0FDB /* Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F75104203760050065AECE /* Defaultable.swift */; };
+		77689E79203EE2EF002E0FDB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DE82037856F00404AC8 /* Color.swift */; };
+		77689E7A203EE2EF002E0FDB /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
+		77689E7B203EE2FA002E0FDB /* Skeleton+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */; };
+		77689E7C203EE2FA002E0FDB /* Skeleton+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */; };
+		77689E7D203EE2FA002E0FDB /* Skeleton+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */; };
+		77689E7E203EE2FA002E0FDB /* Skeleton+Skins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466A203CADC60046092C /* Skeleton+Skins.swift */; };
+		77689E7F203EE2FA002E0FDB /* Skeleton+Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C91203D95A200EC5156 /* Skeleton+Points.swift */; };
+		77689E80203EE2FA002E0FDB /* Skeleton+Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */; };
+		77689E81203EE2FA002E0FDB /* CGPath+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */; };
+		77689E82203EE2FA002E0FDB /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
+		77689E83203EE307002E0FDB /* AnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B7140202E4D060031DD4F /* AnimationTests.swift */; };
+		77689E84203EE307002E0FDB /* SkinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */; };
+		77689E85203EE307002E0FDB /* BoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450359203C76A500BED2D9 /* BoneTests.swift */; };
+		77689E86203EE30E002E0FDB /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
+		77689E87203EE30E002E0FDB /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
+		77689E88203EE30E002E0FDB /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
+		77689E89203EE30E002E0FDB /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
+		77689E8A203EE30E002E0FDB /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
+		77689E8B203EE30E002E0FDB /* AnimationModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77880A412024BB50004DC555 /* AnimationModelsTests.swift */; };
+		77689E8C203EE30E002E0FDB /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
+		77689E8D203EE314002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
+		77689E8E203EE314002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
+		77689E8F203EE314002E0FDB /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
+		77689E90203EE314002E0FDB /* BoneKeyframeShearModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE32024F1F4009E38BD /* BoneKeyframeShearModelTests.swift */; };
+		77689E91203EE314002E0FDB /* SlotKeyframeAttachmentModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE52024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift */; };
+		77689E92203EE314002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE72024F545009E38BD /* SlotKeyframeColorModelTests.swift */; };
+		77689E93203EE314002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE92024F707009E38BD /* IKConstraintKeyframeModelTests.swift */; };
+		77689E94203EE314002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FED2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift */; };
+		77689E95203EE314002E0FDB /* DeformKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FEF2024F9B2009E38BD /* DeformKeyframeModelTests.swift */; };
+		77689E96203EE314002E0FDB /* EventKeyfarameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF12024FAD8009E38BD /* EventKeyfarameModelTests.swift */; };
+		77689E98203EE31D002E0FDB /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450357203C745B00BED2D9 /* ColorTests.swift */; };
+		77689E99203EE323002E0FDB /* CGPathExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */; };
+		77689E9A203EE323002E0FDB /* Skeleton+PointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */; };
+		77689E9B203EE328002E0FDB /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
+		77689E9C203EE625002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */; };
 		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
 		77869DE92037856F00404AC8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DE82037856F00404AC8 /* Color.swift */; };
 		77869DF020386A8D00404AC8 /* CGPath+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */; };
@@ -61,6 +112,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		77689E5D203EE2A3002E0FDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77F1D5E0201A490400AF499B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77689E52203EE2A3002E0FDB;
+			remoteInfo = "Spine-macOS";
+		};
 		77F1D5F4201A490400AF499B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 77F1D5E0201A490400AF499B /* Project object */;
@@ -102,6 +160,11 @@
 		775D969320336DCC00137B38 /* BezierCurveSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveSolver.swift; sourceTree = "<group>"; };
 		776656E2202B9D3A00750189 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		776656E6202BADBB00750189 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
+		77689E53203EE2A3002E0FDB /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77689E55203EE2A3002E0FDB /* Spine_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine_macOS.h; sourceTree = "<group>"; };
+		77689E56203EE2A3002E0FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77689E5B203EE2A3002E0FDB /* Spine-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spine-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77689E62203EE2A3002E0FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
 		77869DE82037856F00404AC8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Spine.swift"; sourceTree = "<group>"; };
@@ -122,12 +185,27 @@
 		77F1D5E9201A490400AF499B /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5EC201A490400AF499B /* Spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine.h; sourceTree = "<group>"; };
 		77F1D5ED201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		77F1D5F2201A490400AF499B /* SpineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F1D5F2201A490400AF499B /* SpineTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SpineTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5F9201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77F75104203760050065AECE /* Defaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaultable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		77689E4F203EE2A3002E0FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689E58203EE2A3002E0FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689E5C203EE2A3002E0FDB /* Spine.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77F1D5E5201A490400AF499B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,6 +265,23 @@
 				77450357203C745B00BED2D9 /* ColorTests.swift */,
 			);
 			path = "Utilites Tests";
+			sourceTree = "<group>";
+		};
+		77689E54203EE2A3002E0FDB /* Spine-macOS */ = {
+			isa = PBXGroup;
+			children = (
+				77689E55203EE2A3002E0FDB /* Spine_macOS.h */,
+				77689E56203EE2A3002E0FDB /* Info.plist */,
+			);
+			path = "Spine-macOS";
+			sourceTree = "<group>";
+		};
+		77689E5F203EE2A3002E0FDB /* Spine-macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				77689E62203EE2A3002E0FDB /* Info.plist */,
+			);
+			path = "Spine-macOSTests";
 			sourceTree = "<group>";
 		};
 		77869DEA2037888600404AC8 /* Protocols */ = {
@@ -255,6 +350,8 @@
 			children = (
 				77F1D5EB201A490400AF499B /* Spine */,
 				77F1D5F6201A490400AF499B /* SpineTests */,
+				77689E54203EE2A3002E0FDB /* Spine-macOS */,
+				77689E5F203EE2A3002E0FDB /* Spine-macOSTests */,
 				77F1D5EA201A490400AF499B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -263,7 +360,9 @@
 			isa = PBXGroup;
 			children = (
 				77F1D5E9201A490400AF499B /* Spine.framework */,
-				77F1D5F2201A490400AF499B /* SpineTests.xctest */,
+				77F1D5F2201A490400AF499B /* SpineTests-iOS.xctest */,
+				77689E53203EE2A3002E0FDB /* Spine.framework */,
+				77689E5B203EE2A3002E0FDB /* Spine-macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -305,6 +404,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		77689E50203EE2A3002E0FDB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689E63203EE2A3002E0FDB /* Spine_macOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77F1D5E6201A490400AF499B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -316,9 +423,45 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		77F1D5E8201A490400AF499B /* Spine */ = {
+		77689E52203EE2A3002E0FDB /* Spine-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 77F1D5FD201A490400AF499B /* Build configuration list for PBXNativeTarget "Spine" */;
+			buildConfigurationList = 77689E64203EE2A3002E0FDB /* Build configuration list for PBXNativeTarget "Spine-macOS" */;
+			buildPhases = (
+				77689E4E203EE2A3002E0FDB /* Sources */,
+				77689E4F203EE2A3002E0FDB /* Frameworks */,
+				77689E50203EE2A3002E0FDB /* Headers */,
+				77689E51203EE2A3002E0FDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Spine-macOS";
+			productName = "Spine-macOS";
+			productReference = 77689E53203EE2A3002E0FDB /* Spine.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		77689E5A203EE2A3002E0FDB /* Spine-macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77689E67203EE2A3002E0FDB /* Build configuration list for PBXNativeTarget "Spine-macOSTests" */;
+			buildPhases = (
+				77689E57203EE2A3002E0FDB /* Sources */,
+				77689E58203EE2A3002E0FDB /* Frameworks */,
+				77689E59203EE2A3002E0FDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				77689E5E203EE2A3002E0FDB /* PBXTargetDependency */,
+			);
+			name = "Spine-macOSTests";
+			productName = "Spine-macOSTests";
+			productReference = 77689E5B203EE2A3002E0FDB /* Spine-macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		77F1D5E8201A490400AF499B /* Spine-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77F1D5FD201A490400AF499B /* Build configuration list for PBXNativeTarget "Spine-iOS" */;
 			buildPhases = (
 				77F1D5E4201A490400AF499B /* Sources */,
 				77F1D5E5201A490400AF499B /* Frameworks */,
@@ -329,14 +472,14 @@
 			);
 			dependencies = (
 			);
-			name = Spine;
+			name = "Spine-iOS";
 			productName = Spine;
 			productReference = 77F1D5E9201A490400AF499B /* Spine.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		77F1D5F1201A490400AF499B /* SpineTests */ = {
+		77F1D5F1201A490400AF499B /* SpineTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 77F1D600201A490400AF499B /* Build configuration list for PBXNativeTarget "SpineTests" */;
+			buildConfigurationList = 77F1D600201A490400AF499B /* Build configuration list for PBXNativeTarget "SpineTests-iOS" */;
 			buildPhases = (
 				77F1D5EE201A490400AF499B /* Sources */,
 				77F1D5EF201A490400AF499B /* Frameworks */,
@@ -347,9 +490,9 @@
 			dependencies = (
 				77F1D5F5201A490400AF499B /* PBXTargetDependency */,
 			);
-			name = SpineTests;
+			name = "SpineTests-iOS";
 			productName = SpineTests;
-			productReference = 77F1D5F2201A490400AF499B /* SpineTests.xctest */;
+			productReference = 77F1D5F2201A490400AF499B /* SpineTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -362,10 +505,18 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Max Gribov";
 				TargetAttributes = {
+					77689E52203EE2A3002E0FDB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					77689E5A203EE2A3002E0FDB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					77F1D5E8201A490400AF499B = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					77F1D5F1201A490400AF499B = {
 						CreatedOnToolsVersion = 9.2;
@@ -385,13 +536,30 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				77F1D5E8201A490400AF499B /* Spine */,
-				77F1D5F1201A490400AF499B /* SpineTests */,
+				77F1D5E8201A490400AF499B /* Spine-iOS */,
+				77F1D5F1201A490400AF499B /* SpineTests-iOS */,
+				77689E52203EE2A3002E0FDB /* Spine-macOS */,
+				77689E5A203EE2A3002E0FDB /* Spine-macOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		77689E51203EE2A3002E0FDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689E59203EE2A3002E0FDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689E9B203EE328002E0FDB /* spineboy-pro.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77F1D5E7201A490400AF499B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -410,6 +578,68 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		77689E4E203EE2A3002E0FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689E7F203EE2FA002E0FDB /* Skeleton+Points.swift in Sources */,
+				77689E7B203EE2FA002E0FDB /* Skeleton+Atlases.swift in Sources */,
+				77689E76203EE2E0002E0FDB /* AnimationModels.swift in Sources */,
+				77689E7D203EE2FA002E0FDB /* Skeleton+Animations.swift in Sources */,
+				77689E6B203EE2C5002E0FDB /* Skeleton.swift in Sources */,
+				77689E6D203EE2D2002E0FDB /* Slot.swift in Sources */,
+				77689E80203EE2FA002E0FDB /* Skeleton+Defaultable.swift in Sources */,
+				77689E7A203EE2EF002E0FDB /* BezierCurveSolver.swift in Sources */,
+				77689E71203EE2E0002E0FDB /* SpineModel.swift in Sources */,
+				77689E6E203EE2D5002E0FDB /* Skin.swift in Sources */,
+				77689E72203EE2E0002E0FDB /* SkeletonModel.swift in Sources */,
+				77689E77203EE2EA002E0FDB /* Prefixable.swift in Sources */,
+				77689E78203EE2EA002E0FDB /* Defaultable.swift in Sources */,
+				77689E82203EE2FA002E0FDB /* SKAction+Spine.swift in Sources */,
+				77689E79203EE2EF002E0FDB /* Color.swift in Sources */,
+				77689E73203EE2E0002E0FDB /* ConstraintsModels.swift in Sources */,
+				77689E81203EE2FA002E0FDB /* CGPath+Spine.swift in Sources */,
+				77689E74203EE2E0002E0FDB /* SkinModels.swift in Sources */,
+				77689E75203EE2E0002E0FDB /* EventModel.swift in Sources */,
+				77689E7E203EE2FA002E0FDB /* Skeleton+Skins.swift in Sources */,
+				77689E6C203EE2C8002E0FDB /* Bone.swift in Sources */,
+				77689E70203EE2DB002E0FDB /* Animation.swift in Sources */,
+				77689E7C203EE2FA002E0FDB /* Skeleton+Physics.swift in Sources */,
+				77689E6F203EE2D8002E0FDB /* Attachment.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77689E57203EE2A3002E0FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77689E90203EE314002E0FDB /* BoneKeyframeShearModelTests.swift in Sources */,
+				77689E8A203EE30E002E0FDB /* EventModelTests.swift in Sources */,
+				77689E98203EE31D002E0FDB /* ColorTests.swift in Sources */,
+				77689E95203EE314002E0FDB /* DeformKeyframeModelTests.swift in Sources */,
+				77689E87203EE30E002E0FDB /* SkeletonModelTests.swift in Sources */,
+				77689E88203EE30E002E0FDB /* ConstraintsModelsTests.swift in Sources */,
+				77689E91203EE314002E0FDB /* SlotKeyframeAttachmentModelTests.swift in Sources */,
+				77689E84203EE307002E0FDB /* SkinTests.swift in Sources */,
+				77689E8C203EE30E002E0FDB /* ColorModelTets.swift in Sources */,
+				77689E85203EE307002E0FDB /* BoneTests.swift in Sources */,
+				77689E8F203EE314002E0FDB /* BoneKeyframeScaleModelTests.swift in Sources */,
+				77689E89203EE30E002E0FDB /* SkinModelsTests.swift in Sources */,
+				77689E8B203EE30E002E0FDB /* AnimationModelsTests.swift in Sources */,
+				77689E8D203EE314002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */,
+				77689E8E203EE314002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */,
+				77689E94203EE314002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */,
+				77689E92203EE314002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */,
+				77689E96203EE314002E0FDB /* EventKeyfarameModelTests.swift in Sources */,
+				77689E9C203EE625002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */,
+				77689E93203EE314002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */,
+				77689E99203EE323002E0FDB /* CGPathExtensionTests.swift in Sources */,
+				77689E83203EE307002E0FDB /* AnimationTests.swift in Sources */,
+				77689E86203EE30E002E0FDB /* SpineModelTests.swift in Sources */,
+				77689E9A203EE323002E0FDB /* Skeleton+PointsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77F1D5E4201A490400AF499B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,14 +705,107 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		77689E5E203EE2A3002E0FDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77689E52203EE2A3002E0FDB /* Spine-macOS */;
+			targetProxy = 77689E5D203EE2A3002E0FDB /* PBXContainerItemProxy */;
+		};
 		77F1D5F5201A490400AF499B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 77F1D5E8201A490400AF499B /* Spine */;
+			target = 77F1D5E8201A490400AF499B /* Spine-iOS */;
 			targetProxy = 77F1D5F4201A490400AF499B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		77689E65203EE2A3002E0FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 29E66XW7ZX;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Spine-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.maxgribov.Spine-macOS";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Spine;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		77689E66203EE2A3002E0FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 29E66XW7ZX;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Spine-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.maxgribov.Spine-macOS";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Spine;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		77689E68203EE2A3002E0FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 29E66XW7ZX;
+				INFOPLIST_FILE = "Spine-macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.maxgribov.Spine-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		77689E69203EE2A3002E0FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 29E66XW7ZX;
+				INFOPLIST_FILE = "Spine-macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "pro.maxgribov.Spine-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		77F1D5FB201A490400AF499B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -599,20 +922,23 @@
 		77F1D5FE201A490400AF499B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 29E66XW7ZX;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Spine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pro.maxgribov.Spine;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Spine;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -623,20 +949,23 @@
 		77F1D5FF201A490400AF499B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 29E66XW7ZX;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Spine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pro.maxgribov.Spine;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Spine;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -676,6 +1005,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		77689E64203EE2A3002E0FDB /* Build configuration list for PBXNativeTarget "Spine-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77689E65203EE2A3002E0FDB /* Debug */,
+				77689E66203EE2A3002E0FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77689E67203EE2A3002E0FDB /* Build configuration list for PBXNativeTarget "Spine-macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77689E68203EE2A3002E0FDB /* Debug */,
+				77689E69203EE2A3002E0FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		77F1D5E3201A490400AF499B /* Build configuration list for PBXProject "Spine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -685,7 +1032,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		77F1D5FD201A490400AF499B /* Build configuration list for PBXNativeTarget "Spine" */ = {
+		77F1D5FD201A490400AF499B /* Build configuration list for PBXNativeTarget "Spine-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77F1D5FE201A490400AF499B /* Debug */,
@@ -694,7 +1041,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		77F1D600201A490400AF499B /* Build configuration list for PBXNativeTarget "SpineTests" */ = {
+		77F1D600201A490400AF499B /* Build configuration list for PBXNativeTarget "SpineTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77F1D601201A490400AF499B /* Debug */,

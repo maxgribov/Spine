@@ -6,7 +6,7 @@
 //  Copyright © 2018 Max Gribov. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
 
 let degreeToRadiansFactor: CGFloat = CGFloat.pi / 180.0
 
