@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Spine-tvOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Spine.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>77689E5A203EE2A3002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77689EA1203EE993002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77689EA9203EE994002E0FDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

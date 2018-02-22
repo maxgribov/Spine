@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77689E52203EE2A3002E0FDB"
-               BuildableName = "Spine_macOS.framework"
+               BuildableName = "Spine.framework"
                BlueprintName = "Spine-macOS"
                ReferencedContainer = "container:Spine.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689E52203EE2A3002E0FDB"
-            BuildableName = "Spine_macOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-macOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689E52203EE2A3002E0FDB"
-            BuildableName = "Spine_macOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-macOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77689E52203EE2A3002E0FDB"
-            BuildableName = "Spine_macOS.framework"
+            BuildableName = "Spine.framework"
             BlueprintName = "Spine-macOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
