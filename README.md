@@ -2,12 +2,12 @@
 [![Pod Version](https://img.shields.io/cocoapods/v/Spine.svg?style=flat)](https://cocoapods.org/pods/Spine)
 
 # Spine
-The library allows you to upload characters and their animations from the Spine app to SpriteKit for platforms:
+This Swift library allows you to upload characters and their animations from the [Spine app](http://esotericsoftware.com) to SpriteKit for platforms:
 
 `iOS` `macOS` `tvOS` `watchOS`
 
-Implemented almost all the functionality of the essential version of Spine:
-Animation of bones, skins, animation of slots, creation of physical bodies on the basis of bounding boxes and some other. For more information about what is currently implemented, see [Implemented Features](#implemented-features)
+Implemented almost all the functionality of the essential version of Spine app:
+Animation of bones, skins, animation of slots, creation of physical bodies on the basis of bounding boxes and some other. See [Implemented Features](#implemented-features) for more information.
 
 ![Hero](images/spine_readme_hero.png)
 
@@ -29,12 +29,12 @@ pod install
 
 #### Files
 
-1. Create folder *(named `Goblins` in example below)*
-2. Create Sprite Atlases *(named `default`, `goblin` and `goblingirl` in example below)*
+1. In `assets` catalog create `folder`. *(`Goblins` folder in example below)*
+2. Create `sprite atlases`. *(`default`, `goblin` and `goblingirl` sprite atlases in example below)*
 3. Put images into sprite atlaces. 
->Note that the images that are in the `root` folder of the Spine project must be in the sprite atlas named `default` in the Xcode project
+>Note that the images that are in the `root` folder of the Spine app project must be in the sprite atlas named `default` in the Xcode project.
 
-Final result should look something like this:
+Final result should looks something like this:
 
 ![Assets](images/spine_readme_assets.png)
 
@@ -44,11 +44,13 @@ Set `Provides Namespace` option enabled for the root folder and for all sprite a
 
 ![Namespace](images/spine_readme_assets_namespace.png)
 
->If you forget to set the namespace when you initialize your character images can be just not found
+>If you forget to set the namespace, later when you initialize your character images can be just not found.
 
 #### JSON
 
-*image here*
+Put the JSON exported from the Spine application somewhere in your project:
+
+![json](images/spine_readme_assets_json.png)
 
 ### Code
 
@@ -58,7 +60,6 @@ Somewhere at the beginning of your code, import the `Spine` library:
 import Spine
 ```
 
-
 The easiest way to load a character from a JSON file and apply skin to it is to use the appropriate `Skeleton` class constructor:
 
 ```swift
@@ -67,8 +68,7 @@ if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "go
    //Do something with your character here
 }
 ```
->[Skeleton](https://github.com/maxgribov/Spine/blob/master/Spine/Skeleton.swift) is a subclass of `SKNode`, so you can do with it whatever you can do with `SKNode` itself
-
+>[Skeleton](Spine/Skeleton.swift) is a subclass of `SKNode`, so you can do with it whatever you can do with `SKNode` itself
 
 This way ou can apply the animation created in Spine to the character:
 
