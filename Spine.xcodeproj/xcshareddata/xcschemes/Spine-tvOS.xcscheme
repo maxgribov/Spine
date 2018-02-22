@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77F1D5E8201A490400AF499B"
-               BuildableName = "Spine.framework"
-               BlueprintName = "Spine-iOS"
+               BlueprintIdentifier = "77689EA1203EE993002E0FDB"
+               BuildableName = "Spine_tvOS.framework"
+               BlueprintName = "Spine-tvOS"
                ReferencedContainer = "container:Spine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,16 +27,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77F1D5F1201A490400AF499B"
-               BuildableName = "SpineTests-iOS.xctest"
-               BlueprintName = "SpineTests-iOS"
+               BlueprintIdentifier = "77689EA9203EE994002E0FDB"
+               BuildableName = "Spine-tvOSTests.xctest"
+               BlueprintName = "Spine-tvOSTests"
                ReferencedContainer = "container:Spine.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77F1D5E8201A490400AF499B"
-            BuildableName = "Spine.framework"
-            BlueprintName = "Spine-iOS"
+            BlueprintIdentifier = "77689EA1203EE993002E0FDB"
+            BuildableName = "Spine_tvOS.framework"
+            BlueprintName = "Spine-tvOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,9 +66,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77F1D5E8201A490400AF499B"
-            BuildableName = "Spine.framework"
-            BlueprintName = "Spine-iOS"
+            BlueprintIdentifier = "77689EA1203EE993002E0FDB"
+            BuildableName = "Spine_tvOS.framework"
+            BlueprintName = "Spine-tvOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -85,9 +84,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77F1D5E8201A490400AF499B"
-            BuildableName = "Spine.framework"
-            BlueprintName = "Spine-iOS"
+            BlueprintIdentifier = "77689EA1203EE993002E0FDB"
+            BuildableName = "Spine_tvOS.framework"
+            BlueprintName = "Spine-tvOS"
             ReferencedContainer = "container:Spine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Spine-iOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Spine-macOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Spine-tvOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Spine-watchOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Spine.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +32,31 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>77689E52203EE2A3002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77689E5A203EE2A3002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77689EA1203EE993002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77689EA9203EE994002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77689EFB203EEB10002E0FDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>77F1D5E8201A490400AF499B</key>
 		<dict>
 			<key>primary</key>
