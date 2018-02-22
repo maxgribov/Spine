@@ -44,7 +44,7 @@ Set `Provides Namespace` option enabled for the root folder and for all sprite a
 
 ![Namespace](images/spine_readme_assets_namespace.png)
 
->If you forget to set the namespace when you initialize your character they can be just not found
+>If you forget to set the namespace when you initialize your character images can be just not found
 
 #### JSON
 
@@ -149,9 +149,9 @@ class GameScene: SKScene {
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## Acknowledgments
+## Useful links
 
 * Spine user guide: http://esotericsoftware.com/spine-user-guide
 * Spine JSON format documentation: http://esotericsoftware.com/spine-json-format
