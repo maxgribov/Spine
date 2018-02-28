@@ -52,6 +52,8 @@ Put the JSON exported from the Spine application somewhere in your project:
 
 ![json](images/spine_readme_assets_json.png)
 
+For more information about assets see [Assets Wiki](https://github.com/maxgribov/Spine/wiki/Assets)
+
 ### Code
 
 Somewhere at the beginning of your code, import the `Spine` library:
@@ -70,7 +72,7 @@ if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "go
 ```
 >[Skeleton](Spine/Skeleton.swift) is a subclass of `SKNode`, so you can do with it whatever you can do with `SKNode` itself
 
-This way ou can apply the animation created in Spine to the character:
+This way you can apply the animation created in Spine to the character:
 
 ```swift
 if let walkAnimation = character.animation(named: "walk") {
@@ -91,7 +93,7 @@ class GameScene: SKScene {
         
         if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "goblin"){
             
-            character.name = "character"
+            character.name = "goblin"
             character.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2))
             
             self.addChild(character)
