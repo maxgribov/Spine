@@ -23,9 +23,9 @@ extension Skeleton {
      */
     public var points: [SKNode]? {
         get {
-            return slots?.flatMap({ (slot) -> [SKNode]? in
+            return slots?.compactMap({ (slot) -> [SKNode]? in
 
-                return slot.children.flatMap({ (node) -> SKNode? in
+                return slot.children.compactMap({ (node) -> SKNode? in
 
                     guard let point = node as? PointAttachment else {
 
@@ -58,7 +58,7 @@ extension Skeleton {
     public var activePoints: [SKNode]? {
         get {
             
-            return slots?.flatMap({ (slot) -> SKNode? in
+            return slots?.compactMap({ (slot) -> SKNode? in
                 
                 return slot.children.first(where: { (node) -> Bool in
                     
@@ -71,7 +71,7 @@ extension Skeleton {
                     
                 })
                 
-            }).flatMap({ (node) -> SKNode? in
+            }).compactMap({ (node) -> SKNode? in
                 
                 guard let point = node as? PointAttachment else {
                     

@@ -71,7 +71,7 @@ extension Skeleton {
 
                 if boundingBoxes.count > 1 {
                     
-                    let physicBodies = boundingBoxes.flatMap({ $0.physicsBody })
+                    let physicBodies = boundingBoxes.compactMap({ $0.physicsBody })
                     let compositePhysicBody = SKPhysicsBody(bodies: physicBodies)
                     compositePhysicBody.isDynamic = false
                     slot.physicsBody = compositePhysicBody
