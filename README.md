@@ -143,7 +143,7 @@ class GameScene: SKScene {
 
 ## System Requirements
 
-**Swift 4.0**
+**Swift 4.1**
 * iOS 8.0+
 * macOS 10.10+
 * tvOS 9.0+
