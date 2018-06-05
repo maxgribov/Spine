@@ -24,7 +24,7 @@ matrix:
       env:
         - XCODE_ACTION=test
         - XCODE_SDK=appletvsimulator
-        - XCODE_DESTINATION="name=Apple TV 1080p"
+        - XCODE_DESTINATION="name=Apple TV 4K"
     - xcode_scheme: "Spine-watchOS"
       osx_image: xcode9.3
       env:
