@@ -48,13 +48,9 @@ class Animation {
             return action.duration > duration ? action.duration : duration
         })
         
-        let actionsCorrected = actions.map({ (action) -> SKAction in
-            
-            let delayDuration = longestDuration - action.duration
-            return delayDuration > 0 ? SKAction.sequence([action, SKAction.wait(forDuration: delayDuration)]) : action
-        })
-        
-        self.action = SKAction.group(actionsCorrected)
+        actions.append(SKAction.wait(forDuration: longestDuration))
+
+        self.action = SKAction.group(actions)
     }
 }
 
@@ -126,7 +122,7 @@ class BoneAnimationBuilder {
         let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
         let action = SKAction.rotate(toAngle: angle, duration: duration)
         setTiming(action, keyframe.curve)
-        
+
         return action
     }
     
@@ -141,12 +137,10 @@ class BoneAnimationBuilder {
     
     class func action(keyframe: BoneKeyframeScaleModel, duration: TimeInterval, _ defaultScale: CGVector) -> SKAction {
         
-        let scaleX = defaultScale.dx + keyframe.scale.dx
-        let scaleY = defaultScale.dy + keyframe.scale.dy
-        let action = SKAction.group([SKAction.scaleX(to: scaleX, duration: duration),
-                                     SKAction.scaleY(to: scaleY, duration: duration)])
+        let action = SKAction.group([SKAction.scaleX(to: keyframe.scale.dx, duration: duration),
+                                     SKAction.scaleY(to: keyframe.scale.dy, duration: duration)])
         setTiming(action, keyframe.curve)
-        
+
         return action
     }
     
