@@ -75,7 +75,7 @@ class BoneAnimationBuilder {
         }
         
         let boneName = Bone.generateName(model.bone)
-        return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: "//\(boneName)", inheritDuration: true)
+        return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: ".//\(boneName)", inheritDuration: true)
     }
     
     class func action(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
@@ -187,12 +187,12 @@ class SlotAnimationBuilder {
             
             if let prevAttachmentName = prevAttachmentName {
                 
-                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName, inheritDuration: true))
+                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName:".//\(prevAttachmentName)", inheritDuration: true))
             }
             
             if let attachmentName = keyframe.name {
                 
-                let childName = "//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
+                let childName = ".//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
                 keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName, inheritDuration: true))
                 
                 prevAttachmentName = childName
@@ -236,7 +236,7 @@ class SlotAnimationBuilder {
             }
         }
         
-        return SKAction.run(slotColorAction, onChildWithName: "//\(Slot.generateName(slot))", inheritDuration: true)
+        return SKAction.run(slotColorAction, onChildWithName: ".//\(Slot.generateName(slot))", inheritDuration: true)
     }
 }
 
@@ -339,7 +339,7 @@ class DrawOrderAnimationBuilder {
                 }
             })
             
-            actions.append(SKAction.run(action, onChildWithName: "//\(Slot.generateName(slotNewOrder.name))", inheritDuration: true))
+            actions.append(SKAction.run(action, onChildWithName: ".//\(Slot.generateName(slotNewOrder.name))", inheritDuration: true))
         }
         
         applyNewOrders(&slotsData, slotsNewOrders)
