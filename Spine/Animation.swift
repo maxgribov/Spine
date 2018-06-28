@@ -187,7 +187,7 @@ class SlotAnimationBuilder {
             
             if let prevAttachmentName = prevAttachmentName {
                 
-                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName:".//\(prevAttachmentName)", inheritDuration: true))
+                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName, inheritDuration: true))
             }
             
             if let attachmentName = keyframe.name {
