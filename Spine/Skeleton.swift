@@ -38,6 +38,21 @@ public class Skeleton: SKNode {
     }
     
     /**
+     Creates a skeleton node with an 'SpineModel' and atlases dictionary.
+
+     - parameter model: the skeleton model.
+     - parameter atlases: atlases dictionary
+     */
+    public init(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) {
+        
+        super.init()
+        self.createBones(model)
+        self.createSlots(model)
+        self.createSkins(model, atlases)
+        self.createAnimations(model)
+    }
+    
+    /**
      Сreates a skeleton node based on the json file stored in the bundle application.
      
      The initializer may fail, so returning value *optional*
@@ -118,6 +133,14 @@ public class Skeleton: SKNode {
         self.skins = model.skins?.map({ (skinModel) -> Skin in
             
             return Skin(skinModel, atlas: folder)
+        })
+    }
+    
+    func createSkins(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) {
+        
+        self.skins = model.skins?.map({ (skinModel) -> Skin in
+            
+            return Skin(skinModel, atlases)
         })
     }
     

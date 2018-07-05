@@ -40,6 +40,12 @@ class Skin {
         self.atlases = atlases
     }
     
+    init(_ model: SkinModel, _ atlases: [String : SKTextureAtlas]) {
+        
+        self.model = model
+        self.atlases = atlases
+    }
+    
     func attachment(_ model: AttachmentModelType) -> Attachment? {
         
         if AttachmentBuilder.textureRequired(for: model) {

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Spine"
-  s.version      = "1.1.2"
+  s.version      = "1.2.0"
   s.summary      = "Unofficial Spine runtime library for iOS, macOS, tvOS and watchOS"
   s.description  = <<-DESC
                     This library allows you to play animations created with the Spine App: http://esotericsoftware.com
