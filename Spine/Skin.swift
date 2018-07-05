@@ -17,7 +17,7 @@ class Skin {
         
         self.model = model
         
-        guard let atlasesNames = atlasesNames(from: model) else {
+        guard let atlasesNames = model.atlasesNames() else {
             
             self.atlases = nil
             return
@@ -108,62 +108,11 @@ func atlasName(from name: String, actualName: String?, path: String?) -> String 
 }
 
 func atlasName(for attachmentType: AttachmentModelType ) -> String? {
-    
+
     switch attachmentType {
     case .region(let region): return atlasName(from: region.name, actualName: region.actualName, path: region.path)
     case .mesh(let mesh): return atlasName(from: mesh.name, actualName: mesh.actualName, path: mesh.path)
     case .linkedMesh(let linkedMesh): return atlasName(from: linkedMesh.name, actualName: linkedMesh.actualName, path: linkedMesh.path)
     default: return nil
     }
-}
-
-func atlasesNames(from skin: SkinModel) -> [String]? {
-
-    guard let slots = skin.slots else {
-        
-        return nil
-    }
-    
-    var names = Set<String>()
-    
-    for slot in slots {
-        
-        guard let attachments = slot.attachments else {
-            
-            continue
-        }
-        
-        for attachment in attachments {
-            
-            guard let attachmentAtlasName = atlasName(for: attachment) else {
-                
-                continue
-            }
-            
-            names.insert(attachmentAtlasName)
-        }
-    }
-    
-    return Array(names)
-}
-
-func atlasesNames(from skins: [SkinModel]? ) -> [String]? {
-    
-    guard let skins = skins else {
-        
-        return nil
-    }
-    
-    var names = Set<String>()
-    
-    for skin in skins {
-        
-        guard let skinNames = atlasesNames(from: skin) else {
-            continue
-        }
-        
-        names = names.union(Set(skinNames))
-    }
-    
-    return Array(names)
 }
