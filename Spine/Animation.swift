@@ -176,8 +176,7 @@ class SlotAnimationBuilder {
         
         var actions = [SKAction]()
         var lastTime: TimeInterval = 0
-        var prevAttachmentName: String?
-        
+
         for keyframe in keyframes {
             
             var keyframeActions = [SKAction]()
@@ -185,17 +184,20 @@ class SlotAnimationBuilder {
             let duration = keyframe.time - lastTime
             keyframeActions.append(SKAction.wait(forDuration: duration))
             
-            if let prevAttachmentName = prevAttachmentName {
+            let hideAction = SKAction.customAction(withDuration: 0) { (node, time) in
                 
-                keyframeActions.append(SKAction.run(SKAction.hide(), onChildWithName: prevAttachmentName, inheritDuration: true))
+                for children in node.children {
+                    
+                    children.isHidden = true
+                }
             }
+            
+            keyframeActions.append(SKAction.run(hideAction, onChildWithName: ".//\(Slot.generateName(slot))", inheritDuration: true))
             
             if let attachmentName = keyframe.name {
                 
                 let childName = ".//\(Slot.generateName(slot))/\(RegionAttachment.generateName(attachmentName))"
                 keyframeActions.append(SKAction.run(SKAction.unhide(), onChildWithName: childName, inheritDuration: true))
-                
-                prevAttachmentName = childName
             }
             
             let keyframeAction = SKAction.sequence(keyframeActions)
