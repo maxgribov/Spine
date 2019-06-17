@@ -9,6 +9,9 @@ This Swift library allows you to upload characters and their animations from the
 Implemented almost all the functionality of the essential version of Spine app:
 Animation of bones, skins, animation of slots, creation of physical bodies on the basis of bounding boxes and some other. See [Implemented Features](#implemented-features) for more information.
 
+Example of working with the library: [Sample project](https://github.com/maxgribov/SpineSampleProject)<BR>
+Learn more about working with the library: [Spine Wiki](https://github.com/maxgribov/Spine/wiki)
+
 ![Hero](images/spine_readme_hero.png)
 
 ## Installing
