@@ -394,7 +394,7 @@ fileprivate func calculateSlotsNewOrders(_ slots: [SlotData], _ offsets: [DrawOr
         for slot in slotsOrdered {
             
             guard let shift = offsets.first(where: { $0.slot == slot.name }),
-                let index = slotsOrdered.index(where: { $0.name == slot.name }) else {
+                let index = slotsOrdered.firstIndex(where: { $0.name == slot.name }) else {
                     
                     continue
             }
@@ -434,7 +434,7 @@ fileprivate func applyNewOrders(_ slotsData: inout [SlotData], _ orders: [SlotNe
         if var slotData = slotsData.first(where: { $0.name == order.name }) {
             
             slotData.order = order.order
-            if let index = slotsData.index(where: { $0.name == slotData.name }){
+            if let index = slotsData.firstIndex(where: { $0.name == slotData.name }){
                 
                 slotsData[index] = slotData
             }
