@@ -36,6 +36,8 @@ extension SpineModel: Decodable {
         case path
         case events
         case animations
+        case name
+        case attachments
     }
     
     public init(from decoder: Decoder) throws {
@@ -48,13 +50,15 @@ extension SpineModel: Decodable {
         //skins
         if container.contains(.skins) {
             
-            let skinsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .skins)
+            var skinsContainer = try container.nestedUnkeyedContainer(forKey: .skins)
             var skins = [SkinModel]()
             
-            for skinKey in skinsContainer.allKeys {
-                
-                let skinContainer = try skinsContainer.nestedContainer(keyedBy: SkinModel.KeysType.self, forKey: skinKey)
-                let skin = try SkinModel(skinKey.stringValue, skinContainer)
+            while !skinsContainer.isAtEnd {
+
+                let skinContainer = try skinsContainer.nestedContainer(keyedBy: Keys.self)
+                let name = try skinContainer.decode(String.self, forKey: Keys.name)
+                let slotsContainer = try skinContainer.nestedContainer(keyedBy: SkinModel.KeysType.self, forKey: Keys.attachments)
+                let skin = try SkinModel(name, slotsContainer)
                 skins.append(skin)
             }
             
