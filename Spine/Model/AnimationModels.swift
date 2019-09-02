@@ -484,6 +484,9 @@ extension BoneKeyframeRotateModel: Decodable {
         
         case time
         case curve
+        case c2
+        case c3
+        case c4
         case angle
     }
     
@@ -494,8 +497,13 @@ extension BoneKeyframeRotateModel: Decodable {
         let angle: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .angle)
         
         do {
-            
-            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
+
+            let bezierCurve = try ParameterizableCurve.create(
+                    container.decode(Float.self, forKey: .curve),
+                    container.decodeIfPresent(Float.self, forKey: .c2),
+                    container.decode(Float.self, forKey: .c3),
+                    container.decodeIfPresent(Float.self, forKey: .c4)
+            )
             self.init(time, bezierCurve, angle)
             
         } catch {
@@ -536,6 +544,9 @@ extension BoneKeyframeTranslateModel: Decodable {
         
         case time
         case curve
+        case c2
+        case c3
+        case c4
         case x
         case y
     }
@@ -548,8 +559,13 @@ extension BoneKeyframeTranslateModel: Decodable {
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         
         do {
-            
-            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
+
+            let bezierCurve = try ParameterizableCurve.create(
+                    container.decode(Float.self, forKey: .curve),
+                    container.decodeIfPresent(Float.self, forKey: .c2),
+                    container.decode(Float.self, forKey: .c3),
+                    container.decodeIfPresent(Float.self, forKey: .c4)
+            )
             self.init(time, bezierCurve, x, y)
             
         } catch {
@@ -590,6 +606,9 @@ extension BoneKeyframeScaleModel: Decodable {
         
         case time
         case curve
+        case c2
+        case c3
+        case c4
         case x
         case y
     }
@@ -602,8 +621,13 @@ extension BoneKeyframeScaleModel: Decodable {
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         
         do {
-            
-            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
+
+            let bezierCurve = try ParameterizableCurve.create(
+                    container.decode(Float.self, forKey: .curve),
+                    container.decodeIfPresent(Float.self, forKey: .c2),
+                    container.decode(Float.self, forKey: .c3),
+                    container.decodeIfPresent(Float.self, forKey: .c4)
+            )
             self.init(time, bezierCurve, x, y)
             
         } catch {
@@ -644,6 +668,9 @@ extension BoneKeyframeShearModel: Decodable {
         
         case time
         case curve
+        case c2
+        case c3
+        case c4
         case x
         case y
     }
@@ -656,8 +683,13 @@ extension BoneKeyframeShearModel: Decodable {
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         
         do {
-            
-            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
+
+            let bezierCurve = try ParameterizableCurve.create(
+                    container.decode(Float.self, forKey: .curve),
+                    container.decodeIfPresent(Float.self, forKey: .c2),
+                    container.decode(Float.self, forKey: .c3),
+                    container.decodeIfPresent(Float.self, forKey: .c4)
+            )
             self.init(time, bezierCurve, x, y)
             
         } catch {
@@ -735,6 +767,9 @@ extension SlotKeyframeColorModel: Decodable {
         case time
         case color
         case curve
+        case c2
+        case c3
+        case c4
     }
     
     init(from decoder: Decoder) throws {
@@ -744,8 +779,13 @@ extension SlotKeyframeColorModel: Decodable {
         let color: String = try container.decode(String.self, forKey: .color)
         
         do {
-            
-            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
+
+            let bezierCurve = try ParameterizableCurve.create(
+                    container.decode(Float.self, forKey: .curve),
+                    container.decodeIfPresent(Float.self, forKey: .c2),
+                    container.decode(Float.self, forKey: .c3),
+                    container.decodeIfPresent(Float.self, forKey: .c4)
+            )
             self.init(time, color, bezierCurve)
             
         } catch {
@@ -871,6 +911,9 @@ extension DeformKeyframeModel: Decodable {
         case offset
         case vertices
         case curve
+        case c2
+        case c3
+        case c4
     }
     
     init(from decoder: Decoder) throws {
@@ -881,8 +924,13 @@ extension DeformKeyframeModel: Decodable {
         let vertices: [CGFloat]? = try container.decodeIfPresent([CGFloat].self, forKey: .vertices)
         
         do {
-            
-            let bezierCurve: [Float] = try container.decode([Float].self, forKey: .curve)
+
+            let bezierCurve = try ParameterizableCurve.create(
+                    container.decode(Float.self, forKey: .curve),
+                    container.decodeIfPresent(Float.self, forKey: .c2),
+                    container.decode(Float.self, forKey: .c3),
+                    container.decodeIfPresent(Float.self, forKey: .c4)
+            )
             self.init(time, offset, vertices, bezierCurve)
             
         } catch {
@@ -1020,5 +1068,16 @@ extension DrawOrderOffsetModel: Decodable {
         
         self.slot = slot
         self.offset = offset
+    }
+}
+
+// MARK: - Helpers
+
+fileprivate enum ParameterizableCurve {
+    static func create(_ curve: Float, _ c2: Float?, _ c3: Float, _ c4: Float?) -> [Float] {
+        let c2Default: Float = 0
+        let c4Default: Float = 1
+
+        return [curve, c2 ?? c2Default, c3, c4 ?? c4Default]
     }
 }
