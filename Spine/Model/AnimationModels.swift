@@ -490,7 +490,7 @@ extension BoneKeyframeRotateModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let angle: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .angle)
         
         do {
@@ -543,7 +543,7 @@ extension BoneKeyframeTranslateModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         
@@ -597,7 +597,7 @@ extension BoneKeyframeScaleModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         
@@ -651,7 +651,7 @@ extension BoneKeyframeShearModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
         let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
         
@@ -697,7 +697,7 @@ extension SlotKeyframeAttachmentModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let name: String? = try container.decodeIfPresent(String.self, forKey: .name)
         
         self.init(time, name)
@@ -740,7 +740,7 @@ extension SlotKeyframeColorModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let color: String = try container.decode(String.self, forKey: .color)
         
         do {
@@ -784,7 +784,7 @@ extension IKConstraintKeyframeModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let mix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .mix)
         let blendPositive: Bool? = try container.decodeIfPresent(Bool.self, forKey: .blendPositive)
         
@@ -826,7 +826,7 @@ extension TransformConstraintKeyframeModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let rotateMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotateMix)
         let translateMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .translateMix)
         let scaleMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .scaleMix)
@@ -876,7 +876,7 @@ extension DeformKeyframeModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let offset: Int? = try container.decodeIfPresent(Int.self, forKey: .offset)
         let vertices: [CGFloat]? = try container.decodeIfPresent([CGFloat].self, forKey: .vertices)
         
@@ -927,7 +927,7 @@ extension EventKeyfarameModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let event: String = try container.decode(String.self, forKey: .event)
         let int: Int? = try container.decodeIfPresent(Int.self, forKey: .int)
         let float: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .float)
@@ -979,7 +979,7 @@ extension DrawOrderKeyframeModel: Decodable {
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval = try container.decode(TimeInterval.self, forKey: .time)
+        let time: TimeInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         let offsets: [DrawOrderOffsetModel]? = try container.decodeIfPresent([DrawOrderOffsetModel].self, forKey: .offsets)
         
         self.time = time
