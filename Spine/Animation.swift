@@ -7,7 +7,6 @@
 //
 
 import SpriteKit
-import simd
 
 class Animation {
     
@@ -59,7 +58,7 @@ func setTiming(_ action: SKAction, _ curve: CurveModelType)  {
     
     switch curve {
     case .linear: action.timingMode = .linear
-    case .stepped: action.timingFunction = { time in return simd_smoothstep(0, 1, time) }
+    case .stepped: action.timingFunction = { time in return time < 1.0 ? 0 : 1.0 }
     case .bezier(let bezierModel): action.timingFunction = BezierCurveSolver(bezierModel).timingFunction()
     }
 }
