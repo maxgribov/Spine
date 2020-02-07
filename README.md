@@ -2,7 +2,7 @@
 [![Pod Version](https://img.shields.io/cocoapods/v/Spine.svg?style=flat)](https://cocoapods.org/pods/Spine)
 
 # Spine
-This Swift library allows you to upload characters and their animations from the [Spine app](http://esotericsoftware.com) to SpriteKit for platforms:
+This Swift library allows you to upload characters and their animations from the [Spine app] (v3.8.x +)(http://esotericsoftware.com) to SpriteKit for platforms:
 
 `iOS` `macOS` `tvOS` `watchOS`
 
