@@ -586,7 +586,7 @@ struct BoneKeyframeScaleModel: BoneKeyframeModel {
         
         self.time = time ?? 0
         self.curve = CurveModelType(curve)
-        self.scale = CGVector(dx: x ?? 0, dy: y ?? 0)
+        self.scale = CGVector(dx: x ?? 1, dy: y ?? 1)
     }
     
     //bezier curve init
@@ -594,7 +594,7 @@ struct BoneKeyframeScaleModel: BoneKeyframeModel {
         
         self.time = time ?? 0
         self.curve = .bezier(curve)
-        self.scale = CGVector(dx: x ?? 0, dy: y ?? 0)
+        self.scale = CGVector(dx: x ?? 1, dy: y ?? 1)
     }
 }
 
