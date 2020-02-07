@@ -44,48 +44,28 @@ extension SpineModel: Decodable {
         self.skeleton = try container.decode(SkeletonModel.self, forKey: .skeleton)
         self.bones = try container.decodeIfPresent([BoneModel].self, forKey: .bones)
         self.slots = try container.decodeIfPresent([SlotModel].self, forKey: .slots)
-        
-        //skins
-        if container.contains(.skins) {
-            
-            let skinsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .skins)
-            var skins = [SkinModel]()
-            
-            for skinKey in skinsContainer.allKeys {
-                
-                let skinContainer = try skinsContainer.nestedContainer(keyedBy: SkinModel.KeysType.self, forKey: skinKey)
-                let skin = try SkinModel(skinKey.stringValue, skinContainer)
-                skins.append(skin)
-            }
-            
-            self.skins = skins
-            
-        } else {
-            
-            self.skins = nil
-        }
-
+        self.skins = try container.decodeIfPresent([SkinModel].self, forKey: .skins)
         self.ik = try container.decodeIfPresent([IKConstraintModel].self, forKey: .ik)
         self.transform = try container.decodeIfPresent([TransformConstraintModel].self, forKey: .transform)
         self.path = try container.decodeIfPresent([PathConstraintModel].self, forKey: .path)
         
         //events
         if container.contains(.events) {
-            
+
             let eventsContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: .events)
             var events = [EventModel]()
-            
+
             for eventKey in eventsContainer.allKeys {
-                
+
                 let eventContainer = try eventsContainer.nestedContainer(keyedBy: EventModel.Keys.self, forKey: eventKey)
                 let event = try EventModel(eventKey.stringValue, eventContainer)
                 events.append(event)
             }
-            
+
             self.events = events
-            
+
         } else {
-            
+
             self.events = nil
         }
 
@@ -213,6 +193,14 @@ enum CurveModelType {
             self.p1 = values[1]
             self.p2 = values[2]
             self.p3 = values[3]
+        }
+        
+        init(_ c1: Float, _ c2: Float?, _ c3: Float?, _ c4: Float?) {
+            
+            p0 = c1
+            p1 = c2 ?? 0
+            p2 = c3 ?? 1
+            p3 = c4 ?? 1
         }
     }
 }

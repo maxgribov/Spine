@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
-		7706409E2028F8460031BD32 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
 		770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
 		770D466B203CADC60046092C /* Skeleton+Skins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466A203CADC60046092C /* Skeleton+Skins.swift */; };
 		770D466D203CC6BE0046092C /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
@@ -24,29 +22,18 @@
 		7711235F20EEC1F200BFF103 /* SkinSlotModel+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7711235D20EEC1F200BFF103 /* SkinSlotModel+Atlases.swift */; };
 		7711236020EEC1F200BFF103 /* SkinSlotModel+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7711235D20EEC1F200BFF103 /* SkinSlotModel+Atlases.swift */; };
 		7711236120EEC1F200BFF103 /* SkinSlotModel+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7711235D20EEC1F200BFF103 /* SkinSlotModel+Atlases.swift */; };
-		773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
-		773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
-		773E8FE22024F04D009E38BD /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
-		773E8FE42024F1F4009E38BD /* BoneKeyframeShearModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE32024F1F4009E38BD /* BoneKeyframeShearModelTests.swift */; };
-		773E8FE62024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE52024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift */; };
-		773E8FE82024F545009E38BD /* SlotKeyframeColorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE72024F545009E38BD /* SlotKeyframeColorModelTests.swift */; };
-		773E8FEA2024F707009E38BD /* IKConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE92024F707009E38BD /* IKConstraintKeyframeModelTests.swift */; };
-		773E8FEE2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FED2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift */; };
-		773E8FF02024F9B2009E38BD /* DeformKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FEF2024F9B2009E38BD /* DeformKeyframeModelTests.swift */; };
-		773E8FF22024FAD9009E38BD /* EventKeyfarameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF12024FAD8009E38BD /* EventKeyfarameModelTests.swift */; };
-		773E8FF42024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */; };
+		771DE59123ED7BED00BDA778 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 771DE59023ED7BED00BDA778 /* spineboy-pro.json */; };
+		771DE59223ED7BED00BDA778 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 771DE59023ED7BED00BDA778 /* spineboy-pro.json */; };
+		771DE59323ED7BED00BDA778 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 771DE59023ED7BED00BDA778 /* spineboy-pro.json */; };
 		773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF52024FE2D009E38BD /* EventModel.swift */; };
 		77404ED3201BD8E500E51CF5 /* SpineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77404ED2201BD8E500E51CF5 /* SpineModel.swift */; };
 		77450355203C71AA00BED2D9 /* CGPathExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */; };
 		77450358203C745B00BED2D9 /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450357203C745B00BED2D9 /* ColorTests.swift */; };
-		7745035A203C76A500BED2D9 /* BoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450359203C76A500BED2D9 /* BoneTests.swift */; };
 		7745035C203CAA8C00BED2D9 /* Skeleton+Atlases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */; };
 		7745035E203CAB4200BED2D9 /* Skeleton+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */; };
 		77450360203CAC6900BED2D9 /* Skeleton+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */; };
 		774D0C90203CD62900EC5156 /* Skeleton+Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */; };
 		774D0C92203D95A200EC5156 /* Skeleton+Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C91203D95A200EC5156 /* Skeleton+Points.swift */; };
-		774D0C94203DA53400EC5156 /* Skeleton+PointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */; };
-		7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
 		775D969420336DCC00137B38 /* BezierCurveSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775D969320336DCC00137B38 /* BezierCurveSolver.swift */; };
 		776656E3202B9D3A00750189 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E2202B9D3A00750189 /* Attachment.swift */; };
 		776656E7202BADBB00750189 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776656E6202BADBB00750189 /* Skin.swift */; };
@@ -78,29 +65,9 @@
 		77689E82203EE2FA002E0FDB /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
 		77689E83203EE307002E0FDB /* AnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B7140202E4D060031DD4F /* AnimationTests.swift */; };
 		77689E84203EE307002E0FDB /* SkinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */; };
-		77689E85203EE307002E0FDB /* BoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450359203C76A500BED2D9 /* BoneTests.swift */; };
 		77689E86203EE30E002E0FDB /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
-		77689E87203EE30E002E0FDB /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
-		77689E88203EE30E002E0FDB /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
-		77689E89203EE30E002E0FDB /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
-		77689E8A203EE30E002E0FDB /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
-		77689E8B203EE30E002E0FDB /* AnimationModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77880A412024BB50004DC555 /* AnimationModelsTests.swift */; };
-		77689E8C203EE30E002E0FDB /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
-		77689E8D203EE314002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
-		77689E8E203EE314002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
-		77689E8F203EE314002E0FDB /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
-		77689E90203EE314002E0FDB /* BoneKeyframeShearModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE32024F1F4009E38BD /* BoneKeyframeShearModelTests.swift */; };
-		77689E91203EE314002E0FDB /* SlotKeyframeAttachmentModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE52024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift */; };
-		77689E92203EE314002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE72024F545009E38BD /* SlotKeyframeColorModelTests.swift */; };
-		77689E93203EE314002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE92024F707009E38BD /* IKConstraintKeyframeModelTests.swift */; };
-		77689E94203EE314002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FED2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift */; };
-		77689E95203EE314002E0FDB /* DeformKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FEF2024F9B2009E38BD /* DeformKeyframeModelTests.swift */; };
-		77689E96203EE314002E0FDB /* EventKeyfarameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF12024FAD8009E38BD /* EventKeyfarameModelTests.swift */; };
 		77689E98203EE31D002E0FDB /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450357203C745B00BED2D9 /* ColorTests.swift */; };
 		77689E99203EE323002E0FDB /* CGPathExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */; };
-		77689E9A203EE323002E0FDB /* Skeleton+PointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */; };
-		77689E9B203EE328002E0FDB /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
-		77689E9C203EE625002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */; };
 		77689EAB203EE994002E0FDB /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77689EA2203EE993002E0FDB /* Spine.framework */; };
 		77689EB2203EE994002E0FDB /* Spine_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 77689EA4203EE993002E0FDB /* Spine_tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77689EB9203EE9B9002E0FDB /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Skeleton.swift */; };
@@ -129,29 +96,9 @@
 		77689ED0203EE9C8002E0FDB /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
 		77689ED1203EE9D1002E0FDB /* AnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B7140202E4D060031DD4F /* AnimationTests.swift */; };
 		77689ED2203EE9D1002E0FDB /* SkinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */; };
-		77689ED3203EE9D1002E0FDB /* BoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450359203C76A500BED2D9 /* BoneTests.swift */; };
 		77689ED4203EE9D7002E0FDB /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
-		77689ED5203EE9D7002E0FDB /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
-		77689ED6203EE9D7002E0FDB /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
-		77689ED7203EE9D7002E0FDB /* SkinModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7755D4232020F14D005275DA /* SkinModelsTests.swift */; };
-		77689ED8203EE9D7002E0FDB /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
-		77689ED9203EE9D7002E0FDB /* AnimationModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77880A412024BB50004DC555 /* AnimationModelsTests.swift */; };
-		77689EDA203EE9D7002E0FDB /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
-		77689EDB203EE9DD002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */; };
-		77689EDC203EE9DD002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */; };
-		77689EDD203EE9DD002E0FDB /* BoneKeyframeScaleModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */; };
-		77689EDE203EE9DD002E0FDB /* BoneKeyframeShearModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE32024F1F4009E38BD /* BoneKeyframeShearModelTests.swift */; };
-		77689EDF203EE9DD002E0FDB /* SlotKeyframeAttachmentModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE52024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift */; };
-		77689EE0203EE9DD002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE72024F545009E38BD /* SlotKeyframeColorModelTests.swift */; };
-		77689EE1203EE9DD002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FE92024F707009E38BD /* IKConstraintKeyframeModelTests.swift */; };
-		77689EE2203EE9DD002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FED2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift */; };
-		77689EE3203EE9DD002E0FDB /* DeformKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FEF2024F9B2009E38BD /* DeformKeyframeModelTests.swift */; };
-		77689EE4203EE9DD002E0FDB /* EventKeyfarameModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF12024FAD8009E38BD /* EventKeyfarameModelTests.swift */; };
-		77689EE5203EE9DD002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */; };
 		77689EE6203EE9E0002E0FDB /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450357203C745B00BED2D9 /* ColorTests.swift */; };
 		77689EE7203EE9E5002E0FDB /* CGPathExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */; };
-		77689EE8203EE9E5002E0FDB /* Skeleton+PointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */; };
-		77689EE9203EE9E9002E0FDB /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
 		77689F00203EEB10002E0FDB /* Spine_watchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 77689EFE203EEB10002E0FDB /* Spine_watchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77689F04203EEB64002E0FDB /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Skeleton.swift */; };
 		77689F05203EEB64002E0FDB /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
@@ -177,15 +124,12 @@
 		77689F19203EEB73002E0FDB /* Skeleton+Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */; };
 		77689F1A203EEB73002E0FDB /* CGPath+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */; };
 		77689F1B203EEB73002E0FDB /* SKAction+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770D466C203CC6BE0046092C /* SKAction+Spine.swift */; };
-		776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */; };
 		77869DE92037856F00404AC8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DE82037856F00404AC8 /* Color.swift */; };
 		77869DF020386A8D00404AC8 /* CGPath+Spine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */; };
-		77880A422024BB50004DC555 /* AnimationModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77880A412024BB50004DC555 /* AnimationModelsTests.swift */; };
 		779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC335201B49B900C33B79 /* SkeletonModel.swift */; };
 		779AC33A201B4A8A00C33B79 /* ConstraintsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */; };
 		779AC340201B4BC200C33B79 /* SkinModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC33F201B4BC200C33B79 /* SkinModels.swift */; };
 		779AC344201B4C4D00C33B79 /* AnimationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC343201B4C4D00C33B79 /* AnimationModels.swift */; };
-		779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779AC345201BC28900C33B79 /* SkeletonModelTests.swift */; };
 		779B7141202E4D060031DD4F /* AnimationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779B7140202E4D060031DD4F /* AnimationTests.swift */; };
 		77DBA2A7202A19D900D35306 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A6202A19D900D35306 /* Skeleton.swift */; };
 		77DBA2A9202A1FE400D35306 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBA2A8202A1FE400D35306 /* Animation.swift */; };
@@ -193,7 +137,6 @@
 		77E5A8C5202CDFC000ACDC0D /* SkinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */; };
 		77E5A8C7202CED6F00ACDC0D /* Prefixable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */; };
 		77E6FFB62029C8510078923C /* Bone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB52029C8510078923C /* Bone.swift */; };
-		77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6FFB72029D2110078923C /* ColorModelTets.swift */; };
 		77F1D5F3201A490400AF499B /* Spine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F1D5E9201A490400AF499B /* Spine.framework */; };
 		77F1D5FA201A490400AF499B /* Spine.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F1D5EC201A490400AF499B /* Spine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77F75105203760050065AECE /* Defaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F75104203760050065AECE /* Defaultable.swift */; };
@@ -224,37 +167,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7706409B2028D17F0031BD32 /* EventModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModelTests.swift; sourceTree = "<group>"; };
-		7706409D2028F8460031BD32 /* spineboy-pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "spineboy-pro.json"; sourceTree = "<group>"; };
 		7706409F2028F86C0031BD32 /* SpineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModelTests.swift; sourceTree = "<group>"; };
 		770D466A203CADC60046092C /* Skeleton+Skins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Skins.swift"; sourceTree = "<group>"; };
 		770D466C203CC6BE0046092C /* SKAction+Spine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKAction+Spine.swift"; sourceTree = "<group>"; };
 		7711235320EEC00C00BFF103 /* SpineModel+Atlases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpineModel+Atlases.swift"; sourceTree = "<group>"; };
 		7711235820EEC13000BFF103 /* SkinModel+Atlases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkinModel+Atlases.swift"; sourceTree = "<group>"; };
 		7711235D20EEC1F200BFF103 /* SkinSlotModel+Atlases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkinSlotModel+Atlases.swift"; sourceTree = "<group>"; };
-		773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeRotateModelTests.swift; sourceTree = "<group>"; };
-		773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeTranslateModelTests.swift; sourceTree = "<group>"; };
-		773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeScaleModelTests.swift; sourceTree = "<group>"; };
-		773E8FE32024F1F4009E38BD /* BoneKeyframeShearModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneKeyframeShearModelTests.swift; sourceTree = "<group>"; };
-		773E8FE52024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotKeyframeAttachmentModelTests.swift; sourceTree = "<group>"; };
-		773E8FE72024F545009E38BD /* SlotKeyframeColorModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotKeyframeColorModelTests.swift; sourceTree = "<group>"; };
-		773E8FE92024F707009E38BD /* IKConstraintKeyframeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKConstraintKeyframeModelTests.swift; sourceTree = "<group>"; };
-		773E8FED2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformConstraintKeyframeModelTests.swift; sourceTree = "<group>"; };
-		773E8FEF2024F9B2009E38BD /* DeformKeyframeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeformKeyframeModelTests.swift; sourceTree = "<group>"; };
-		773E8FF12024FAD8009E38BD /* EventKeyfarameModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKeyfarameModelTests.swift; sourceTree = "<group>"; };
-		773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawOrderKeyframeModelTests.swift; sourceTree = "<group>"; };
+		771DE59023ED7BED00BDA778 /* spineboy-pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "spineboy-pro.json"; sourceTree = "<group>"; };
 		773E8FF52024FE2D009E38BD /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		77404ED2201BD8E500E51CF5 /* SpineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModel.swift; sourceTree = "<group>"; };
 		77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPathExtensionTests.swift; sourceTree = "<group>"; };
 		77450357203C745B00BED2D9 /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
-		77450359203C76A500BED2D9 /* BoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoneTests.swift; sourceTree = "<group>"; };
 		7745035B203CAA8C00BED2D9 /* Skeleton+Atlases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Atlases.swift"; sourceTree = "<group>"; };
 		7745035D203CAB4200BED2D9 /* Skeleton+Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Physics.swift"; sourceTree = "<group>"; };
 		7745035F203CAC6900BED2D9 /* Skeleton+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Animations.swift"; sourceTree = "<group>"; };
 		774D0C8F203CD62900EC5156 /* Skeleton+Defaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Defaultable.swift"; sourceTree = "<group>"; };
 		774D0C91203D95A200EC5156 /* Skeleton+Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+Points.swift"; sourceTree = "<group>"; };
-		774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeleton+PointsTests.swift"; sourceTree = "<group>"; };
-		7755D4232020F14D005275DA /* SkinModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModelsTests.swift; sourceTree = "<group>"; };
 		775D969320336DCC00137B38 /* BezierCurveSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveSolver.swift; sourceTree = "<group>"; };
 		776656E2202B9D3A00750189 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		776656E6202BADBB00750189 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
@@ -271,15 +199,12 @@
 		77689EFC203EEB10002E0FDB /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77689EFE203EEB10002E0FDB /* Spine_watchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine_watchOS.h; sourceTree = "<group>"; };
 		77689EFF203EEB10002E0FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModelsTests.swift; sourceTree = "<group>"; };
 		77869DE82037856F00404AC8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		77869DEF20386A8D00404AC8 /* CGPath+Spine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPath+Spine.swift"; sourceTree = "<group>"; };
-		77880A412024BB50004DC555 /* AnimationModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModelsTests.swift; sourceTree = "<group>"; };
 		779AC335201B49B900C33B79 /* SkeletonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModel.swift; sourceTree = "<group>"; };
 		779AC339201B4A8A00C33B79 /* ConstraintsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsModels.swift; sourceTree = "<group>"; };
 		779AC33F201B4BC200C33B79 /* SkinModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinModels.swift; sourceTree = "<group>"; };
 		779AC343201B4C4D00C33B79 /* AnimationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModels.swift; sourceTree = "<group>"; };
-		779AC345201BC28900C33B79 /* SkeletonModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonModelTests.swift; sourceTree = "<group>"; };
 		779B7140202E4D060031DD4F /* AnimationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTests.swift; sourceTree = "<group>"; };
 		77DBA2A6202A19D900D35306 /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		77DBA2A8202A1FE400D35306 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
@@ -287,7 +212,6 @@
 		77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinTests.swift; sourceTree = "<group>"; };
 		77E5A8C6202CED6F00ACDC0D /* Prefixable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prefixable.swift; sourceTree = "<group>"; };
 		77E6FFB52029C8510078923C /* Bone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bone.swift; sourceTree = "<group>"; };
-		77E6FFB72029D2110078923C /* ColorModelTets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModelTets.swift; sourceTree = "<group>"; };
 		77F1D5E9201A490400AF499B /* Spine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F1D5EC201A490400AF499B /* Spine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spine.h; sourceTree = "<group>"; };
 		77F1D5ED201A490400AF499B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -355,44 +279,9 @@
 		770640A12028F97A0031BD32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7706409D2028F8460031BD32 /* spineboy-pro.json */,
+				771DE59023ED7BED00BDA778 /* spineboy-pro.json */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */ = {
-			isa = PBXGroup;
-			children = (
-				773E8FDD2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift */,
-				773E8FDF2024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift */,
-				773E8FE12024F04D009E38BD /* BoneKeyframeScaleModelTests.swift */,
-				773E8FE32024F1F4009E38BD /* BoneKeyframeShearModelTests.swift */,
-				773E8FE52024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift */,
-				773E8FE72024F545009E38BD /* SlotKeyframeColorModelTests.swift */,
-				773E8FE92024F707009E38BD /* IKConstraintKeyframeModelTests.swift */,
-				773E8FED2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift */,
-				773E8FEF2024F9B2009E38BD /* DeformKeyframeModelTests.swift */,
-				773E8FF12024FAD8009E38BD /* EventKeyfarameModelTests.swift */,
-				773E8FF32024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift */,
-			);
-			path = AnimationKeyframesModelsTests;
-			sourceTree = "<group>";
-		};
-		77450353203C716200BED2D9 /* Extensions Tests */ = {
-			isa = PBXGroup;
-			children = (
-				77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */,
-				774D0C93203DA53400EC5156 /* Skeleton+PointsTests.swift */,
-			);
-			path = "Extensions Tests";
-			sourceTree = "<group>";
-		};
-		77450356203C742B00BED2D9 /* Utilites Tests */ = {
-			isa = PBXGroup;
-			children = (
-				77450357203C745B00BED2D9 /* ColorTests.swift */,
-			);
-			path = "Utilites Tests";
 			sourceTree = "<group>";
 		};
 		77689E54203EE2A3002E0FDB /* Spine-macOS */ = {
@@ -487,21 +376,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		779B7143202E4D390031DD4F /* Model Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7706409F2028F86C0031BD32 /* SpineModelTests.swift */,
-				779AC345201BC28900C33B79 /* SkeletonModelTests.swift */,
-				776912F3201F9A2B00DE909F /* ConstraintsModelsTests.swift */,
-				7755D4232020F14D005275DA /* SkinModelsTests.swift */,
-				7706409B2028D17F0031BD32 /* EventModelTests.swift */,
-				77880A412024BB50004DC555 /* AnimationModelsTests.swift */,
-				77E6FFB72029D2110078923C /* ColorModelTets.swift */,
-				773E8FDC2024ED2E009E38BD /* AnimationKeyframesModelsTests */,
-			);
-			path = "Model Tests";
-			sourceTree = "<group>";
-		};
 		77F1D5DF201A490400AF499B = {
 			isa = PBXGroup;
 			children = (
@@ -554,10 +428,9 @@
 			children = (
 				779B7140202E4D060031DD4F /* AnimationTests.swift */,
 				77E5A8C4202CDFC000ACDC0D /* SkinTests.swift */,
-				77450359203C76A500BED2D9 /* BoneTests.swift */,
-				779B7143202E4D390031DD4F /* Model Tests */,
-				77450356203C742B00BED2D9 /* Utilites Tests */,
-				77450353203C716200BED2D9 /* Extensions Tests */,
+				7706409F2028F86C0031BD32 /* SpineModelTests.swift */,
+				77450357203C745B00BED2D9 /* ColorTests.swift */,
+				77450354203C71AA00BED2D9 /* CGPathExtensionTests.swift */,
 				770640A12028F97A0031BD32 /* Resources */,
 				77F1D5F9201A490400AF499B /* Info.plist */,
 			);
@@ -811,7 +684,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77689E9B203EE328002E0FDB /* spineboy-pro.json in Resources */,
+				771DE59223ED7BED00BDA778 /* spineboy-pro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,7 +699,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77689EE9203EE9E9002E0FDB /* spineboy-pro.json in Resources */,
+				771DE59323ED7BED00BDA778 /* spineboy-pro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,7 +721,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7706409E2028F8460031BD32 /* spineboy-pro.json in Resources */,
+				771DE59123ED7BED00BDA778 /* spineboy-pro.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,30 +766,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77689E90203EE314002E0FDB /* BoneKeyframeShearModelTests.swift in Sources */,
-				77689E8A203EE30E002E0FDB /* EventModelTests.swift in Sources */,
 				77689E98203EE31D002E0FDB /* ColorTests.swift in Sources */,
-				77689E95203EE314002E0FDB /* DeformKeyframeModelTests.swift in Sources */,
-				77689E87203EE30E002E0FDB /* SkeletonModelTests.swift in Sources */,
-				77689E88203EE30E002E0FDB /* ConstraintsModelsTests.swift in Sources */,
-				77689E91203EE314002E0FDB /* SlotKeyframeAttachmentModelTests.swift in Sources */,
 				77689E84203EE307002E0FDB /* SkinTests.swift in Sources */,
-				77689E8C203EE30E002E0FDB /* ColorModelTets.swift in Sources */,
-				77689E85203EE307002E0FDB /* BoneTests.swift in Sources */,
-				77689E8F203EE314002E0FDB /* BoneKeyframeScaleModelTests.swift in Sources */,
-				77689E89203EE30E002E0FDB /* SkinModelsTests.swift in Sources */,
-				77689E8B203EE30E002E0FDB /* AnimationModelsTests.swift in Sources */,
-				77689E8D203EE314002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */,
-				77689E8E203EE314002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */,
-				77689E94203EE314002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */,
-				77689E92203EE314002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */,
-				77689E96203EE314002E0FDB /* EventKeyfarameModelTests.swift in Sources */,
-				77689E9C203EE625002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */,
-				77689E93203EE314002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */,
 				77689E99203EE323002E0FDB /* CGPathExtensionTests.swift in Sources */,
 				77689E83203EE307002E0FDB /* AnimationTests.swift in Sources */,
 				77689E86203EE30E002E0FDB /* SpineModelTests.swift in Sources */,
-				77689E9A203EE323002E0FDB /* Skeleton+PointsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,30 +812,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77689EE5203EE9DD002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */,
-				77689EDE203EE9DD002E0FDB /* BoneKeyframeShearModelTests.swift in Sources */,
-				77689ED8203EE9D7002E0FDB /* EventModelTests.swift in Sources */,
 				77689EE6203EE9E0002E0FDB /* ColorTests.swift in Sources */,
-				77689EE3203EE9DD002E0FDB /* DeformKeyframeModelTests.swift in Sources */,
-				77689ED5203EE9D7002E0FDB /* SkeletonModelTests.swift in Sources */,
-				77689ED6203EE9D7002E0FDB /* ConstraintsModelsTests.swift in Sources */,
-				77689EDF203EE9DD002E0FDB /* SlotKeyframeAttachmentModelTests.swift in Sources */,
 				77689ED2203EE9D1002E0FDB /* SkinTests.swift in Sources */,
-				77689EDA203EE9D7002E0FDB /* ColorModelTets.swift in Sources */,
-				77689ED3203EE9D1002E0FDB /* BoneTests.swift in Sources */,
-				77689EDD203EE9DD002E0FDB /* BoneKeyframeScaleModelTests.swift in Sources */,
-				77689ED7203EE9D7002E0FDB /* SkinModelsTests.swift in Sources */,
-				77689ED9203EE9D7002E0FDB /* AnimationModelsTests.swift in Sources */,
-				77689EDB203EE9DD002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */,
-				77689EDC203EE9DD002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */,
-				77689EE2203EE9DD002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */,
-				77689EE0203EE9DD002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */,
-				77689EE4203EE9DD002E0FDB /* EventKeyfarameModelTests.swift in Sources */,
-				77689EE1203EE9DD002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */,
 				77689EE7203EE9E5002E0FDB /* CGPathExtensionTests.swift in Sources */,
 				77689ED1203EE9D1002E0FDB /* AnimationTests.swift in Sources */,
 				77689ED4203EE9D7002E0FDB /* SpineModelTests.swift in Sources */,
-				77689EE8203EE9E5002E0FDB /* Skeleton+PointsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,30 +892,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77880A422024BB50004DC555 /* AnimationModelsTests.swift in Sources */,
-				7745035A203C76A500BED2D9 /* BoneTests.swift in Sources */,
-				773E8FE62024F46A009E38BD /* SlotKeyframeAttachmentModelTests.swift in Sources */,
 				779B7141202E4D060031DD4F /* AnimationTests.swift in Sources */,
-				773E8FF22024FAD9009E38BD /* EventKeyfarameModelTests.swift in Sources */,
-				773E8FF42024FC2A009E38BD /* DrawOrderKeyframeModelTests.swift in Sources */,
-				773E8FF02024F9B2009E38BD /* DeformKeyframeModelTests.swift in Sources */,
-				773E8FE42024F1F4009E38BD /* BoneKeyframeShearModelTests.swift in Sources */,
-				7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */,
-				77E6FFB82029D2110078923C /* ColorModelTets.swift in Sources */,
 				770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */,
-				776912F4201F9A2B00DE909F /* ConstraintsModelsTests.swift in Sources */,
 				77450358203C745B00BED2D9 /* ColorTests.swift in Sources */,
-				774D0C94203DA53400EC5156 /* Skeleton+PointsTests.swift in Sources */,
 				77450355203C71AA00BED2D9 /* CGPathExtensionTests.swift in Sources */,
 				77E5A8C5202CDFC000ACDC0D /* SkinTests.swift in Sources */,
-				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
-				773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */,
-				773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */,
-				773E8FEE2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift in Sources */,
-				779AC346201BC28900C33B79 /* SkeletonModelTests.swift in Sources */,
-				773E8FEA2024F707009E38BD /* IKConstraintKeyframeModelTests.swift in Sources */,
-				773E8FE22024F04D009E38BD /* BoneKeyframeScaleModelTests.swift in Sources */,
-				773E8FE82024F545009E38BD /* SlotKeyframeColorModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
