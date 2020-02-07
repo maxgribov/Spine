@@ -29,7 +29,7 @@ struct IKConstraintModel {
      
      - Parameters:
          - name: Required
-         - order: Required
+         - order: Optional, default: 0
          - bones: Required
          - target: Required
          - mix: Optional, default: 1.0
@@ -37,10 +37,10 @@ struct IKConstraintModel {
      
      - Returns: new IKConstraintModel.
      */
-    init(_ name: String, _ order: UInt, _ bones: [String], _ target: String, _ mix: CGFloat?, _ blendPositive: Bool?) {
+    init(_ name: String, _ order: UInt?, _ bones: [String], _ target: String, _ mix: CGFloat?, _ blendPositive: Bool?) {
         
         self.name = name
-        self.order = order
+        self.order = order ?? 0
         self.bones = bones
         self.target = target
         self.mix = mix ?? 1.0
@@ -64,7 +64,7 @@ extension IKConstraintModel: Decodable {
         
         let container = try decoder.container(keyedBy: IKConstraintModelKeys.self)
         let name: String = try container.decode(String.self, forKey: .name)
-        let order: UInt = try container.decode(UInt.self, forKey: .order)
+        let order: UInt? = try container.decodeIfPresent(UInt.self, forKey: .order)
         let bones: [String] = try container.decode([String].self, forKey: .bones)
         let target: String = try container.decode(String.self, forKey: .target)
         let mix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .mix)

@@ -68,7 +68,7 @@ class Skin {
     func texture(with name: String, from atlasName: String) -> SKTexture? {
         
         guard let atlas = atlases?[atlasName],
-              let textureName = atlas.textureNames.first(where: { $0.contains(name) }) else {
+              let textureName = atlas.textureNames.first(where: { $0 == name }) else {
             
             return nil
         }
