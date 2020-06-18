@@ -230,7 +230,7 @@ extension BoneAnimationModel: SpineDecodableDictionary {
     }
     
     typealias KeysType = Keys
-    
+
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
         var timelines = [BoneAnimationTimelineModelType]()
@@ -241,16 +241,23 @@ extension BoneAnimationModel: SpineDecodableDictionary {
                 
             case .rotate:
                 let rotateKeyframes = try container.decode([BoneKeyframeRotateModel].self, forKey: .rotate)
-                timelines.append(BoneAnimationTimelineModelType.rotate(rotateKeyframes))
+                let adjustedRotateKeyframes = adjustedCurves(rotateKeyframes)
+                timelines.append(BoneAnimationTimelineModelType.rotate(adjustedRotateKeyframes))
+
             case .translate:
                 let translateKeyframes = try container.decode([BoneKeyframeTranslateModel].self, forKey: .translate)
-                timelines.append(BoneAnimationTimelineModelType.translate(translateKeyframes))
+                let adjustedTranslateKeyframes = adjustedCurves(translateKeyframes)
+                timelines.append(BoneAnimationTimelineModelType.translate(adjustedTranslateKeyframes))
+
             case .scale:
                 let scaleKeyframes = try container.decode([BoneKeyframeScaleModel].self, forKey: .scale)
-                timelines.append(BoneAnimationTimelineModelType.scale(scaleKeyframes))
+                let adjustedScaleKeyframes = adjustedCurves(scaleKeyframes)
+                timelines.append(BoneAnimationTimelineModelType.scale(adjustedScaleKeyframes))
+
             case .shear:
                 let shearKeyframes = try container.decode([BoneKeyframeShearModel].self, forKey: .shear)
-                timelines.append(BoneAnimationTimelineModelType.shear(shearKeyframes))
+                let adjustedShearKeyframes = adjustedCurves(shearKeyframes)
+                timelines.append(BoneAnimationTimelineModelType.shear(adjustedShearKeyframes))
             }
         }
         
@@ -290,7 +297,8 @@ extension SlotAnimationModel: SpineDecodableDictionary {
                 timelines.append(SlotAnimationTimelineModelType.attachment(attachmentKeyframes))
             case .color:
                 let colorKeyframes = try container.decode([SlotKeyframeColorModel].self, forKey: .color)
-                timelines.append(SlotAnimationTimelineModelType.color(colorKeyframes))
+                let adjustedColorKeyframes = adjustedCurves(colorKeyframes)
+                timelines.append(SlotAnimationTimelineModelType.color(adjustedColorKeyframes))
             }
         }
         
@@ -449,9 +457,33 @@ protocol KeyframeModel {
     var time: TimeInterval { get }
 }
 
-protocol BoneKeyframeModel: KeyframeModel {
-    
-    var curve: CurveModelType { get }
+protocol CurvedKeyframeModel {
+
+    var curve: CurveModelType { get set }
+}
+
+protocol BoneKeyframeModel: CurvedKeyframeModel {
+
+}
+
+/**
+ Most keyframe properties affect how animation behaves *prior* to the keyframe,
+ but curve property affects now animation behaves *after* the keyframe.
+ This function moves curve property of keyframes to consequent keyframes
+ in order to make curve logic consistent with other properties, like position and angle.
+ */
+func adjustedCurves<T:CurvedKeyframeModel>(_ input: [T]) -> [T]
+{
+    var output = [T]()
+    var previousCurve = CurveModelType.linear
+    for frame in input {
+        var adjustedFrame = frame
+        adjustedFrame.curve = previousCurve
+        output.append(adjustedFrame)
+        previousCurve = frame.curve
+    }
+
+    return output
 }
 
 //MARK: Bone Rotate Keyframe
@@ -459,7 +491,7 @@ protocol BoneKeyframeModel: KeyframeModel {
 struct BoneKeyframeRotateModel: BoneKeyframeModel {
     
     let time: TimeInterval
-    let curve: CurveModelType
+    var curve: CurveModelType
     let angle: CGFloat
     
     init(_ time: TimeInterval?, _ curve: String?, _ angle: CGFloat?) {
@@ -518,7 +550,7 @@ extension BoneKeyframeRotateModel: Decodable {
 struct BoneKeyframeTranslateModel: BoneKeyframeModel {
     
     let time: TimeInterval
-    let curve: CurveModelType
+    var curve: CurveModelType
     let position: CGPoint
     
     init(_ time: TimeInterval?, _ curve: String?, _ x: CGFloat?, _ y: CGFloat?) {
@@ -579,7 +611,7 @@ extension BoneKeyframeTranslateModel: Decodable {
 struct BoneKeyframeScaleModel: BoneKeyframeModel {
     
     let time: TimeInterval
-    let curve: CurveModelType
+    var curve: CurveModelType
     let scale: CGVector
     
     init(_ time: TimeInterval?, _ curve: String?, _ x: CGFloat?, _ y: CGFloat?) {
@@ -640,7 +672,7 @@ extension BoneKeyframeScaleModel: Decodable {
 struct BoneKeyframeShearModel: BoneKeyframeModel {
     
     let time: TimeInterval
-    let curve: CurveModelType
+    var curve: CurveModelType
     let shear: CGVector
     
     init(_ time: TimeInterval?, _ curve: String?, _ x: CGFloat?, _ y: CGFloat?) {
@@ -734,11 +766,11 @@ extension SlotKeyframeAttachmentModel: Decodable {
 
 //MARK: Slot Color Keyframe
 
-struct SlotKeyframeColorModel: SlotKeyframeModel {
+struct SlotKeyframeColorModel: SlotKeyframeModel, CurvedKeyframeModel {
     
     let time: TimeInterval
     let color: ColorModel
-    let curve: CurveModelType
+    var curve: CurveModelType
     
     init(_ time: TimeInterval?, _ color: String, _ curve: String?) {
         
