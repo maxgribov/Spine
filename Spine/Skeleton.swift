@@ -11,7 +11,7 @@ import SpriteKit
 public class Skeleton: SKNode {
     
     /**
-     Cloasure that is called each time an event animation is triggered.
+     Closure that is called each time an event animation is triggered.
      The events represented by the 'EventModel' model
      
      See more information about events:
