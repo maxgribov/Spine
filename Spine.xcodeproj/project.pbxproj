@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		546EC4D12718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
+		546EC4D22718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
+		546EC4D32718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
+		546EC4D42718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
+		546EC4D52718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
+		546EC4D62718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
+		546EC4D72718E9B500C0AD63 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546EC4D02718E9B500C0AD63 /* Debugging.swift */; };
 		7706409C2028D17F0031BD32 /* EventModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409B2028D17F0031BD32 /* EventModelTests.swift */; };
 		7706409E2028F8460031BD32 /* spineboy-pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 7706409D2028F8460031BD32 /* spineboy-pro.json */; };
 		770640A02028F86C0031BD32 /* SpineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7706409F2028F86C0031BD32 /* SpineModelTests.swift */; };
@@ -224,6 +231,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		546EC4D02718E9B500C0AD63 /* Debugging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
 		7706409B2028D17F0031BD32 /* EventModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModelTests.swift; sourceTree = "<group>"; };
 		7706409D2028F8460031BD32 /* spineboy-pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "spineboy-pro.json"; sourceTree = "<group>"; };
 		7706409F2028F86C0031BD32 /* SpineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpineModelTests.swift; sourceTree = "<group>"; };
@@ -452,6 +460,7 @@
 			children = (
 				77869DE82037856F00404AC8 /* Color.swift */,
 				775D969320336DCC00137B38 /* BezierCurveSolver.swift */,
+				546EC4D02718E9B500C0AD63 /* Debugging.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -881,6 +890,7 @@
 				77689E81203EE2FA002E0FDB /* CGPath+Spine.swift in Sources */,
 				77689E74203EE2E0002E0FDB /* SkinModels.swift in Sources */,
 				77689E75203EE2E0002E0FDB /* EventModel.swift in Sources */,
+				546EC4D32718E9B500C0AD63 /* Debugging.swift in Sources */,
 				77689E7E203EE2FA002E0FDB /* Skeleton+Skins.swift in Sources */,
 				77689E6C203EE2C8002E0FDB /* Bone.swift in Sources */,
 				77689E70203EE2DB002E0FDB /* Animation.swift in Sources */,
@@ -910,6 +920,7 @@
 				77689E8E203EE314002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */,
 				77689E94203EE314002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */,
 				77689E92203EE314002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */,
+				546EC4D42718E9B500C0AD63 /* Debugging.swift in Sources */,
 				77689E96203EE314002E0FDB /* EventKeyfarameModelTests.swift in Sources */,
 				77689E9C203EE625002E0FDB /* DrawOrderKeyframeModelTests.swift in Sources */,
 				77689E93203EE314002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */,
@@ -946,6 +957,7 @@
 				77689ECF203EE9C8002E0FDB /* CGPath+Spine.swift in Sources */,
 				77689EC2203EE9BD002E0FDB /* SkinModels.swift in Sources */,
 				77689EC3203EE9BD002E0FDB /* EventModel.swift in Sources */,
+				546EC4D52718E9B500C0AD63 /* Debugging.swift in Sources */,
 				77689ECC203EE9C8002E0FDB /* Skeleton+Skins.swift in Sources */,
 				77689EBA203EE9B9002E0FDB /* Bone.swift in Sources */,
 				77689EBE203EE9B9002E0FDB /* Animation.swift in Sources */,
@@ -975,6 +987,7 @@
 				77689EDB203EE9DD002E0FDB /* BoneKeyframeRotateModelTests.swift in Sources */,
 				77689EDC203EE9DD002E0FDB /* BoneKeyframeTranslateModelTests.swift in Sources */,
 				77689EE2203EE9DD002E0FDB /* TransformConstraintKeyframeModelTests.swift in Sources */,
+				546EC4D62718E9B500C0AD63 /* Debugging.swift in Sources */,
 				77689EE0203EE9DD002E0FDB /* SlotKeyframeColorModelTests.swift in Sources */,
 				77689EE4203EE9DD002E0FDB /* EventKeyfarameModelTests.swift in Sources */,
 				77689EE1203EE9DD002E0FDB /* IKConstraintKeyframeModelTests.swift in Sources */,
@@ -1011,6 +1024,7 @@
 				77689F1A203EEB73002E0FDB /* CGPath+Spine.swift in Sources */,
 				77689F0D203EEB68002E0FDB /* SkinModels.swift in Sources */,
 				77689F0E203EEB68002E0FDB /* EventModel.swift in Sources */,
+				546EC4D72718E9B500C0AD63 /* Debugging.swift in Sources */,
 				77689F17203EEB73002E0FDB /* Skeleton+Skins.swift in Sources */,
 				77689F05203EEB64002E0FDB /* Bone.swift in Sources */,
 				77689F09203EEB64002E0FDB /* Animation.swift in Sources */,
@@ -1045,6 +1059,7 @@
 				7745035C203CAA8C00BED2D9 /* Skeleton+Atlases.swift in Sources */,
 				773E8FF62024FE2D009E38BD /* EventModel.swift in Sources */,
 				77869DF020386A8D00404AC8 /* CGPath+Spine.swift in Sources */,
+				546EC4D12718E9B500C0AD63 /* Debugging.swift in Sources */,
 				779AC336201B49B900C33B79 /* SkeletonModel.swift in Sources */,
 				77F75105203760050065AECE /* Defaultable.swift in Sources */,
 				774D0C92203D95A200EC5156 /* Skeleton+Points.swift in Sources */,
@@ -1074,6 +1089,7 @@
 				77450355203C71AA00BED2D9 /* CGPathExtensionTests.swift in Sources */,
 				77E5A8C5202CDFC000ACDC0D /* SkinTests.swift in Sources */,
 				7755D4242020F14D005275DA /* SkinModelsTests.swift in Sources */,
+				546EC4D22718E9B500C0AD63 /* Debugging.swift in Sources */,
 				773E8FDE2024ED4B009E38BD /* BoneKeyframeRotateModelTests.swift in Sources */,
 				773E8FE02024EDF8009E38BD /* BoneKeyframeTranslateModelTests.swift in Sources */,
 				773E8FEE2024F856009E38BD /* TransformConstraintKeyframeModelTests.swift in Sources */,

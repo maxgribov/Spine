@@ -63,6 +63,8 @@ public class Skeleton: SKNode {
      - parameter name: Spine JSON file name.
      - parameter folder: name of the folder with image atlases. *optional*
      - parameter skin: the name of the skin that you want to apply to 'Skeleton'. *optional*
+
+     - returns: Returns a new skeleton or `nil` if error occures.
      */
     public convenience init?(fromJSON name: String, atlas folder: String? = nil, skin: String? = nil) {
         
@@ -73,6 +75,30 @@ public class Skeleton: SKNode {
                 return nil
         }
         
+        self.init(model, atlas: folder)
+        applySkin(named: skin)
+    }
+
+    /**
+     Сreates a skeleton node based on the json file stored in the bundle application.
+
+     The initializer may fail, so returning value *optional*
+
+     See more information about Spine:
+     http://esotericsoftware.com/spine-basic-concepts
+
+     - parameter name: Spine JSON file name.
+     - parameter folder: name of the folder with image atlases. *optional*
+     - parameter skin: the name of the skin that you want to apply to 'Skeleton'. *optional*
+
+     - throws: Throws a debuggable error.
+     */
+    public convenience init(JSON name: String, atlas folder: String? = nil, skin: String? = nil) throws {
+
+        let url = try unwrap(Bundle.main.url(forResource: name, withExtension: "json"))
+        let json = try Data(contentsOf: url)
+        let model = try JSONDecoder().decode(SpineModel.self, from: json)
+
         self.init(model, atlas: folder)
         applySkin(named: skin)
     }
