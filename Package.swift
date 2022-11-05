@@ -14,7 +14,8 @@ let package = Package(
         .testTarget(name: "SpineTests",
                     dependencies: ["Spine"],
                     resources: [
-                        .process("Resources/spineboy-ess.json")
+                        .process("Resources/spineboy-ess.json"),
+                        .process("Resources/skeleton.json")
                     ])
     ]
 )

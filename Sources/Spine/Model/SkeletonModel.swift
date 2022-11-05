@@ -15,6 +15,8 @@ struct SkeletonModel {
     let hash: String
     ///The version of Spine that exported the data. This can be used by tools to enforce a particular Spine version to be used.
     let spine: String
+    /// The x,y coordinates of the bottom left corner of the AABB for the skeleton's attachments as it was in the setup pose in Spine.
+    let position: CGPoint
     /**
      The AABB size for the skeleton's attachments as it was in the setup pose in Spine
      
@@ -26,54 +28,33 @@ struct SkeletonModel {
     let fps: CGFloat
     
     ///The images path, as it was in Spine. Nonessential.
-    let path: String?
-
-    /**
-     Initializes a new SkeletonModel.
-     
-     - Parameters:
-        - hash: Required
-        - spine: Required
-        - width: Required
-        - height: Required
-        - fps: Optional, default: 30.0
-        - path: Optional
-     
-     - Returns: new SkeletonModel.
-     */
-    init(_ hash: String, _ spine: String, _ width: CGFloat, _ height: CGFloat, _ fps: CGFloat?, _ path: String?) {
-        
-        self.hash = hash
-        self.spine = spine
-        self.size = CGSize(width: width, height: height)
-        self.fps = fps ?? 30
-        self.path = path
-    }
+    let images: String?
+    
+    /// The audio path, as it was in Spine. Nonessential.
+    let audio: String?
 }
 
 extension SkeletonModel: Decodable {
     
     enum Keys: String, CodingKey {
         
-        case hash
-        case spine
-        case width
-        case height
-        case fps
-        case path = "images"
+        case hash, spine, x, y, width, height, fps, images, audio
     }
     
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
-        let hash: String = try container.decode(String.self, forKey: .hash)
-        let spine: String = try container.decode(String.self, forKey: .spine)
-        let width: CGFloat = try container.decode(CGFloat.self, forKey: .width)
-        let height: CGFloat = try container.decode(CGFloat.self, forKey: .height)
-        let fps: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .fps)
-        let path: String? = try container.decodeIfPresent(String.self, forKey: .path)
-        
-        self.init(hash, spine, width, height, fps, path)
+        hash = try container.decode(String.self, forKey: .hash)
+        spine = try container.decode(String.self, forKey: .spine)
+        let x = try container.decode(CGFloat.self, forKey: .x)
+        let y = try container.decode(CGFloat.self, forKey: .y)
+        position = .init(x: x, y: y)
+        let width = try container.decode(CGFloat.self, forKey: .width)
+        let height = try container.decode(CGFloat.self, forKey: .height)
+        size = .init(width: width, height: height)
+        fps = try container.decodeIfPresent(CGFloat.self, forKey: .fps) ?? 30
+        images = try container.decodeIfPresent(String.self, forKey: .images)
+        audio = try container.decodeIfPresent(String.self, forKey: .audio)
     }
 }
 
