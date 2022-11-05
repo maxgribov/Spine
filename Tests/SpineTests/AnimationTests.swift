@@ -60,3 +60,4 @@ class AnimationTests: XCTestCase {
         XCTAssertEqual(action.timingFunction(1.0), 1.0, accuracy: Float.ulpOfOne)
     }
 }
+

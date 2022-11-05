@@ -1,12 +1,20 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
     name: "Spine",
+    platforms: [
+        .iOS(.v8), .macOS(.v10_10), .tvOS(.v9), .watchOS(.v3)
+    ],
     products: [
         .library(name: "Spine", targets: ["Spine"]),
     ],
     targets: [
-        .target(name: "Spine", path: "Spine"),
+        .target(name: "Spine"),
+        .testTarget(name: "SpineTests",
+                    dependencies: ["Spine"],
+                    resources: [
+                        .process("Resources/spineboy-pro.json")
+                    ])
     ]
 )
