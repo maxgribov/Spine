@@ -16,7 +16,8 @@ let package = Package(
                     resources: [
                         .process("Resources/spineboy-ess.json"),
                         .process("Resources/skeleton.json"),
-                        .process("Resources/bones.json")
+                        .process("Resources/bones.json"),
+                        .process("Resources/slots.json")
                     ])
     ]
 )

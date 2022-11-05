@@ -1,0 +1,104 @@
+[{
+        "name": "rear-upper-arm",
+        "bone": "rear-upper-arm",
+        "attachment": "rear-upper-arm"
+    },
+    {
+        "name": "head-bb",
+        "bone": "head"
+    },
+    {
+        "name": "rear-bracer",
+        "bone": "rear-bracer",
+        "attachment": "rear-bracer"
+    },
+    {
+        "name": "gun",
+        "bone": "gun",
+        "attachment": "gun"
+    },
+    {
+        "name": "rear-foot",
+        "bone": "rear-foot",
+        "attachment": "rear-foot"
+    },
+    {
+        "name": "rear-thigh",
+        "bone": "rear-thigh",
+        "attachment": "rear-thigh"
+    },
+    {
+        "name": "rear-shin",
+        "bone": "rear-shin",
+        "attachment": "rear-shin"
+    },
+    {
+        "name": "neck",
+        "bone": "neck",
+        "attachment": "neck"
+    },
+    {
+        "name": "torso",
+        "bone": "torso",
+        "attachment": "torso"
+    },
+    {
+        "name": "front-upper-arm",
+        "bone": "front-upper-arm",
+        "attachment": "front-upper-arm"
+    },
+    {
+        "name": "head",
+        "bone": "head",
+        "attachment": "head"
+    },
+    {
+        "name": "eye",
+        "bone": "head",
+        "attachment": "eye-indifferent"
+    },
+    {
+        "name": "front-thigh",
+        "bone": "front-thigh",
+        "attachment": "front-thigh"
+    },
+    {
+        "name": "front-foot",
+        "bone": "front-foot",
+        "attachment": "front-foot"
+    },
+    {
+        "name": "front-shin",
+        "bone": "front-shin",
+        "attachment": "front-shin"
+    },
+    {
+        "name": "mouth",
+        "bone": "head",
+        "attachment": "mouth-smile"
+    },
+    {
+        "name": "goggles",
+        "bone": "head",
+        "attachment": "goggles"
+    },
+    {
+        "name": "front-bracer",
+        "bone": "front-bracer",
+        "attachment": "front-bracer"
+    },
+    {
+        "name": "front-fist",
+        "bone": "front-fist",
+        "attachment": "front-fist-closed"
+    },
+    {
+        "name": "muzzle",
+        "bone": "gun-tip",
+        "blend": "additive"
+    },
+    {
+        "name": "head-bb",
+        "bone": "head"
+    }
+]
