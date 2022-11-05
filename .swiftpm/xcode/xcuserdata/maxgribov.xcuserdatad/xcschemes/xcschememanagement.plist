@@ -22,6 +22,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>Spine_SpineTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>

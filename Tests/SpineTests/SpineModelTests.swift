@@ -14,7 +14,7 @@ class SpineModelTests: XCTestCase {
     func testDecodable() {
         
         // given
-        guard let url = Bundle.module.url(forResource: "spineboy-pro", withExtension: "json") else {
+        guard let url = Bundle.module.url(forResource: "spineboy-ess", withExtension: "json") else {
             
             XCTFail("Missing file spineboy-pro.json")
             return
