@@ -8,8 +8,10 @@
 import SpriteKit
 
 ///The bones section describes the bones in the setup pose.
-struct BoneModel {
+struct BoneModel: Identifiable {
     
+    /// The bone id.
+    var id: String { name }
     ///The bone name. This is unique for the skeleton.
     let name: String
     ///Parent bone. Nil if omitted.
