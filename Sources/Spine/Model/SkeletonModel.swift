@@ -34,6 +34,8 @@ struct SkeletonModel {
     let audio: String?
 }
 
+//MARK: - Decodable
+
 extension SkeletonModel: Decodable {
     
     enum Keys: String, CodingKey {
@@ -58,147 +60,6 @@ extension SkeletonModel: Decodable {
     }
 }
 
-//MARK: - Bone
-
-///The bones section describes the bones in the setup pose.
-struct BoneModel {
-    
-    ///The bone name. This is unique for the skeleton.
-    let name: String
-    ///Parent bone. Nil if omitted.
-    let parent: String?
-    ///The length of the bone. The bone length is not typically used at runtime except to draw debug lines for the bones. Assume 0 if omitted.
-    let lenght: CGFloat
-    ///Determines how parent bone transforms are inherited: normal, onlyTranslation, noRotationOrReflection, noScale, or noScaleOrReflection. Assume normal if omitted.
-    let transform: BoneTransformModelType
-    /**
-     The position of the bone relative to the parent for the setup pose.
-     
-     - x: The X position of the bone relative to the parent for the setup pose. Assume 0 if omitted.
-     - y: The Y position of the bone relative to the parent for the setup pose. Assume 0 if omitted.
-     */
-    let position: CGPoint
-    ///The rotation in degrees of the bone relative to the parent for the setup pose. Assume 0 if omitted.
-    let rotation: CGFloat
-    /**
-     The scale of the bone for the setup pose.
-     
-     - dx: The X scale of the bone for the setup pose. Assume 1 if omitted.
-     - dy: The Y scale of the bone for the setup pose. Assume 1 if omitted.
-     */
-    let scale: CGVector
-    /**
-     The shear of the bone for the setup pose.
-     
-     - dx: The X shear of the bone for the setup pose. Assume 0 if omitted.
-     - dy: The Y shear of the bone for the setup pose. Assume 0 if omitted.
-     */
-    let shear: CGVector
-    ///False if scale from parent bones should not affect this bone. Assume true if omitted.
-    let inheritScale: Bool
-    ///False if rotation from parent bones should not affect this bone. Assume true if omitted.
-    let inheritRotation: Bool
-    ///The color of the bone, as it was in Spine. Assume 0x989898FF RGBA if omitted. Nonessential.
-    let color: ColorModel
-    
-    /**
-     Initializes a new BoneModel.
-     
-     - Parameters:
-         - name: Required
-         - parent: Optional
-         - lenght: Optional, default: 0
-         - transform: Optional, default: .normal
-         - x: Optional, default: 0
-         - y: Optional, default: 0
-         - rotation: Optional, default: 0
-         - scaleX: Optional, default: 1.0
-         - scaleY: Optional, default: 1.0
-         - shearX: Optional, default: 0
-         - shearY: Optional, default: 0
-         - inheritScale: Optional, default: true
-         - inheritRotation: Optional, default: true
-         - color: Optional, default: 0x989898FF
-
-     - Returns: new BoneModel.
-     */
-    init(_ name: String, _ parent: String?, _ lenght: CGFloat?, _ transform: String?, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ scaleX: CGFloat?, _ scaleY: CGFloat?, _ shearX: CGFloat?, _ shearY: CGFloat?, _ inheritScale: Bool?, _ inheritRotation: Bool?, _ color: String?) {
-        
-        self.name = name
-        self.parent = parent
-        self.lenght = lenght ?? 0
-        self.transform = BoneTransformModelType(transform ?? "normal")
-        self.position = CGPoint(x: x ?? 0, y: y ?? 0)
-        self.rotation = rotation ?? 0
-        self.scale = CGVector(dx: scaleX ?? 1.0, dy: scaleY ?? 1.0)
-        self.shear = CGVector(dx: shearX ?? 0, dy: shearY ?? 0)
-        self.inheritScale = inheritScale ?? true
-        self.inheritRotation = inheritRotation ?? true
-        self.color = ColorModel(color ?? "989898FF")
-    }
-    
-    enum BoneTransformModelType: String {
-        
-        case normal
-        case onlyTranslation
-        case noRotationOrReflection
-        case noScale
-        case noScaleOrReflection
-        
-        init(_ transform: String ) {
-            
-            if let transform = BoneTransformModelType(rawValue: transform) {
-                
-                self = transform
-                
-            } else {
-                
-                self = .normal
-            }
-        }
-    }
-}
-
-extension BoneModel: Decodable {
-
-    enum Keys: String, CodingKey {
-        case name
-        case parent
-        case length
-        case transform
-        case x
-        case y
-        case rotation
-        case scaleX
-        case scaleY
-        case shearX
-        case shearY
-        case inheritScale
-        case inheritRotation
-        case color
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let name: String = try container.decode(String.self, forKey: .name)
-        let parent: String? = try container.decodeIfPresent(String.self, forKey: .parent)
-        let lenght: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .length)
-        let transform: String? = try container.decodeIfPresent(String.self, forKey: .transform)
-        let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
-        let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
-        let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
-        let scaleX: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .scaleX)
-        let scaleY: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .scaleY)
-        let shearX: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .shearX)
-        let shearY: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .shearY)
-        let inheritScale: Bool? = try container.decodeIfPresent(Bool.self, forKey: .inheritScale)
-        let inheritRotation: Bool? = try container.decodeIfPresent(Bool.self, forKey: .inheritRotation)
-        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
-        
-        self.init(name, parent, lenght, transform, x, y, rotation, scaleX, scaleY, shearX, shearY, inheritScale, inheritRotation, color)
-    }
-}
 
 //MARK: - Slot
 
