@@ -7,8 +7,6 @@
 
 import SpriteKit
 
-//TODO: - Tests
-
 ///This section describes the IK constraints
 struct IKConstraintModel {
     
@@ -36,7 +34,8 @@ struct IKConstraintModel {
     let uniform: Bool
 }
 
-//MARK: - Decodagle
+//MARK: - Decodable
+
 extension IKConstraintModel: Decodable {
     
     enum Keys: String, CodingKey {
@@ -44,6 +43,7 @@ extension IKConstraintModel: Decodable {
         case name, order, skin, bones, target, mix, softness, bendPositive, compress, stretch, uniform
     }
     
+    //TODO: - Tests
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: Keys.self)
