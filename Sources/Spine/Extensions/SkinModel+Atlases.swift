@@ -11,12 +11,7 @@ import Foundation
 extension SkinModel {
     
     func atlasesNames() -> [String]? {
-        
-        guard let slots = slots else {
-            
-            return nil
-        }
-        
+
         var names = Set<String>()
         
         for slot in slots {

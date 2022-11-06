@@ -35,12 +35,7 @@ extension Skeleton {
         
         for skin in skins {
             
-            guard let slotsModels = skin.model.slots else {
-                
-                continue
-            }
-            
-            for slotModel in slotsModels {
+            for slotModel in skin.model.slots {
                 
                 guard let slot = slots?.first(where: { $0.model.name == slotModel.name }),
                     let attachmentsModels = slotModel.attachments else {

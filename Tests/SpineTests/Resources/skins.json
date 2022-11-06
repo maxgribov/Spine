@@ -1,0 +1,41 @@
+[{
+        "name": "default",
+        "attachments": {
+            "eye_left": {
+                "eye_left": {
+                    "width": 19,
+                    "height": 19
+                }
+            },
+            "moustache": {
+                "moustache": {
+                    "x": -1.41,
+                    "y": 3.52,
+                    "width": 51,
+                    "height": 19
+                }
+            }
+        }
+    },
+    {
+        "name": "blue",
+        "attachments": {
+            "body_skin": {
+                "body_skin": {
+                    "name": "body_blue",
+                    "x": 11.62,
+                    "y": 56.67,
+                    "width": 117,
+                    "height": 118
+                }
+            },
+            "eyebrow_left": {
+                "eyebrow_left_skin": {
+                    "name": "eyebrow_left",
+                    "width": 18,
+                    "height": 11
+                }
+            }
+        }
+    }
+]

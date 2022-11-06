@@ -79,6 +79,7 @@ class Skin {
 
 //MARK: - Atlases Names Helpers
 
+//TODO: refactor
 func textureName(from name: String, actualName: String? , path: String?) -> String {
     
     let resultName = path ?? actualName ?? name
@@ -90,7 +91,7 @@ func textureName(from name: String, actualName: String? , path: String?) -> Stri
 func textureName(for attachmentType: AttachmentModelType ) -> String? {
     
     switch attachmentType {
-    case .region(let region): return textureName(from: region.name, actualName: region.actualName, path: region.path)
+    case .region(let region): return textureName(from: region.name, actualName: region.name, path: region.path)
     case .mesh(let mesh): return textureName(from: mesh.name, actualName: mesh.actualName, path: mesh.path)
     case .linkedMesh(let linkedMesh): return textureName(from: linkedMesh.name, actualName: linkedMesh.actualName, path: linkedMesh.path)
     default: return nil
@@ -116,7 +117,7 @@ func atlasName(from name: String, actualName: String?, path: String?) -> String 
 func atlasName(for attachmentType: AttachmentModelType ) -> String? {
 
     switch attachmentType {
-    case .region(let region): return atlasName(from: region.name, actualName: region.actualName, path: region.path)
+    case .region(let region): return atlasName(from: region.name, actualName: region.name, path: region.path)
     case .mesh(let mesh): return atlasName(from: mesh.name, actualName: mesh.actualName, path: mesh.path)
     case .linkedMesh(let linkedMesh): return atlasName(from: linkedMesh.name, actualName: linkedMesh.actualName, path: linkedMesh.path)
     default: return nil
