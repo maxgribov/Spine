@@ -52,6 +52,14 @@
                     "x": 123.43,
                     "y": 34.23
                 }
+            },
+            "clipping-slot": {
+                "clipping-attachment": {
+                    "type": "clipping",
+                    "end": "path-slot",
+                    "vertexCount": 12,
+                    "vertices": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95]
+                }
             }
         }
     },
