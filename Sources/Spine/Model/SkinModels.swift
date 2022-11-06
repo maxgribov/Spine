@@ -26,48 +26,7 @@ import SpriteKit
 
 //MARK: - Point
 
-struct PointAttachmentModel: AttachmentModel {
 
-    let name: String
-    let actualName: String?
-    let point: CGPoint
-    let rotation: CGFloat
-    let color: ColorModel
-
-    init(_ name: String, _ actualName: String?, _ x: CGFloat?, _ y: CGFloat?, _ rotation: CGFloat?, _ color: String?) {
-        
-        self.name = name
-        self.actualName = actualName
-        self.point = CGPoint(x: x ?? 0, y: y ?? 0)
-        self.rotation = rotation ?? 0
-        self.color = ColorModel(color ?? "F1F100FF")
-    }
-}
-
-extension PointAttachmentModel: SpineDecodableDictionary {
-    
-    enum Keys: String, CodingKey {
-        
-        case name
-        case x
-        case y
-        case rotation
-        case color
-    }
-    
-    typealias KeysType = Keys
-    
-    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
-        
-        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
-        let x: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .x)
-        let y: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .y)
-        let rotation: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotation)
-        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
-        
-        self.init(name, actualName, x, y, rotation, color)
-    }
-}
 
 //MARK: - Clipping
 

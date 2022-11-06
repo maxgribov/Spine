@@ -140,7 +140,7 @@ class PointAttachment: SKShapeNode, Attachment {
     
     func dropToDefaults() {
         
-        self.position = concreteModel.point
+        self.position = concreteModel.position
         self.zRotation = concreteModel.rotation * degreeToRadiansFactor
     }
 }
