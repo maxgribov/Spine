@@ -10,48 +10,7 @@ import SpriteKit
 
 
 
-//MARK: - Bounding Box
 
-struct BoundingBoxAttachmentModel: AttachmentModel {
-    
-    let name: String
-    let actualName: String?
-    let vertexCount: UInt
-    let vertices: [CGFloat]
-    let color: ColorModel
-
-    init(_ name: String, _ actualName: String?, _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
-        
-        self.name = name
-        self.actualName = actualName
-        self.vertexCount = vertexCount
-        self.vertices = vertices
-        self.color = ColorModel(color ?? "60F000FF")
-    }
-}
-
-extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
-    
-    enum Keys: String, CodingKey {
-        
-        case name
-        case vertexCount
-        case vertices
-        case color
-    }
-    
-    typealias KeysType = Keys
-    
-    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
-        
-        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
-        let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
-        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
-        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
-        
-        self.init(name, actualName, vertexCount, vertices, color)
-    }
-}
 
 //MARK: - Mesh
 

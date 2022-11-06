@@ -9,5 +9,6 @@ import Foundation
 
 protocol AttachmentModel {
 
+    //TODO: - remove
     var name: String { get }
 }

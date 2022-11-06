@@ -205,7 +205,7 @@ enum CurveModelType {
     }
 }
 
-struct ColorModel {
+struct ColorModel: Decodable {
 
     let red: CGFloat
     let green: CGFloat
