@@ -22,58 +22,7 @@ import SpriteKit
 
 //MARK: - Path
 
-struct PathAttachmentModel: AttachmentModel {
-    
-    let name: String
-    let actualName: String?
-    let closed: Bool
-    let constantSpeed: Bool
-    let lengths: [CGFloat]
-    let vertexCount: UInt
-    let vertices: [CGFloat]
-    let color: ColorModel
-    
-    init(_ name: String, _ actualName: String?, _ closed: Bool?, _ constantSpeed: Bool?, _ lengths: [CGFloat], _ vertexCount: UInt, _ vertices: [CGFloat], _ color: String?) {
-        
-        self.name = name
-        self.actualName = actualName
-        self.closed = closed ?? false
-        self.constantSpeed = constantSpeed ?? true
-        self.lengths = lengths
-        self.vertexCount = vertexCount
-        self.vertices = vertices
-        self.color = ColorModel(color ?? "FF7F00FF")
-    }
-}
 
-extension PathAttachmentModel: SpineDecodableDictionary {
-    
-    enum Keys: String, CodingKey {
-        
-        case name
-        case closed
-        case constantSpeed
-        case lengths
-        case vertexCount
-        case vertices
-        case color
-    }
-    
-    typealias KeysType = Keys
-    
-    init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
-        
-        let actualName: String? = try container.decodeIfPresent(String.self, forKey: .name)
-        let closed: Bool? = try container.decodeIfPresent(Bool.self, forKey: .closed)
-        let constantSpeed: Bool? = try container.decodeIfPresent(Bool.self, forKey: .constantSpeed)
-        let lengths: [CGFloat] = try container.decode([CGFloat].self, forKey: .lengths)
-        let vertexCount: UInt = try container.decode(UInt.self, forKey: .vertexCount)
-        let vertices: [CGFloat] = try container.decode([CGFloat].self, forKey: .vertices)
-        let color: String? = try container.decodeIfPresent(String.self, forKey: .color)
-        
-        self.init(name, actualName, closed, constantSpeed, lengths, vertexCount, vertices, color)
-    }
-}
 
 //MARK: - Point
 

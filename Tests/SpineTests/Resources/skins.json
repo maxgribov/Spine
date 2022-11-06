@@ -37,6 +37,14 @@
                     "skin": "test",
                     "parent": "mesh-attachment"
                 }
+            },
+            "path-slot": {
+                "path-attachment": {
+                    "type": "path",
+                    "lengths": [257.77, 285.16, 57.18, 120.77, 164.95, 76.95],
+                    "vertexCount": 10,
+                    "vertices": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95]
+                }
             }
         }
     },
