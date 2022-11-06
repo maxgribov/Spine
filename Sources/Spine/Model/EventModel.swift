@@ -6,42 +6,50 @@
 //  Copyright © 2018 Max Gribov. All rights reserved.
 //
 
-import SpriteKit
+import Foundation
 
 public struct EventModel {
     
     let name: String
     let int: Int
-    let float: CGFloat
+    let float: Float
     let string: String?
-    
-    init(_ name: String, _ int: Int?, _ float: CGFloat?, _ string: String?) {
-        
-        self.name = name
-        self.int = int ?? 0
-        self.float = float ?? 0
-        self.string = string
-    }
+    let audio: String?
+    let volume: Float
+    let balance: Float
 }
 
 extension EventModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
-        case event
-        case int
-        case float
-        case string
+        case event, int, float, string, audio, volume, balance
     }
     
     typealias KeysType = Keys
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        let int: Int? = try container.decodeIfPresent(Int.self, forKey: .int)
-        let float: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .float)
-        let string: String? = try container.decodeIfPresent(String.self, forKey: .string)
+        self.name = name
+        int = try container.decodeIfPresent(Int.self, forKey: .int) ?? 0
+        float = try container.decodeIfPresent(Float.self, forKey: .float) ?? 0
+        string = try container.decodeIfPresent(String.self, forKey: .string)
+        audio = try container.decodeIfPresent(String.self, forKey: .audio)
+        volume = try container.decodeIfPresent(Float.self, forKey: .volume) ?? 1
+        balance = try container.decodeIfPresent(Float.self, forKey: .balance) ?? 0
+    }
+}
+
+extension EventModel {
+    
+    init(with keyframe: EventKeyfarameModel) {
         
-        self.init(name, int, float, string)
+        self.name = keyframe.event
+        self.int = keyframe.int ?? 0
+        self.float = Float(keyframe.float ?? 0)
+        self.string = keyframe.string
+        self.audio = nil
+        self.volume = 1
+        self.balance = 0
     }
 }

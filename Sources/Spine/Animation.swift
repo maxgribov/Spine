@@ -281,7 +281,7 @@ class EventAnimationBuilder {
     
     class func event(with keyframe: EventKeyfarameModel) -> EventModel {
         
-        return EventModel(keyframe.event, keyframe.int, keyframe.float, keyframe.string)
+        return EventModel(with: keyframe)
     }
 }
 
