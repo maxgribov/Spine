@@ -60,6 +60,8 @@ func setTiming(_ action: SKAction, _ curve: CurveModelType)  {
     case .linear: action.timingMode = .linear
     case .stepped: action.timingFunction = { time in return time < 1.0 ? 0 : 1.0 }
     case .bezier(let bezierModel): action.timingFunction = BezierCurveSolver(bezierModel).timingFunction()
+        //FIXME: - real implementation required with two bezier curves for x and y
+    case .bezier2(let bezierModel1, _): action.timingFunction = BezierCurveSolver(bezierModel1).timingFunction()
     }
 }
 

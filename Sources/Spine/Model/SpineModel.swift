@@ -116,34 +116,46 @@ struct SpineNameKey: CodingKey {
 
 //MARK: - Helpers models
 
-enum CurveModelType {
+enum CurveModelType: Decodable, Equatable {
     
     case linear
     case stepped
     case bezier(BezierCurveModel)
+    case bezier2(BezierCurveModel, BezierCurveModel)
     
-    var name: String {
-        get {
-            switch self {
-            case .linear: return "linear"
-            case .stepped: return "stepped"
-            case .bezier(_): return "bezier"
-            }
-        }
-    }
-    
-    var bezierValue: [Float] {
+    init(from decoder: Decoder) throws {
         
-        get {
+        let container = try decoder.singleValueContainer()
+        do {
             
-            switch self {
-            case .bezier(let value): return [value.p0, value.p1, value.p2, value.p3]
+            let stringValue = try container.decode(String.self)
+            
+            guard stringValue == "stepped" else {
+                throw DecodingError.typeMismatch(CurveModelType.self, .init(codingPath: decoder.codingPath, debugDescription: "Unexpected string value: \(stringValue)"))
+            }
+            
+            self = .stepped
+            
+        } catch {
+            
+            let floatsValue = try container.decode([Float].self)
+            switch floatsValue.count {
+            case 4:
+                let bezierCurve = BezierCurveModel(p0: floatsValue[0], p1: floatsValue[1], p2: floatsValue[2], p3: floatsValue[3])
+                self = .bezier(bezierCurve)
+                
+            case 8:
+                let bezierCurve1 = BezierCurveModel(p0: floatsValue[0], p1: floatsValue[1], p2: floatsValue[2], p3: floatsValue[3])
+                let bezierCurve2 = BezierCurveModel(p0: floatsValue[4], p1: floatsValue[5], p2: floatsValue[6], p3: floatsValue[7])
+                self = .bezier2(bezierCurve1, bezierCurve2)
+                
             default:
-                return [Float]()
+                throw DecodingError.dataCorrupted(.init(codingPath: decoder.codingPath, debugDescription: "Unable recognize bezier curve data in floats value: \(floatsValue)"))
             }
         }
     }
     
+//TODO: - REMOVE
     init(_ value: String?) {
         
         if let value = value {
@@ -162,7 +174,7 @@ enum CurveModelType {
             self = .linear
         }
     }
-    
+    //TODO: - REMOVE
     init(_ value: [Float]) {
         
         if let curve = BezierCurveModel(value) {
@@ -174,18 +186,26 @@ enum CurveModelType {
             self = .linear
         }
     }
-    
-    struct BezierCurveModel {
+
+    struct BezierCurveModel: Equatable {
         
         let p0: Float
         let p1: Float
         let p2: Float
         let p3: Float
         
+        init(p0: Float, p1: Float, p2: Float, p3: Float) {
+            
+            self.p0 = p0
+            self.p1 = p1
+            self.p2 = p2
+            self.p3 = p3
+        }
+        
+        //TODO: - REMOVE
         init?(_ values: [Float]) {
             
             guard values.count == 4 else {
-                
                 return nil
             }
             
@@ -194,7 +214,7 @@ enum CurveModelType {
             self.p2 = values[2]
             self.p3 = values[3]
         }
-        
+        //TODO: - REMOVE
         init(_ c1: Float, _ c2: Float?, _ c3: Float?, _ c4: Float?) {
             
             p0 = c1
