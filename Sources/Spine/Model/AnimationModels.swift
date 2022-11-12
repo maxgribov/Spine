@@ -566,47 +566,7 @@ extension DeformKeyframeModel: Decodable {
 
 //MARK: Event Keyframe
 
-struct EventKeyfarameModel: KeyframeModel, AnimationGroupModel {
-    
-    let time: TimeInterval
-    let event: String
-    let int: Int?
-    let float: CGFloat?
-    let string: String?
-    
-    init(_ time: TimeInterval?, _ event: String, _ int: Int?, _ float: CGFloat?, _ string: String?) {
-        
-        self.time = time ?? 0
-        self.event = event
-        self.int = int
-        self.float = float
-        self.string = string
-    }
-}
 
-extension EventKeyfarameModel: Decodable {
-    
-    enum Keys: String, CodingKey {
-        
-        case time
-        case event = "name"
-        case int
-        case float
-        case string
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .time)
-        let event: String = try container.decode(String.self, forKey: .event)
-        let int: Int? = try container.decodeIfPresent(Int.self, forKey: .int)
-        let float: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .float)
-        let string: String? = try container.decodeIfPresent(String.self, forKey: .string)
-        
-        self.init(time, event, int, float, string)
-    }
-}
 
 //MARK: Draw Order Keyframe
 

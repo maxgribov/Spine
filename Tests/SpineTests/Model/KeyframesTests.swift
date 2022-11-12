@@ -8,8 +8,12 @@
 import XCTest
 @testable import Spine
 
-final class KeyframesTests: XCTestCase {
+final class KeyframesTests: XCTestCase {}
 
+//MARK: - Bone
+
+extension KeyframesTests {
+    
     func testBoneKeyframeRotateModel_Decoding() throws {
         
         // given
@@ -241,5 +245,51 @@ extension KeyframesTests {
         XCTAssertEqual(result[2].time, 0.0667, accuracy: .ulpOfOne)
         XCTAssertEqual(result[2].color, .init(value: "ffffff62"))
         XCTAssertEqual(result[2].curve, .bezier(.init(p0: 0.232, p1: 0.65, p2: 0.249, p3: -2.15)))
+    }
+}
+
+//MARK: - Event
+
+extension KeyframesTests {
+    
+    func testEventKeyframeModel_Decoding() throws {
+        
+        // given
+        guard let url = Bundle.module.url(forResource: "eventKeyframes", withExtension: "json") else {
+            XCTFail()
+            return
+        }
+        
+        let json = try Data(contentsOf: url)
+        
+        // when
+        let result = try JSONDecoder().decode([EventKeyfarameModel].self, from: json)
+        
+        // then
+        XCTAssertEqual(result.count, 3)
+        
+        XCTAssertEqual(result[0].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].event, "footstep")
+        XCTAssertEqual(result[0].int, nil)
+        XCTAssertEqual(result[0].float, nil)
+        XCTAssertEqual(result[0].string, nil)
+        XCTAssertEqual(result[0].volume, nil)
+        XCTAssertEqual(result[0].balance, nil)
+        
+        XCTAssertEqual(result[1].time, 0.0667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].event, "footstep")
+        XCTAssertEqual(result[1].int, nil)
+        XCTAssertEqual(result[1].float, nil)
+        XCTAssertEqual(result[1].string, nil)
+        XCTAssertEqual(result[1].volume, nil)
+        XCTAssertEqual(result[1].balance, nil)
+        
+        XCTAssertEqual(result[2].time, 0.0667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].event, "footstep")
+        XCTAssertEqual(result[2].int, 4)
+        XCTAssertEqual(result[2].float!, 5.23, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].string, "six")
+        XCTAssertEqual(result[2].volume!, 0.7, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].balance!, -0.5, accuracy: .ulpOfOne)
     }
 }
