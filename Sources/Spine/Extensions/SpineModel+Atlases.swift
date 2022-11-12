@@ -10,15 +10,10 @@ import SpriteKit
 
 public extension SpineModel {
     
+    //TODO: - depricate, must return non optonal value
     func atlasesNames() -> [String]? {
         
-        guard let skins = skins else {
-            
-            return nil
-        }
-        
         var names = Set<String>()
-        
         for skin in skins {
             
             guard let atlasesNames = skin.atlasesNames() else {

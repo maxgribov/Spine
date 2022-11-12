@@ -89,48 +89,40 @@ public class Skeleton: SKNode {
     
     func createBones(_ model: SpineModel)  {
         
-        if let bonesModels = model.bones {
+        let bones = model.bones.map { Bone($0) }
+        for bone in bones {
             
-            let bones: [Bone] = bonesModels.map { Bone($0) }
-            
-            for bone in bones {
+            if let parentName = bone.model.parent,
+                let parentNode = bones.first(where: { $0.name == Bone.generateName(parentName) }) {
                 
-                if let parentName = bone.model.parent,
-                    let parentNode = bones.first(where: { $0.name == Bone.generateName(parentName) }) {
-                    
-                    parentNode.addChild(bone)
-                    
-                } else {
-                    
-                    self.addChild(bone)
-                }
+                parentNode.addChild(bone)
+                
+            } else {
+                
+                self.addChild(bone)
             }
         }
     }
     
     func createSlots(_ model: SpineModel) {
 
-        if let slotsModels = model.slots {
+        var slotOrder: Int = 0
+        for slotModel in model.slots {
             
-            var slotOrder: Int = 0
-            
-            for slotModel in slotsModels {
+            let boneName = Bone.generateName(slotModel.bone)
+            if let bone = childNode(withName: "//\(boneName)") {
                 
-                let boneName = Bone.generateName(slotModel.bone)
-                if let bone = childNode(withName: "//\(boneName)") {
-                    
-                    let slot = Slot(slotModel, slotOrder)
-                    bone.addChild(slot)
-                }
-                
-                slotOrder += 1
+                let slot = Slot(slotModel, slotOrder)
+                bone.addChild(slot)
             }
+            
+            slotOrder += 1
         }
     }
     
     func createSkins(_ model: SpineModel, atlas folder: String? ) {
         
-        self.skins = model.skins?.map({ (skinModel) -> Skin in
+        self.skins = model.skins.map({ (skinModel) -> Skin in
             
             return Skin(skinModel, atlas: folder)
         })
@@ -138,7 +130,7 @@ public class Skeleton: SKNode {
     
     func createSkins(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) {
         
-        self.skins = model.skins?.map({ (skinModel) -> Skin in
+        self.skins = model.skins.map({ (skinModel) -> Skin in
             
             return Skin(skinModel, atlases)
         })
@@ -146,7 +138,7 @@ public class Skeleton: SKNode {
     
     func createAnimations(_ model: SpineModel) {
         
-        self.animations = model.animations?.map({ (animationModel) -> Animation in
+        self.animations = model.animations.map({ (animationModel) -> Animation in
             
             return Animation(animationModel, model)
         })

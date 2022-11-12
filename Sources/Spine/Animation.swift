@@ -25,7 +25,7 @@ class Animation {
             case .bones(let bonesAnimationModels):
                 actions.append(contentsOf: bonesAnimationModels.map({ (boneAnimationModel) -> SKAction in
                     
-                    let bone = model.bones?.filter({ $0.name == boneAnimationModel.bone }).first
+                    let bone = model.bones.filter({ $0.name == boneAnimationModel.bone }).first
                     return BoneAnimationBuilder.action(boneAnimationModel, bone)
                 }))
             case .slots(let slotsAnimationModels):

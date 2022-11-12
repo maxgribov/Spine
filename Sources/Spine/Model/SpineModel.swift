@@ -11,14 +11,14 @@ import SpriteKit
 public struct SpineModel {
     
     let skeleton: SkeletonModel
-    let bones: [BoneModel]?
-    let slots: [SlotModel]?
-    let skins: [SkinModel]?
-    let ik: [IKConstraintModel]?
-    let transform: [TransformConstraintModel]?
-    let path: [PathConstraintModel]?
-    let events: [EventModel]?
-    let animations: [AnimationModel]?
+    let bones: [BoneModel]
+    let slots: [SlotModel]
+    let skins: [SkinModel]
+    let ik: [IKConstraintModel]
+    let transform: [TransformConstraintModel]
+    let path: [PathConstraintModel]
+    let events: [EventModel]
+    let animations: [AnimationModel]
 }
 
 //MARK: - Decoding
@@ -42,12 +42,12 @@ extension SpineModel: Decodable {
         
         let container = try decoder.container(keyedBy: Keys.self)
         self.skeleton = try container.decode(SkeletonModel.self, forKey: .skeleton)
-        self.bones = try container.decodeIfPresent([BoneModel].self, forKey: .bones)
-        self.slots = try container.decodeIfPresent([SlotModel].self, forKey: .slots)
-        self.skins = try container.decodeIfPresent([SkinModel].self, forKey: .skins)
-        self.ik = try container.decodeIfPresent([IKConstraintModel].self, forKey: .ik)
-        self.transform = try container.decodeIfPresent([TransformConstraintModel].self, forKey: .transform)
-        self.path = try container.decodeIfPresent([PathConstraintModel].self, forKey: .path)
+        self.bones = try container.decodeIfPresent([BoneModel].self, forKey: .bones) ?? []
+        self.slots = try container.decodeIfPresent([SlotModel].self, forKey: .slots) ?? []
+        self.skins = try container.decodeIfPresent([SkinModel].self, forKey: .skins) ?? []
+        self.ik = try container.decodeIfPresent([IKConstraintModel].self, forKey: .ik) ?? []
+        self.transform = try container.decodeIfPresent([TransformConstraintModel].self, forKey: .transform) ?? []
+        self.path = try container.decodeIfPresent([PathConstraintModel].self, forKey: .path) ?? []
         
         //events
         if container.contains(.events) {
@@ -66,7 +66,7 @@ extension SpineModel: Decodable {
 
         } else {
 
-            self.events = nil
+            self.events = []
         }
 
         //animations
@@ -87,7 +87,7 @@ extension SpineModel: Decodable {
             
         } else {
             
-            self.animations = nil
+            self.animations = []
         }
     }
 }
