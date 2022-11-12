@@ -25,16 +25,26 @@ final class BonesModelTests: XCTestCase {
         
         // then
         XCTAssertEqual(result[0].name, "root")
+        XCTAssertEqual(result[0].lenght, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].transform, .normal)
+        XCTAssertEqual(result[0].position, .zero)
+        XCTAssertEqual(result[0].rotation, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].scale, .init(dx: 1, dy: 1))
+        XCTAssertEqual(result[0].shear, .zero)
+        XCTAssertEqual(result[0].inheritScale, true)
+        XCTAssertEqual(result[0].inheritRotation, true)
+        XCTAssertEqual(result[0].color, .init(value: "989898FF"))
         
-        XCTAssertEqual(result[1].name, "hip")
-        XCTAssertEqual(result[1].parent, "root")
-        XCTAssertEqual(result[1].position, .init(x: 0, y: 247.47))
-        
-        XCTAssertEqual(result[2].name, "torso")
-        XCTAssertEqual(result[2].parent, "hip")
-        XCTAssertEqual(result[2].lenght, 127.56, accuracy: .ulpOfOne)
-        XCTAssertEqual(result[2].rotation, 103.82, accuracy: .ulpOfOne)
-        XCTAssertEqual(result[2].position, .init(x: -1.62, y: 4.9))
-        XCTAssertEqual(result[2].color.value, "e0da19ff")
+        XCTAssertEqual(result[1].name, "front-upper-arm")
+        XCTAssertEqual(result[1].parent, "torso")
+        XCTAssertEqual(result[1].lenght, 69.45, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].transform, .noRotationOrReflection)
+        XCTAssertEqual(result[1].position, .init(x: 103.76, y: 19.33))
+        XCTAssertEqual(result[1].rotation, 168.38, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].scale, .init(dx: 0.7, dy: 0.8))
+        XCTAssertEqual(result[1].shear, .init(dx: 3.25, dy: 2.5))
+        XCTAssertEqual(result[1].inheritScale, false)
+        XCTAssertEqual(result[1].inheritRotation, false)
+        XCTAssertEqual(result[1].color.value, "00ff04ff")
     }
 }
