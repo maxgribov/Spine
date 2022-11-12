@@ -85,8 +85,8 @@ extension BoneModel: Decodable {
         let y = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 0
         position = .init(x: x, y: y)
         rotation = try container.decodeIfPresent(CGFloat.self, forKey: .rotation) ?? 0
-        let scaleX = try container.decodeIfPresent(CGFloat.self, forKey: .scaleX) ?? 0
-        let scaleY = try container.decodeIfPresent(CGFloat.self, forKey: .scaleY) ?? 0
+        let scaleX = try container.decodeIfPresent(CGFloat.self, forKey: .scaleX) ?? 1
+        let scaleY = try container.decodeIfPresent(CGFloat.self, forKey: .scaleY) ?? 1
         scale = .init(dx: scaleX, dy: scaleY)
         let shearX = try container.decodeIfPresent(CGFloat.self, forKey: .shearX) ?? 0
         let shearY = try container.decodeIfPresent(CGFloat.self, forKey: .shearY) ?? 0
