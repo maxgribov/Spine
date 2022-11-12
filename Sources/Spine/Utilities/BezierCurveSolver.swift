@@ -23,7 +23,7 @@ struct BezierCurveSolver {
     let ay: Float
     let isLinear: Bool
     
-    init(_ curve: CurveModelType.BezierCurveModel) {
+    init(_ curve: BezierCurveModel) {
         
         self.init(curve.p0, curve.p1, curve.p2, curve.p3)
     }

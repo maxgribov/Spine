@@ -15,7 +15,7 @@ class AnimationTests: XCTestCase {
     func testTimeFunctionLinear() {
 
         //given
-        let model = CurveModelType.linear
+        let model = CurveModel.linear
         let action = SKAction()
         
         //when
@@ -31,7 +31,7 @@ class AnimationTests: XCTestCase {
     func testTimeFunctionStepped() {
         
         //given
-        let model = CurveModelType.stepped
+        let model = CurveModel.stepped
         let action = SKAction()
         
         //when
@@ -47,8 +47,7 @@ class AnimationTests: XCTestCase {
         
         //given
         
-        let bezierValues: [Float] = [1, 0, 0, 1]
-        let model = CurveModelType.bezier(CurveModelType.BezierCurveModel(bezierValues)!)
+        let model = CurveModel.bezier(BezierCurveModel(p0: 1, p1: 0, p2: 0, p3: 1))
         let action = SKAction()
         
         //when

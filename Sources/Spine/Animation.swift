@@ -54,7 +54,7 @@ class Animation {
     }
 }
 
-func setTiming(_ action: SKAction, _ curve: CurveModelType)  {
+func setTiming(_ action: SKAction, _ curve: CurveModel)  {
     
     switch curve {
     case .linear: action.timingMode = .linear

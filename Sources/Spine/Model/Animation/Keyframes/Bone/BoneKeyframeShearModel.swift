@@ -11,7 +11,7 @@ struct BoneKeyframeShearModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let shear: CGVector
-    var curve: CurveModelType
+    var curve: CurveModel
 }
 
 extension BoneKeyframeShearModel: Decodable {
@@ -28,6 +28,6 @@ extension BoneKeyframeShearModel: Decodable {
         let dx = try container.decodeIfPresent(CGFloat.self, forKey: .x) ?? 0
         let dy = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 0
         shear = .init(dx: dx, dy: dy)
-        curve = try container.decodeIfPresent(CurveModelType.self, forKey: .curve) ?? .linear
+        curve = try container.decodeIfPresent(CurveModel.self, forKey: .curve) ?? .linear
     }
 }

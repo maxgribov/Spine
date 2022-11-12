@@ -11,7 +11,7 @@ struct BoneKeyframeRotateModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let angle: CGFloat
-    var curve: CurveModelType
+    var curve: CurveModel
 }
 
 extension BoneKeyframeRotateModel: Decodable {
@@ -27,6 +27,6 @@ extension BoneKeyframeRotateModel: Decodable {
         let container = try decoder.container(keyedBy: Keys.self)
         time = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         angle = try container.decodeIfPresent(CGFloat.self, forKey: .angle) ?? 0
-        curve = try container.decodeIfPresent(CurveModelType.self, forKey: .curve) ?? .linear
+        curve = try container.decodeIfPresent(CurveModel.self, forKey: .curve) ?? .linear
     }
 }

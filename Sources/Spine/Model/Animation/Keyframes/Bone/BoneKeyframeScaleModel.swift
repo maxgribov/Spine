@@ -11,7 +11,7 @@ struct BoneKeyframeScaleModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let scale: CGVector
-    var curve: CurveModelType
+    var curve: CurveModel
 }
 
 extension BoneKeyframeScaleModel: Decodable {
@@ -28,6 +28,6 @@ extension BoneKeyframeScaleModel: Decodable {
         let dx = try container.decodeIfPresent(CGFloat.self, forKey: .x) ?? 1
         let dy = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 1
         scale = .init(dx: dx, dy: dy)
-        curve = try container.decodeIfPresent(CurveModelType.self, forKey: .curve) ?? .linear
+        curve = try container.decodeIfPresent(CurveModel.self, forKey: .curve) ?? .linear
     }
 }

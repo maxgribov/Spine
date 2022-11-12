@@ -14,7 +14,7 @@ protocol KeyframeModel {
 
 protocol CurvedKeyframeModel: KeyframeModel {
 
-    var curve: CurveModelType { get set }
+    var curve: CurveModel { get set }
 }
 
 /**
@@ -26,7 +26,7 @@ protocol CurvedKeyframeModel: KeyframeModel {
 func adjustedCurves<T:CurvedKeyframeModel>(_ input: [T]) -> [T]
 {
     var output = [T]()
-    var previousCurve = CurveModelType.linear
+    var previousCurve = CurveModel.linear
     for frame in input {
         var adjustedFrame = frame
         adjustedFrame.curve = previousCurve

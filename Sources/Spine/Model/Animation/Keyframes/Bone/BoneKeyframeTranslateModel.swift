@@ -11,7 +11,7 @@ struct BoneKeyframeTranslateModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let position: CGPoint
-    var curve: CurveModelType
+    var curve: CurveModel
 }
 
 extension BoneKeyframeTranslateModel: Decodable {
@@ -28,6 +28,6 @@ extension BoneKeyframeTranslateModel: Decodable {
         let x = try container.decodeIfPresent(CGFloat.self, forKey: .x) ?? 0
         let y = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 0
         position = .init(x: x, y: y)
-        curve = try container.decodeIfPresent(CurveModelType.self, forKey: .curve) ?? .linear
+        curve = try container.decodeIfPresent(CurveModel.self, forKey: .curve) ?? .linear
     }
 }

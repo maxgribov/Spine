@@ -12,7 +12,7 @@ struct DeformKeyframeModel: KeyframeModel {
     let time: TimeInterval
     let offset: Int
     let vertices: [CGFloat]
-    let curve: CurveModelType
+    let curve: CurveModel
 }
 
 //TODO: - Tests
@@ -29,6 +29,6 @@ extension DeformKeyframeModel: Decodable {
         time = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         offset = try container.decodeIfPresent(Int.self, forKey: .offset) ?? 0
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
-        curve = try container.decodeIfPresent(CurveModelType.self, forKey: .curve) ?? .linear
+        curve = try container.decodeIfPresent(CurveModel.self, forKey: .curve) ?? .linear
     }
 }
