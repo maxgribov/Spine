@@ -502,67 +502,7 @@ func adjustedCurves<T:CurvedKeyframeModel>(_ input: [T]) -> [T]
 
 //MARK: Deform Keyframe
 
-struct DeformKeyframeModel: KeyframeModel {
-    
-    let time: TimeInterval
-    let offset: Int
-    let vertices: [CGFloat]?
-    let curve: CurveModelType
-    
-    init(_ time: TimeInterval?, _ offset: Int?, _ vertices: [CGFloat]?, _ curve: String?) {
-        
-        self.time = time ?? 0
-        self.offset = offset ?? 0
-        self.vertices = vertices
-        self.curve = CurveModelType(curve)
-    }
-    
-    //bezier curve type init
-    init(_ time: TimeInterval?, _ offset: Int?, _ vertices: [CGFloat]?, _ curve: CurveModelType.BezierCurveModel) {
-        
-        self.time = time ?? 0
-        self.offset = offset ?? 0
-        self.vertices = vertices
-        self.curve = .bezier(curve)
-    }
-}
 
-extension DeformKeyframeModel: Decodable {
-    
-    enum Keys: String, CodingKey {
-        
-        case time
-        case offset
-        case vertices
-        case curve
-        case c2
-        case c3
-        case c4
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .time)
-        let offset: Int? = try container.decodeIfPresent(Int.self, forKey: .offset)
-        let vertices: [CGFloat]? = try container.decodeIfPresent([CGFloat].self, forKey: .vertices)
-        
-        do {
-            
-            let c1 = try container.decode(Float.self, forKey: .curve)
-            let c2 = try container.decodeIfPresent(Float.self, forKey: .c2)
-            let c3 = try container.decodeIfPresent(Float.self, forKey: .c3)
-            let c4 = try container.decodeIfPresent(Float.self, forKey: .c4)
-            
-            self.init(time, offset, vertices, CurveModelType.BezierCurveModel(c1, c2, c3, c4))
-            
-        } catch {
-            
-            let curve: String? = try container.decodeIfPresent(String.self, forKey: .curve)
-            self.init(time, offset, vertices, curve)
-        }
-    }
-}
 
 //MARK: Event Keyframe
 
