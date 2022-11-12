@@ -18,13 +18,10 @@ extension Skeleton {
      */
     public func setBitMasks(category: UInt32, collision: UInt32) {
         
-        if let slots = slots {
+        for slot in slots {
             
-            for slot in slots {
-                
-                slot.physicsBody?.categoryBitMask = category
-                slot.physicsBody?.collisionBitMask = collision
-            }
+            slot.physicsBody?.categoryBitMask = category
+            slot.physicsBody?.collisionBitMask = collision
         }
     }
     
@@ -35,12 +32,9 @@ extension Skeleton {
      */
     public func setCategoryBitMask(_ mask: UInt32) {
         
-        if let slots = slots {
+        for slot in slots {
             
-            for slot in slots {
-                
-                slot.physicsBody?.categoryBitMask = mask
-            }
+            slot.physicsBody?.categoryBitMask = mask
         }
     }
     
@@ -51,12 +45,9 @@ extension Skeleton {
      */
     public func setCollisionBitMask(_ mask: UInt32) {
         
-        if let slots = slots {
+        for slot in slots {
             
-            for slot in slots {
-                
-                slot.physicsBody?.collisionBitMask = mask
-            }
+            slot.physicsBody?.collisionBitMask = mask
         }
     }
 }

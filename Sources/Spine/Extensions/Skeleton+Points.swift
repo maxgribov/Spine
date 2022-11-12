@@ -23,7 +23,7 @@ extension Skeleton {
      */
     public var points: [SKNode]? {
         get {
-            return slots?.compactMap({ (slot) -> [SKNode]? in
+            return slots.compactMap({ (slot) -> [SKNode]? in
 
                 return slot.children.compactMap({ (node) -> SKNode? in
 
@@ -58,7 +58,7 @@ extension Skeleton {
     public var activePoints: [SKNode]? {
         get {
             
-            return slots?.compactMap({ (slot) -> SKNode? in
+            return slots.compactMap({ (slot) -> SKNode? in
                 
                 return slot.children.first(where: { (node) -> Bool in
                     

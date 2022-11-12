@@ -13,15 +13,7 @@ extension Skeleton {
     /**
      A list of all available animation names for this skeleton `Skeleton`.
      */
-    public var animationsNames: [String]? {
-        get {
-            guard let animations = animations else {
-                return nil
-            }
-            
-            return animations.map({ $0.name })
-        }
-    }
+    public var animationsNames: [String]? { animations.map({ $0.name }) }
     
     /**
      Returns a 'SKAction' for animation with a specific name if possible.
@@ -30,8 +22,7 @@ extension Skeleton {
      */
     public func animation(named: String) -> SKAction? {
         
-        guard let animation = animations?.first(where: { $0.name == named }) else {
-            
+        guard let animation = animations.first(where: { $0.name == named }) else {
             return nil
         }
         

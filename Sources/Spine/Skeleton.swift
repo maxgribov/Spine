@@ -28,13 +28,14 @@ public class Skeleton: SKNode {
      - parameter model: the skeleton model.
      - parameter folder: name of the folder with image atlases. *optional*
      */
-    public init(_ model: SpineModel, atlas folder: String? = nil) {
+    public convenience init(_ model: SpineModel, atlas folder: String? = nil) {
 
-        super.init()
+        let skins = Self.createSkins(model, atlas: folder)
+        let animations = Self.createAnimations(model)
+        self.init(skins: skins, animations: animations)
+        
         self.createBones(model)
         self.createSlots(model)
-        self.createSkins(model, atlas: folder)
-        self.createAnimations(model)
     }
     
     /**
@@ -43,13 +44,14 @@ public class Skeleton: SKNode {
      - parameter model: the skeleton model.
      - parameter atlases: atlases dictionary
      */
-    public init(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) {
+    public convenience init(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) {
         
-        super.init()
+        let skins = Self.createSkins(model, atlases)
+        let animations = Self.createAnimations(model)
+        self.init(skins: skins, animations: animations)
+        
         self.createBones(model)
         self.createSlots(model)
-        self.createSkins(model, atlases)
-        self.createAnimations(model)
     }
     
     /**
@@ -83,9 +85,16 @@ public class Skeleton: SKNode {
 
     //MARK: - Private
     
-    var slots: [Slot]? { get { return self["//\(Slot.prefix)*"] as? [Slot] } }
-    var skins: [Skin]?
-    var animations: [Animation]?
+    var slots: [Slot] { self["//\(Slot.prefix)*"].compactMap({ $0 as? Slot }) }
+    var skins: [Skin]
+    var animations: [Animation]
+    
+    init(skins: [Skin], animations: [Animation]) {
+    
+        self.skins = skins
+        self.animations = animations
+        super.init()
+    }
     
     func createBones(_ model: SpineModel)  {
         
@@ -120,28 +129,19 @@ public class Skeleton: SKNode {
         }
     }
     
-    func createSkins(_ model: SpineModel, atlas folder: String? ) {
+    static func createSkins(_ model: SpineModel, atlas folder: String? ) -> [Skin] {
         
-        self.skins = model.skins.map({ (skinModel) -> Skin in
-            
-            return Skin(skinModel, atlas: folder)
-        })
+        model.skins.map{ Skin($0, atlas: folder) }
     }
     
-    func createSkins(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) {
+    static func createSkins(_ model: SpineModel, _ atlases: [String : SKTextureAtlas]) -> [Skin] {
         
-        self.skins = model.skins.map({ (skinModel) -> Skin in
-            
-            return Skin(skinModel, atlases)
-        })
+        model.skins.map{ Skin($0, atlases) }
     }
     
-    func createAnimations(_ model: SpineModel) {
+    static func createAnimations(_ model: SpineModel) -> [Animation] {
         
-        self.animations = model.animations.map({ (animationModel) -> Animation in
-            
-            return Animation(animationModel, model)
-        })
+        model.animations.map{ Animation($0, model) }
     }
 }
 

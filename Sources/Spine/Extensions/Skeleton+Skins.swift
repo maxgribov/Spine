@@ -28,16 +28,12 @@ extension Skeleton {
             skinsNames.insert(named)
         }
         
-        guard let skins = skins?.filter({ skinsNames.contains($0.model.name) }) else {
-            
-            return
-        }
-        
-        for skin in skins {
+        let filterredSkins = skins.filter({ skinsNames.contains($0.model.name) })
+        for skin in filterredSkins {
             
             for slotModel in skin.model.slots {
                 
-                guard let slot = slots?.first(where: { $0.model.name == slotModel.name })else {
+                guard let slot = slots.first(where: { $0.model.name == slotModel.name }) else {
                         continue
                 }
                 

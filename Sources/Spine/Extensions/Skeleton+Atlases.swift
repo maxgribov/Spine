@@ -15,28 +15,20 @@ extension Skeleton {
      Each atlas is represented only once.
      */
     public var atlases: [SKTextureAtlas]? {
-        get {
+        
+        var atlasesMutable = Set<SKTextureAtlas>()
+        for skin in skins {
             
-            var atlasesMutable = Set<SKTextureAtlas>()
-            
-            guard let skins = skins else {
+            for atlasName in skin.atlases.keys {
                 
-                return nil
-            }
-            
-            for skin in skins {
-                
-                for atlasName in skin.atlases.keys {
+                if let atlas = skin.atlases[atlasName] {
                     
-                    if let atlas = skin.atlases[atlasName] {
-                        
-                        atlasesMutable.insert(atlas)
-                    }
+                    atlasesMutable.insert(atlas)
                 }
             }
-            
-            return Array(atlasesMutable)
         }
+        
+        return Array(atlasesMutable)
     }
     
     /**
@@ -45,7 +37,7 @@ extension Skeleton {
      - parameter completionHandler: the closure that is called when the preload is complete.
      - parameter succeed: preload operation completion flag
      */
-    public func preloadTextureAtlases(withCompletionHandler completionHandler: @escaping (_ succeed: Bool) -> Swift.Void){
+    public func preloadTextureAtlases(withCompletionHandler completionHandler: @escaping (_ succeed: Bool) -> Swift.Void) {
         
         guard let atlases = atlases else {
             
