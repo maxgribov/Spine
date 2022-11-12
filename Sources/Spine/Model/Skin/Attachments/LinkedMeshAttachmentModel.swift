@@ -35,8 +35,7 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
         skin = try container.decodeIfPresent(String.self, forKey: .skin) ?? "default"
         parent = try container.decode(String.self, forKey: .parent)
         deform = try container.decodeIfPresent(Bool.self, forKey: .deform) ?? true
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "FFFFFFFF"
-        color = ColorModel(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "FFFFFFFF")
         width = try container.decodeIfPresent(CGFloat.self, forKey: .width)
         height = try container.decodeIfPresent(CGFloat.self, forKey: .height)
     }

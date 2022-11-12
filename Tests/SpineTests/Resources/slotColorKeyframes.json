@@ -1,0 +1,14 @@
+[
+    {
+        "color": "ffffffff"
+    },
+    {
+        "time": 0.0667,
+        "color": "ffffff62"
+    },
+    {
+        "time": 0.0667,
+        "color": "ffffff62",
+        "curve": [0.232, 0.65, 0.249, -2.15]
+    }
+]

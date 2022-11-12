@@ -462,7 +462,7 @@ protocol CurvedKeyframeModel {
     var curve: CurveModelType { get set }
 }
 
-protocol BoneKeyframeModel: CurvedKeyframeModel {}
+
 
 /**
  Most keyframe properties affect how animation behaves *prior* to the keyframe,
@@ -484,96 +484,13 @@ func adjustedCurves<T:CurvedKeyframeModel>(_ input: [T]) -> [T]
     return output
 }
 
-protocol SlotKeyframeModel: KeyframeModel {}
 
-struct SlotKeyframeAttachmentModel: SlotKeyframeModel {
-    
-    let time: TimeInterval
-    let name: String?
-    
-    init(_ time: TimeInterval?, _ name: String?) {
-        
-        self.time = time ?? 0
-        self.name = name
-    }
-}
 
-extension SlotKeyframeAttachmentModel: Decodable {
-    
-    enum Keys: String, CodingKey {
-        
-        case time
-        case name
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .time)
-        let name: String? = try container.decodeIfPresent(String.self, forKey: .name)
-        
-        self.init(time, name)
-    }
-}
+
 
 //MARK: Slot Color Keyframe
 
-struct SlotKeyframeColorModel: SlotKeyframeModel, CurvedKeyframeModel {
-    
-    let time: TimeInterval
-    let color: ColorModel
-    var curve: CurveModelType
-    
-    init(_ time: TimeInterval?, _ color: String, _ curve: String?) {
-        
-        self.time = time ?? 0
-        self.color = ColorModel(color)
-        self.curve = CurveModelType(curve)
-    }
-    
-    //bezier curve type init
-    init(_ time: TimeInterval?, _ color: String, _ curve: CurveModelType.BezierCurveModel) {
-        
-        self.time = time ?? 0
-        self.color = ColorModel(color)
-        self.curve = .bezier(curve)
-    }
-}
 
-extension SlotKeyframeColorModel: Decodable {
-    
-    enum Keys: String, CodingKey {
-        
-        case time
-        case color
-        case curve
-        case c2
-        case c3
-        case c4
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .time)
-        let color: String = try container.decode(String.self, forKey: .color)
-        
-        do {
-            
-            let c1 = try container.decode(Float.self, forKey: .curve)
-            let c2 = try container.decodeIfPresent(Float.self, forKey: .c2)
-            let c3 = try container.decodeIfPresent(Float.self, forKey: .c3)
-            let c4 = try container.decodeIfPresent(Float.self, forKey: .c4)
-            
-            self.init(time, color, CurveModelType.BezierCurveModel(c1, c2, c3, c4))
-            
-        } catch {
-            
-            let curve: String? = try container.decodeIfPresent(String.self, forKey: .curve)
-            self.init(time, color, curve)
-        }
-    }
-}
 
 //MARK: IK Constraint Keyframe
 

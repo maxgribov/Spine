@@ -14,7 +14,7 @@ class ColorTests: XCTestCase {
     func testCreateColor() {
         
         //given
-        let colorModel = ColorModel("db00f0ff")
+        let colorModel = ColorModel(value: "db00f0ff")
         
         //when
         let color = createColor(with: colorModel)

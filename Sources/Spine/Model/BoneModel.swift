@@ -93,9 +93,7 @@ extension BoneModel: Decodable {
         shear = .init(dx: shearX, dy: shearY)
         inheritScale = try container.decodeIfPresent(Bool.self, forKey: .inheritScale) ?? true
         inheritRotation = try container.decodeIfPresent(Bool.self, forKey: .inheritRotation) ?? true
-        //TODO: ColorModel Decodable
-        let colorData = try container.decodeIfPresent(String.self, forKey: .color) ?? "989898FF"
-        color = ColorModel(colorData)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "989898FF")
     }
 }
 

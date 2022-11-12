@@ -180,3 +180,66 @@ final class KeyframesTests: XCTestCase {
                                                  .init(p0: 0.475, p1: 1.018, p2: 0.492, p3: 0.94)))
     }
 }
+
+//MARK: - Slot
+
+extension KeyframesTests {
+    
+    func testSlotKeyframeAttachmentModel_Decoding() throws {
+        
+        // given
+        guard let url = Bundle.module.url(forResource: "slotAttachmentKeyframes", withExtension: "json") else {
+            XCTFail()
+            return
+        }
+        
+        let json = try Data(contentsOf: url)
+        
+        // when
+        let result = try JSONDecoder().decode([SlotKeyframeAttachmentModel].self, from: json)
+        
+        // then
+        XCTAssertEqual(result.count, 4)
+        
+        XCTAssertEqual(result[0].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].name, nil)
+        
+        XCTAssertEqual(result[1].time, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].name, nil)
+        
+        XCTAssertEqual(result[2].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].name, "hoverglow-small")
+        
+        XCTAssertEqual(result[3].time, 0.0667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[3].name, "hoverglow-small")
+    }
+    
+    func testSlotKeyframeColorModel_Decoding() throws {
+        
+        // given
+        guard let url = Bundle.module.url(forResource: "slotColorKeyframes", withExtension: "json") else {
+            XCTFail()
+            return
+        }
+        
+        let json = try Data(contentsOf: url)
+        
+        // when
+        let result = try JSONDecoder().decode([SlotKeyframeColorModel].self, from: json)
+        
+        // then
+        XCTAssertEqual(result.count, 3)
+        
+        XCTAssertEqual(result[0].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].color, .init(value: "ffffffff"))
+        XCTAssertEqual(result[0].curve, .linear)
+        
+        XCTAssertEqual(result[1].time, 0.0667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].color, .init(value: "ffffff62"))
+        XCTAssertEqual(result[1].curve, .linear)
+        
+        XCTAssertEqual(result[2].time, 0.0667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].color, .init(value: "ffffff62"))
+        XCTAssertEqual(result[2].curve, .bezier(.init(p0: 0.232, p1: 0.65, p2: 0.249, p3: -2.15)))
+    }
+}

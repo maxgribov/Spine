@@ -32,7 +32,6 @@ extension ClippingAttachmentModel: SpineDecodableDictionary {
         end = try container.decode(String.self, forKey: .end)
         vertexCount = try container.decode(UInt.self, forKey: .vertexCount)
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "CE3A3AFF"
-        color = ColorModel(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? ColorModel(value: "CE3A3AFF")
     }
 }

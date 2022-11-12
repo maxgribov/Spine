@@ -21,7 +21,9 @@ let package = Package(
                         .process("Resources/skins.json"),
                         .process("Resources/events.json"),
                         .process("Resources/rotateBoneKeyframes.json"),
-                        .process("Resources/translateBoneKeyframes.json")
+                        .process("Resources/translateBoneKeyframes.json"),
+                        .process("Resources/slotAttachmentKeyframes.json"),
+                        .process("Resources/slotColorKeyframes.json")
                     ])
     ]
 )

@@ -43,7 +43,6 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
         let width = try container.decode(CGFloat.self, forKey: .width)
         let height = try container.decode(CGFloat.self, forKey: .height)
         size = .init(width: width, height: height)
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "FFFFFFFF"
-        color = .init(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "FFFFFFFF")
     }
 }

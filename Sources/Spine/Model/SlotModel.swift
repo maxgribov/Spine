@@ -51,14 +51,8 @@ extension SlotModel: Decodable {
         let container = try decoder.container(keyedBy: Keys.self)
         name = try container.decode(String.self, forKey: .name)
         bone = try container.decode(String.self, forKey: .bone)
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "FFFFFFFF"
-        //TODO: ColorModel Decodable
-        color = ColorModel(colorValue)
-        if let darkColorValue = try container.decodeIfPresent(String.self, forKey: .dark) {
-            dark = ColorModel(darkColorValue)
-        } else {
-            dark = nil
-        }
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "FFFFFFFF")
+        dark = try container.decodeIfPresent(ColorModel.self, forKey: .dark)
         attachment = try container.decodeIfPresent(String.self, forKey: .attachment)
         blend = try container.decodeIfPresent(BlendMode.self, forKey: .blend)
     }

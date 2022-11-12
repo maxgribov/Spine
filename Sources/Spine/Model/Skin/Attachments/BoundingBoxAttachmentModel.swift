@@ -29,7 +29,6 @@ extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
         
         vertexCount = try container.decode(UInt.self, forKey: .vertexCount)
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "60F000FF"
-        color = ColorModel(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "60F000FF")
     }
 }

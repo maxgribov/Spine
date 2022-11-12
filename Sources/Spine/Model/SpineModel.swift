@@ -225,51 +225,42 @@ enum CurveModelType: Decodable, Equatable {
     }
 }
 
-struct ColorModel: Decodable {
-
-    let red: CGFloat
-    let green: CGFloat
-    let blue: CGFloat
-    let alpha: CGFloat
+struct ColorModel: Equatable {
+    
     let value: String
     
-    init(_ value: String) {
-
-        var rgbaValue: UInt32 = 0
-        Scanner(string: value).scanHexInt32(&rgbaValue)
+    var rgbaValue: UInt32 {
         
-        red = CGFloat((rgbaValue & 0xFF000000) >> 24) / 255.0
-        green = CGFloat((rgbaValue & 0x00FF0000) >> 16) / 255.0
-        blue = CGFloat((rgbaValue & 0x0000FF00) >> 8) / 255.0
-        alpha = CGFloat(rgbaValue & 0x000000FF) / 255.0
+        var result: UInt32 = 0
+        Scanner(string: value).scanHexInt32(&result)
+        
+        return result
+    }
+    
+    var red: CGFloat { CGFloat((rgbaValue & 0xFF000000) >> 24) / 255.0 }
+    var green: CGFloat { CGFloat((rgbaValue & 0x00FF0000) >> 16) / 255.0 }
+    var blue: CGFloat { CGFloat((rgbaValue & 0x0000FF00) >> 8) / 255.0 }
+    var alpha: CGFloat { CGFloat(rgbaValue & 0x000000FF) / 255.0 }
+
+    init(value: String) {
         
         self.value = value
     }
     
-    init?(_ value: String?) {
-
-        if let value = value {
-
-            self.init(value)
-
-        } else {
-
-            return nil
-        }
-    }
-    
-    func mix(with model: ColorModel) -> ColorModel {
+    func mix(with color: ColorModel) -> ColorModel {
         
-        var rgbaValue: UInt32 = 0
-        Scanner(string: value).scanHexInt32(&rgbaValue)
-        
-        var rgbaModelValue: UInt32 = 0
-        Scanner(string: model.value).scanHexInt32(&rgbaModelValue)
-        
-        let rgbaResultValue: UInt32 = rgbaValue & rgbaModelValue
-        
+        let rgbaResultValue: UInt32 = rgbaValue & color.rgbaValue
         let stringValue = String(format:"%2x", rgbaResultValue)
         
-        return ColorModel(stringValue)
+        return ColorModel(value: stringValue)
+    }
+}
+
+extension ColorModel: Decodable {
+    
+    init(from decoder: Decoder) throws {
+        
+        let container = try decoder.singleValueContainer()
+        value = try container.decode(String.self)
     }
 }

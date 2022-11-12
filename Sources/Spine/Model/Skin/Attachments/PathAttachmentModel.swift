@@ -36,7 +36,6 @@ extension PathAttachmentModel: SpineDecodableDictionary {
         lengths = try container.decode([CGFloat].self, forKey: .lengths)
         vertexCount = try container.decode(UInt.self, forKey: .vertexCount)
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "FF7F00FF"
-        color = ColorModel(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "FF7F00FF")
     }
 }

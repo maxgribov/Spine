@@ -40,8 +40,7 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
         hull = try container.decode(UInt.self, forKey: .hull)
         edges = try container.decodeIfPresent([UInt].self, forKey: .edges)
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "FFFFFFFF"
-        color = ColorModel(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "FFFFFFFF")
         width = try container.decodeIfPresent(CGFloat.self, forKey: .width)
         height = try container.decodeIfPresent(CGFloat.self, forKey: .height)
     }

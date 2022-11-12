@@ -32,7 +32,6 @@ extension PointAttachmentModel: SpineDecodableDictionary {
         let y = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 0
         position = .init(x: x, y: y)
         rotation = try container.decodeIfPresent(CGFloat.self, forKey: .rotation) ?? 0
-        let colorValue = try container.decodeIfPresent(String.self, forKey: .color) ?? "F1F100FF"
-        color = ColorModel(colorValue)
+        color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "F1F100FF")
     }
 }
