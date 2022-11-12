@@ -327,7 +327,7 @@ class DrawOrderAnimationBuilder {
         return SKAction.sequence(actions)
     }
     
-    fileprivate class func action(_ slotsData: inout [SlotData], _ offsets: [DrawOrderOffsetModel]?) -> SKAction? {
+    fileprivate class func action(_ slotsData: inout [SlotData], _ offsets: [DrawOrderKeyframeModel.Offset]?) -> SKAction? {
         
         let slotsNewOrders = calculateSlotsNewOrders(slotsData, offsets)
         
@@ -385,7 +385,7 @@ fileprivate struct SlotNewOrder {
     }
 }
 
-fileprivate func calculateSlotsNewOrders(_ slots: [SlotData], _ offsets: [DrawOrderOffsetModel]?) -> [SlotNewOrder] {
+fileprivate func calculateSlotsNewOrders(_ slots: [SlotData], _ offsets: [DrawOrderKeyframeModel.Offset]?) -> [SlotNewOrder] {
     
     var orders = [SlotNewOrder]()
     

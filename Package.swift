@@ -24,7 +24,8 @@ let package = Package(
                         .process("Resources/translateBoneKeyframes.json"),
                         .process("Resources/slotAttachmentKeyframes.json"),
                         .process("Resources/slotColorKeyframes.json"),
-                        .process("Resources/eventKeyframes.json")
+                        .process("Resources/eventKeyframes.json"),
+                        .process("Resources/drawOrderKeyframes.json")
                     ])
     ]
 )

@@ -293,3 +293,36 @@ extension KeyframesTests {
         XCTAssertEqual(result[2].balance!, -0.5, accuracy: .ulpOfOne)
     }
 }
+
+//MARK: - Draw Order
+
+extension KeyframesTests {
+    
+    func testDrawOrderKeyframeModel_Decoding() throws {
+        
+        // given
+        guard let url = Bundle.module.url(forResource: "drawOrderKeyframes", withExtension: "json") else {
+            XCTFail()
+            return
+        }
+        
+        let json = try Data(contentsOf: url)
+        
+        // when
+        let result = try JSONDecoder().decode([DrawOrderKeyframeModel].self, from: json)
+        
+        // then
+        XCTAssertEqual(result.count, 3)
+        
+        XCTAssertEqual(result[0].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].offsets.count, 0)
+        
+        XCTAssertEqual(result[1].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].offsets.count, 1)
+        XCTAssertEqual(result[1].offsets[0], .init(slot: "splat01", offset: 5))
+        
+        XCTAssertEqual(result[2].time, 1.3667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].offsets.count, 1)
+        XCTAssertEqual(result[2].offsets[0], .init(slot: "splat01", offset: 5))
+    }
+}

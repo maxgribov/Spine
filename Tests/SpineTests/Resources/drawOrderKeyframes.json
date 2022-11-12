@@ -1,0 +1,18 @@
+[
+    {
+        "offsets": []
+    },
+    {
+        "offsets": [{
+            "slot": "splat01",
+            "offset": 5
+        }]
+    },
+    {
+        "time": 1.3667,
+        "offsets": [{
+            "slot": "splat01",
+            "offset": 5
+        }]
+    }
+]
