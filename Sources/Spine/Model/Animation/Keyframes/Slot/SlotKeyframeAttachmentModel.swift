@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SlotKeyframeAttachmentModel.swift
 //  
 //
 //  Created by Max Gribov on 12.11.2022.

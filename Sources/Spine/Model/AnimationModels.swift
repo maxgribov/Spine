@@ -494,83 +494,11 @@ func adjustedCurves<T:CurvedKeyframeModel>(_ input: [T]) -> [T]
 
 //MARK: IK Constraint Keyframe
 
-struct IKConstraintKeyframeModel: KeyframeModel {
-    
-    let time: TimeInterval
-    let mix: CGFloat
-    let blendPositive: Bool
-    
-    init(_ time: TimeInterval?, _ mix: CGFloat?, _ blendPositive: Bool?) {
-        
-        self.time = time ?? 0
-        self.mix = mix ?? 1.0
-        self.blendPositive = blendPositive ?? false
-    }
-}
 
-extension IKConstraintKeyframeModel: Decodable {
-    
-    enum Keys: String, CodingKey {
-        
-        case time
-        case mix
-        case blendPositive
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .time)
-        let mix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .mix)
-        let blendPositive: Bool? = try container.decodeIfPresent(Bool.self, forKey: .blendPositive)
-        
-        self.init(time, mix, blendPositive)
-    }
-}
 
 //MARK: Transform Constraint Keyframe
 
-struct TransformConstraintKeyframeModel: KeyframeModel {
-    
-    let time: TimeInterval
-    let rotateMix: CGFloat
-    let translateMix: CGFloat
-    let scaleMix: CGFloat
-    let shearMix: CGFloat
-    
-    init(_ time: TimeInterval?, _ rotateMix: CGFloat?, _ translateMix: CGFloat?, _ scaleMix: CGFloat?, _ shearMix: CGFloat?) {
-        
-        self.time = time ?? 0
-        self.rotateMix = rotateMix ?? 1.0
-        self.translateMix = translateMix ?? 1.0
-        self.scaleMix = scaleMix ?? 1.0
-        self.shearMix = shearMix ?? 1.0
-    }
-}
 
-extension TransformConstraintKeyframeModel: Decodable {
-    
-    enum Keys: String, CodingKey {
-        
-        case time
-        case rotateMix
-        case translateMix
-        case scaleMix
-        case shearMix
-    }
-    
-    init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: Keys.self)
-        let time: TimeInterval? = try container.decodeIfPresent(TimeInterval.self, forKey: .time)
-        let rotateMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .rotateMix)
-        let translateMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .translateMix)
-        let scaleMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .scaleMix)
-        let shearMix: CGFloat? = try container.decodeIfPresent(CGFloat.self, forKey: .shearMix)
-        
-        self.init(time, rotateMix, translateMix, scaleMix, shearMix)
-    }
-}
 
 //MARK: Deform Keyframe
 
