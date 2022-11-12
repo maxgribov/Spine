@@ -26,14 +26,9 @@ extension Skeleton {
             
             for skin in skins {
                 
-                guard let skinAtlaces = skin.atlases else {
+                for atlasName in skin.atlases.keys {
                     
-                    continue
-                }
-                
-                for atlasName in skinAtlaces.keys {
-                    
-                    if let atlas = skinAtlaces[atlasName] {
+                    if let atlas = skin.atlases[atlasName] {
                         
                         atlasesMutable.insert(atlas)
                     }

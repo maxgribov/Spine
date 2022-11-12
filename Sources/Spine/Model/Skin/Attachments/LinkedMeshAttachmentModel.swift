@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct LinkedMeshAttachmentModel: AttachmentModel {
+struct LinkedMeshAttachmentModel: AttachmentTexturedModel {
     
     let name: String
     let fileName: String?

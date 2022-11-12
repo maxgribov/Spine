@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct MeshAttachmentModel: AttachmentModel {
+struct MeshAttachmentModel: AttachmentTexturedModel {
     
     let name: String
     let fileName: String?

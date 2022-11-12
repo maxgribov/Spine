@@ -17,22 +17,7 @@ extension Attachment {
     static var prefix: String { get { return "attachment:" } }
 }
 
-class AttachmentBuilder {
-    
-    class func attachment(for type: AttachmentModelType, _ texture: SKTexture? = nil) -> Attachment? {
-        
-        switch type {
-        case .region(let regionModel):
-            guard let texture = texture else {
-                return nil
-            }
-            return RegionAttachment(regionModel, texture)
-        case .boundingBox(let boundingBoxModel): return BoundingBoxAttachment(boundingBoxModel)
-        case .point(let pointModel): return PointAttachment(pointModel)
-        default: return nil
-        }
-    }
-}
+//MARK: - Attachments
 
 class RegionAttachment: SKSpriteNode, Attachment {
 

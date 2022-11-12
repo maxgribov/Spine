@@ -10,15 +10,18 @@ import SpriteKit
 
 public extension SpineModel {
     
-    //TODO: - depricate, must return non optonal value
+    //TODO: tests
+    var uniqueAtlasesNames: Set<String> {
+        
+        skins.reduce(Set<String>()) { partialResult, skin in
+            
+            partialResult.union(skin.atlasesNames)
+        }
+    }
+    
+    @available(*, deprecated, message: "Use uniqueAtlasesNames instead")
     func atlasesNames() -> [String]? {
         
-        var names = Set<String>()
-        for skin in skins {
-            
-            names = names.union(Set(skin.atlasesNames()))
-        }
-        
-        return Array(names)
+        Array(uniqueAtlasesNames)
     }
 }
