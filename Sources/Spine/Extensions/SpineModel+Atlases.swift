@@ -16,11 +16,7 @@ public extension SpineModel {
         var names = Set<String>()
         for skin in skins {
             
-            guard let atlasesNames = skin.atlasesNames() else {
-                continue
-            }
-            
-            names = names.union(Set(atlasesNames))
+            names = names.union(Set(skin.atlasesNames()))
         }
         
         return Array(names)

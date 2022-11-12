@@ -10,7 +10,7 @@ import SpriteKit
 struct SkinSlotModel {
     
     let name: String
-    let attachments: [AttachmentModelType]?
+    let attachments: [AttachmentModelType]
 }
 
 extension SkinSlotModel: SpineDecodableDictionary {

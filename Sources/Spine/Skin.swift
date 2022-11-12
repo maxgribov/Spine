@@ -16,16 +16,10 @@ class Skin {
     init(_ model: SkinModel, atlas folder: String?) {
         
         self.model = model
-        
-        guard let atlasesNames = model.atlasesNames() else {
-            
-            self.atlases = nil
-            return
-        }
-        
+
         var atlases = [String : SKTextureAtlas]()
         
-        for atlasName in atlasesNames {
+        for atlasName in model.atlasesNames() {
 
             var atlasPath = atlasName
             
@@ -48,7 +42,7 @@ class Skin {
     
     func attachment(_ model: AttachmentModelType) -> Attachment? {
         
-        if AttachmentBuilder.textureRequired(for: model) {
+        if model.isTextureRequired == true {
             
             guard let attachmentAtlasName = atlasName(for: model),
                 let textureName = textureName(for: model),
@@ -80,9 +74,9 @@ class Skin {
 //MARK: - Atlases Names Helpers
 
 //TODO: refactor
-func textureName(from name: String, actualName: String? , path: String?) -> String {
+func textureName(from name: String, fileName: String? , path: String?) -> String {
     
-    let resultName = path ?? actualName ?? name
+    let resultName = path ?? fileName ?? name
     let splittedResultName = resultName.components(separatedBy: "/")
     
     return splittedResultName.last ?? name
@@ -91,9 +85,9 @@ func textureName(from name: String, actualName: String? , path: String?) -> Stri
 func textureName(for attachmentType: AttachmentModelType ) -> String? {
     
     switch attachmentType {
-    case .region(let region): return textureName(from: region.name, actualName: region.name, path: region.path)
-    case .mesh(let mesh): return textureName(from: mesh.name, actualName: mesh.name, path: mesh.path)
-    case .linkedMesh(let linkedMesh): return textureName(from: linkedMesh.name, actualName: linkedMesh.name, path: linkedMesh.path)
+    case .region(let region): return textureName(from: region.name, fileName: region.fileName, path: region.path)
+    case .mesh(let mesh): return textureName(from: mesh.name, fileName: mesh.fileName, path: mesh.path)
+    case .linkedMesh(let linkedMesh): return textureName(from: linkedMesh.name, fileName: linkedMesh.fileName, path: linkedMesh.path)
     default: return nil
     }
 }
@@ -117,9 +111,9 @@ func atlasName(from name: String, actualName: String?, path: String?) -> String 
 func atlasName(for attachmentType: AttachmentModelType ) -> String? {
 
     switch attachmentType {
-    case .region(let region): return atlasName(from: region.name, actualName: region.name, path: region.path)
-    case .mesh(let mesh): return atlasName(from: mesh.name, actualName: mesh.name, path: mesh.path)
-    case .linkedMesh(let linkedMesh): return atlasName(from: linkedMesh.name, actualName: linkedMesh.name, path: linkedMesh.path)
+    case .region(let region): return atlasName(from: region.name, actualName: region.fileName, path: region.path)
+    case .mesh(let mesh): return atlasName(from: mesh.name, actualName: mesh.fileName, path: mesh.path)
+    case .linkedMesh(let linkedMesh): return atlasName(from: linkedMesh.name, actualName: linkedMesh.fileName, path: linkedMesh.path)
     default: return nil
     }
 }

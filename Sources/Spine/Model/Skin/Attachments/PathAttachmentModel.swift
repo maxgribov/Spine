@@ -9,9 +9,7 @@ import SpriteKit
 
 struct PathAttachmentModel: AttachmentModel {
     
-    //TODO: - remove
-    let name = ""
-    
+    let name: String
     let closed: Bool
     let constantSpeed: Bool
     let lengths: [CGFloat]
@@ -31,6 +29,7 @@ extension PathAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        self.name = name
         closed = try container.decodeIfPresent(Bool.self, forKey: .closed) ?? false
         constantSpeed = try container.decodeIfPresent(Bool.self, forKey: .constantSpeed) ?? true
         lengths = try container.decode([CGFloat].self, forKey: .lengths)

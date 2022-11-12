@@ -37,15 +37,13 @@ extension Skeleton {
             
             for slotModel in skin.model.slots {
                 
-                guard let slot = slots?.first(where: { $0.model.name == slotModel.name }),
-                    let attachmentsModels = slotModel.attachments else {
-                        
+                guard let slot = slots?.first(where: { $0.model.name == slotModel.name })else {
                         continue
                 }
                 
                 var boundingBoxes = [BoundingBoxAttachment]()
                 
-                for attachmentModel in attachmentsModels {
+                for attachmentModel in slotModel.attachments {
                     
                     if let attachment = skin.attachment(attachmentModel) {
                         

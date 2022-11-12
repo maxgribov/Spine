@@ -43,6 +43,7 @@ class Slot: SKNode, Prefixable, Defaultable {
 
                 sprite.setColor(with: model.color)
                 sprite.colorBlendFactor = 1.0
+                print("model: \(sprite.model.name), attachment: \(String(describing: model.attachment))")
                 sprite.isHidden = sprite.model.name == model.attachment ? false : true
             }
         }

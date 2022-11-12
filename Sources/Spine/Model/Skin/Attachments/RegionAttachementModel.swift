@@ -9,8 +9,8 @@ import SpriteKit
 
 struct RegionAttachmentModel: AttachmentModel {
     
-    let type: AttachmentModelTypeKeys = .region
     let name: String
+    let fileName: String?
     let path: String?
     let position: CGPoint
     let scale: CGVector
@@ -31,7 +31,8 @@ extension RegionAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? name
+        self.name = name
+        fileName = try container.decodeIfPresent(String.self, forKey: .name)
         path = try container.decodeIfPresent(String.self, forKey: .path)
         let x = try container.decodeIfPresent(CGFloat.self, forKey: .x) ?? 0
         let y = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 0

@@ -10,6 +10,7 @@ import SpriteKit
 struct LinkedMeshAttachmentModel: AttachmentModel {
     
     let name: String
+    let fileName: String?
     let path: String?
     let skin: String
     let parent: String
@@ -30,7 +31,8 @@ extension LinkedMeshAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? name
+        self.name = name
+        fileName = try container.decodeIfPresent(String.self, forKey: .name)
         path = try container.decodeIfPresent(String.self, forKey: .path)
         skin = try container.decodeIfPresent(String.self, forKey: .skin) ?? "default"
         parent = try container.decode(String.self, forKey: .parent)

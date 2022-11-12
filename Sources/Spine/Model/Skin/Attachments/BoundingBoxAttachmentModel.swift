@@ -9,8 +9,7 @@ import SpriteKit
 
 struct BoundingBoxAttachmentModel: AttachmentModel {
     
-    //TODO: - remove
-    let name = ""
+    let name: String
     let vertexCount: UInt
     let vertices: [CGFloat]
     let color: ColorModel
@@ -27,6 +26,7 @@ extension BoundingBoxAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        self.name = name
         vertexCount = try container.decode(UInt.self, forKey: .vertexCount)
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
         color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "60F000FF")

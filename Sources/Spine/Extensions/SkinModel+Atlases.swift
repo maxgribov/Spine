@@ -10,17 +10,13 @@ import Foundation
 
 extension SkinModel {
     
-    func atlasesNames() -> [String]? {
+    func atlasesNames() -> [String] {
 
         var names = Set<String>()
         
         for slot in slots {
             
-            guard let atlasesNames = slot.atlasesNames() else {
-                continue
-            }
-            
-            names = names.union(Set(atlasesNames))
+            names = names.union(Set(slot.atlasesNames()))
         }
         
         return Array(names)

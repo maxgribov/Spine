@@ -10,15 +10,9 @@ import SpriteKit
 
 extension SkinSlotModel {
     
-    func atlasesNames() -> [String]? {
+    func atlasesNames() -> [String] {
         
         var names = Set<String>()
-
-        guard let attachments = attachments else {
-            
-            return nil
-        }
-        
         for attachment in attachments {
             
             guard let attachmentAtlasName = atlasName(for: attachment) else {

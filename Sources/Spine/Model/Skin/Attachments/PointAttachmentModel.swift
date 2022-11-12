@@ -9,9 +9,7 @@ import SpriteKit
 
 struct PointAttachmentModel: AttachmentModel {
 
-    //TODO: - remove
-    let name = ""
-
+    let name: String
     let position: CGPoint
     let rotation: CGFloat
     let color: ColorModel
@@ -28,6 +26,7 @@ extension PointAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        self.name = name
         let x = try container.decodeIfPresent(CGFloat.self, forKey: .x) ?? 0
         let y = try container.decodeIfPresent(CGFloat.self, forKey: .y) ?? 0
         position = .init(x: x, y: y)

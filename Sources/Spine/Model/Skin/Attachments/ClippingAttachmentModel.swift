@@ -9,9 +9,7 @@ import SpriteKit
 
 struct ClippingAttachmentModel: AttachmentModel {
     
-    //TODO: - remove
-    let name = ""
-    
+    let name: String
     let end: String
     let vertexCount: UInt
     let vertices: [CGFloat]
@@ -29,6 +27,7 @@ extension ClippingAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
+        self.name = name
         end = try container.decode(String.self, forKey: .end)
         vertexCount = try container.decode(UInt.self, forKey: .vertexCount)
         vertices = try container.decode([CGFloat].self, forKey: .vertices)

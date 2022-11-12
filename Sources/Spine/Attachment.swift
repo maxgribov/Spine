@@ -10,10 +10,7 @@ import SpriteKit
 
 typealias SKNodeNamePrefix = SKNode & Prefixable & Defaultable
 
-protocol Attachment: SKNodeNamePrefix {
-
-    var model: AttachmentModel { get }
-}
+protocol Attachment: SKNodeNamePrefix {}
 
 extension Attachment {
     
@@ -35,34 +32,24 @@ class AttachmentBuilder {
         default: return nil
         }
     }
-    
-    class func textureRequired(for type: AttachmentModelType) -> Bool {
-        
-        switch type {
-        case .region(_), .mesh(_), .linkedMesh(_): return true
-        default:
-            return false
-        }
-    }
 }
 
 class RegionAttachment: SKSpriteNode, Attachment {
 
-    var model: AttachmentModel { get { return concreteModel } }
-    let concreteModel: RegionAttachmentModel
+    let model: RegionAttachmentModel
     
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {
         
-        self.concreteModel = model
+        self.model = model
         super.init(texture: texture, color: createColor(with: model.color), size: model.size)
         self.name = RegionAttachment.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.dropToDefaults()
     }
     
-    func setColor(with model: ColorModel) {
+    func setColor(with colorModel: ColorModel) {
         
-        let resultColorModel = concreteModel.color.mix(with: model)
+        let resultColorModel = model.color.mix(with: colorModel)
         self.color = createColor(with: resultColorModel)
     }
     
@@ -74,10 +61,10 @@ class RegionAttachment: SKSpriteNode, Attachment {
     
     func dropToDefaults() {
         
-        self.position = concreteModel.position
-        self.zRotation = concreteModel.rotation * degreeToRadiansFactor
-        self.xScale = concreteModel.scale.dx
-        self.yScale = concreteModel.scale.dy
+        self.position = model.position
+        self.zRotation = model.rotation * degreeToRadiansFactor
+        self.xScale = model.scale.dx
+        self.yScale = model.scale.dy
     }
 }
 
@@ -124,7 +111,6 @@ class PointAttachment: SKShapeNode, Attachment {
         
         self.concreteModel = model
         super.init()
-        self.name = PointAttachment.generateName(model.name)
         let circleRadius: CGFloat = 5.0
         let curcleRect = CGRect(x: -circleRadius, y: -circleRadius, width: circleRadius * 2, height: circleRadius * 2)
         self.path = CGPath(ellipseIn: curcleRect, transform: nil)

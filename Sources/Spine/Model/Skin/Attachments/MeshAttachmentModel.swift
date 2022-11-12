@@ -10,6 +10,7 @@ import SpriteKit
 struct MeshAttachmentModel: AttachmentModel {
     
     let name: String
+    let fileName: String?
     let path: String?
     let uvs: [CGFloat]
     let triangles: [UInt]
@@ -33,7 +34,8 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
     
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
-        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? name
+        self.name = name
+        fileName = try container.decodeIfPresent(String.self, forKey: .name)
         path = try container.decodeIfPresent(String.self, forKey: .path)
         uvs = try container.decode([CGFloat].self, forKey: .uvs)
         triangles = try container.decode([UInt].self, forKey: .triangles)
