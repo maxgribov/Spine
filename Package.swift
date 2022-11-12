@@ -20,7 +20,8 @@ let package = Package(
                         .process("Resources/slots.json"),
                         .process("Resources/skins.json"),
                         .process("Resources/events.json"),
-                        .process("Resources/rotateBoneKeyframes.json")
+                        .process("Resources/rotateBoneKeyframes.json"),
+                        .process("Resources/translateBoneKeyframes.json")
                     ])
     ]
 )
