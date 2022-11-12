@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SlotKeyframeColorModel: SlotKeyframeModel, CurvedKeyframeModel {
+struct SlotKeyframeColorModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let color: ColorModel

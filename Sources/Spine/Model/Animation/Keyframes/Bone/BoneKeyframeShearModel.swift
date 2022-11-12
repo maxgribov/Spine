@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoneKeyframeShearModel: BoneKeyframeModel {
+struct BoneKeyframeShearModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let shear: CGVector

@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct BoneKeyframeScaleModel: BoneKeyframeModel {
+struct BoneKeyframeScaleModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let scale: CGVector

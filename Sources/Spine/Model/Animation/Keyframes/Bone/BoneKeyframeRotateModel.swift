@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct BoneKeyframeRotateModel: BoneKeyframeModel {
+struct BoneKeyframeRotateModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let angle: CGFloat

@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct EventKeyfarameModel: KeyframeModel, AnimationGroupModel {
+struct EventKeyfarameModel: KeyframeModel {
     
     let time: TimeInterval
     let event: String

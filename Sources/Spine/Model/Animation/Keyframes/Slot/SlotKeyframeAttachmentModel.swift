@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SlotKeyframeAttachmentModel: SlotKeyframeModel {
+struct SlotKeyframeAttachmentModel: KeyframeModel {
     
     let time: TimeInterval
     let name: String?

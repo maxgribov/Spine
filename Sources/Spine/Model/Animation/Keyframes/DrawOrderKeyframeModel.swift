@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DrawOrderKeyframeModel: KeyframeModel, AnimationGroupModel {
+struct DrawOrderKeyframeModel: KeyframeModel {
     
     let time: TimeInterval
     let offsets: [Offset]

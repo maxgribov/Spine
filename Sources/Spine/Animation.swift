@@ -35,7 +35,7 @@ class Animation {
                 }))
             case .events(let eventsKeyframes):
                 actions.append(EventAnimationBuilder.action(eventsKeyframes))
-            case .draworder(let draworderKeyframes):
+            case .drawOrder(let draworderKeyframes):
                 actions.append(DrawOrderAnimationBuilder.action(draworderKeyframes, model.slots))
 
             default:
@@ -80,7 +80,7 @@ class BoneAnimationBuilder {
         return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: ".//\(boneName)", inheritDuration: true)
     }
     
-    class func action(timeline: BoneAnimationTimelineModelType, _ bone: BoneModel) -> SKAction {
+    class func action(timeline: BoneAnimationModel.Timeline, _ bone: BoneModel) -> SKAction {
         
         var lastTime: TimeInterval = 0
         

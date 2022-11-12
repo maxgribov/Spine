@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-struct BoneKeyframeTranslateModel: BoneKeyframeModel {
+struct BoneKeyframeTranslateModel: CurvedKeyframeModel {
     
     let time: TimeInterval
     let position: CGPoint
