@@ -122,7 +122,7 @@ class BoneAnimationBuilder {
     class func action(keyframe: BoneKeyframeRotateModel, duration: TimeInterval, _ defaultAngle: CGFloat) -> SKAction {
         
         let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
-        let action = SKAction.rotate(toAngle: angle, duration: duration)
+        let action = SKAction.rotate(toAngle: angle, duration: duration, shortestUnitArc: true)
         setTiming(action, keyframe.curve)
 
         return action
