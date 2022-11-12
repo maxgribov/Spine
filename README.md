@@ -1,5 +1,4 @@
 [![Build Status](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)
-[![Pod Version](https://img.shields.io/cocoapods/v/Spine.svg?style=flat)](https://cocoapods.org/pods/Spine)
 
 # Spine
 This Swift library allows you to upload characters and their animations from the [Spine app](http://esotericsoftware.com) (v3.8.x +) to SpriteKit for platforms:
