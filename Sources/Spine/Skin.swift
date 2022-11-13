@@ -10,6 +10,7 @@ import SpriteKit
 
 class Skin {
     
+    var name: String { model.name }
     let model: SkinModel
     let atlases: [String : SKTextureAtlas]
     

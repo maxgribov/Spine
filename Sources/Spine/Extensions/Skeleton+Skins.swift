@@ -34,30 +34,36 @@ extension Skeleton {
             for slotModel in skin.model.slots {
                 
                 guard let slot = slots.first(where: { $0.model.name == slotModel.name }) else {
-                        continue
+                    continue
                 }
                 
+                // reset slot
+                slot.removeAllChildren()
+                slot.physicsBody = nil
+
                 var boundingBoxes = [BoundingBoxAttachment]()
                 
                 for attachmentModel in slotModel.attachments {
                     
-                    if let attachment = skin.attachment(attachmentModel) {
+                    guard let attachment = skin.attachment(attachmentModel) else {
+                        continue
+                    }
+                    
+                    switch attachment {
+                    case let region as RegionAttachment:
+                        slot.addChild(region)
                         
-                        if let region = attachment as? RegionAttachment {
-                            
-                            slot.addChild(region)
-                            
-                        } else if let boundingBox = attachment as? BoundingBoxAttachment {
-                            
-                            boundingBoxes.append(boundingBox)
-                            
-                        } else if let point = attachment as? PointAttachment {
-                            
-                            slot.addChild(point)
-                        }
+                    case let boundingBox as BoundingBoxAttachment:
+                        boundingBoxes.append(boundingBox)
+                        
+                    case let point as PointAttachment:
+                        slot.addChild(point)
+                        
+                    default:
+                        continue
                     }
                 }
-
+                
                 if boundingBoxes.count > 1 {
                     
                     let physicBodies = boundingBoxes.compactMap({ $0.physicsBody })
