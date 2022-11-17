@@ -28,13 +28,17 @@ class Animation {
                     let bone = model.bones.filter({ $0.name == boneAnimationModel.bone }).first
                     return BoneAnimationBuilder.action(boneAnimationModel, bone)
                 }))
+                
             case .slots(let slotsAnimationModels):
-                actions.append(contentsOf: slotsAnimationModels.map({ (slotAnimationModel) -> SKAction in
+                let slotsAnimations = slotsAnimationModels.map({ (slotAnimationModel) -> SKAction in
                     
                     return SlotAnimationBuilder.action(slotAnimationModel)
-                }))
+                })
+                actions.append(contentsOf: slotsAnimations)
+                
             case .events(let eventsKeyframes):
                 actions.append(EventAnimationBuilder.action(eventsKeyframes))
+                
             case .drawOrder(let draworderKeyframes):
                 actions.append(DrawOrderAnimationBuilder.action(draworderKeyframes, model.slots))
 
@@ -166,8 +170,13 @@ class SlotAnimationBuilder {
             switch timeline {
             case .attachment(let attachmentKeyframes):
                 actions.append(SlotAnimationBuilder.action(attachmentKeyframes, model.slot))
+                
             case .color(let colorKeyframes):
                 actions.append(SlotAnimationBuilder.action(colorKeyframes, model.slot))
+                
+            case .colorDark(let colorDarkKeyframes):
+                //TODO: - Implement actions
+                break
             }
         }
         
@@ -213,6 +222,7 @@ class SlotAnimationBuilder {
     
     class func action(_ keyframes: [SlotKeyframeColorModel], _ slot: String) -> SKAction {
         
+        /*
         //color action
         var actions = [SKAction]()
         var lastTime: TimeInterval = 0
@@ -241,6 +251,11 @@ class SlotAnimationBuilder {
         }
         
         return SKAction.run(slotColorAction, onChildWithName: ".//\(Slot.generateName(slot))", inheritDuration: true)
+         */
+        
+        return SKAction.customAction(withDuration: 0.01) { node, time in
+            
+        }
     }
 }
 

@@ -12,6 +12,8 @@ struct BoneKeyframeRotateModel: CurvedKeyframeModel {
     let time: TimeInterval
     let angle: CGFloat
     var curve: CurveModel
+    
+    var values: [Float] { [Float(angle)] }
 }
 
 extension BoneKeyframeRotateModel: Decodable {

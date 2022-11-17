@@ -46,22 +46,22 @@ extension BoneAnimationModel: SpineDecodableDictionary {
             switch timelineKey {
             case .rotate:
                 let rotateKeyframes = try container.decode([BoneKeyframeRotateModel].self, forKey: .rotate)
-                let adjustedRotateKeyframes = adjustedCurves(rotateKeyframes)
+                let adjustedRotateKeyframes = try adjustedCurves(rotateKeyframes)
                 timelines.append(.rotate(adjustedRotateKeyframes))
 
             case .translate:
                 let translateKeyframes = try container.decode([BoneKeyframeTranslateModel].self, forKey: .translate)
-                let adjustedTranslateKeyframes = adjustedCurves(translateKeyframes)
+                let adjustedTranslateKeyframes = try adjustedCurves(translateKeyframes)
                 timelines.append(.translate(adjustedTranslateKeyframes))
 
             case .scale:
                 let scaleKeyframes = try container.decode([BoneKeyframeScaleModel].self, forKey: .scale)
-                let adjustedScaleKeyframes = adjustedCurves(scaleKeyframes)
+                let adjustedScaleKeyframes = try adjustedCurves(scaleKeyframes)
                 timelines.append(.scale(adjustedScaleKeyframes))
 
             case .shear:
                 let shearKeyframes = try container.decode([BoneKeyframeShearModel].self, forKey: .shear)
-                let adjustedShearKeyframes = adjustedCurves(shearKeyframes)
+                let adjustedShearKeyframes = try adjustedCurves(shearKeyframes)
                 timelines.append(.shear(adjustedShearKeyframes))
             }
         }

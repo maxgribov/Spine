@@ -12,6 +12,8 @@ struct BoneKeyframeScaleModel: CurvedKeyframeModel {
     let time: TimeInterval
     let scale: CGVector
     var curve: CurveModel
+    
+    var values: [Float] { [Float(scale.dx), Float(scale.dy)]}
 }
 
 extension BoneKeyframeScaleModel: Decodable {

@@ -21,6 +21,7 @@ extension SlotAnimationModel {
         
         case attachment([SlotKeyframeAttachmentModel])
         case color([SlotKeyframeColorModel])
+        case colorDark([SlotKeyframeColorDarkModel])
     }
 }
 
@@ -28,8 +29,7 @@ extension SlotAnimationModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
-        case attachment
-        case color
+        case attachment, rgb, alpha, rgba, rgba2
     }
     
     typealias KeysType = Keys
@@ -41,15 +41,31 @@ extension SlotAnimationModel: SpineDecodableDictionary {
         for timelineKey in container.allKeys {
             
             switch timelineKey {
-                
             case .attachment:
-                let attachmentKeyframes = try container.decode([SlotKeyframeAttachmentModel].self, forKey: .attachment)
-                timelines.append(.attachment(attachmentKeyframes))
+                var keyframesContainer = try container.nestedUnkeyedContainer(forKey: .attachment)
+                var keyframes = [SlotKeyframeAttachmentModel]()
+                while keyframesContainer.isAtEnd == false {
+                    
+                    let keyframe = try keyframesContainer.decode(SlotKeyframeAttachmentModel.self)
+                    keyframes.append(keyframe)
+                }
+                timelines.append(.attachment(keyframes))
                 
-            case .color:
-                let colorKeyframes = try container.decode([SlotKeyframeColorModel].self, forKey: .color)
-                let adjustedColorKeyframes = adjustedCurves(colorKeyframes)
-                timelines.append(.color(adjustedColorKeyframes))
+            case .rgba:
+                var keyframesContainer = try container.nestedUnkeyedContainer(forKey: .rgba)
+                var keyframes = [SlotKeyframeColorModel]()
+                while keyframesContainer.isAtEnd == false {
+                    
+                    let keyframe = try keyframesContainer.decode(SlotKeyframeColorModel.self)
+                    keyframes.append(keyframe)
+                }
+                
+//                let adjustedColorKeyframes = try adjustedCurves(keyframes)
+                timelines.append(.color(keyframes))
+                
+            default:
+                break
+               //TODO: - Implementation required for rgb + alpha & rgba2
             }
         }
         

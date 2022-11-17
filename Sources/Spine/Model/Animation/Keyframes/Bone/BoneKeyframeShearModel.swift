@@ -12,6 +12,8 @@ struct BoneKeyframeShearModel: CurvedKeyframeModel {
     let time: TimeInterval
     let shear: CGVector
     var curve: CurveModel
+    
+    var values: [Float] { [Float(shear.dx), Float(shear.dy)] }
 }
 
 extension BoneKeyframeShearModel: Decodable {

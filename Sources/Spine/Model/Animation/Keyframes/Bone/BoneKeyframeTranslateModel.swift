@@ -12,6 +12,8 @@ struct BoneKeyframeTranslateModel: CurvedKeyframeModel {
     let time: TimeInterval
     let position: CGPoint
     var curve: CurveModel
+    
+    var values: [Float] { [Float(position.x), Float(position.y)] }
 }
 
 extension BoneKeyframeTranslateModel: Decodable {
