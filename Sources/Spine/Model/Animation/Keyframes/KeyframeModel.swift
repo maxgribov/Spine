@@ -66,9 +66,7 @@ func adjustedCurves<T:CurvedKeyframeModel>(_ input: [T]) throws -> [T]
         
         adjustedFrame.curve = previousCurve
         output.append(adjustedFrame)
-        
-        
-        
+
         previousTime = Float(frame.time)
         previousValues = frame.values
         previousCurve = frame.curve

@@ -54,6 +54,19 @@ public class Skeleton: SKNode {
         self.createSlots(model)
     }
     
+    public convenience init(json name: String, folder: String? = nil, skin: String? = nil) throws {
+        
+        guard let url = Bundle.main.url(forResource: name, withExtension: "json") else {
+            throw SpineError.jsonFileLoadingFromBundleFailed("\(name).json")
+        }
+        
+        let json = try Data(contentsOf: url)
+        let model = try JSONDecoder().decode(SpineModel.self, from: json)
+        
+        self.init(model, atlas: folder)
+        applySkin(named: skin)
+    }
+    
     /**
      Сreates a skeleton node based on the json file stored in the bundle application.
      
@@ -66,17 +79,17 @@ public class Skeleton: SKNode {
      - parameter folder: name of the folder with image atlases. *optional*
      - parameter skin: the name of the skin that you want to apply to 'Skeleton'. *optional*
      */
+    @available(*, deprecated, message: "Use 'init(json:folder:skin:) throws' instead")
     public convenience init?(fromJSON name: String, atlas folder: String? = nil, skin: String? = nil) {
         
-        guard let url = Bundle.main.url(forResource: name, withExtension: "json"),
-              let json = try? Data(contentsOf: url),
-              let model = try? JSONDecoder().decode(SpineModel.self, from: json) else {
-                
-                return nil
+        do {
+            
+            try self.init(json: name, folder: folder, skin: skin)
+            
+        } catch {
+            
+            return nil
         }
-        
-        self.init(model, atlas: folder)
-        applySkin(named: skin)
     }
     
     required public init?(coder aDecoder: NSCoder) {

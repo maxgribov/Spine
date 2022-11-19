@@ -45,6 +45,6 @@ final class BonesModelTests: XCTestCase {
         XCTAssertEqual(result[1].shear, .init(dx: 3.25, dy: 2.5))
         XCTAssertEqual(result[1].inheritScale, false)
         XCTAssertEqual(result[1].inheritRotation, false)
-        XCTAssertEqual(result[1].color.value, "00ff04ff")
+        XCTAssertEqual(result[1].color.rgbaValue, 0x00FF04FF)
     }
 }

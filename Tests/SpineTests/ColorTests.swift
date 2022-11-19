@@ -17,7 +17,7 @@ class ColorTests: XCTestCase {
         let colorModel = ColorModel(value: "db00f0ff")
         
         //when
-        let color = createColor(with: colorModel)
+        let color = colorModel.skColor
         
         //then
         var red: CGFloat = 0

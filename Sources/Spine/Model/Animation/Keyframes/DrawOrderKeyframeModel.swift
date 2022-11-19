@@ -10,7 +10,7 @@ import Foundation
 struct DrawOrderKeyframeModel: KeyframeModel {
     
     let time: TimeInterval
-    let offsets: [Offset]
+    let offsets: [Offset]?
 }
 
 //MARK: - Types
@@ -37,6 +37,6 @@ extension DrawOrderKeyframeModel: Decodable {
         
         let container = try decoder.container(keyedBy: Keys.self)
         time = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
-        offsets = try container.decode([Offset].self, forKey: .offsets)
+        offsets = try container.decodeIfPresent([Offset].self, forKey: .offsets)
     }
 }
