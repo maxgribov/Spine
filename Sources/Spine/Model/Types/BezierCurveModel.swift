@@ -46,7 +46,10 @@ public struct BezierCurveModel: Equatable {
         let p1normal = valueRange != 0 ? (p1 - valueStart) / valueRange : 0
         let p3normal = valueRange != 0 ? (p3 - valueStart) / valueRange : 0
         
-        return BezierCurveModel(p0: p0normal, p1: p1normal, p2: p2normal, p3: p3normal)
+        return BezierCurveModel(p0: p0normal.rounded(places: 3),
+                                p1: p1normal.rounded(places: 3),
+                                p2: p2normal.rounded(places: 3),
+                                p3: p3normal.rounded(places: 3))
     }
 }
 

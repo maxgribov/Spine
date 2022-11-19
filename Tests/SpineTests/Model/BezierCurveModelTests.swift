@@ -51,10 +51,10 @@ extension BezierCurveModelTests {
         let result = curve.normalazed(timeStart: prevTime, timeEnd: currTime, valueStart: prevValue, valueEnd: currValue)
         
         // then
-        XCTAssertEqual(result.p0, 0.333, accuracy: 0.001)
-        XCTAssertEqual(result.p1, 0, accuracy: 0.001)
-        XCTAssertEqual(result.p2, 0.667, accuracy: 0.001)
-        XCTAssertEqual(result.p3, 1, accuracy: 0.001)
+        XCTAssertEqual(result.p0, 0.333, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p1, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p2, 0.667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p3, 1, accuracy: .ulpOfOne)
     }
     
     func testNormalized_Keyframe_Three() throws {
@@ -70,10 +70,10 @@ extension BezierCurveModelTests {
         let result = curve.normalazed(timeStart: prevTime, timeEnd: currTime, valueStart: prevValue, valueEnd: currValue)
         
         // then
-        XCTAssertEqual(result.p0, 0.333, accuracy: 0.001)
-        XCTAssertEqual(result.p1, 0, accuracy: 0.001)
-        XCTAssertEqual(result.p2, 0.667, accuracy: 0.001)
-        XCTAssertEqual(result.p3, 1, accuracy: 0.001)
+        XCTAssertEqual(result.p0, 0.334, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p1, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p2, 0.667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p3, 1, accuracy: .ulpOfOne)
     }
     
     func testNormalized_Keyframe_Four() throws {
@@ -89,10 +89,10 @@ extension BezierCurveModelTests {
         let result = curve.normalazed(timeStart: prevTime, timeEnd: currTime, valueStart: prevValue, valueEnd: currValue)
         
         // then
-        XCTAssertEqual(result.p0, 0.333, accuracy: 0.001)
-        XCTAssertEqual(result.p1, 0, accuracy: 0.001)
-        XCTAssertEqual(result.p2, 0.667, accuracy: 0.001)
-        XCTAssertEqual(result.p3, 1, accuracy: 0.001)
+        XCTAssertEqual(result.p0, 0.333, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p1, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p2, 0.667, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p3, 1, accuracy: .ulpOfOne)
     }
 }
 
@@ -111,9 +111,9 @@ extension BezierCurveModelTests {
         let result = curve.normalazed(timeStart: prevTime, timeEnd: currTime, valueStart: prevValue, valueEnd: currValue)
         
         // then
-        XCTAssertEqual(result.p0, 0.333, accuracy: 0.001)
-        XCTAssertEqual(result.p1, 0, accuracy: 0.001)
-        XCTAssertEqual(result.p2, 1, accuracy: 0.001)
-        XCTAssertEqual(result.p3, -2, accuracy: 0.001)
+        XCTAssertEqual(result.p0, 0.333, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p1, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p2, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result.p3, -2, accuracy: .ulpOfOne)
     }
 }
