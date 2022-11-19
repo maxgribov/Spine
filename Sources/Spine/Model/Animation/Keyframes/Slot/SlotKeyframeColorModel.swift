@@ -54,10 +54,11 @@ extension SlotKeyframeColorModel: Decodable {
                 var channels = [SlotKeyframeColorModel.Channel]()
                 for (index, channel) in color.channels.enumerated() {
                     
-                    let p0 = curveValues[index]
-                    let p1 = curveValues[index + 1]
-                    let p2 = curveValues[index + 2]
-                    let p3 = curveValues[index + 3]
+                    let valueIndex = index * 4
+                    let p0 = curveValues[valueIndex]
+                    let p1 = curveValues[valueIndex + 1]
+                    let p2 = curveValues[valueIndex + 2]
+                    let p3 = curveValues[valueIndex + 3]
                     let curve = BezierCurveModel(p0: p0, p1: p1, p2: p2, p3: p3)
                     let keyframe = SlotKeyframeColorModel.Channel(time: time, value: channel, curve: .bezier(curve))
                     channels.append(keyframe)

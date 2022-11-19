@@ -231,7 +231,7 @@ extension Animation {
         
         var actions = [SKAction]()
         var lastTime: TimeInterval = 0
-        var lastValue: CGFloat = 0
+        var lastValue: CGFloat = 1
         
         for keyframe in keyframes {
             
@@ -239,16 +239,16 @@ extension Animation {
             let change = keyframe.value - lastValue
             let timingFunction = keyframe.curve.timingFunction
             
-            //FIXME: bezier curve animation stops working after a little while for some reason
-            let channelAction = SKAction.customAction(withDuration: duration) { [timingFunction, lastValue, change] node, time in
+            let channelAction = SKAction.customAction(withDuration: duration) { [lastValue, change] node, time in
 
-                if let spriteNode = node.children.compactMap({ $0 as? SKSpriteNode }).first {
-                    
-                    let delta = timingFunction(Float(time))
-                    let value = min(lastValue + change * CGFloat(delta), 1)
-                    
-                    spriteNode.color = spriteNode.color.updated(channel: value, index: index)
+                guard let spriteNode = node.children.compactMap({ $0 as? SKSpriteNode }).first else {
+                    return
                 }
+                
+                let delta = timingFunction(Float(time))
+                let value = min(lastValue + change * CGFloat(delta), 1)
+                
+                spriteNode.color = spriteNode.color.updated(channel: value, index: index)
             }
   
             actions.append(channelAction)
@@ -257,7 +257,6 @@ extension Animation {
             lastValue = keyframe.value
         }
 
-        actions.removeFirst()
         return SKAction.sequence(actions)
     }
 }
