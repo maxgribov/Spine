@@ -13,7 +13,7 @@
 
 import SpriteKit
 
-public struct BezierCurveSolver {
+struct BezierCurveSolver {
     
     let cx: Float
     let bx: Float
@@ -124,12 +124,12 @@ public struct BezierCurveSolver {
         return t2
     }
     
-    public func solve(x: Float) -> Float {
+    func solve(x: Float) -> Float {
         
         return sampleCurveY(time: solveCurveX(x: x))
     }
     
-    public func timingFunction() -> SKActionTimingFunction {
+    func timingFunction() -> SKActionTimingFunction {
         
         if isLinear {
             

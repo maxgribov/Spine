@@ -96,6 +96,8 @@ extension BezierCurveModelTests {
     }
 }
 
+//MARK: - Extreme Bezier
+
 extension BezierCurveModelTests {
     
     func testNormalized_Extreme() throws {
