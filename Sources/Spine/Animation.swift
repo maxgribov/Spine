@@ -115,27 +115,31 @@ extension Animation {
         
         let angle = (defaultAngle + keyframe.angle) * degreeToRadiansFactor
         let action = SKAction.rotate(toAngle: angle, duration: duration, shortestUnitArc: true)
-        setTiming(action, keyframe.curve)
+        action.timingFunction = keyframe.curve.timingFunction
 
         return action
     }
     
     static func action(keyframe: BoneKeyframeTranslateModel, duration: TimeInterval, _ defaultPosition: CGPoint) -> SKAction {
         
-        let position = CGPoint(x: defaultPosition.x + keyframe.position.x, y: defaultPosition.y + keyframe.position.y)
-        let action = SKAction.move(to: position, duration: duration)
-        setTiming(action, keyframe.curve)
-
-        return action
+        let positionX = defaultPosition.x + keyframe.position.x
+        let positionY = defaultPosition.y + keyframe.position.y
+        let actionX = SKAction.moveTo(x: positionX, duration: duration)
+        let actionY = SKAction.moveTo(y: positionY, duration: duration)
+        actionX.timingFunction = keyframe.curve.timingFunction
+        actionY.timingFunction = keyframe.curve.timingFunctionSecond
+        
+        return SKAction.group([actionX, actionY])
     }
     
     static func action(keyframe: BoneKeyframeScaleModel, duration: TimeInterval, _ defaultScale: CGVector) -> SKAction {
         
-        let action = SKAction.group([SKAction.scaleX(to: keyframe.scale.dx, duration: duration),
-                                     SKAction.scaleY(to: keyframe.scale.dy, duration: duration)])
-        setTiming(action, keyframe.curve)
-
-        return action
+        let actionX = SKAction.scaleX(to: keyframe.scale.dx, duration: duration)
+        let actionY = SKAction.scaleY(to: keyframe.scale.dy, duration: duration)
+        actionX.timingFunction = keyframe.curve.timingFunction
+        actionY.timingFunction = keyframe.curve.timingFunctionSecond
+     
+        return SKAction.group([actionX, actionY])
     }
     
     static func action(keyframe: BoneKeyframeShearModel, duration: TimeInterval, _ defaultShear: CGVector) -> SKAction {
@@ -373,17 +377,6 @@ extension Animation {
 //MARK: - Helpers
 
 extension Animation {
-    
-    static func setTiming(_ action: SKAction, _ curve: CurveModel)  {
-        
-        switch curve {
-        case .linear: action.timingMode = .linear
-        case .stepped: action.timingFunction = { time in return time < 1.0 ? 0 : 1.0 }
-        case .bezier(let bezierModel): action.timingFunction = BezierCurveSolver(bezierModel).timingFunction()
-            //FIXME: - real implementation required with two bezier curves for x and y
-        case .bezier2(let bezierModel1, _): action.timingFunction = BezierCurveSolver(bezierModel1).timingFunction()
-        }
-    }
     
     static func longestDuration(_ actions: [SKAction]) -> TimeInterval {
         
