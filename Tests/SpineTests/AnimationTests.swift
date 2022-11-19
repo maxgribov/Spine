@@ -19,7 +19,7 @@ class AnimationTests: XCTestCase {
         let action = SKAction()
         
         //when
-        setTiming(action, model)
+        Animation.setTiming(action, model)
         
         //then
         XCTAssertEqual(action.timingMode, .linear)
@@ -35,7 +35,7 @@ class AnimationTests: XCTestCase {
         let action = SKAction()
         
         //when
-        setTiming(action, model)
+        Animation.setTiming(action, model)
 
         //then
         XCTAssertEqual(action.timingFunction(0), 0, accuracy: Float.ulpOfOne)
@@ -51,7 +51,7 @@ class AnimationTests: XCTestCase {
         let action = SKAction()
         
         //when
-        setTiming(action, model)
+        Animation.setTiming(action, model)
 
         //then
         XCTAssertEqual(action.timingFunction(0), 0, accuracy: Float.ulpOfOne)

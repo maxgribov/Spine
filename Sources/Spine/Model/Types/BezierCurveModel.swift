@@ -38,12 +38,13 @@ public struct BezierCurveModel: Equatable {
     /// - Returns: BezierCurveModel with normalized parameter values
     public func normalazed(timeStart: Float, timeEnd: Float, valueStart: Float, valueEnd: Float) -> BezierCurveModel {
         
-        let p0normal = timeEnd > 0 ? (p0 - timeStart) / timeEnd : 0
-        let p2normal = timeEnd > 0 ? (p2 - timeStart) / timeEnd : 0
+        let timeRange = abs(timeEnd - timeStart)
+        let p0normal = timeRange > 0 ? abs(p0 - timeStart) / timeRange : 0
+        let p2normal = timeRange > 0 ? abs(p2 - timeStart) / timeRange : 0
         
-        let range = abs(valueEnd - valueStart)
-        let p1normal = range != 0 ? abs(p1 - valueStart) / range : 0
-        let p3normal = range != 0 ? abs(p3 - valueStart) / range : 0
+        let valueRange = valueEnd - valueStart
+        let p1normal = valueRange != 0 ? (p1 - valueStart) / valueRange : 0
+        let p3normal = valueRange != 0 ? (p3 - valueStart) / valueRange : 0
         
         return BezierCurveModel(p0: p0normal, p1: p1normal, p2: p2normal, p3: p3normal)
     }
