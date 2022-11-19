@@ -9,11 +9,23 @@ import Foundation
 
 struct SlotKeyframeColorModel {
 
-    var keyframes: [SlotKeyframeColorChannelModel]
+    var channels: [Channel]
 
-    init(keyframes: [SlotKeyframeColorChannelModel]) {
+    init(channels: [Channel]) {
         
-        self.keyframes = keyframes
+        self.channels = channels
+    }
+}
+
+extension SlotKeyframeColorModel {
+    
+    struct Channel: CurvedKeyframeModel {
+        
+        let time: TimeInterval
+        let value: ColorChannel
+        var curve: CurveModel
+        
+        var values: [Float] { [Float(value)] }
     }
 }
 
@@ -32,14 +44,14 @@ extension SlotKeyframeColorModel: Decodable {
         do {
             
             let curve = try container.decode(CurveModel.self, forKey: .curve)
-            let keyframes = color.channels.map{ SlotKeyframeColorChannelModel(time: time, channel: $0, curve: curve) }
-            self.init(keyframes: keyframes)
+            let keyframes = color.channels.map{ SlotKeyframeColorModel.Channel(time: time, value: $0, curve: curve) }
+            self.init(channels: keyframes)
             
         } catch {
             
             if let curveValues = try? container.decode([Float].self, forKey: .curve), curveValues.count == 4 * 4 {
                 
-                var keyframes = [SlotKeyframeColorChannelModel]()
+                var channels = [SlotKeyframeColorModel.Channel]()
                 for (index, channel) in color.channels.enumerated() {
                     
                     let p0 = curveValues[index]
@@ -47,16 +59,16 @@ extension SlotKeyframeColorModel: Decodable {
                     let p2 = curveValues[index + 2]
                     let p3 = curveValues[index + 3]
                     let curve = BezierCurveModel(p0: p0, p1: p1, p2: p2, p3: p3)
-                    let keyframe = SlotKeyframeColorChannelModel(time: time, channel: channel, curve: .bezier(curve))
-                    keyframes.append(keyframe)
+                    let keyframe = SlotKeyframeColorModel.Channel(time: time, value: channel, curve: .bezier(curve))
+                    channels.append(keyframe)
                 }
                 
-                self.init(keyframes: keyframes)
+                self.init(channels: channels)
                 
             } else {
                 
-                let keyframes = color.channels.map{ SlotKeyframeColorChannelModel(time: time, channel: $0, curve: .linear) }
-                self.init(keyframes: keyframes)
+                let channels = color.channels.map{ SlotKeyframeColorModel.Channel(time: time, value: $0, curve: .linear) }
+                self.init(channels: channels)
             }
         }
     }

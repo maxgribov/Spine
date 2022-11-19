@@ -28,6 +28,7 @@ public struct BezierCurveModel: Equatable {
         self.p3 = p3
     }
     
+    //TODO: tests
     /// Normalizes parameter values (puts them in the range between 0 and 1) based on time and the value for the current and previous keyframes
     /// - Parameters:
     ///   - timeStart: previous keyframe absolute time
@@ -45,5 +46,13 @@ public struct BezierCurveModel: Equatable {
         let p3normal = range != 0 ? abs(p3 - valueStart) / range : 0
         
         return BezierCurveModel(p0: p0normal, p1: p1normal, p2: p2normal, p3: p3normal)
+    }
+}
+
+extension BezierCurveModel: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        
+        return "p0: \(p0), p1: \(p1), p2: \(p2), p3: \(p3)"
     }
 }

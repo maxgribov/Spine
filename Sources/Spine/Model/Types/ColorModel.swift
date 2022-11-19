@@ -7,27 +7,32 @@
 
 import SpriteKit
 
+typealias ColorChannel = CGFloat
+
 struct ColorModel: Equatable {
-    
-    let value: String
     
     let rgbaValue: UInt32
     
-    let redChannel: ColorChannelModel
-    let greenChannel: ColorChannelModel
-    let blueChannel: ColorChannelModel
-    let alphaChannel: ColorChannelModel
+    let red: ColorChannel
+    let green: ColorChannel
+    let blue: ColorChannel
+    let alpha: ColorChannel
     
     init(value: String) {
         
-        self.value = value
+        var result: UInt32 = 0
+        Scanner(string: value).scanHexInt32(&result)
+
+        self.init(value: result)
+    }
+    
+    init(value: UInt32) {
         
-        let rgbaValue = Self.rgbaValue(fom: value)
-        self.rgbaValue = rgbaValue
-        self.redChannel = .init(value: CGFloat((rgbaValue & 0xFF000000) >> 24) / 255.0)
-        self.greenChannel = .init(value: CGFloat((rgbaValue & 0x00FF0000) >> 16) / 255.0)
-        self.blueChannel = .init(value: CGFloat((rgbaValue & 0x0000FF00) >> 8) / 255.0)
-        self.alphaChannel = .init(value: CGFloat(rgbaValue & 0x000000FF) / 255.0)
+        rgbaValue = value
+        red = CGFloat((value & 0xFF000000) >> 24) / 255.0
+        green = CGFloat((value & 0x00FF0000) >> 16) / 255.0
+        blue = CGFloat((value & 0x0000FF00) >> 8) / 255.0
+        alpha = CGFloat(value & 0x000000FF) / 255.0
     }
 }
 
@@ -35,26 +40,12 @@ struct ColorModel: Equatable {
 
 extension ColorModel {
         
-    var channels: [ColorChannelModel] { [redChannel, greenChannel, blueChannel, alphaChannel] }
-    var red: CGFloat { redChannel.value }
-    var green: CGFloat { greenChannel.value }
-    var blue: CGFloat { blueChannel.value }
-    var alpha: CGFloat { alphaChannel.value }
+    var skColor: SKColor { .init(red: red, green: green, blue: blue, alpha: alpha) }
+    var channels: [ColorChannel] { [red, green, blue, alpha] }
 
-    func mix(with color: ColorModel) -> ColorModel {
+    func add(color: ColorModel) -> ColorModel {
         
-        let rgbaResultValue: UInt32 = rgbaValue & color.rgbaValue
-        let stringValue = String(format:"%2x", rgbaResultValue)
-        
-        return ColorModel(value: stringValue)
-    }
-    
-    static func rgbaValue(fom value: String) -> UInt32 {
-        
-        var result: UInt32 = 0
-        Scanner(string: value).scanHexInt32(&result)
-        
-        return result
+        ColorModel(value: rgbaValue & color.rgbaValue)
     }
 }
 

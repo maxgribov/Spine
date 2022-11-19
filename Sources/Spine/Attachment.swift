@@ -26,7 +26,7 @@ class RegionAttachment: SKSpriteNode, Attachment {
     init(_ model: RegionAttachmentModel, _ texture: SKTexture) {
         
         self.model = model
-        super.init(texture: texture, color: createColor(with: model.color), size: model.size)
+        super.init(texture: texture, color: model.color.skColor, size: model.size)
         self.name = RegionAttachment.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.dropToDefaults()
@@ -34,8 +34,7 @@ class RegionAttachment: SKSpriteNode, Attachment {
     
     func setColor(with colorModel: ColorModel) {
         
-        let resultColorModel = model.color.mix(with: colorModel)
-        self.color = createColor(with: resultColorModel)
+        self.color = model.color.add(color: colorModel).skColor
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +65,7 @@ class BoundingBoxAttachment: SKShapeNode, Attachment {
         if let path = CGPath.path(with: model.vertices) {
             
             self.path = path
-            self.fillColor = createColor(with: model.color)
+            self.fillColor = model.color.skColor
             self.zPosition = 100.0
             self.alpha = 0.5
             
@@ -99,7 +98,7 @@ class PointAttachment: SKShapeNode, Attachment {
         let circleRadius: CGFloat = 5.0
         let curcleRect = CGRect(x: -circleRadius, y: -circleRadius, width: circleRadius * 2, height: circleRadius * 2)
         self.path = CGPath(ellipseIn: curcleRect, transform: nil)
-        self.fillColor = createColor(with: concreteModel.color)
+        self.fillColor = concreteModel.color.skColor
         self.dropToDefaults()
     }
     

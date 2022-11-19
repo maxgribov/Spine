@@ -23,11 +23,19 @@ class Animation {
             
             switch group {
             case .bones(let bonesAnimationModels):
-                actions.append(contentsOf: bonesAnimationModels.map({ (boneAnimationModel) -> SKAction in
+                let bonesActions = bonesAnimationModels.compactMap({ (animationModel) -> (BoneModel, BoneAnimationModel)? in
+
+                    guard let bone = model.bones.first(where: { $0.name == animationModel.bone } ) else {
+                        return nil
+                    }
+
+                    return (bone, animationModel)
                     
-                    let bone = model.bones.filter({ $0.name == boneAnimationModel.bone }).first
-                    return BoneAnimationBuilder.action(boneAnimationModel, bone)
-                }))
+                }).map { bone, animaton in
+                    
+                    return BoneAnimationBuilder.action(animaton, bone)
+                }
+                actions.append(contentsOf: bonesActions)
                 
             case .slots(let slotsAnimationModels):
                 let slotsAnimations = slotsAnimationModels.map({ (slotAnimationModel) -> SKAction in
@@ -43,7 +51,7 @@ class Animation {
                 actions.append(DrawOrderAnimationBuilder.action(draworderKeyframes, model.slots))
 
             default:
-                continue
+                break
             }
         }
         
@@ -73,12 +81,7 @@ func setTiming(_ action: SKAction, _ curve: CurveModel)  {
 
 class BoneAnimationBuilder {
     
-    class func action(_ model: BoneAnimationModel, _ bone: BoneModel?) -> SKAction {
-        
-        guard let bone = bone else {
-            
-            return SKAction()
-        }
+    class func action(_ model: BoneAnimationModel, _ bone: BoneModel) -> SKAction {
         
         let boneName = Bone.generateName(model.bone)
         return SKAction.run(SKAction.group(model.timelines.map({ BoneAnimationBuilder.action(timeline: $0, bone)})), onChildWithName: ".//\(boneName)", inheritDuration: true)
@@ -153,7 +156,7 @@ class BoneAnimationBuilder {
     class func action(keyframe: BoneKeyframeShearModel, duration: TimeInterval, _ defaultShear: CGVector) -> SKAction {
         
         //TODO: Implement shear action here in future
-        return SKAction()
+        return SKAction.wait(forDuration: 0.000001)
     }
 }
 
@@ -174,12 +177,11 @@ class SlotAnimationBuilder {
             case .color(let colorKeyframes):
                 actions.append(SlotAnimationBuilder.action(colorKeyframes, model.slot))
                 
-            case .colorDark(let colorDarkKeyframes):
-                //TODO: - Implement actions
+            default:
                 break
             }
         }
-        
+
         return SKAction.group(actions)
     }
     
@@ -222,40 +224,59 @@ class SlotAnimationBuilder {
     
     class func action(_ keyframes: [SlotKeyframeColorModel], _ slot: String) -> SKAction {
         
-        /*
-        //color action
+        var actions = [SKAction]()
+        let channels = keyframes.map({ $0.channels }).transposed()
+        
+        for (index, keyframes) in channels.enumerated() {
+            
+            let channelAction = Self.action(keyframes, index: index)
+            actions.append(channelAction)
+        }
+        
+        let colorAction = SKAction.group(actions)
+
+        let longestDuration = actions.reduce(0, { (duration, action) -> TimeInterval in
+            
+            return action.duration > duration ? action.duration : duration
+        })
+
+        let result = SKAction.run(colorAction, onChildWithName: ".//\(Slot.generateName(slot))", inheritDuration: true)
+
+        return SKAction.group([result, SKAction.wait(forDuration: longestDuration)])
+    }
+    
+    class func action(_ keyframes: [SlotKeyframeColorModel.Channel], index: Int) -> SKAction {
+        
         var actions = [SKAction]()
         var lastTime: TimeInterval = 0
+        var lastValue: CGFloat = 0
         
         for keyframe in keyframes {
             
             let duration = keyframe.time - lastTime
-            let action = SKAction.colorize(with: createColor(with: keyframe.color), colorBlendFactor: 1.0, duration: duration)
-            setTiming(action, keyframe.curve)
+            let change = keyframe.value - lastValue
+            let timingFunction = keyframe.curve.timingFunction
             
-            actions.append(action)
+            //FIXME: bezier curve animation stops working after a little while for some reason
+            let channelAction = SKAction.customAction(withDuration: duration) { [timingFunction, lastValue, change] node, time in
+
+                if let spriteNode = node.children.compactMap({ $0 as? SKSpriteNode }).first {
+                    
+                    let delta = timingFunction(Float(time))
+                    let value = min(lastValue + change * CGFloat(delta), 1)
+                    
+                    spriteNode.color = spriteNode.color.updated(channel: value, index: index)
+                }
+            }
+  
+            actions.append(channelAction)
             
             lastTime = keyframe.time
+            lastValue = keyframe.value
         }
-        
-        let colorAction = SKAction.sequence(actions)
-        
-        let slotColorAction = SKAction.customAction(withDuration: 0) { (node, time) in
-            
-            let sprites = node.children.filter { $0 is SKSpriteNode }
-            
-            for sprite in sprites {
-                
-                sprite.run(colorAction)
-            }
-        }
-        
-        return SKAction.run(slotColorAction, onChildWithName: ".//\(Slot.generateName(slot))", inheritDuration: true)
-         */
-        
-        return SKAction.customAction(withDuration: 0.01) { node, time in
-            
-        }
+
+        actions.removeFirst()
+        return SKAction.sequence(actions)
     }
 }
 
@@ -306,12 +327,7 @@ class EventAnimationBuilder {
 
 class DrawOrderAnimationBuilder {
     
-    class func action(_ keyframes: [DrawOrderKeyframeModel], _ slots: [SlotModel]?) -> SKAction {
-        
-        guard let slots = slots else {
-            
-            return SKAction()
-        }
+    class func action(_ keyframes: [DrawOrderKeyframeModel], _ slots: [SlotModel]) -> SKAction {
         
         var slotsData = [SlotData]()
         

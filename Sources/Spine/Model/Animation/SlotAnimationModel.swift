@@ -59,9 +59,23 @@ extension SlotAnimationModel: SpineDecodableDictionary {
                     let keyframe = try keyframesContainer.decode(SlotKeyframeColorModel.self)
                     keyframes.append(keyframe)
                 }
+                let channelKeyframes = keyframes.map { $0.channels }.transposed()
+                var channelKeyframesAdjusted = [[SlotKeyframeColorModel.Channel]]()
+                for column in channelKeyframes {
+                    
+                    let columnAdjusted = try adjustedCurves(column)
+                    channelKeyframesAdjusted.append(columnAdjusted)
+                }
                 
-//                let adjustedColorKeyframes = try adjustedCurves(keyframes)
-                timelines.append(.color(keyframes))
+                channelKeyframesAdjusted = channelKeyframesAdjusted.transposed()
+                var keyframesAdjusted = [SlotKeyframeColorModel]()
+                for row in channelKeyframesAdjusted {
+                    
+                    let keyframe = SlotKeyframeColorModel(channels: row)
+                    keyframesAdjusted.append(keyframe)
+                }
+
+                timelines.append(.color(keyframesAdjusted))
                 
             default:
                 break

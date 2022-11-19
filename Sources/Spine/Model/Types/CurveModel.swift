@@ -15,6 +15,45 @@ enum CurveModel: Equatable {
     case bezier2(BezierCurveModel, BezierCurveModel)
 }
 
+//MARK: - Helpers
+
+extension CurveModel {
+    
+    var timingFunction: SKActionTimingFunction {
+        
+        switch self {
+        case .linear: return { time in time }
+        case .stepped: return { time in time < 1.0 ? 0 : 1.0 }
+        case .bezier(let bezier): return BezierCurveSolver(bezier).timingFunction()
+        case .bezier2(let bezier, _): return BezierCurveSolver(bezier).timingFunction()
+        }
+    }
+    
+    var timingFunctionSecond: SKActionTimingFunction {
+        
+        switch self {
+        case .linear: return { time in time }
+        case .stepped: return { time in time < 1.0 ? 0 : 1.0 }
+        case .bezier(let bezier): return BezierCurveSolver(bezier).timingFunction()
+        case .bezier2(_, let bezier): return BezierCurveSolver(bezier).timingFunction()
+        }
+    }
+}
+
+extension CurveModel: CustomDebugStringConvertible {
+    
+    var debugDescription: String {
+        
+        switch self {
+        case .linear: return "linear"
+        case .stepped: return "stepped"
+        case .bezier(let bezierCurveModel): return "bezier: \(bezierCurveModel)"
+        case .bezier2(let bezierCurveModel, let bezierCurveModel2):
+            return "bezier1: \(bezierCurveModel), bezier2: \(bezierCurveModel2)"
+        }
+    }
+}
+
 //MARK: - Decoding
 
 extension CurveModel: Decodable {
