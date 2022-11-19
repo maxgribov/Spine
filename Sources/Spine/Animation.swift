@@ -179,6 +179,8 @@ class SlotAnimationBuilder {
                 
             default:
                 break
+                
+                //TODO: - [Spine Pro] color + darkColor animation
             }
         }
 

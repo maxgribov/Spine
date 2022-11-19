@@ -7,6 +7,7 @@
 
 import Foundation
 
+//TODO: - [Spine Pro]
 struct SlotKeyframeColorDarkModel {
     
     let color: SlotKeyframeColorModel

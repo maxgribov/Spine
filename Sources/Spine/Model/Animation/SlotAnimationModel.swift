@@ -79,7 +79,9 @@ extension SlotAnimationModel: SpineDecodableDictionary {
                 
             default:
                 break
-               //TODO: - Implementation required for rgb + alpha & rgba2
+                
+                //TODO: - Implementation required for rgb + alpha
+                //TODO: - [Spine Pro] rgba2
             }
         }
         
