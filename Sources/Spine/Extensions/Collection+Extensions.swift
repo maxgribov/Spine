@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Collection+Extensions.swift
 //  
 //
 //  Created by Max Gribov on 17.11.2022.

@@ -142,7 +142,7 @@ public class Skeleton: SKNode {
         }
     }
     
-    static func createSkins(_ model: SpineModel, atlas folder: String? ) -> [Skin] {
+    static func createSkins(_ model: SpineModel, atlas folder: String?) -> [Skin] {
         
         model.skins.map{ Skin($0, atlas: folder) }
     }
@@ -155,6 +155,27 @@ public class Skeleton: SKNode {
     static func createAnimations(_ model: SpineModel) -> [Animation] {
         
         model.animations.map{ Animation($0, model) }
+    }
+}
+
+//MARK: - Defaultable
+
+extension Skeleton: Defaultable {
+    
+    func dropToDefaults() {
+        
+        for child in self[".//*"] {
+            
+            if child.hasActions() {
+                
+                child.removeAllActions()
+            }
+            
+            if let defaultableChild = child as? Defaultable {
+                
+                defaultableChild.dropToDefaults()
+            }
+        }
     }
 }
 

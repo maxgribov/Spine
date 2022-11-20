@@ -12,3 +12,8 @@ protocol Defaultable {
     
     func dropToDefaults()
 }
+
+extension Defaultable {
+    
+    func dropToDefaults() {}
+}

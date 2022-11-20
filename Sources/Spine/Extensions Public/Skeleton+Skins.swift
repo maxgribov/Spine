@@ -42,13 +42,9 @@ extension Skeleton {
                 slot.physicsBody = nil
 
                 var boundingBoxes = [BoundingBoxAttachment]()
-                
-                for attachmentModel in slotModel.attachments {
-                    
-                    guard let attachment = skin.attachment(attachmentModel) else {
-                        continue
-                    }
-                    
+                let attachments = slotModel.attachments.compactMap({ skin.attachment($0) })
+                for attachment in attachments {
+  
                     switch attachment {
                     case let region as RegionAttachment:
                         slot.addChild(region)
@@ -73,10 +69,7 @@ extension Skeleton {
                     
                 } else {
                     
-                    if let boundingBox = boundingBoxes.first {
-                        
-                        slot.physicsBody = boundingBox.physicsBody
-                    }
+                    slot.physicsBody = boundingBoxes.first?.physicsBody
                 }
                 
                 slot.dropToDefaults()

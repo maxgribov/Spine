@@ -17,11 +17,10 @@ class Skin {
     init(_ model: SkinModel, atlas folder: String?) {
         
         self.model = model
-
         var atlases = [String : SKTextureAtlas]()
         
         for atlasName in model.atlasesNames {
-
+            
             var atlasPath = atlasName
             if let folder = folder {
                 
@@ -41,11 +40,11 @@ class Skin {
     }
     
     func attachment(_ model: AttachmentModel) -> Attachment? {
-
+        
         if let texturedModel = model as? AttachmentTexturedModel {
             
             guard let texture = texture(with: texturedModel.textureName, from: texturedModel.atlasName) else {
-                    return nil
+                return nil
             }
             
             switch texturedModel {
@@ -62,7 +61,7 @@ class Skin {
             switch model {
             case let boundingBoxModel as BoundingBoxAttachmentModel:
                 return BoundingBoxAttachment(boundingBoxModel)
-            
+                
             case let pointModel as PointAttachmentModel:
                 return PointAttachment(pointModel)
                 
@@ -80,7 +79,7 @@ class Skin {
             
             return nil
         }
-
+        
         return atlas.textureNamed(textureName)
     }
 }

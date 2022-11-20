@@ -14,7 +14,7 @@ protocol Attachment: SKNodeNamePrefix {}
 
 extension Attachment {
     
-    static var prefix: String { get { return "attachment:" } }
+    static var prefix: String { "attachment:" }
 }
 
 //MARK: - Attachments
@@ -54,12 +54,11 @@ class RegionAttachment: SKSpriteNode, Attachment {
 
 class BoundingBoxAttachment: SKShapeNode, Attachment {
     
-    var model: AttachmentModel { get { return concreteModel } }
-    let concreteModel: BoundingBoxAttachmentModel
+    let model: BoundingBoxAttachmentModel
 
     init(_ model: BoundingBoxAttachmentModel) {
         
-        self.concreteModel = model
+        self.model = model
         super.init()
         
         if let path = CGPath.path(with: model.vertices) {
@@ -78,27 +77,20 @@ class BoundingBoxAttachment: SKShapeNode, Attachment {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: Defaultable
-    
-    func dropToDefaults() {
-
-    }
 }
 
 class PointAttachment: SKShapeNode, Attachment {
     
-    var model: AttachmentModel { get { return concreteModel } }
-    let concreteModel: PointAttachmentModel
+    let model: PointAttachmentModel
     
     init(_ model: PointAttachmentModel) {
         
-        self.concreteModel = model
+        self.model = model
         super.init()
         let circleRadius: CGFloat = 5.0
         let curcleRect = CGRect(x: -circleRadius, y: -circleRadius, width: circleRadius * 2, height: circleRadius * 2)
         self.path = CGPath(ellipseIn: curcleRect, transform: nil)
-        self.fillColor = concreteModel.color.skColor
+        self.fillColor = model.color.skColor
         self.dropToDefaults()
     }
     
@@ -110,7 +102,7 @@ class PointAttachment: SKShapeNode, Attachment {
     
     func dropToDefaults() {
         
-        self.position = concreteModel.position
-        self.zRotation = concreteModel.rotation * degreeToRadiansFactor
+        self.position = model.position
+        self.zRotation = model.rotation * degreeToRadiansFactor
     }
 }

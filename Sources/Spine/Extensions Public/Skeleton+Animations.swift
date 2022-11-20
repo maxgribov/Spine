@@ -9,7 +9,7 @@
 import SpriteKit
 
 extension Skeleton {
-
+    
     /**
      A list of all available animation names for this skeleton `Skeleton`.
      */
@@ -35,11 +35,12 @@ extension Skeleton {
     public func dropToDefaultsAction() -> SKAction {
         
         return SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in
-
-            if let skeleton = node as? Skeleton {
-                
-                skeleton.dropToDefaults()
+            
+            guard let skeleton = node as? Skeleton else {
+                return
             }
+            
+            skeleton.dropToDefaults()
         })
     }
 }

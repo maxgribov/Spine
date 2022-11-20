@@ -16,15 +16,7 @@ class Bone: SKSpriteNode, Prefixable, Defaultable {
     init(_ model: BoneModel) {
 
         self.model = model
-        #if os(OSX)
-            
-            super.init(texture: nil, color: NSColor.white, size: CGSize.zero)
-            
-        #else
-            
-            super.init(texture: nil, color: UIColor.white, size: CGSize.zero)
-            
-        #endif
+        super.init(texture: nil, color: .white, size: CGSize.zero)
         
         self.name = Bone.generateName(model.name)
         self.anchorPoint = CGPoint(x: 0, y: 0.5)

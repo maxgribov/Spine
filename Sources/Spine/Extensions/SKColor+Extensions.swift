@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SKColor+Extensions.swift
 //  
 //
 //  Created by Max Gribov on 17.11.2022.
@@ -21,6 +21,7 @@ extension SKColor {
         default: return self
         }
     }
+    
     func updated(red channel: ColorChannel) -> SKColor {
         
         .init(red: channel, green: rgba.green, blue: rgba.blue, alpha: rgba.alpha)
@@ -43,13 +44,13 @@ extension SKColor {
     
     var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         
-          var red: CGFloat = 0
-          var green: CGFloat = 0
-          var blue: CGFloat = 0
-          var alpha: CGFloat = 0
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
         
-          getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
-          return (red, green, blue, alpha)
-      }
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return (red, green, blue, alpha)
+    }
 }

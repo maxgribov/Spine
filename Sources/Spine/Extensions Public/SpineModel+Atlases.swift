@@ -11,6 +11,7 @@ import SpriteKit
 public extension SpineModel {
     
     //TODO: tests
+    //TODO: documentation
     var uniqueAtlasesNames: Set<String> {
         
         skins.reduce(Set<String>()) { partialResult, skin in

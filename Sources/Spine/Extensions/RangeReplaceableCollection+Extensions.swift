@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  RangeReplaceableCollection+Extensions.swift
 //  
 //
 //  Created by Max Gribov on 19.11.2022.

@@ -19,9 +19,9 @@ extension CGPath {
         
         var points = [CGPoint]()
         
-        for i in stride(from: 0, to: vertices.count, by: 2) {
-
-            let point = CGPoint(x: vertices[i], y: vertices[i+1])
+        for index in stride(from: 0, to: vertices.count, by: 2) {
+            
+            let point = CGPoint(x: vertices[index], y: vertices[index+1])
             points.append(point)
         }
         
