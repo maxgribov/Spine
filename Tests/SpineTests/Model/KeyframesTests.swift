@@ -234,20 +234,56 @@ extension KeyframesTests {
         // then
         XCTAssertEqual(result.count, 3)
         
-        //TODO: Update 
-        /*
-        XCTAssertEqual(result[0].time, 0, accuracy: .ulpOfOne)
-        XCTAssertEqual(result[0].color, .init(value: "ffffffff"))
-        XCTAssertEqual(result[0].curve, .linear)
+        XCTAssertEqual(result[0].channels.count, 4)
+        XCTAssertEqual(result[0].channels[0].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[0].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[0].curve, .linear)
         
-        XCTAssertEqual(result[1].time, 0.0667, accuracy: .ulpOfOne)
-        XCTAssertEqual(result[1].color, .init(value: "ffffff62"))
-        XCTAssertEqual(result[1].curve, .linear)
+        XCTAssertEqual(result[0].channels[1].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[1].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[1].curve, .linear)
         
-        XCTAssertEqual(result[2].time, 0.0667, accuracy: .ulpOfOne)
-        XCTAssertEqual(result[2].color, .init(value: "ffffff62"))
-        XCTAssertEqual(result[2].curve, .bezier(.init(p0: 0.232, p1: 0.65, p2: 0.249, p3: -2.15)))
-         */
+        XCTAssertEqual(result[0].channels[2].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[2].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[2].curve, .linear)
+        
+        XCTAssertEqual(result[0].channels[3].time, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[3].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[0].channels[3].curve, .linear)
+        
+        XCTAssertEqual(result[1].channels.count, 4)
+        XCTAssertEqual(result[1].channels[0].time, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[0].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[0].curve, .linear)
+        
+        XCTAssertEqual(result[1].channels[1].time, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[1].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[1].curve, .linear)
+        
+        XCTAssertEqual(result[1].channels[2].time, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[2].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[2].curve, .linear)
+        
+        XCTAssertEqual(result[1].channels[3].time, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[3].value, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[1].channels[3].curve, .linear)
+        
+        XCTAssertEqual(result[2].channels.count, 4)
+        XCTAssertEqual(result[2].channels[0].time, 2, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[0].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[0].curve, .bezier(.init(p0: 1.333, p1: 1, p2: 1.667, p3: 1)))
+        
+        XCTAssertEqual(result[2].channels[1].time, 2, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[1].value, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[1].curve, .bezier(.init(p0: 1.333, p1: 0, p2: 1.667, p3: 1)))
+    
+        XCTAssertEqual(result[2].channels[2].time, 2, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[2].value, 0, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[2].curve, .bezier(.init(p0: 1.333, p1: 0, p2: 1.667, p3: 1)))
+        
+        XCTAssertEqual(result[2].channels[3].time, 2, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[3].value, 1, accuracy: .ulpOfOne)
+        XCTAssertEqual(result[2].channels[3].curve, .bezier(.init(p0: 1.333, p1: 1, p2: 1.667, p3: 1)))
     }
 }
 
