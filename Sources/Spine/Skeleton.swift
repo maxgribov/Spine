@@ -53,7 +53,20 @@ public class Skeleton: SKNode {
         self.createBones(model)
         self.createSlots(model)
     }
-    
+    /**
+     Сreates a skeleton node based on the json file stored in the bundle application.
+     
+     The initializer may fail, so returning value *optional*
+     
+     See more information about Spine:
+     http://esotericsoftware.com/spine-basic-concepts
+     
+     - parameter name: Spine JSON file name.
+     - parameter folder: name of the folder with image atlases. *optional*
+     - parameter skin: the name of the skin that you want to apply to 'Skeleton'. *optional*
+     
+     - throws: Throws a debuggable error.
+     */
     public convenience init(json name: String, folder: String? = nil, skin: String? = nil) throws {
         
         guard let url = Bundle.main.url(forResource: name, withExtension: "json") else {
@@ -64,7 +77,13 @@ public class Skeleton: SKNode {
         let model = try JSONDecoder().decode(SpineModel.self, from: json)
         
         self.init(model, atlas: folder)
-        applySkin(named: skin)
+        
+        try applyDefaultSkin()
+        
+        if let skin = skin {
+            
+            try apply(skin: skin)
+        }
     }
     
     /**
@@ -108,6 +127,11 @@ public class Skeleton: SKNode {
         self.animations = animations
         super.init()
     }
+}
+
+//MARK: - Init Helpers
+
+extension Skeleton {
     
     func createBones(_ model: SpineModel)  {
         
@@ -128,17 +152,15 @@ public class Skeleton: SKNode {
     
     func createSlots(_ model: SpineModel) {
 
-        var slotOrder: Int = 0
-        for slotModel in model.slots {
+        for (index, slotModel) in model.slots.enumerated() {
             
             let boneName = Bone.generateName(slotModel.bone)
-            if let bone = childNode(withName: "//\(boneName)") {
-                
-                let slot = Slot(slotModel, slotOrder)
-                bone.addChild(slot)
+            guard let bone = childNode(withName: "//\(boneName)") else {
+                continue
             }
             
-            slotOrder += 1
+            let slot = Slot(slotModel, index)
+            bone.addChild(slot)
         }
     }
     
@@ -158,11 +180,77 @@ public class Skeleton: SKNode {
     }
 }
 
+//MARK: - Skins
+
+extension Skeleton {
+    
+    func skin(named: String) throws -> Skin {
+        
+        guard let skin = skins.first(where: { $0.name == named }) else {
+            throw SpineError.missingSkinNamed(named)
+        }
+        
+        return skin
+    }
+
+    func apply(skin: Skin) {
+        
+        for slotModel in skin.model.slots {
+            
+            guard let slot = slots.first(where: { $0.model.name == slotModel.name }) else {
+                continue
+            }
+            
+            // reset slot
+            slot.removeAllChildren()
+            slot.physicsBody = nil
+
+            var boundingBoxes = [BoundingBoxAttachment]()
+            let attachments = slotModel.attachments.compactMap({ skin.attachment($0) })
+            for attachment in attachments {
+
+                switch attachment {
+                case let region as RegionAttachment:
+                    slot.addChild(region)
+                    
+                case let boundingBox as BoundingBoxAttachment:
+                    boundingBoxes.append(boundingBox)
+                    
+                case let point as PointAttachment:
+                    slot.addChild(point)
+                    
+                default:
+                    continue
+                }
+            }
+            
+            if boundingBoxes.count > 1 {
+                
+                let physicBodies = boundingBoxes.compactMap({ $0.physicsBody })
+                let compositePhysicBody = SKPhysicsBody(bodies: physicBodies)
+                compositePhysicBody.isDynamic = false
+                slot.physicsBody = compositePhysicBody
+                
+            } else {
+                
+                slot.physicsBody = boundingBoxes.first?.physicsBody
+            }
+            
+            slot.dropToDefaults()
+        }
+    }
+}
+
 //MARK: - Defaultable
 
 extension Skeleton: Defaultable {
     
     func dropToDefaults() {
+        
+        if self.hasActions() {
+            
+            self.removeAllActions()
+        }
         
         for child in self[".//*"] {
             

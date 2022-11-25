@@ -12,17 +12,11 @@ public extension SpineModel {
     
     //TODO: tests
     //TODO: documentation
-    var uniqueAtlasesNames: Set<String> {
+    var atlasesNames: Set<String> {
         
         skins.reduce(Set<String>()) { partialResult, skin in
             
             partialResult.union(skin.atlasesNames)
         }
-    }
-    
-    @available(*, deprecated, message: "Use uniqueAtlasesNames instead")
-    func atlasesNames() -> [String]? {
-        
-        Array(uniqueAtlasesNames)
     }
 }

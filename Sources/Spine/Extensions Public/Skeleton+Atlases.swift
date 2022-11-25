@@ -8,27 +8,32 @@
 
 import SpriteKit
 
-extension Skeleton {
+public extension Skeleton {
     
     /**
      A list of all texture atlases for all of the `Slots` of the `Skeleton`.
      Each atlas is represented only once.
      */
-    public var atlases: [SKTextureAtlas]? {
-        
-        var atlasesMutable = Set<SKTextureAtlas>()
-        for skin in skins {
+    var atlases: [SKTextureAtlas] {
             
-            for atlasName in skin.atlases.keys {
+        skins.map { skin in
+            
+            skin.atlases.keys.compactMap { atlasName in
                 
-                if let atlas = skin.atlases[atlasName] {
-                    
-                    atlasesMutable.insert(atlas)
-                }
+                skin.atlases[atlasName]
             }
+            
+        }.reduce(Set<SKTextureAtlas>()) { partialResult, atlas in
+            
+            partialResult.union(atlas)
+            
+        }.reduce([SKTextureAtlas]()) { partialResult, atlas in
+            
+            var result = partialResult
+            result.append(atlas)
+            
+            return result
         }
-        
-        return Array(atlasesMutable)
     }
     
     /**
@@ -37,17 +42,11 @@ extension Skeleton {
      - parameter completionHandler: the closure that is called when the preload is complete.
      - parameter succeed: preload operation completion flag
      */
-    public func preloadTextureAtlases(withCompletionHandler completionHandler: @escaping (_ succeed: Bool) -> Swift.Void) {
-        
-        guard let atlases = atlases else {
-            
-            completionHandler(false)
-            return
-        }
+    func preloadTextureAtlases(withCompletionHandler completionHandler: @escaping () -> Void) {
         
         SKTextureAtlas.preloadTextureAtlases(atlases) {
             
-            completionHandler(true)
+            completionHandler()
         }
     }
     
@@ -57,19 +56,18 @@ extension Skeleton {
      - parameter skeletons: list of skeletons whose atlases will be preloaded.
      - parameter completionHandler: the closure that is called when the preload is complete.
      */
-    public class func preloadTextureAtlases(_ skeletons: [Skeleton], withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
+    class func preloadTextureAtlases(_ skeletons: [Skeleton], withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        var atlasesMutable = Set<SKTextureAtlas>()
-        
-        for skeleton in skeletons {
+        let atlases = skeletons.map { skeleton in
             
-            if let atlases = skeleton.atlases {
-                
-                atlasesMutable = atlasesMutable.union(atlases)
-            }
+            skeleton.atlases
+            
+        }.reduce(Set<SKTextureAtlas>()) { partialResult, atlases in
+            
+            partialResult.union(atlases)
         }
-        
-        SKTextureAtlas.preloadTextureAtlases(Array(atlasesMutable)) {
+
+        SKTextureAtlas.preloadTextureAtlases(Array(atlases)) {
             
             completionHandler()
         }

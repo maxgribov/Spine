@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-extension Skeleton {
+public extension Skeleton {
     
     /**
      Representation of Spine's *Point Attachments*
@@ -21,26 +21,26 @@ extension Skeleton {
      See more information about point attachments:
      http://esotericsoftware.com/spine-point-attachments
      */
-    public var points: [SKNode]? {
+    var points: [SKNode]? {
         
-        slots.compactMap({ (slot) -> [SKNode]? in
+        slots.compactMap { slot in
 
-            slot.children.compactMap({ (node) -> SKNode? in
+            slot.children.compactMap { node in
 
                 guard let point = node as? PointAttachment else {
                     return nil
                 }
                 
                 return point
-            })
+            }
             
-        }).reduce([SKNode](), { (result, nodes) -> [SKNode] in
+        }.reduce([SKNode]()) { result, nodes in
 
             var resultMutable = result
             resultMutable.append(contentsOf: nodes)
 
             return resultMutable
-        })
+        }
     }
     
     /**
@@ -54,11 +54,11 @@ extension Skeleton {
      See more information about point attachments:
      http://esotericsoftware.com/spine-point-attachments
      */
-    public var activePoints: [SKNode]? {
+    var activePoints: [SKNode]? {
         
-       slots.compactMap({ (slot) -> SKNode? in
+       slots.compactMap { slot in
             
-            slot.children.first(where: { (node) -> Bool in
+            slot.children.first(where: { node in
                 
                 guard let name = node.name, let attachment = slot.model.attachment else {
                     return false
@@ -67,13 +67,13 @@ extension Skeleton {
                 return name.range(of: attachment) != nil
             })
             
-        }).compactMap({ (node) -> SKNode? in
+        }.compactMap { node in
             
             guard let point = node as? PointAttachment else {
                 return nil
             }
             
             return point
-        })
+        }
     }
 }

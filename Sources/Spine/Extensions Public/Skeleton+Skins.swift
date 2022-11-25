@@ -8,7 +8,53 @@
 
 import SpriteKit
 
-extension Skeleton {
+public extension Skeleton {
+    
+    var skinsNames: [String] { skins.map { $0.name } }
+    
+    /**
+     Applies *default* skin.
+     
+     See more information about skins:
+     http://esotericsoftware.com/spine-skins
+     
+     - throws: error if default skin can't be found.
+     */
+    func applyDefaultSkin() throws {
+        
+        apply(skin: try skin(named: SpineModel.defaultSkinName))
+    }
+    
+    /**
+     Applies a skin with a specific name.
+     
+     See more information about skins:
+     http://esotericsoftware.com/spine-skins
+     
+     - parameter named: The name of the skin you want to apply.
+     - throws: error if a skin can't be found.
+     */
+    func apply(skin named: String) throws {
+        
+        apply(skin: try skin(named: named))
+    }
+    
+    /**
+     Creates 'SKAction' that applyes skin. This action can be run on skeleton, like any other 'SKAction'.
+     
+     See more information about skins:
+     http://esotericsoftware.com/spine-skins
+     
+     - parameter applySkin: The name of the skin you want to apply.
+     - returns: action than applyes skin if it run on skeleton.
+     - throws: error if a skin can't be found.
+     */
+    func action(applySkin name: String) throws -> SKAction {
+        
+        let skin = try skin(named: name)
+        
+        return SKAction.run { [weak self] in self?.apply(skin: skin) }
+    }
     
     /**
      Applies a skin with a specific name if possible. Attachments that belong to the 'default' skin will be added to the slots anyway.
@@ -19,61 +65,14 @@ extension Skeleton {
      - parameter named: The name of the skin you want to apply.
      If a skin with that name is not found or skipped it will be added only attachments for the 'default' skin.
      */
-    public func applySkin(named: String? = nil) {
+    @available(*, deprecated, message: "Use 'apply(skin:)' or 'applyDefaultSkin()' instead")
+    func applySkin(named: String? = nil) {
         
-        var skinsNames: Set = ["default"]
-        
+        try? applyDefaultSkin()
+
         if let named = named {
             
-            skinsNames.insert(named)
-        }
-        
-        let filterredSkins = skins.filter({ skinsNames.contains($0.model.name) })
-        for skin in filterredSkins {
-            
-            for slotModel in skin.model.slots {
-                
-                guard let slot = slots.first(where: { $0.model.name == slotModel.name }) else {
-                    continue
-                }
-                
-                // reset slot
-                slot.removeAllChildren()
-                slot.physicsBody = nil
-
-                var boundingBoxes = [BoundingBoxAttachment]()
-                let attachments = slotModel.attachments.compactMap({ skin.attachment($0) })
-                for attachment in attachments {
-  
-                    switch attachment {
-                    case let region as RegionAttachment:
-                        slot.addChild(region)
-                        
-                    case let boundingBox as BoundingBoxAttachment:
-                        boundingBoxes.append(boundingBox)
-                        
-                    case let point as PointAttachment:
-                        slot.addChild(point)
-                        
-                    default:
-                        continue
-                    }
-                }
-                
-                if boundingBoxes.count > 1 {
-                    
-                    let physicBodies = boundingBoxes.compactMap({ $0.physicsBody })
-                    let compositePhysicBody = SKPhysicsBody(bodies: physicBodies)
-                    compositePhysicBody.isDynamic = false
-                    slot.physicsBody = compositePhysicBody
-                    
-                } else {
-                    
-                    slot.physicsBody = boundingBoxes.first?.physicsBody
-                }
-                
-                slot.dropToDefaults()
-            }
+            try? apply(skin: named)
         }
     }
 }

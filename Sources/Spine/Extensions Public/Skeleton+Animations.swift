@@ -8,39 +8,57 @@
 
 import SpriteKit
 
-extension Skeleton {
+public extension Skeleton {
     
     /**
      A list of all available animation names for this skeleton `Skeleton`.
      */
-    public var animationsNames: [String]? { animations.map({ $0.name }) }
+    var animationsNames: [String] { animations.map({ $0.name }) }
     
     /**
-     Returns a 'SKAction' for animation with a specific name if possible.
+     Returns a 'SKAction' for animation with a specific name.
      
      - parameter named: the name of the animation.
+     
+     - throws: error if animation with this name can't be found.
      */
-    public func animation(named: String) -> SKAction? {
+    func action(animation name: String) throws -> SKAction {
         
-        guard let animation = animations.first(where: { $0.name == named }) else {
-            return nil
+        guard let animation = animations.first(where: { $0.name == name }) else {
+            throw SpineError.missingAnimatonNamed(name)
         }
         
         return animation.action
     }
     
     /**
+     Runs action for animation with a specific name.
+     
+     - parameter named: the name of the animation.
+     
+     - throws: error if animation with this name can't be found.
+     */
+    func run(animation name: String) throws {
+        
+        run(try action(animation: name))
+    }
+    
+    /**
+     Returns a 'SKAction' for animation with a specific name if possible.
+     
+     - parameter named: the name of the animation.
+     */
+    @available(*, deprecated, message: "Use 'action(animation:)' instead")
+    func animation(named: String) -> SKAction? {
+        
+        return try? action(animation: named)
+    }
+    
+    /**
      Returns a 'SKAction' that stops all animations and resets all skeleton parameters to the default state.
      */
-    public func dropToDefaultsAction() -> SKAction {
+    func dropToDefaultsAction() -> SKAction {
         
-        return SKAction.customAction(withDuration: 0, actionBlock: { (node, time) in
-            
-            guard let skeleton = node as? Skeleton else {
-                return
-            }
-            
-            skeleton.dropToDefaults()
-        })
+        SKAction.run { [weak self] in  self?.dropToDefaults() }
     }
 }
