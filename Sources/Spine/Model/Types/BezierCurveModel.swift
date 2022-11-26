@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BezierCurveModel: Equatable {
+struct BezierCurveModel: Equatable {
 
     let p0: Float
     let p1: Float
@@ -28,7 +28,6 @@ public struct BezierCurveModel: Equatable {
         self.p3 = p3
     }
     
-    //TODO: tests
     /// Normalizes parameter values (puts them in the range between 0 and 1) based on time and the value for the current and previous keyframes
     /// - Parameters:
     ///   - timeStart: previous keyframe absolute time
@@ -36,7 +35,7 @@ public struct BezierCurveModel: Equatable {
     ///   - valueStart: previous keyframe absolute value
     ///   - valueEnd: current keyframe absolute value
     /// - Returns: BezierCurveModel with normalized parameter values
-    public func normalazed(timeStart: Float, timeEnd: Float, valueStart: Float, valueEnd: Float) -> BezierCurveModel {
+    func normalazed(timeStart: Float, timeEnd: Float, valueStart: Float, valueEnd: Float) -> BezierCurveModel {
         
         let timeRange = abs(timeEnd - timeStart)
         let p0normal = timeRange > 0 ? abs(p0 - timeStart) / timeRange : 0
@@ -55,7 +54,7 @@ public struct BezierCurveModel: Equatable {
 
 extension BezierCurveModel: CustomDebugStringConvertible {
     
-    public var debugDescription: String {
+    var debugDescription: String {
         
         return "p0: \(p0), p1: \(p1), p2: \(p2), p3: \(p3)"
     }

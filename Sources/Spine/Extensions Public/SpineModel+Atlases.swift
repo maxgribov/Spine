@@ -11,7 +11,7 @@ import SpriteKit
 public extension SpineModel {
     
     //TODO: tests
-    //TODO: documentation
+    /// Names of atlases with textures that are stored in the model. The names correspond to folders in the Spine App project
     var atlasesNames: Set<String> {
         
         skins.reduce(Set<String>()) { partialResult, skin in

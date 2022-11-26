@@ -8,6 +8,48 @@
 
 import SpriteKit
 
+/**
+ The `JSON` exported from Spine App is deserialized into this data model. Then this data model is used to create a `Skeleton`.
+ 
+ Usually you don't need to get the model from JSON yourself, this is done during the `Skeleton` initialization process:
+ 
+ ```swift
+ do {
+     
+     let character = try Skeleton(json: "goblins-ess", folder: "goblins", skin: "goblin")
+     
+     // do something with the character
+     
+ } catch {
+     
+     // handle error
+     print(error)
+ }
+ ```
+ But in some cases, for example, when you manually prepare texture atlases, you need to decode JSON yourself:
+ 
+ ```swift
+ do {
+     // prepare your atlases
+     let atlases: [String: SKTextureAtlas] = ...
+
+     guard let url = Bundle.main.url(forResource: "goblins-ess", withExtension: "json") else {
+         return
+     }
+     
+     let json = try Data(contentsOf: url)
+     let model = try JSONDecoder().decode(SpineModel.self, from: json)
+     
+     let character = Skeleton(model, atlases)
+     // do something with the character
+     
+ } catch {
+     
+     // handle error
+     print(error)
+ }
+ ```
+ */
 public struct SpineModel {
     
     let skeleton: SkeletonModel

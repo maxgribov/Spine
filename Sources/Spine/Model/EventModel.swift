@@ -8,6 +8,11 @@
 
 import Foundation
 
+/**
+ Events triggered during animation.
+ 
+ The specific value of the event is determined at the stage of character animation. For example, it can be the events of steps, which can then be played sounds.
+ */
 public struct EventModel {
     
     let name: String

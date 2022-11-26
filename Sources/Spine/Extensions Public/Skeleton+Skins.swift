@@ -10,6 +10,7 @@ import SpriteKit
 
 public extension Skeleton {
     
+    /// A list of all skin names stored in the character data model.
     var skinsNames: [String] { skins.map { $0.name } }
     
     /**
@@ -40,7 +41,7 @@ public extension Skeleton {
     }
     
     /**
-     Creates 'SKAction' that applyes skin. This action can be run on skeleton, like any other 'SKAction'.
+     Creates `SKAction` that applyes skin. This action can be run on skeleton, like any other `SKAction`.
      
      See more information about skins:
      http://esotericsoftware.com/spine-skins

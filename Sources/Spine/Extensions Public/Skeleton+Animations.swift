@@ -16,7 +16,7 @@ public extension Skeleton {
     var animationsNames: [String] { animations.map({ $0.name }) }
     
     /**
-     Returns a 'SKAction' for animation with a specific name.
+     Returns a `SKAction` for animation with a specific name.
      
      - parameter named: the name of the animation.
      
@@ -44,7 +44,7 @@ public extension Skeleton {
     }
     
     /**
-     Returns a 'SKAction' for animation with a specific name if possible.
+     Returns a `SKAction` for animation with a specific name if possible.
      
      - parameter named: the name of the animation.
      */
@@ -55,7 +55,7 @@ public extension Skeleton {
     }
     
     /**
-     Returns a 'SKAction' that stops all animations and resets all skeleton parameters to the default state.
+     Returns a `SKAction` that stops all animations and resets all skeleton parameters to the default state.
      */
     func dropToDefaultsAction() -> SKAction {
         

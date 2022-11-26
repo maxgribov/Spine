@@ -37,7 +37,7 @@ public extension Skeleton {
     }
     
     /**
-     Preloads all the atlases for the 'Skeleton' and invokes the callback
+     Preloads all the atlases for the `Skeleton` and invokes the callback
      
      - parameter completionHandler: the closure that is called when the preload is complete.
      - parameter succeed: preload operation completion flag
