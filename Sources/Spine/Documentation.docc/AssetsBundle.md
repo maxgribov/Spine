@@ -74,7 +74,7 @@ This is how the structure of the `Images` folder in the Spine project should loo
 
 ### Namespaces
 
-You **must** enable the `Provides Namespace` option on the folder and all nested atlases in Xcode'a attribute inspector:
+You **must** enable the **Provides Namespace** option on the folder and all nested atlases in Xcode'a attribute inspector:
 
 ![](spine_readme_assets_namespace.png)
 
