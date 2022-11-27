@@ -1,30 +1,27 @@
 [![Build Status](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)
-[![Pod Version](https://img.shields.io/cocoapods/v/Spine.svg?style=flat)](https://cocoapods.org/pods/Spine)
 
 # Spine
-This Swift library allows you to upload characters and their animations from the [Spine app](http://esotericsoftware.com) (v3.8.x +) to SpriteKit for platforms:
+This Swift library allows you to upload characters and their animations from the [Spine (ESS version)](http://esotericsoftware.com) (v4.1+) to `SpriteKit` for platforms::
 
 `iOS` `macOS` `tvOS` `watchOS`
 
 Implemented almost all the functionality of the essential version of Spine app:
 Animation of bones, skins, animation of slots, creation of physical bodies on the basis of bounding boxes and some other. See [Implemented Features](#implemented-features) for more information.
 
+>Warning: There is no implementation of Spine Pro functionality and it is not planned. There are no such features as meshes and their animations. Moreover, when trying to load a character from Spine Pro version with meshes, it will not even be displayed correctly on the screen, a lot of textures will be missing.
+
 Example of working with the library: [Sample project](https://github.com/maxgribov/SpineSampleProject)<BR>
 Learn more about working with the library: [Spine Wiki](https://github.com/maxgribov/Spine/wiki)
+You can also compile the documentation in Xcode
 
 ![Hero](images/spine_readme_hero.png)
 
 ## Installing
+Spine Library can be installed using Swift Package Manager.
 
-### CocoaPods
-Add the pod to your podfile
-```
-pod 'Spine'
-```
-run
-```
-pod install
-```
+Use the package URL to search for the URLImage package: [https://github.com/maxgribov/Spine](https://github.com/maxgribov/Spine)
+
+For how-to integrate package dependencies refer to [Adding Package Dependencies to Your App documentation.](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app)
 
 ## Basic Usage
 
@@ -32,10 +29,10 @@ pod install
 
 #### Files
 
-1. In `assets` catalog create `folder`. *(`Goblins` folder in example below)*
+1. In `Assets` catalog create `folder`. *(`Goblins` folder in example below)*
 2. Create `sprite atlases`. *(`default`, `goblin` and `goblingirl` sprite atlases in example below)*
 3. Put images into sprite atlaces. 
->Note that the images that are in the `root` folder of the Spine app project must be in the sprite atlas named `default` in the Xcode project.
+>Note: Note that the images that are in the `root` folder of the Spine app project must be in the sprite atlas named `default` in the Xcode project.
 
 Final result should looks something like this:
 
@@ -47,7 +44,7 @@ Set `Provides Namespace` option enabled for the root folder and for all sprite a
 
 ![Namespace](images/spine_readme_assets_namespace.png)
 
->If you forget to set the namespace, later when you initialize your character images can be just not found.
+>Warning: If you forget to set the namespace, later when you initialize your character images can be just not found.
 
 #### JSON
 
@@ -65,25 +62,20 @@ Somewhere at the beginning of your code, import the `Spine` library:
 import Spine
 ```
 
-The easiest way to load a character from a JSON file and apply skin to it is to use the appropriate `Skeleton` class constructor:
+The easiest way to load a character from a `JSON` file and apply skin to it is to use the appropriate `Skeleton` class init:
 
 ```swift
-if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "goblin") {
-
-   //Do something with your character here
-}
+let character = try Skeleton(json: "goblins-ess", folder: "goblins", skin: "goblin")
 ```
 >[Skeleton](Spine/Skeleton.swift) is a subclass of `SKNode`, so you can do with it whatever you can do with `SKNode` itself
 
 This way you can apply the animation created in Spine to the character:
 
 ```swift
-if let walkAnimation = character.animation(named: "walk") {
-
-    character.run(walkAnimation)
-}
+let walkAnimation = try character.action(animation: "walk")
+character.run(walkAnimation)
 ```
->The `animation(named:)` method returns an object of the `SKAction` class so that you can use this animation as any other object of the `SKAction` class
+>The `action(animation:)` method returns an object of the `SKAction` class so that you can use this animation as any other object of the `SKAction` class
 
 This is an example of the simplest scene in which we load our Goblin character, add it to the scene and start walk animation in an endless loop:
 ```swift
@@ -94,17 +86,19 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "goblin"){
+        do {
             
-            character.name = "goblin"
-            character.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2))
+            let character = try Skeleton(json: "goblins-ess", folder: "goblins", skin: "goblin")
+            character.name = "character"
+            character.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2) - 200)
+            addChild(character)
             
-            self.addChild(character)
+            let walkAnimation = try character.action(animation: "walk")
+            character.run(.repeatForever(walkAnimation))
 
-            if let walkAnimation = character.animation(named: "walk") {
-                
-                character.run(SKAction.repeatForever(walkAnimation))
-            }
+        } catch {
+            
+            print(error)
         }
     }
 }
@@ -143,6 +137,17 @@ class GameScene: SKScene {
 | - Path Constraint | + | - | - |
 | **Events** | + | + | + |
 | **Draw Order** | + | + | + |
+
+## Documentation
+The Spine library is pretty well documented. You can find the documentation both in the source code files themselves and compile the documentation for displaying it in the Developer Documentation in Xcode.
+
+To compile the documentation use the menu: `Product` > `Build Documentation`
+
+Or use a shortcut: `ctrl` + `shift` + `command` + `D`
+
+As a result, the Developer Documentation will open and you will see something like this:
+
+![Docs](images/spine_readme_docs.png)
 
 ## System Requirements
 

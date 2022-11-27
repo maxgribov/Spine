@@ -1,0 +1,87 @@
+[{
+        "name": "default",
+        "attachments": {
+            "eye_left": {
+                "eye_left": {
+                    "width": 19,
+                    "height": 19
+                }
+            },
+            "moustache": {
+                "moustache": {
+                    "x": -1.41,
+                    "y": 3.52,
+                    "width": 51,
+                    "height": 19
+                }
+            },
+            "head-bb": {
+                "head": {
+                    "type": "boundingbox",
+                    "vertexCount": 6,
+                    "vertices": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95]
+                }
+            },
+            "mesh-slot": {
+                "mesh-attachment": {
+                    "type": "mesh",
+                    "uvs": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95],
+                    "triangles": [1, 2, 3],
+                    "vertices": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95],
+                    "hull": 100
+                }
+            },
+            "linked-mesh-slot": {
+                "linked-mesh-attachment": {
+                    "type": "linkedmesh",
+                    "skin": "test",
+                    "parent": "mesh-attachment"
+                }
+            },
+            "path-slot": {
+                "path-attachment": {
+                    "type": "path",
+                    "lengths": [257.77, 285.16, 57.18, 120.77, 164.95, 76.95],
+                    "vertexCount": 10,
+                    "vertices": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95]
+                }
+            },
+            "point-slot": {
+                "point-attachment": {
+                    "type": "point",
+                    "x": 123.43,
+                    "y": 34.23
+                }
+            },
+            "clipping-slot": {
+                "clipping-attachment": {
+                    "type": "clipping",
+                    "end": "path-slot",
+                    "vertexCount": 12,
+                    "vertices": [-19.14, -70.3, 40.8, -118.07, 257.77, -115.62, 285.16, 57.18, 120.77, 164.95, -5.07, 76.95]
+                }
+            }
+        }
+    },
+    {
+        "name": "blue",
+        "attachments": {
+            "body_skin": {
+                "body_skin": {
+                    "name": "body_blue",
+                    "x": 11.62,
+                    "y": 56.67,
+                    "width": 117,
+                    "height": 118
+                }
+            },
+            "eyebrow_left": {
+                "eyebrow_left_skin": {
+                    "name": "eyebrow_left",
+                    "width": 18,
+                    "height": 11
+                }
+            }
+        }
+    }
+]

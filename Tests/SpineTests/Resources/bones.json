@@ -1,0 +1,20 @@
+[   {
+        "name": "root"
+    },
+    {
+        "name": "front-upper-arm",
+        "parent": "torso",
+        "length": 69.45,
+        "transform": "noRotationOrReflection",
+        "rotation": 168.38,
+        "x": 103.76,
+        "y": 19.33,
+        "scaleX": 0.7,
+        "scaleY": 0.8,
+        "shearX": 3.25,
+        "shearY": 2.5,
+        "inheritScale": false,
+        "inheritRotation": false,
+        "color": "00ff04ff"
+    }
+]

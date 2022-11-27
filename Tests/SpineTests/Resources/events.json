@@ -1,0 +1,15 @@
+{
+    "footsteps": {
+        "int": 1,
+        "float": 2,
+        "string": "three"
+    },
+    "action": {
+        "int": 1,
+        "float": 2,
+        "string": "three",
+        "audio": "hit.wav",
+        "volume": 0.9,
+        "balance": -0.25
+    }
+}
