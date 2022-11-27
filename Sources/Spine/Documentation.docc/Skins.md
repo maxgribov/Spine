@@ -54,4 +54,92 @@ character.run(.repeatForever(switchSkinsAction))
 ```
 - ``Skeleton/action(applySkin:)``
 
+## Advanced Techniques
 
+### Replacing region attachment texture
+
+There are usually enough features that Pine provides in order to manipulate images of parts of your character using skins and attachments that you configure in the Spine App project.
+
+However, in some cases, more subtle control over the images is required. For example, you have a character who wears armor and you want to replace images of different parts of the armor depending on what the user has chosen.
+
+In this case, you will need to:
+- prepare in advance all possible armor options for each slot (helmet, breastplate, etc.)
+- download these images in a convenient way for you to the project (application bundle, download from a remote server, etc.)
+- prepare textures (`SKTexture`) based on images and assemble them into atlases (`SKTextureAtlas`)  (Recommended but not required. atlases are very useful in optimizing the work with images in SpriteKit.)
+- at the right moment, replace the textures in the corresponding region attachments with your own
+
+>Note: How to upload images, create textures based on them and assemble them into texture atlases is beyond the scope of this discussion, you will have to study this issue yourself using the documentation on SpriteKit and other Apple frameworks.
+
+First of all, we have to create a texture. The easiest way to create it to use image stored in the application bundle:
+
+```swift 
+let epicHelmetTexture = SKTexture(imageNamed: "Epic Helmet")
+```
+
+Next, we need to find the right attachment region. To do this, we can print information about the names of the child nodes of the character's skeleton:
+
+```swift
+print(warriorCharacter.childrenTreeInfo)
+```
+
+As a result, something like this will be printed in the console:
+
+```console
+Skeleton warrior children tree:
+bone:root
+-bone:hip
+--bone:torso
+---bone:neck
+----bone:head
+-----slot:head
+------attachment:head
+-----slot:helmet
+------attachment:basic-helmet <<<< looking for
+...
+```
+
+In this case, we are interested in an attachment called `basic-helmet`. The easiest way to replace its texture:
+
+```swift 
+try character.apply(texture: epicHelmetTexture, region: "basic-helmet")
+```
+
+Let's put all together:
+
+```swift 
+do {
+    
+    let character = try Skeleton(json: "warriors-ess", folder: "warriors", skin: "warrior-soldier")
+    character.name = "warrior"
+    
+    let epicHelmetTexture = SKTexture(imageNamed: "Epic Helmet")
+    try character.apply(texture: epicHelmetTexture, region: "basic-helmet")
+    
+    ...
+    
+} catch {
+    
+    print(error)
+}
+```
+An alternative way is to get the `SKSpriteNode` for the desired region attachment and directly install the texture into it:
+
+```swift
+do {
+    
+    let character = try Skeleton(json: "warriors-ess", folder: "warriors", skin: "warrior-soldier")
+    character.name = "warrior"
+    
+    let epicHelmetTexture = SKTexture(imageNamed: "Epic Helmet")
+    character.regionAttachmentNode(named: "basic-helmet")?.texture = epicHelmetTexture
+    
+    
+} catch {
+    
+    print(error)
+}
+```
+
+>Warning: The dimensions and position of the image are determined by the `SKSpriteNode` itself. By applying a new texture, you may find that it does not display exactly as you expected.
+
+>Warning: If you apply animations that switch the visibility of the character's skeleton attachments or apply skins, then what is displayed on the character may change.

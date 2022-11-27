@@ -14,16 +14,11 @@ Learn more about working with the library: [Spine Wiki](https://github.com/maxgr
 ![Hero](images/spine_readme_hero.png)
 
 ## Installing
+Spine can be installed using Swift Package Manager.
 
-### CocoaPods
-Add the pod to your podfile
-```
-pod 'Spine'
-```
-run
-```
-pod install
-```
+Use the package URL to search for the URLImage package: [https://github.com/maxgribov/Spine](https://github.com/maxgribov/Spine)
+
+For how-to integrate package dependencies refer to [Adding Package Dependencies to Your App documentation.](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app)
 
 ## Basic Usage
 
@@ -31,10 +26,10 @@ pod install
 
 #### Files
 
-1. In `assets` catalog create `folder`. *(`Goblins` folder in example below)*
+1. In `Assets` catalog create `folder`. *(`Goblins` folder in example below)*
 2. Create `sprite atlases`. *(`default`, `goblin` and `goblingirl` sprite atlases in example below)*
 3. Put images into sprite atlaces. 
->Note that the images that are in the `root` folder of the Spine app project must be in the sprite atlas named `default` in the Xcode project.
+>Note: Note that the images that are in the `root` folder of the Spine app project must be in the sprite atlas named `default` in the Xcode project.
 
 Final result should looks something like this:
 
@@ -64,25 +59,20 @@ Somewhere at the beginning of your code, import the `Spine` library:
 import Spine
 ```
 
-The easiest way to load a character from a JSON file and apply skin to it is to use the appropriate `Skeleton` class constructor:
+The easiest way to load a character from a `JSON` file and apply skin to it is to use the appropriate `Skeleton` class init:
 
 ```swift
-if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "goblin") {
-
-   //Do something with your character here
-}
+let character = try Skeleton(json: "goblins-ess", folder: "goblins", skin: "goblin")
 ```
 >[Skeleton](Spine/Skeleton.swift) is a subclass of `SKNode`, so you can do with it whatever you can do with `SKNode` itself
 
 This way you can apply the animation created in Spine to the character:
 
 ```swift
-if let walkAnimation = character.animation(named: "walk") {
-
-    character.run(walkAnimation)
-}
+let walkAnimation = try character.action(animation: "walk")
+character.run(walkAnimation)
 ```
->The `animation(named:)` method returns an object of the `SKAction` class so that you can use this animation as any other object of the `SKAction` class
+>The `action(animation:)` method returns an object of the `SKAction` class so that you can use this animation as any other object of the `SKAction` class
 
 This is an example of the simplest scene in which we load our Goblin character, add it to the scene and start walk animation in an endless loop:
 ```swift
@@ -93,17 +83,19 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        if let character = Skeleton(fromJSON: "goblins-ess", atlas: "Goblins", skin: "goblin"){
+        do {
             
-            character.name = "goblin"
-            character.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2))
+            let character = try Skeleton(json: "goblins-ess", folder: "goblins", skin: "goblin")
+            character.name = "character"
+            character.position = CGPoint(x: self.size.width / 2, y: (self.size.height / 2) - 200)
+            addChild(character)
             
-            self.addChild(character)
+            let walkAnimation = try character.action(animation: "walk")
+            character.run(.repeatForever(walkAnimation))
 
-            if let walkAnimation = character.animation(named: "walk") {
-                
-                character.run(SKAction.repeatForever(walkAnimation))
-            }
+        } catch {
+            
+            print(error)
         }
     }
 }

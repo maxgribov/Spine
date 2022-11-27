@@ -41,7 +41,7 @@ public class Skeleton: SKNode {
      The events represented by the `EventModel` model
      
      See more information about events:
-     http://esotericsoftware.com/spine-events
+     [http://esotericsoftware.com/spine-events](http://esotericsoftware.com/spine-events)
      */
     public var eventTriggered: ((EventModel) ->())?
 
@@ -49,7 +49,7 @@ public class Skeleton: SKNode {
      Creates a skeleton node with an `SpineModel` and *optional* atlas folder name.
      
      See more information about Spine:
-     http://esotericsoftware.com/spine-basic-concepts
+     [http://esotericsoftware.com/spine-basic-concepts](http://esotericsoftware.com/spine-basic-concepts)
      
      - parameter model: the skeleton model.
      - parameter folder: name of the folder with image atlases. *optional*
@@ -85,7 +85,7 @@ public class Skeleton: SKNode {
      The initializer may fail, so returning value *optional*
      
      See more information about Spine:
-     http://esotericsoftware.com/spine-basic-concepts
+     [http://esotericsoftware.com/spine-basic-concepts](http://esotericsoftware.com/spine-basic-concepts)
      
      - parameter name: Spine JSON file name.
      - parameter folder: name of the folder with image atlases. *optional*
@@ -118,7 +118,7 @@ public class Skeleton: SKNode {
      The initializer may fail, so returning value *optional*
      
      See more information about Spine:
-     http://esotericsoftware.com/spine-basic-concepts
+     [http://esotericsoftware.com/spine-basic-concepts](http://esotericsoftware.com/spine-basic-concepts)
      
      - parameter name: Spine JSON file name.
      - parameter folder: name of the folder with image atlases. *optional*

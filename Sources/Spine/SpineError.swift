@@ -12,6 +12,7 @@ enum SpineError: LocalizedError {
     case jsonFileLoadingFromBundleFailed(String)
     case missingAnimatonNamed(String)
     case missingSkinNamed(String)
+    case unableApplyTextureToRegionAttachmentNode(String)
     
     var errorDescription: String? {
         
@@ -24,6 +25,9 @@ enum SpineError: LocalizedError {
             
         case let .missingSkinNamed(skinName):
             return "Missing skin named: \(skinName)"
+            
+        case let .unableApplyTextureToRegionAttachmentNode(attachmentName):
+            return "Applying texture failed. Region attachment node named: \(attachmentName) not found in skeleton nodes tree."
         }
     }
 }

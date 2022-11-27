@@ -29,6 +29,13 @@
 - ``setCollisionBitMask(_:)``
 - ``setBitMasks(category:collision:)``
 
+### Node Tree
+- ``childrenTreeInfo``
+- ``regionAttachmentNode(named:)``
+- ``slotNode(named:)``
+- ``boneNode(named:)``
+- ``apply(texture:region:)``
+
 ### Other
 - ``eventTriggered``
 - ``points``

@@ -8,6 +8,9 @@ This Swift library allows you to upload characters and their animations from the
 
 ## Topics
 
+### Getting Started
+- <doc:GettingStarted>
+
 ### Character
 - ``Skeleton``
 
