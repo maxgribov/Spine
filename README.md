@@ -1,12 +1,14 @@
 [![Build Status](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)
 
 # Spine
-This Swift library allows you to upload characters and their animations from the [Spine app](http://esotericsoftware.com) (v3.8.x +) to SpriteKit for platforms:
+This Swift library allows you to upload characters and their animations from the [Spine (ESS version)](http://esotericsoftware.com) (v4.1+) to `SpriteKit` for platforms::
 
 `iOS` `macOS` `tvOS` `watchOS`
 
 Implemented almost all the functionality of the essential version of Spine app:
 Animation of bones, skins, animation of slots, creation of physical bodies on the basis of bounding boxes and some other. See [Implemented Features](#implemented-features) for more information.
+
+>Warning: There is no implementation of Spine Pro functionality and it is not planned. There are no such features as meshes and their animations. Moreover, when trying to load a character from Spine Pro version with meshes, it will not even be displayed correctly on the screen, a lot of textures will be missing.
 
 Example of working with the library: [Sample project](https://github.com/maxgribov/SpineSampleProject)<BR>
 Learn more about working with the library: [Spine Wiki](https://github.com/maxgribov/Spine/wiki)
@@ -14,7 +16,7 @@ Learn more about working with the library: [Spine Wiki](https://github.com/maxgr
 ![Hero](images/spine_readme_hero.png)
 
 ## Installing
-Spine can be installed using Swift Package Manager.
+Spine Library can be installed using Swift Package Manager.
 
 Use the package URL to search for the URLImage package: [https://github.com/maxgribov/Spine](https://github.com/maxgribov/Spine)
 
@@ -41,7 +43,7 @@ Set `Provides Namespace` option enabled for the root folder and for all sprite a
 
 ![Namespace](images/spine_readme_assets_namespace.png)
 
->If you forget to set the namespace, later when you initialize your character images can be just not found.
+>Warning: If you forget to set the namespace, later when you initialize your character images can be just not found.
 
 #### JSON
 

@@ -23,7 +23,7 @@ Set `Provides Namespace` option enabled for the root folder and for all sprite a
 
 ![Namespace](spine_readme_assets_namespace.png)
 
->If you forget to set the namespace, later when you initialize your character images can be just not found.
+>Warning: If you forget to set the namespace, later when you initialize your character images can be just not found.
 
 ### JSON
 
