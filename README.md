@@ -12,6 +12,7 @@ Animation of bones, skins, animation of slots, creation of physical bodies on th
 
 Example of working with the library: [Sample project](https://github.com/maxgribov/SpineSampleProject)<BR>
 Learn more about working with the library: [Spine Wiki](https://github.com/maxgribov/Spine/wiki)
+You can also compile the documentation in Xcode
 
 ![Hero](images/spine_readme_hero.png)
 
@@ -136,6 +137,14 @@ class GameScene: SKScene {
 | - Path Constraint | + | - | - |
 | **Events** | + | + | + |
 | **Draw Order** | + | + | + |
+
+## Documentation
+The Spine library is pretty well documented. You can find the documentation both in the source code files themselves and compile the documentation for displaying it in the Developer Documentation in Xcode.
+To compile the documentation use the menu: `Product` > `Build Documentation`
+Or use a shortcut: `ctrl` + `shift` + `command` + `D`
+As a result, the Developer Documentation will open and you will see something like this:
+
+![Docs](images/spine_readme_docs.png)
 
 ## System Requirements
 
