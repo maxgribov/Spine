@@ -140,8 +140,11 @@ class GameScene: SKScene {
 
 ## Documentation
 The Spine library is pretty well documented. You can find the documentation both in the source code files themselves and compile the documentation for displaying it in the Developer Documentation in Xcode.
+
 To compile the documentation use the menu: `Product` > `Build Documentation`
+
 Or use a shortcut: `ctrl` + `shift` + `command` + `D`
+
 As a result, the Developer Documentation will open and you will see something like this:
 
 ![Docs](images/spine_readme_docs.png)
