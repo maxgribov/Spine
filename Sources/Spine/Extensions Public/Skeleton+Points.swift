@@ -25,7 +25,7 @@ public extension Skeleton {
         
         slots.compactMap { slot in
 
-            slot.children.compactMap { node in
+            slot.children.compactMap { (node) -> PointAttachment? in
 
                 guard let point = node as? PointAttachment else {
                     return nil
