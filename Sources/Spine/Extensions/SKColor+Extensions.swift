@@ -17,7 +17,7 @@ extension SKColor {
         case 0: return updated(red: channel)
         case 1: return updated(green: channel)
         case 2: return updated(blue: channel)
-        case 4: return updated(alpha: channel)
+        case 3: return updated(alpha: channel)
         default: return self
         }
     }
