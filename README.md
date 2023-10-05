@@ -1,5 +1,3 @@
-[![Build Status](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)](https://api.travis-ci.org/maxgribov/Spine.svg?branch=master)
-
 # Spine
 This Swift library allows you to upload characters and their animations from the [Spine (ESS version)](http://esotericsoftware.com) (v4.1+) to `SpriteKit` for platforms::
 
