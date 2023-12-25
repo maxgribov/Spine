@@ -249,7 +249,7 @@ extension Animation {
                     return
                 }
                 
-                let delta = timingFunction(Float(time))
+                let delta = timingFunction(Float(time) / Float(duration))
                 let value = min(lastValue + change * CGFloat(delta), 1)
                 
                 spriteNode.color = spriteNode.color.updated(channel: value, index: index)
