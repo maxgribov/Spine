@@ -243,13 +243,13 @@ extension Animation {
             let change = keyframe.value - lastValue
             let timingFunction = keyframe.curve.timingFunction
             
-            let channelAction = SKAction.customAction(withDuration: duration) { [lastValue, change] node, time in
+            let channelAction = SKAction.customAction(withDuration: duration) { [lastValue, change, duration] node, time in
 
                 guard let spriteNode = node.children.compactMap({ $0 as? SKSpriteNode }).first else {
                     return
                 }
                 
-                let deltaTime = duration > 0 ? Float(time) / Float(duration) : 0
+                let deltaTime = duration > 0 ? Float(time) / Float(duration) : 1
                 let delta = timingFunction(deltaTime)
                 let value = min(lastValue + change * CGFloat(delta), 1)
                 
