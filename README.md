@@ -7,7 +7,7 @@ This Swift library allows you to upload characters and their animations from the
 Implemented almost all the functionality of the essential version of Spine app:
 Animation of bones, skins, animation of slots, creation of physical bodies on the basis of bounding boxes and some other. See [Implemented Features](#implemented-features) for more information.
 
->Warning: There is no implementation of Spine Pro functionality and it is not planned. There are no such features as meshes and their animations. Moreover, when trying to load a character from Spine Pro version with meshes, it will not even be displayed correctly on the screen, a lot of textures will be missing.
+>Warning: There is no implementation of Spine Pro functionality and it is not planned. There are no such features as meshes and their animations. Moreover, when trying to load a character from Spine Pro version with meshes, it will not even be displayed correctly on the screen, a lot of textures will be missing.<br /><br /> If you really need Spine's Pro functionality, and you don't care about SpriteKie, take a look at the official Spine iOS runtime: https://esotericsoftware.com/spine-ios
 
 Example of working with the library: [Sample project](https://github.com/maxgribov/SpineSampleProject)<BR>
 Learn more about working with the library: [Spine Wiki](https://github.com/maxgribov/Spine/wiki)
@@ -162,6 +162,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Useful links
 
+* The official Spine iOS runtime: https://esotericsoftware.com/spine-ios
 * Spine user guide: http://esotericsoftware.com/spine-user-guide
 * Spine JSON format documentation: http://esotericsoftware.com/spine-json-format
 * Spine oficial runtimes: https://github.com/EsotericSoftware/spine-runtimes
