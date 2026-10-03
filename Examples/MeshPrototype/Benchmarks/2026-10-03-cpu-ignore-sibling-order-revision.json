@@ -1,0 +1,62 @@
+[
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r1-1-mesh.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r1-1-triangle.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r1-10-mesh.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r1-10-triangle.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r1-50-mesh.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r1-50-triangle.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r2-1-mesh.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r2-1-triangle.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r2-10-mesh.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r2-10-triangle.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r2-50-mesh.png",
+    "maximumChannelDifference" : 0
+  },
+  {
+    "channelsDifferingOver2" : 0,
+    "image" : "gpu-r2-50-triangle.png",
+    "maximumChannelDifference" : 0
+  }
+]

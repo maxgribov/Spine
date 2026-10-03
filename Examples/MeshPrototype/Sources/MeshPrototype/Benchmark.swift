@@ -65,11 +65,24 @@ private final class BenchmarkScene: SKScene {
         tick += 1
         if tick == warmup+measured {
             completed = true
+            var shaders = Set<ObjectIdentifier>(), textures = Set<ObjectIdentifier>(), sprites = 0
+            func inspect(_ node: SKNode) {
+                guard !node.isHidden else { return }
+                if let sprite = node as? SKSpriteNode {
+                    sprites += 1
+                    if let shader = sprite.shader { shaders.insert(ObjectIdentifier(shader)) }
+                    if let texture = sprite.texture { textures.insert(ObjectIdentifier(texture)) }
+                }
+                node.children.forEach(inspect)
+            }
+            actors.forEach(inspect)
             let result: [String: Any] = ["poseAndGeometryCPU_ms": statistics(cpu), "frameInterval_ms": statistics(intervals),
                 "effectiveFPS": 1000/(intervals.reduce(0,+)/Double(intervals.count)),
                 "intervalsOver25ms": intervals.filter { $0 > 25 }.count,
                 "submittedQuadArea_px2": statistics(areas), "triangleArea_px2": statistics(triangles),
                 "visibleTrianglesLastFrame": actors.reduce(0) { $0 + $1.triangleCount },
+                "visibleSpriteNodesLastFrame": sprites, "uniqueShaderObjectsLastFrame": shaders.count,
+                "uniquePrimaryTextureObjectsLastFrame": textures.count,
                 "occludedMeasuredFrames": occludedFrames, "appActiveAtEnd": NSApp.isActive,
                 "thermalStart": thermalStart, "thermalEnd": ProcessInfo.processInfo.thermalState.rawValue]
             let callback = onComplete
@@ -99,7 +112,7 @@ final class BenchmarkRunner {
         view.window?.orderFrontRegardless()
         view.preferredFramesPerSecond = 60
         view.showsFPS = false; view.showsNodeCount = false; view.showsDrawCount = false
-        view.ignoresSiblingOrder = false
+        view.ignoresSiblingOrder = CommandLine.arguments.contains("--ignore-sibling-order")
         view.shouldCullNonVisibleNodes = true
         runNext()
     }
@@ -143,7 +156,7 @@ final class BenchmarkRunner {
         guard let target = device.makeTexture(descriptor: descriptor) else { throw PrototypeError("Render target allocation failed") }
         let renderer = SKRenderer(device: device)
         renderer.scene = scene
-        renderer.ignoresSiblingOrder = false; renderer.shouldCullNonVisibleNodes = true
+        renderer.ignoresSiblingOrder = view.ignoresSiblingOrder; renderer.shouldCullNonVisibleNodes = true
         let pass = MTLRenderPassDescriptor()
         pass.colorAttachments[0].texture = target
         pass.colorAttachments[0].loadAction = .clear; pass.colorAttachments[0].storeAction = .store
@@ -207,7 +220,7 @@ final class BenchmarkRunner {
             "backingScale": view.window?.backingScaleFactor ?? 1,
             "targetFPS": 60, "nativeWarmupFrames": 30, "nativeMeasuredFrames": 120,
             "gpuWarmupFrames": 30, "gpuMeasuredFrames": 60, "results": results,
-            "appNapPrevented": true, "floatingWindow": true,
+            "appNapPrevented": true, "floatingWindow": true, "ignoresSiblingOrder": view.ignoresSiblingOrder,
             "notes": "Release build recommended. Two rounds, reversed mode order. Geometry areas are proxies, not fragment counters. Native intervals are vsync-paced; GPU samples use SKRenderer, serialized command buffers, no readback. No measured draw-call counters."]
         try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
             .write(to: output.appendingPathComponent("benchmark.json"))

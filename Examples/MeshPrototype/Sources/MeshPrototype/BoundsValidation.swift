@@ -80,3 +80,49 @@ func verifyOptimizedBounds(view: SKView, output: URL) throws -> [String] {
     print(result)
     return [result]
 }
+
+/// A shared material must not leak projection/UV state between overlapping meshes.
+func verifySharedMaterial(view: SKView) throws -> String {
+    let texture = checkerTexture()
+    let shared = TriangleMeshNode.Material(texture: texture)
+    let roots = [SKNode(), SKNode()]
+    var groups: [[TriangleMeshNode]] = []
+    for (group, root) in roots.enumerated() {
+        var meshes: [TriangleMeshNode] = []
+        for index in 0..<3 {
+            let material = group == 0 ? TriangleMeshNode.Material(texture: texture) : shared
+            let node = try TriangleMeshNode(material: material, positions: square, uvs: squareUV, indices: [0,1,2, 0,2,3])
+            node.position = CGPoint(x: 40+index*31, y: 45+index*17)
+            node.zPosition = CGFloat(index)
+            node.alpha = 0.6
+            root.addChild(node); meshes.append(node)
+        }
+        groups.append(meshes)
+    }
+    var maximum = 0
+    for frame in 0..<16 {
+        for meshes in groups {
+            for (index, node) in meshes.enumerated() {
+                var positions = square
+                positions[2].x += Float(frame*3)
+                // Fold the quad, reversing one triangle; updates cached UV order.
+                if frame.isMultiple(of: 3) { positions[2].y = -24 }
+                try node.updatePositions(positions)
+                node.zRotation = CGFloat(frame+index)*0.03
+                node.xScale = index == 1 ? -0.8 : 0.9
+                node.yScale = 0.7+CGFloat(index)*0.1
+            }
+        }
+        let crop = CGRect(x: -100, y: -40, width: 420, height: 320)
+        let expected = try bitmap(capture(view: view, node: roots[0], crop: crop))
+        let actual = try bitmap(capture(view: view, node: roots[1], crop: crop))
+        guard expected.count == actual.count else { throw PrototypeError("Shared-material image sizes differ") }
+        for index in expected.indices {
+            maximum = max(maximum, abs(Int(expected[index])-Int(actual[index])))
+        }
+        guard maximum <= 2 else { throw PrototypeError("Shared material changed pixels by \(maximum)/255") }
+    }
+    let result = "Shared material: 16 overlapping/folded mesh comparisons passed; maximum difference \(maximum)/255."
+    print(result)
+    return result
+}

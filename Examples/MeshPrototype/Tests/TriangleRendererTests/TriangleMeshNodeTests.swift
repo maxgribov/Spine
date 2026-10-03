@@ -57,4 +57,29 @@ final class TriangleMeshNodeTests: XCTestCase {
         XCTAssertLessThan(node.submittedQuadArea, initialArea)
         XCTAssertEqual(node.positions, vertices)
     }
+    func testSharedMaterialKeepsProjectionAttributesIndependent() throws {
+        let texture = SKTexture(data: Data([255,255,255,255]), size: CGSize(width: 1, height: 1))
+        let material = TriangleMeshNode.Material(texture: texture)
+        let first = try TriangleMeshNode(material: material, positions: vertices, uvs: vertices, indices: [0,1,2])
+        let second = try TriangleMeshNode(material: material, positions: vertices, uvs: vertices, indices: [0,1,2])
+        first.prepareForRendering(localToPixels: .identity)
+        second.prepareForRendering(localToPixels: CGAffineTransform(translationX: 100, y: 50))
+        let a = first.children[0] as! SKSpriteNode, b = second.children[0] as! SKSpriteNode
+        XCTAssertTrue(a.shader === b.shader)
+        XCTAssertEqual(a.value(forAttributeNamed: "a_rasterX")!.vectorFloat3Value, SIMD3(1,0,0))
+        XCTAssertEqual(b.value(forAttributeNamed: "a_rasterX")!.vectorFloat3Value, SIMD3(1,0,-100))
+        second.prepareForRendering(localToPixels: CGAffineTransform(translationX: 200, y: 50))
+        XCTAssertEqual(a.value(forAttributeNamed: "a_rasterX")!.vectorFloat3Value, SIMD3(1,0,0))
+    }
+
+    func testUVAttributesFollowWindingChangesAndRecovery() throws {
+        let node = try makeMesh()
+        let sprite = node.children[0] as! SKSpriteNode
+        try node.updatePositions([vertices[0], vertices[2], vertices[1]])
+        XCTAssertEqual(sprite.value(forAttributeNamed: "a_uv1")!.vectorFloat2Value, vertices[2])
+        try node.updatePositions([.zero, .zero, .zero])
+        try node.updatePositions(vertices)
+        XCTAssertEqual(sprite.value(forAttributeNamed: "a_uv1")!.vectorFloat2Value, vertices[1])
+    }
+
 }

@@ -21,40 +21,59 @@ public final class TriangleMeshNode: SKNode {
     private let sprites: [SKSpriteNode]
     private let values: [[SKAttributeValue]]
     private let attributeNames: [String]
-    private let rasterX: SKUniform
-    private let rasterY: SKUniform
+    private var rasterX = SIMD3<Float>(1,0,0)
+    private var rasterY = SIMD3<Float>(0,1,0)
+    private var lastWinding: [Bool?]
+    private var normalized: [SIMD2<Float>]
     private var localToPixels: CGAffineTransform?
     private var meshMinimum = SIMD2<Float>.zero
     private var meshExtent = SIMD2<Float>(repeating: 1)
     private var projectionWasSingular = false
+    private var rasterAttributesInitialized = false
     private static let white = SKTexture(data: Data([255, 255, 255, 255]), size: CGSize(width: 1, height: 1))
 
-    public init(texture: SKTexture, positions: [SIMD2<Float>], uvs: [SIMD2<Float>], indices: [Int],
-                boundsMode: BoundsMode = .triangle) throws {
+    /// Share a material between meshes using the same atlas page and bounds mode.
+    /// It contains only immutable texture uniforms; transforms are per-node attributes.
+    public final class Material {
+        public let boundsMode: BoundsMode
+        fileprivate let shader: SKShader
+        fileprivate static let names = ["a_e0", "a_e1", "a_e2", "a_uv0", "a_uv1", "a_uv2", "a_inverseArea", "a_rasterX", "a_rasterY"]
+        public init(texture: SKTexture, boundsMode: BoundsMode = .triangle) {
+            self.boundsMode = boundsMode
+            // Uniform samplers use linear filtering on the tested backend;
+            // nearest sampling explicitly snaps to texel centers.
+            let imageSize = texture.filteringMode == .nearest ? texture.cgImage() : nil
+            let source = TriangleMeshNode.source.replacingOccurrences(of: "MESH_POSITION", with:
+                boundsMode == .mesh ? "v_tex_coord" : "vec2(dot(a_rasterX, vec3(gl_FragCoord.xy, 1.0)), dot(a_rasterY, vec3(gl_FragCoord.xy, 1.0)))")
+            shader = SKShader(source: source, uniforms: [
+                SKUniform(name: "u_image", texture: texture),
+                SKUniform(name: "u_pixelSize", vectorFloat2: SIMD2(Float(imageSize?.width ?? 1), Float(imageSize?.height ?? 1))),
+                SKUniform(name: "u_nearest", float: texture.filteringMode == .nearest ? 1 : 0)
+            ])
+            shader.attributes = Self.names.prefix(boundsMode == .triangle ? 9 : 7).enumerated().map { index, name in
+                SKAttribute(name: name, type: index < 3 ? .vectorFloat4 : index < 6 ? .vectorFloat2 : index == 6 ? .float : .vectorFloat3)
+            }
+        }
+    }
+
+    public convenience init(texture: SKTexture, positions: [SIMD2<Float>], uvs: [SIMD2<Float>], indices: [Int],
+                            boundsMode: BoundsMode = .triangle) throws {
+        try self.init(material: Material(texture: texture, boundsMode: boundsMode), positions: positions, uvs: uvs, indices: indices)
+    }
+
+    public init(material: Material, positions: [SIMD2<Float>], uvs: [SIMD2<Float>], indices: [Int]) throws {
         guard positions.count >= 3, uvs.count == positions.count, !indices.isEmpty,
               indices.count.isMultiple(of: 3), indices.allSatisfy({ positions.indices.contains($0) }),
               positions.allSatisfy(Self.finite), uvs.allSatisfy(Self.finite) else { throw MeshError.invalidGeometry }
         self.positions = positions
         self.uvs = uvs
         self.indices = indices
-        self.boundsMode = boundsMode
-        let attributeNames = ["a_e0", "a_e1", "a_e2", "a_uv0", "a_uv1", "a_uv2", "a_inverseArea"]
+        self.boundsMode = material.boundsMode
+        normalized = positions
+        lastWinding = [Bool?](repeating: nil, count: indices.count/3)
+        let attributeNames = Array(Material.names.prefix(material.boundsMode == .triangle ? 9 : 7))
         self.attributeNames = attributeNames
-        // SpriteKit's sampler for a texture uniform is linear on the tested
-        // backend even when filteringMode is nearest. Snap UVs explicitly.
-        let imageSize = texture.filteringMode == .nearest ? texture.cgImage() : nil
-        let source = Self.source.replacingOccurrences(of: "MESH_POSITION", with:
-            boundsMode == .mesh ? "v_tex_coord" : "vec2(dot(u_rasterX, vec3(gl_FragCoord.xy, 1.0)), dot(u_rasterY, vec3(gl_FragCoord.xy, 1.0)))")
-        rasterX = SKUniform(name: "u_rasterX", vectorFloat3: SIMD3<Float>(1,0,0))
-        rasterY = SKUniform(name: "u_rasterY", vectorFloat3: SIMD3<Float>(0,1,0))
-        let shader = SKShader(source: source, uniforms: [
-            SKUniform(name: "u_image", texture: texture),
-            SKUniform(name: "u_pixelSize", vectorFloat2: SIMD2(Float(imageSize?.width ?? 1), Float(imageSize?.height ?? 1))),
-            SKUniform(name: "u_nearest", float: texture.filteringMode == .nearest ? 1 : 0)
-        ] + (boundsMode == .triangle ? [rasterX, rasterY] : []))
-        shader.attributes = attributeNames.enumerated().map { index, name in
-            SKAttribute(name: name, type: index < 3 ? .vectorFloat4 : index < 6 ? .vectorFloat2 : .float)
-        }
+        let shader = material.shader
         sprites = stride(from: 0, to: indices.count, by: 3).map { _ in
             let sprite = SKSpriteNode(texture: Self.white)
             sprite.anchorPoint = .zero
@@ -89,19 +108,21 @@ public final class TriangleMeshNode: SKNode {
             sprites.forEach { $0.isHidden = true }
             return
         }
-        updateRasterUniforms(minimum: minimum, extent: extent)
-        let normalized = positions.map { ($0 - minimum) / extent }
+        updateRasterAttributes(minimum: minimum, extent: extent)
+        for index in positions.indices { normalized[index] = (positions[index] - minimum) / extent }
         let inverse = localToPixels?.inverted() ?? .identity
         let padding = SIMD2<Float>(Float(abs(inverse.a)+abs(inverse.c)), Float(abs(inverse.b)+abs(inverse.d)))
         for (triangle, sprite) in sprites.enumerated() {
-            var ids = Array(indices[(triangle * 3)..<(triangle * 3 + 3)])
-            var area = Self.cross(normalized[ids[1]] - normalized[ids[0]], normalized[ids[2]] - normalized[ids[0]])
-            if area < 0 { ids.swapAt(1, 2); area = -area }
+            let i0 = indices[triangle*3]
+            var i1 = indices[triangle*3+1], i2 = indices[triangle*3+2]
+            var area = Self.cross(normalized[i1] - normalized[i0], normalized[i2] - normalized[i0])
+            let reversed = area < 0
+            if reversed { swap(&i1, &i2); area = -area }
             sprite.isHidden = area <= 1e-12
             if sprite.isHidden { continue }
             var quadMin = minimum, quadMax = maximum
             if boundsMode == .triangle {
-                let p0 = positions[ids[0]], p1 = positions[ids[1]], p2 = positions[ids[2]]
+                let p0 = positions[i0], p1 = positions[i1], p2 = positions[i2]
                 quadMin = SIMD2(min(p0.x, min(p1.x, p2.x)), min(p0.y, min(p1.y, p2.y)))
                 quadMax = SIMD2(max(p0.x, max(p1.x, p2.x)), max(p0.y, max(p1.y, p2.y)))
                 // Pad in local units to keep SpriteKit quad rasterization from
@@ -114,21 +135,26 @@ public final class TriangleMeshNode: SKNode {
             sprite.size = CGSize(width: CGFloat(quadSize.x), height: CGFloat(quadSize.y))
             submittedQuadArea += Double(quadSize.x) * Double(quadSize.y)
             coveredTriangleArea += Double(area) * Double(extent.x) * Double(extent.y) / 2
-            let edges = [(ids[1], ids[2]), (ids[2], ids[0]), (ids[0], ids[1])]
-            for (i, pair) in edges.enumerated() {
-                // Canonical endpoint ordering gives a shared edge identical
-                // coefficients (up to sign) in both adjacent triangles.
-                let low = normalized[min(pair.0, pair.1)], high = normalized[max(pair.0, pair.1)]
-                let sign: Float = pair.0 < pair.1 ? 1 : -1
-                let delta = (high - low) * sign
-                let coefficients = SIMD3(low.y - high.y, high.x - low.x,
-                                         low.x * high.y - high.x * low.y) * sign
+            func edge(_ a: Int, _ b: Int, _ index: Int) {
+                // Compute identical shared-edge coefficients, up to sign.
+                let low = normalized[min(a,b)], high = normalized[max(a,b)]
+                let sign: Float = a < b ? 1 : -1
+                let delta = (high-low)*sign
+                let c = SIMD3(low.y-high.y, high.x-low.x, low.x*high.y-high.x*low.y)*sign
                 let inclusive: Float = delta.y > 0 || (delta.y == 0 && delta.x < 0) ? 1 : 0
-                values[triangle][i].vectorFloat4Value = SIMD4(coefficients.x, coefficients.y, coefficients.z, inclusive)
-                values[triangle][i + 3].vectorFloat2Value = uvs[ids[i]]
+                values[triangle][index].vectorFloat4Value = SIMD4(c.x,c.y,c.z,inclusive)
+                sprite.setValue(values[triangle][index], forAttribute: attributeNames[index])
+            }
+            edge(i1,i2,0); edge(i2,i0,1); edge(i0,i1,2)
+            if lastWinding[triangle] != reversed {
+                values[triangle][3].vectorFloat2Value = uvs[i0]
+                values[triangle][4].vectorFloat2Value = uvs[i1]
+                values[triangle][5].vectorFloat2Value = uvs[i2]
+                for index in 3...5 { sprite.setValue(values[triangle][index], forAttribute: attributeNames[index]) }
+                lastWinding[triangle] = reversed
             }
             values[triangle][6].floatValue = 1 / area
-            for (name, value) in zip(attributeNames, values[triangle]) { sprite.setValue(value, forAttribute: name) }
+            sprite.setValue(values[triangle][6], forAttribute: attributeNames[6])
         }
     }
 
@@ -152,14 +178,22 @@ public final class TriangleMeshNode: SKNode {
             projectionWasSingular = false
             try? updatePositions(positions)
         } else if meshExtent.x > 0 && meshExtent.y > 0 {
-            updateRasterUniforms(minimum: meshMinimum, extent: meshExtent)
+            updateRasterAttributes(minimum: meshMinimum, extent: meshExtent)
         }
     }
 
-    private func updateRasterUniforms(minimum: SIMD2<Float>, extent: SIMD2<Float>) {
+    private func updateRasterAttributes(minimum: SIMD2<Float>, extent: SIMD2<Float>) {
         guard let inverse = localToPixels?.inverted(), boundsMode == .triangle else { return }
-        rasterX.vectorFloat3Value = SIMD3(Float(inverse.a)/extent.x, Float(inverse.c)/extent.x, (Float(inverse.tx)-minimum.x)/extent.x)
-        rasterY.vectorFloat3Value = SIMD3(Float(inverse.b)/extent.y, Float(inverse.d)/extent.y, (Float(inverse.ty)-minimum.y)/extent.y)
+        let x = SIMD3(Float(inverse.a)/extent.x, Float(inverse.c)/extent.x, (Float(inverse.tx)-minimum.x)/extent.x)
+        let y = SIMD3(Float(inverse.b)/extent.y, Float(inverse.d)/extent.y, (Float(inverse.ty)-minimum.y)/extent.y)
+        guard x != rasterX || y != rasterY || !rasterAttributesInitialized else { return }
+        rasterX = x; rasterY = y; rasterAttributesInitialized = true
+        for (index, sprite) in sprites.enumerated() {
+            values[index][7].vectorFloat3Value = x
+            values[index][8].vectorFloat3Value = y
+            sprite.setValue(values[index][7], forAttribute: attributeNames[7])
+            sprite.setValue(values[index][8], forAttribute: attributeNames[8])
+        }
     }
 
     private static func finite(_ p: SIMD2<Float>) -> Bool { p.x.isFinite && p.y.isFinite }

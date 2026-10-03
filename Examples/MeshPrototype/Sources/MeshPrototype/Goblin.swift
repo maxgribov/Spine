@@ -41,18 +41,98 @@ private struct Influence {
     let position: SIMD2<Float>
     let weight: Float
 }
+// Compile the same ten-segment 4.1 Bezier approximation once at load time.
+// Absolute time/value control points are not normalized easing curves.
+private struct ScalarTimeline {
+    struct Frame {
+        let time: Float, value: Float
+        let points: [SIMD2<Float>]
+        let stepped: Bool
+    }
+    let frames: [Frame]
+    init(_ raw: [Object], key: String, channel: Int = 0, fraction: Bool = false) {
+        frames = raw.enumerated().map { index, frame in
+            let time = number(frame, "time"), value: Float = fraction ? 0 : number(frame, key)
+            var points: [SIMD2<Float>] = []
+            let curve = array(frame, "curve"), offset = channel*4
+            if index+1 < raw.count {
+                let end = number(raw[index+1], "time"), to: Float = fraction ? 1 : number(raw[index+1], key)
+                if curve.count >= offset+4 {
+                    func bezier(_ a: Float, _ b: Float, _ c: Float, _ d: Float, _ t: Float) -> Float {
+                        let u = 1-t
+                        return u*u*u*a + 3*u*u*t*b + 3*u*t*t*c + t*t*t*d
+                    }
+                    points = (1...10).map { step in
+                        let t = Float(step)/10
+                        return SIMD2(bezier(time, curve[offset], curve[offset+2], end, t),
+                                     bezier(value, curve[offset+1], curve[offset+3], to, t))
+                    }
+                } else { points = [SIMD2(end, to)] }
+            }
+            return Frame(time: time, value: value, points: points, stepped: frame["curve"] as? String == "stepped")
+        }
+    }
+    func sample(_ time: Float) -> Float {
+        guard let index = frames.lastIndex(where: { $0.time <= time }) else { return 0 }
+        return sample(time, index: index)
+    }
+    func sample(_ time: Float, index: Int) -> Float {
+        let frame = frames[index]
+        if frame.stepped { return frame.value }
+        var previous = SIMD2(frame.time, frame.value)
+        for point in frame.points {
+            if time <= point.x {
+                return point.x > previous.x ? previous.y + (point.y-previous.y)*(time-previous.x)/(point.x-previous.x) : point.y
+            }
+            previous = point
+        }
+        return previous.y
+    }
+}
+private struct BonePose {
+    let parent: Int?
+    let x: Float, y: Float, rotation: Float, shearX: Float, shearY: Float, scaleX: Float, scaleY: Float
+    let rotate: ScalarTimeline, translateX: ScalarTimeline, translateY: ScalarTimeline
+}
+private struct DeformTimeline {
+    let curve: ScalarTimeline
+    let values: [[Float]]
+    let zero: [Float]
+    init(_ frames: [Object], count: Int) throws {
+        zero = [Float](repeating: 0, count: count)
+        curve = ScalarTimeline(frames, key: "", fraction: true)
+        values = try frames.map { frame in
+            var result = [Float](repeating: 0, count: count)
+            let values = array(frame, "vertices"), start = Int(number(frame, "offset"))
+            guard start >= 0, start+values.count <= count else { throw PrototypeError("Invalid deform offset") }
+            result.replaceSubrange(start..<(start+values.count), with: values)
+            return result
+        }
+    }
+    func sample(_ time: Float) -> [Float] {
+        guard let index = curve.frames.lastIndex(where: { $0.time <= time }) else { return zero }
+        let from = values[index]
+        guard index+1 < values.count else { return from }
+        let fraction = curve.sample(time, index: index), to = values[index+1]
+        return zip(from, to).map { $0 + ($1-$0)*fraction }
+    }
+}
 private struct Part {
-    let slot: Int, key: String, timelineSkin: String, timelineKey: String
+    let slot: Int, key: String
     let node: TriangleMeshNode
     let influences: [[Influence]]
-    let weighted: Bool
-    var deformCount: Int { weighted ? influences.reduce(0) { $0 + $1.count*2 } : influences.count*2 }
+    let deform: DeformTimeline
 }
 
 final class Goblin: SKNode {
+    private static var materials: [TriangleMeshNode.BoundsMode: TriangleMeshNode.Material] = [:]
     let skinName: String
     let duration: Float
-    private let bones: [Object], slots: [Object], animation: Object
+    private let slots: [Object]
+    private let bonePoses: [BonePose]
+    private let slotFrames: [[(time: Float, name: String?)]]
+    private let setupAttachments: [String?]
+    private var transforms: [Transform]
     private var parts: [Part] = []
     private let wire = SKShapeNode()
     var showsWireframe = false { didSet { wire.isHidden = !showsWireframe } }
@@ -86,7 +166,31 @@ final class Goblin: SKNode {
         for bone in bones where (bone["transform"] as? String ?? "normal") != "normal" {
             throw PrototypeError("Fixture player only supports normal transform inheritance")
         }
-        self.bones = bones; self.slots = slots; self.animation = animation
+        self.slots = slots
+        let boneAnimations = animation["bones"] as? [String: Object] ?? [:]
+        var compiledBones: [BonePose] = [], indexByName: [String: Int] = [:]
+        for (index, bone) in bones.enumerated() {
+            let name = bone["name"] as! String, timelines = boneAnimations[name] ?? [:]
+            guard Set(timelines.keys).isSubset(of: ["rotate", "translate"]) else { throw PrototypeError("Unsupported bone timeline") }
+            let parent = (bone["parent"] as? String).flatMap { indexByName[$0] }
+            if bone["parent"] != nil && parent == nil { throw PrototypeError("Invalid bone order") }
+            compiledBones.append(BonePose(parent: parent, x: number(bone,"x"), y: number(bone,"y"),
+                rotation: number(bone,"rotation"), shearX: number(bone,"shearX"), shearY: number(bone,"shearY"),
+                scaleX: number(bone,"scaleX",1), scaleY: number(bone,"scaleY",1),
+                rotate: ScalarTimeline(timelines["rotate"] as? [Object] ?? [], key: "value"),
+                translateX: ScalarTimeline(timelines["translate"] as? [Object] ?? [], key: "x"),
+                translateY: ScalarTimeline(timelines["translate"] as? [Object] ?? [], key: "y", channel: 1)))
+            indexByName[name] = index
+        }
+        bonePoses = compiledBones
+        transforms = [Transform](repeating: Transform(), count: bones.count)
+        let slotTimelines = animation["slots"] as? [String: Object] ?? [:]
+        setupAttachments = slots.map { $0["attachment"] as? String }
+        slotFrames = slots.map { slot in
+            (slotTimelines[slot["name"] as! String]?["attachment"] as? [Object] ?? []).map {
+                (number($0, "time"), $0["name"] as? String)
+            }
+        }
         func lastTime(_ value: Any) -> Float {
             if let object = value as? Object { return max(number(object, "time"), object.values.map(lastTime).max() ?? 0) }
             if let list = value as? [Any] { return list.map(lastTime).max() ?? 0 }
@@ -120,8 +224,14 @@ final class Goblin: SKNode {
         guard let image = NSImage(contentsOf: directory.appendingPathComponent("goblins.png")) else {
             throw PrototypeError("Missing atlas image")
         }
-        let texture = SKTexture(image: image)
-        texture.filteringMode = .linear
+        let material: TriangleMeshNode.Material
+        if let cached = Self.materials[boundsMode] { material = cached }
+        else {
+            let texture = SKTexture(image: image)
+            texture.filteringMode = .linear
+            material = TriangleMeshNode.Material(texture: texture, boundsMode: boundsMode)
+            Self.materials[boundsMode] = material
+        }
         let skinMaps = Dictionary(uniqueKeysWithValues: skins.map { ($0["name"] as! String, $0["attachments"] as! [String: Object]) })
         guard let selected = skinMaps[skin] else { throw PrototypeError("Missing skin \(skin)") }
         super.init()
@@ -196,12 +306,14 @@ final class Goblin: SKNode {
                         throw PrototypeError("Fixture player only supports white tint and normal blending")
                     }
                 }
-                let node = try TriangleMeshNode(texture: texture, positions: influences.map { $0[0].position }, uvs: uv, indices: indices, boundsMode: boundsMode)
+                let node = try TriangleMeshNode(material: material, positions: influences.map { $0[0].position }, uvs: uv, indices: indices)
                 node.zPosition = CGFloat(slotIndex)
                 node.name = slotName + "/" + key
                 addChild(node)
-                parts.append(Part(slot: slotIndex, key: key, timelineSkin: timelineSkin, timelineKey: timelineKey,
-                                  node: node, influences: influences, weighted: weighted))
+                parts.append(Part(slot: slotIndex, key: key, node: node, influences: influences,
+                                  deform: try DeformTimeline(
+                                    (animation["attachments"] as? [String: [String: [String: Object]]])?[timelineSkin]?[slotName]?[timelineKey]?["deform"] as? [Object] ?? [],
+                                    count: weighted ? influences.reduce(0) { $0 + $1.count*2 } : influences.count*2)))
             }
         }
         wire.strokeColor = NSColor.systemYellow.withAlphaComponent(0.7)
@@ -214,37 +326,23 @@ final class Goblin: SKNode {
 
     func sample(time: Float) throws {
         let t = max(0, time)
-        let boneAnimations = animation["bones"] as? [String: Object] ?? [:]
-        var transforms: [Transform] = [], indexByName: [String: Int] = [:]
-        for (index, bone) in bones.enumerated() {
-            let name = bone["name"] as! String, timelines = boneAnimations[name] ?? [:]
-            guard Set(timelines.keys).isSubset(of: ["rotate", "translate"]) else { throw PrototypeError("Unsupported bone timeline") }
-            let rotation = number(bone, "rotation") + sampleScalar(timelines["rotate"] as? [Object] ?? [], t, "value")
-            let x = number(bone, "x") + sampleScalar(timelines["translate"] as? [Object] ?? [], t, "x")
-            let y = number(bone, "y") + sampleScalar(timelines["translate"] as? [Object] ?? [], t, "y", channel: 1)
-            let rx = (rotation + number(bone, "shearX")) * .pi / 180
-            let ry = (rotation + 90 + number(bone, "shearY")) * .pi / 180
-            let local = Transform(a: cos(rx)*number(bone, "scaleX", 1), b: cos(ry)*number(bone, "scaleY", 1),
-                                  c: sin(rx)*number(bone, "scaleX", 1), d: sin(ry)*number(bone, "scaleY", 1), x: x, y: y)
-            if let parent = bone["parent"] as? String {
-                guard let parentIndex = indexByName[parent] else { throw PrototypeError("Invalid bone order") }
-                transforms.append(transforms[parentIndex].appending(local))
-            } else { transforms.append(local) }
-            indexByName[name] = index
+        for (index, bone) in bonePoses.enumerated() {
+            let rotation = bone.rotation + bone.rotate.sample(t)
+            let x = bone.x + bone.translateX.sample(t), y = bone.y + bone.translateY.sample(t)
+            let rx = (rotation + bone.shearX) * .pi / 180
+            let ry = (rotation + 90 + bone.shearY) * .pi / 180
+            let local = Transform(a: cos(rx)*bone.scaleX, b: cos(ry)*bone.scaleY,
+                                  c: sin(rx)*bone.scaleX, d: sin(ry)*bone.scaleY, x: x, y: y)
+            transforms[index] = bone.parent.map { transforms[$0].appending(local) } ?? local
         }
-        let attachmentTimelines = animation["attachments"] as? [String: [String: [String: Object]]] ?? [:]
-        let slotTimelines = animation["slots"] as? [String: Object] ?? [:]
-        let path = CGMutablePath()
+        let active = slots.indices.map { index in
+            slotFrames[index].last(where: { $0.time <= t }).map { $0.name } ?? setupAttachments[index]
+        }
+        let path = showsWireframe ? CGMutablePath() : nil
         for part in parts {
-            let slot = slots[part.slot], slotName = slot["name"] as! String
-            var active = slot["attachment"] as? String
-            for frame in slotTimelines[slotName]?["attachment"] as? [Object] ?? [] where number(frame, "time") <= t {
-                active = frame["name"] as? String
-            }
-            part.node.isHidden = active != part.key
+            part.node.isHidden = active[part.slot] != part.key
             if part.node.isHidden { continue }
-            let frames = attachmentTimelines[part.timelineSkin]?[slotName]?[part.timelineKey]?["deform"] as? [Object] ?? []
-            let deform = try sampleDeform(frames, t, count: part.deformCount)
+            let deform = part.deform.sample(t)
             var offset = 0
             let positions = part.influences.map { influences -> SIMD2<Float> in
                 var result = SIMD2<Float>.zero
@@ -260,63 +358,12 @@ final class Goblin: SKNode {
                     for vertex in 0..<3 {
                         let p = positions[part.node.indices[start+vertex]]
                         let point = CGPoint(x: CGFloat(p.x), y: CGFloat(p.y))
-                        if vertex == 0 { path.move(to: point) } else { path.addLine(to: point) }
+                        if vertex == 0 { path?.move(to: point) } else { path?.addLine(to: point) }
                     }
-                    path.closeSubpath()
+                    path?.closeSubpath()
                 }
             }
         }
         wire.path = showsWireframe ? path : nil
     }
-}
-
-// 4.1 curves contain absolute time/value control points (not SKAction easing).
-private func curveValue(_ frame: Object, time: Float, endTime: Float, from: Float, to: Float, channel: Int = 0) -> Float {
-    let startTime = number(frame, "time")
-    if frame["curve"] as? String == "stepped" { return from }
-    let curve = array(frame, "curve")
-    let offset = channel * 4
-    if curve.count >= offset+4 {
-        func bezier(_ a: Float, _ b: Float, _ c: Float, _ d: Float, _ t: Float) -> Float {
-            let u = 1-t
-            return u*u*u*a + 3*u*u*t*b + 3*u*t*t*c + t*t*t*d
-        }
-        // Match the 4.1 runtime's ten-segment Bezier approximation. Solving
-        // the cubic exactly produces visibly different reference poses.
-        var previousX = startTime, previousY = from
-        for step in 1...10 {
-            let parameter = Float(step)/10
-            let x = bezier(startTime, curve[offset], curve[offset+2], endTime, parameter)
-            let y = bezier(from, curve[offset+1], curve[offset+3], to, parameter)
-            if time <= x {
-                return x > previousX ? previousY + (y-previousY)*(time-previousX)/(x-previousX) : y
-            }
-            previousX = x; previousY = y
-        }
-        return to
-    }
-    let fraction = (time-startTime)/(endTime-startTime)
-    return from + (to-from)*fraction
-}
-private func sampleScalar(_ frames: [Object], _ time: Float, _ key: String, channel: Int = 0) -> Float {
-    guard let index = frames.lastIndex(where: { number($0, "time") <= time }) else { return 0 }
-    let current = frames[index], from = number(current, key)
-    guard index+1 < frames.count else { return from }
-    return curveValue(current, time: time, endTime: number(frames[index+1], "time"), from: from,
-                      to: number(frames[index+1], key), channel: channel)
-}
-private func sampleDeform(_ frames: [Object], _ time: Float, count: Int) throws -> [Float] {
-    func expanded(_ frame: Object) throws -> [Float] {
-        var result = [Float](repeating: 0, count: count)
-        let values = array(frame, "vertices"), start = Int(number(frame, "offset"))
-        guard start >= 0, start+values.count <= count else { throw PrototypeError("Invalid deform offset") }
-        result.replaceSubrange(start..<(start+values.count), with: values)
-        return result
-    }
-    guard let index = frames.lastIndex(where: { number($0, "time") <= time }) else { return [Float](repeating: 0, count: count) }
-    let from = try expanded(frames[index])
-    guard index+1 < frames.count else { return from }
-    let to = try expanded(frames[index+1])
-    let fraction = curveValue(frames[index], time: time, endTime: number(frames[index+1], "time"), from: 0, to: 1)
-    return zip(from, to).map { $0 + ($1-$0)*fraction }
 }

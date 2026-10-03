@@ -193,6 +193,7 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
         }
     }
     report.append(contentsOf: try verifyOptimizedBounds(view: view, output: output))
+    report.append(try verifySharedMaterial(view: view))
     var frameBytes: [[UInt8]] = []
     var snapshots: [[String: Any]] = []
     scene.playing = false
@@ -219,6 +220,13 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
     print("PASS: GPU pixel checks and Goblins animation smoke check. Artifacts: \(output.path)")
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--compare-benchmarks") {
+    do {
+        guard CommandLine.arguments.count > index+2 else { throw PrototypeError("Provide reference and candidate benchmark directories") }
+        try validateBenchmarkRevision(reference: URL(fileURLWithPath: CommandLine.arguments[index+1]),
+                                      output: URL(fileURLWithPath: CommandLine.arguments[index+2])); exit(0)
+    } catch { fputs("Revision image validation failed: \(error)\n", stderr); exit(1) }
+}
 if let index = CommandLine.arguments.firstIndex(of: "--validate-benchmark") {
     do {
         guard CommandLine.arguments.count > index+1 else { throw PrototypeError("Provide benchmark output directory") }
@@ -234,7 +242,7 @@ window.title = "Spine · Triangle Mesh Prototype"
 window.center()
 let view = SKView(frame: window.contentView!.bounds)
 view.autoresizingMask = [.width, .height]
-view.ignoresSiblingOrder = false
+view.ignoresSiblingOrder = CommandLine.arguments.contains("--ignore-sibling-order")
 window.contentView = view
 var demo: DemoScene?
 do {

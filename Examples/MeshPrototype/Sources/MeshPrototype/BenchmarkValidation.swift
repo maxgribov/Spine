@@ -41,3 +41,35 @@ func validateBenchmarkImages(output: URL) throws -> [[String: Any]] {
     print("Benchmark render validation: all 6 mesh/triangle image pairs passed (<1% of foreground differing by >4/255).")
     return results
 }
+
+/// Compare the same deterministic frame across two renderer revisions/settings.
+/// Unlike the bounds comparison, this allows no displaced silhouette pixels.
+func validateBenchmarkRevision(reference: URL, output: URL) throws {
+    var results: [[String: Any]] = []
+    for round in 1...2 {
+        for count in [1,10,50] {
+            for mode in ["mesh", "triangle"] {
+                let name = "gpu-r\(round)-\(count)-\(mode).png"
+                func load(_ directory: URL) throws -> CGImage {
+                    let data = try Data(contentsOf: directory.appendingPathComponent(name))
+                    guard let image = NSBitmapImageRep(data: data)?.cgImage else { throw PrototypeError("Invalid PNG: \(name)") }
+                    return image
+                }
+                let old = try load(reference), new = try load(output)
+                guard old.width == new.width, old.height == new.height else { throw PrototypeError("Revision image sizes differ") }
+                let a = try bitmap(old), b = try bitmap(new)
+                var maximum = 0, different = 0
+                for index in a.indices {
+                    let delta = abs(Int(a[index])-Int(b[index]))
+                    maximum = max(maximum, delta)
+                    if delta > 2 { different += 1 }
+                }
+                results.append(["image": name, "maximumChannelDifference": maximum, "channelsDifferingOver2": different])
+                guard different == 0 else { throw PrototypeError("Revision render differs: \(name), \(different) channels >2/255") }
+            }
+        }
+    }
+    try JSONSerialization.data(withJSONObject: results, options: [.prettyPrinted, .sortedKeys])
+        .write(to: output.appendingPathComponent("revision-validation.json"))
+    print("Revision validation: 12 image pairs passed, no channels differing by >2/255.")
+}
