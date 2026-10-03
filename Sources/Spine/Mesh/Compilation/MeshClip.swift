@@ -81,6 +81,7 @@ struct MeshClip {
     enum Target {
         case boneX(Int), boneY(Int), boneRotation(Int), boneScaleX(Int), boneScaleY(Int)
         case deform(slot: Int, component: Int)
+        case slotColor(slot:Int,component:Int)
     }
     struct Channel {
         let target: Target
@@ -90,12 +91,28 @@ struct MeshClip {
         let time: TimeInterval
         let value: EventModel
     }
+    struct AttachmentTimeline {
+        struct Key {let time:Float;let name:String?}
+        let slot:Int
+        let keys:[Key]
+    }
+    struct DrawOrderKey {let time:Float;let order:[Int]}
+    struct DeformTimeline {
+        struct Key {let time:Float;let deltas:[SIMD2<Float>];let progress:MeshScalarTimeline?}
+        let slot:Int
+        let attachmentID:Int
+        let keys:[Key]
+    }
     let name: String
+    let attachments:[AttachmentTimeline]
+    let drawOrders:[DrawOrderKey]
+    let deforms:[DeformTimeline]
     let channels: [Channel]
     let events: [Event]
     let duration: TimeInterval
 
-    init(name: String, channels: [Channel], events: [Event] = []) throws {
+    init(name: String, channels: [Channel], events: [Event] = [],
+         attachments:[AttachmentTimeline]=[],drawOrders:[DrawOrderKey]=[],deforms:[DeformTimeline]=[]) throws {
         var previous: TimeInterval = -1
         for event in events {
             guard event.time.isFinite, event.time >= 0, event.time > previous else {
@@ -105,7 +122,10 @@ struct MeshClip {
             previous = event.time
         }
         self.name = name; self.channels = channels; self.events = events
-        duration = max(channels.map { $0.timeline.duration }.max() ?? 0, events.last?.time ?? 0)
+        self.attachments=attachments;self.drawOrders=drawOrders;self.deforms=deforms
+        duration = ([channels.map { $0.timeline.duration }.max() ?? 0,events.last?.time ?? 0]
+            + attachments.map {Double($0.keys.last?.time ?? 0)} + drawOrders.map {Double($0.time)}
+            + deforms.map {Double($0.keys.last?.time ?? 0)}).max() ?? 0
     }
 }
 

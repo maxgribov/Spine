@@ -27,7 +27,7 @@ final class SetupOracleExportTests:XCTestCase {
                         part["deformSourceName"]=source.name
                         part["deformSourceSkin"]=asset.compiled.skinAttachments.first {$0.value.values.contains(mesh.deformSourceID)}!.key
                     case .region(let model):
-                        let region=try XCTUnwrap(skeleton.regionAttachmentNode(named:key))
+                        let region=try XCTUnwrap(skeleton.meshRuntime!.setupRenderer!.regionNode(named:key,slot:slot))
                         let uvx=try XCTUnwrap(region.value(forAttributeNamed:"a_uvX")).vectorFloat3Value,uvy=try XCTUnwrap(region.value(forAttributeNamed:"a_uvY")).vectorFloat3Value
                         let metadata=attachment.texture!
                         let unscaled=CGSize(width:model.size.width*metadata.trimRect.width/metadata.originalSize.width,height:model.size.height*metadata.trimRect.height/metadata.originalSize.height)

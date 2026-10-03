@@ -22,7 +22,7 @@ public extension Skeleton {
      - throws: error if default skin can't be found.
      */
     func applyDefaultSkin() throws {
-        if let runtime = meshRuntime { try runtime.validateSkin("default"); return }
+        if let runtime = meshRuntime { try runtime.applySkin("default",owner:self); return }
         
         apply(skin: try skin(named: SpineModel.defaultSkinName))
     }
@@ -37,7 +37,7 @@ public extension Skeleton {
      - throws: error if a skin can't be found.
      */
     func apply(skin named: String) throws {
-        if let runtime = meshRuntime { try runtime.validateSkin(named); return }
+        if let runtime = meshRuntime { try runtime.applySkin(named,owner:self); return }
         
         apply(skin: try skin(named: named))
     }

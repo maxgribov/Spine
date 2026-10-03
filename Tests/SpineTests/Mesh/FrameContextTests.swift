@@ -110,3 +110,35 @@ final class FrameContextTests: XCTestCase {
     }
 }
 #endif
+
+#if os(macOS) || os(iOS)
+extension FrameContextTests {
+    func testEffectAndCropAncestorsAreRejectedAndRecoverWithoutAdvancingTime()throws {
+        for parent in [SKEffectNode() as SKNode,SKCropNode()] {
+            let h=try MeshActionHarness(asset:authoredAsset("deform-resources"))
+            h.start(try h.skeleton.action(animation:"proof"));h.advance(0.2)
+            let time=h.snapshot.time
+            h.skeleton.removeFromParent();h.scene.addChild(parent);parent.addChild(h.skeleton)
+            assertMeshError(try h.skeleton.prepareMeshes(for:validMeshContext),.unsupportedFeature)
+            XCTAssertTrue(h.skeleton.meshRuntime!.managedVisuals.isHidden)
+            h.skeleton.removeFromParent();h.scene.addChild(h.skeleton)
+            try h.skeleton.prepareMeshes(for:validMeshContext)
+            XCTAssertFalse(h.skeleton.meshRuntime!.managedVisuals.isHidden)
+            XCTAssertEqual(h.snapshot.time,time)
+        }
+    }
+    func testBoneChangesAfterPrepareOnlyUpdateMeshBuffersOnNextPrepare()throws {
+        let h=try MeshActionHarness(asset:authoredAsset("deform-resources"))
+        h.start(try h.skeleton.action(animation:"proof"));h.advance(0.2)
+        try h.skeleton.prepareMeshes(for:validMeshContext)
+        let before=h.skeleton.meshRuntime!.setupRenderer!.snapshot.vertices
+        h.bone.position.x += 30
+        XCTAssertEqual(h.skeleton.meshRuntime!.setupRenderer!.snapshot.vertices,before)
+        let time=h.snapshot.time
+        try h.skeleton.prepareMeshes(for:validMeshContext)
+        let after=h.skeleton.meshRuntime!.setupRenderer!.snapshot.vertices
+        for (a,b) in zip(before[0],after[0]) {XCTAssertEqual(b.x-a.x,30,accuracy:1e-4)}
+        XCTAssertEqual(h.snapshot.time,time)
+    }
+}
+#endif

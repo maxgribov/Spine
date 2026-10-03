@@ -114,3 +114,28 @@ check, reused-run provenance, warnings, deferred gates and a phase-scoped status
 Do not label the whole mesh feature complete from a phase 2 health pass.
 The first execution is recorded in [phase2-health.json](phase2-health.json).
 Setup integration checks are recorded in [phase3-health.json](phase3-health.json).
+
+## Phase 4 animation and integration
+
+The same mesh CLI now also exports the complete animation timestamp grid and
+runs both production scenes against the retained prototype environment reference:
+
+```sh
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-mesh "$health_output/mesh"
+node Examples/MeshPrototype/Scripts/compare-library-setup.mjs "$SPINE_CORE_4156_ENTRY" "$health_output/mesh"
+node Examples/MeshPrototype/Scripts/compare-library-animation.mjs "$SPINE_CORE_4156_ENTRY" "$health_output/mesh"
+```
+
+Expect 223 animation snapshots across the required three fixtures plus the authored
+slot-transition fixture, nine existing setup GPU comparisons and eight strict
+world comparisons (max channel error 3/255, count over 2 recorded separately).
+`NativeFrameProjectionTests` additionally verifies live-view corner/pixel-center
+mapping after late edits and a strict bottom-left custom crop-origin comparison.
+Its hard-edged opaque silhouette readbacks are **supplementary diagnostics**, not
+passing image acceptance evidence: two calibration cases differ by one pixel
+(max 39/255). The strict textured camera gate is the eight world comparisons.
+The custom capture crops an ordinary subtree; cropping an `SKScene` resizes its
+projection and is not a faithful viewport-offset fixture.
+
+Phase 3 physical-device hashes and captures remain historical after phase 4
+production changes. Final iOS parity/lifecycle/performance runs belong to phase 5.

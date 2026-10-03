@@ -13,6 +13,8 @@ final class MeshSetupRenderer {
         let attachment:CompiledAttachment
         let node:SKNode
         let mesh:MeshTriangleNode?
+        var contractIndex=0
+        let tintAttribute:SKAttributeValue?
         var positions:[SIMD2<Float>]
         var deform:[SIMD2<Float>]
         let pixelSizeAttribute:SKAttributeValue?
@@ -20,6 +22,7 @@ final class MeshSetupRenderer {
         init(_ attachment:CompiledAttachment,node:SKNode,mesh:MeshTriangleNode?=nil,count:Int=0,deformCount:Int=0) {
             self.attachment=attachment;self.node=node;self.mesh=mesh
             positions=Array(repeating:.zero,count:count);deform=Array(repeating:.zero,count:deformCount/2)
+            tintAttribute=(node as? SKSpriteNode)?.value(forAttributeNamed:"a_tint")
             pixelSizeAttribute=(node as? SKSpriteNode)?.value(forAttributeNamed:"a_pixelSize")
             nearestAttribute=(node as? SKSpriteNode)?.value(forAttributeNamed:"a_nearest")
         }
@@ -34,12 +37,17 @@ final class MeshSetupRenderer {
     private var matrices:[CGAffineTransform]
     private var opacity:[CGFloat]
     private var hidden:[Bool]
+    private var ranks:[Int]
+    private var lastDrawOrder:[Int]
+    private var logicalPoints:[(id:Int,slot:Int,node:PointAttachment)]=[]
+    private var physicsBodies:[Int:SKPhysicsBody]=[:]
     private(set) var activeAttachments:[String?]
 
     init(compiled:CompiledMeshSkeleton,resources:MeshRendererResources,bones:[Bone],slots:[Slot],root:SKNode,skin:String)throws {
         self.compiled=compiled;self.bones=bones;self.slots=slots;self.root=root
         matrices=Array(repeating:.identity,count:bones.count);opacity=Array(repeating:1,count:bones.count);hidden=Array(repeating:false,count:bones.count)
         activeAttachments=[]
+        ranks=Array(slots.indices);lastDrawOrder=Array(slots.indices)
         proxyBones=bones.map {_ in SKNode()}
         for i in proxyBones.indices {
             proxyBones[i].name="_spine_render_bone_\(i)"
@@ -50,7 +58,6 @@ final class MeshSetupRenderer {
         activeAttachments=compiled.slots.enumerated().map {index,slot in
             slot.attachment.flatMap {merged[.init(slot:index,name:$0)] != nil ? $0:nil}
         }
-        var physics:[Int:[SKPhysicsBody]]=[:]
         for id in merged.values.sorted() {
             let attachment=compiled.attachments[id],slot=attachment.slot
             let depth=CGFloat(slot)/CGFloat(max(1,slots.count))
@@ -81,38 +88,53 @@ final class MeshSetupRenderer {
                 records.append(Record(attachment,node:node))
             case .point(let model):
                 let node=PointAttachment(model);node.name=PointAttachment.generateName(model.name);node.isHidden=true
-                slots[slot].addChild(node)
+                logicalPoints.append((attachment.id,slot,node))
             case .boundingBox(let model):
-                if let body=BoundingBoxAttachment(model).physicsBody {physics[slot,default:[]].append(body)}
+                if let body=BoundingBoxAttachment(model).physicsBody {physicsBodies[attachment.id]=body}
             }
-        }
-        for (slot,bodies) in physics {
-            slots[slot].physicsBody=bodies.count==1 ? bodies[0]:SKPhysicsBody(bodies:bodies)
-            slots[slot].physicsBody?.isDynamic=false
         }
         func remember(_ node:SKNode) {
             for child in node.children {contracts.append((child,node,child.zPosition));remember(child)}
         }
         remember(root)
+        for record in records {record.contractIndex=contracts.firstIndex {$0.0 === record.node}!}
         for record in records {record.node.isHidden=activeAttachments[record.attachment.slot] != record.attachment.name}
     }
 
+    func removeLogicalAttachments() {
+        for point in logicalPoints {point.node.removeFromParent()}
+        for slot in slots {slot.physicsBody=nil}
+    }
+    func installLogicalAttachments(states:[MeshSlotState]) {
+        for point in logicalPoints {slots[point.slot].addChild(point.node)}
+        updateLogicalActivity(states:states)
+    }
+    func updateLogicalActivity(states:[MeshSlotState]) {
+        for slot in slots.indices {
+            let body=states[slot].attachmentID.flatMap {physicsBodies[$0]}
+            if let body=body,!body.isDynamic {states[slot].hadStaticPhysicsBody=true}
+            if slots[slot].physicsBody !== body {slots[slot].physicsBody=body}
+        }
+    }
+    func activePoints(states:[MeshSlotState])->[SKNode] {
+        logicalPoints.filter {states[$0.slot].attachmentID==$0.id}.map(\.node)
+    }
     func meshNode(named:String,slot:String)->SKNode? {
         guard let index=compiled.slots.firstIndex(where:{$0.name==slot}) else {return nil}
         return records.first {$0.attachment.slot==index && $0.attachment.name==named && $0.mesh != nil}?.node
     }
-    func regionNode(named:String)->SKSpriteNode? {
-        records.first {$0.attachment.name==named && $0.mesh==nil}?.node as? SKSpriteNode
+    func regionNode(named:String,slot:Int?=nil)->SKSpriteNode? {
+        records.first {record in record.attachment.name==named && record.mesh==nil && (slot.map {$0==record.attachment.slot} ?? true)}?.node as? SKSpriteNode
     }
     var snapshot:MeshSnapshot {
         var positions=Array(repeating:[SIMD2<Float>](),count:slots.count),uvs=positions
         for record in records where activeAttachments[record.attachment.slot]==record.attachment.name {
             if case .mesh(let mesh)=record.attachment.content {positions[record.attachment.slot]=record.positions;uvs[record.attachment.slot]=mesh.uvs}
         }
-        return MeshSnapshot(activeAttachments:activeAttachments,drawOrder:Array(slots.indices),vertices:positions,uvs:uvs)
+        return MeshSnapshot(activeAttachments:activeAttachments,drawOrder:lastDrawOrder,vertices:positions,uvs:uvs)
     }
 
-    func prepare(owner:Skeleton,context:SpineMeshFrameContext)throws {
+    func prepare(owner:Skeleton,context:SpineMeshFrameContext,states:[MeshSlotState],drawOrder:[Int])throws {
         func mutation(_ name:String)throws->Never {throw SpineRuntimeError(.mutatedNodeContract,path:"/runtime/nodes/"+SpineRuntimeError.pointerComponent(name),message:"Managed node hierarchy, slot transform or internal depth was changed.")}
         guard root.parent === owner,root.position == .zero,root.zRotation==0,root.xScale==1,root.yScale==1,root.zPosition==0,root.alpha==1 else {try mutation("renderer")}
         for (node,parent,z) in contracts where node.parent !== parent || node.zPosition != z {try mutation(node.name ?? "renderer")}
@@ -134,8 +156,16 @@ final class MeshSetupRenderer {
         }
         for i in slots.indices {
             let slot=slots[i]
-            guard slot.parent === bones[compiled.slotBones[i]],slot.position == .zero,slot.zRotation==0,slot.xScale==1,slot.yScale==1,slot.zPosition==0 else {try mutation(compiled.slots[i].name)}
+            // SpriteKit's static-body solver can round a mathematically identity local
+            // rotation to a few Float ULPs when the parent bone rotates. Do not write
+            // the physical node back; allow only that narrow owned-body residue.
+            let ownedStatic=slot.physicsBody.map {body in !body.isDynamic && physicsBodies.values.contains {$0 === body}} ?? states[i].hadStaticPhysicsBody
+            let rotationTolerance:CGFloat=ownedStatic ? CGFloat(Float.ulpOfOne)*8:0
+            guard slot.parent === bones[compiled.slotBones[i]],slot.position == .zero,abs(slot.zRotation)<=rotationTolerance,slot.xScale==1,slot.yScale==1,slot.zPosition==0 else {try mutation(compiled.slots[i].name)}
         }
+        for (rank,slot) in drawOrder.enumerated() {ranks[slot]=rank}
+        for slot in slots.indices {activeAttachments[slot]=states[slot].activeName}
+        lastDrawOrder=drawOrder
         // Validate every logical transform before changing any mesh buffer or proxy pose.
         for i in bones.indices {
             let node=proxyBones[i],bone=bones[i]
@@ -143,15 +173,21 @@ final class MeshSetupRenderer {
         }
         for record in records {
             let slot=record.attachment.slot,bone=compiled.slotBones[slot]
-            let active=activeAttachments[slot]==record.attachment.name
+            let active=states[slot].attachmentID==record.attachment.id
+            let depth=CGFloat(ranks[slot])/CGFloat(max(1,slots.count))
+            record.node.zPosition=depth;contracts[record.contractIndex].2=record.node.zPosition
             record.node.isHidden = !active || slots[slot].isHidden || hidden[bone]
             guard active else {continue}
+            let tint=states[slot].color*record.attachment.color
             if let node=record.mesh,case .mesh(let mesh)=record.attachment.content {
+                for vertex in record.deform.indices {record.deform[vertex]=SIMD2(states[slot].deform[vertex*2],states[slot].deform[vertex*2+1])}
+                node.setTint(tint)
                 try computeMeshPositions(mesh,boneMatrices:matrices,deform:record.deform,into:&record.positions)
                 try node.prepareForRendering(localToPixels:context.skeletonToPixels,positions:record.positions)
                 node.alpha=opacity[bone]*slots[slot].alpha
             } else {
                 record.node.alpha=slots[slot].alpha
+                if let value=record.tintAttribute {value.vectorFloat4Value=tint;(record.node as? SKSpriteNode)?.setValue(value,forAttribute:"a_tint")}
                 if let sprite=record.node as? SKSpriteNode,let texture=sprite.texture,
                    let pixels=record.pixelSizeAttribute,let nearest=record.nearestAttribute {
                     let size=texture.size()

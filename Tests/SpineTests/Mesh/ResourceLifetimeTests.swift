@@ -35,5 +35,21 @@ final class ResourceLifetimeTests:XCTestCase {
         XCTAssertEqual(textures.requests,calls)
         XCTAssertEqual(other.boneNode(named:"root")!.position,.zero)
     }
+    func testOneHundredSkinReplacementsReleaseOldVisualTreesAndKeepAssetMaterials()throws {
+        let asset=try authoredAsset("slot-transitions"),skeleton=try Skeleton(meshAsset:asset)
+        let resources=asset.rendererResources
+        for index in 0..<100 {
+            weak var previous:SKNode?
+            try autoreleasepool {
+                previous=skeleton.meshRuntime!.managedVisuals
+                try skeleton.apply(skin:index.isMultiple(of:2) ? "compatible":"incompatible")
+                try skeleton.prepareMeshes(for:validMeshContext)
+            }
+            XCTAssertNil(previous)
+            XCTAssertTrue(skeleton.meshRuntime!.asset.rendererResources === resources)
+            XCTAssertEqual(skeleton.points?.count,2)
+        }
+    }
+
 }
 #endif

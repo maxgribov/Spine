@@ -146,8 +146,9 @@ struct MeshAssetCompiler {
             else {try fail(.invalidData,draft.path,"Unable to compile attachment.")}
             attachments.append(.init(id:draft.id,slot:draft.slot,name:draft.name,path:draft.path,color:color,texture:texture,content:content))
         }
+        let clips=try MeshClipCompiler(model:model,skinAttachments:skins,attachments:attachments).compile()
         let skinNames=model.skins.map(\.name)
-        return CompiledMeshSkeleton(bones:model.bones,slots:model.slots,deformComponentCounts:deformCounts,clips:[],
+        return CompiledMeshSkeleton(bones:model.bones,slots:model.slots,deformComponentCounts:deformCounts,clips:clips,
             skinNames:skinNames.isEmpty ? ["default"]:skinNames,attachments:attachments,skinAttachments:skins,sourceAnimations:model.animations)
     }
 

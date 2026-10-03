@@ -298,12 +298,16 @@ do {
                 control.frame = CGRect(x: 18,y: content.bounds.height-36,width: 310,height: 28)
                 control.autoresizingMask = [.minYMargin]
                 content.addSubview(control)
-                let hint = NSTextField(labelWithString: "Tab — switch scenes")
+                let runtimeControl=switcher.runtimeControl!
+                runtimeControl.frame=CGRect(x:345,y:content.bounds.height-36,width:240,height:28)
+                runtimeControl.autoresizingMask=[.minYMargin];content.addSubview(runtimeControl)
+                let hint = NSTextField(labelWithString: "Tab — scene · L — renderer")
                 hint.textColor = .secondaryLabelColor
-                hint.frame = CGRect(x: 350,y: content.bounds.height-30,width: 260,height: 20)
+                hint.frame = CGRect(x: 610,y: content.bounds.height-30,width: 260,height: 20)
                 hint.autoresizingMask = [.minYMargin]; content.addSubview(hint)
             }
             if CommandLine.arguments.contains("--integration") { switcher.select(1) }
+            if CommandLine.arguments.contains("--library") {switcher.selectRuntime(true)}
         }
     }
 } catch {
@@ -318,6 +322,12 @@ if let index = benchmarkIndex {
     let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output/benchmark"
     benchmarkRunner = BenchmarkRunner(view: view, output: URL(fileURLWithPath: path))
     DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { benchmarkRunner!.start() }
+} else if let index = CommandLine.arguments.firstIndex(of: "--verify-library-scenes") {
+    let path=CommandLine.arguments.count>index+1 ? CommandLine.arguments[index+1]:"output/library-scenes"
+    DispatchQueue.main.asyncAfter(deadline:.now()+1) {
+        do {try verifyLibraryScenes(view:view,switcher:sceneSwitcher!,output:URL(fileURLWithPath:path));exit(0)}
+        catch {fputs("Library scene verification failed: \(error)\n",stderr);exit(1)}
+    }
 } else if let index = CommandLine.arguments.firstIndex(of: "--verify-integration") {
     let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output/integration"
     demo!.playing = false

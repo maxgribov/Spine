@@ -1,0 +1,61 @@
+{
+  "comparisons" : [
+    {
+      "case" : 0,
+      "channelsOver2" : 0,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 1,
+      "time" : 0
+    },
+    {
+      "case" : 1,
+      "channelsOver2" : 1,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 3,
+      "time" : 2
+    },
+    {
+      "case" : 2,
+      "channelsOver2" : 0,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 1,
+      "time" : 4
+    },
+    {
+      "case" : 3,
+      "channelsOver2" : 0,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 1,
+      "time" : 7.8499999999999996
+    },
+    {
+      "case" : 4,
+      "channelsOver2" : 0,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 1,
+      "time" : 9.8499999999999996
+    },
+    {
+      "case" : 5,
+      "channelsOver2" : 0,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 2,
+      "time" : 11.800000000000001
+    },
+    {
+      "case" : 6,
+      "channelsOver2" : 1,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 3,
+      "time" : 15.699999999999999
+    },
+    {
+      "case" : 7,
+      "channelsOver2" : 0,
+      "channelsOver3" : 0,
+      "maximumChannelDifference" : 1,
+      "time" : 18
+    }
+  ],
+  "selector" : "four cached scenes, Tab\/L, retained state passed"
+}

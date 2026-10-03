@@ -1,8 +1,36 @@
 # Spine meshes через SpriteKit nodes + shader
 
-Изолированный macOS-прототип. Запускается в обычном `SKView`, без Metal host и без изменений основного target `Spine`.
+macOS-пример с двумя независимыми режимами: исходный **Prototype** и **Library** на production `Skeleton`. Оба запускаются в обычном `SKView`; исходные сцены и renderer прототипа сохранены.
 
 Показывает официальный **Goblins Pro 4.1.17**, skins `goblin` и `goblingirl`, анимацию `walk`. В примере воспроизводятся обычные/weighted meshes, deform timelines, linked feet, переключение attachments при моргании и rotated atlas regions. Regions рисуются тем же треугольным renderer, что и meshes: порядок слотов сохраняется.
+
+## Production Library
+
+Переключатель **Prototype / Library** (клавиша **L**) выбирает renderer, а
+**Mesh demo / Integration scene** (**Tab**) — сцену. Все четыре сцены кешируются.
+Для прямого запуска production-окружения:
+
+```sh
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --library --integration
+```
+
+Library использует общий `SpineMeshAsset`, независимые `Skeleton`, обычные
+`SKAction` и финальный `prepareMeshes(in:)` в `didFinishUpdate`. Здесь доступны
+Space, A, R, 0; в окружении также C и +/−. Покадровый seek и wireframe остаются
+управлением исходного Prototype. Прежние `--verify`, `--verify-integration` и
+benchmark-команды по-прежнему проверяют Prototype.
+
+```sh
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-scenes /tmp/spine-library-scenes
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-mesh /tmp/spine-library-mesh
+```
+
+Первая команда проверяет сохранение четырёх сцен при Tab/L, сохраняет оба
+production-скриншота и сравнивает восемь кадров окружения с исходным независимым
+mesh-bounds renderer. Вторая также запускает GPU/state checks и экспортирует
+полную сетку времён для внешнего oracle 4.1.56. Это автоматические readback-проверки,
+не интерактивный UI review. Правила API описаны в
+[Meshes.md](../../Sources/Spine/Documentation.docc/Meshes.md).
 
 ## Запуск
 
