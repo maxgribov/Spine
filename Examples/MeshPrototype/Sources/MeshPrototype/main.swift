@@ -28,9 +28,9 @@ final class DemoScene: SKScene {
     var playing = true
     private var translucent = false
 
-    init(exampleSize: CGSize = CGSize(width: 1100, height: 760), boundsMode: TriangleMeshNode.BoundsMode = .triangle) throws {
-        goblin = try Goblin(skin: "goblin", boundsMode: boundsMode)
-        girl = try Goblin(skin: "goblingirl", boundsMode: boundsMode)
+    init(exampleSize: CGSize = CGSize(width: 1100, height: 760), boundsMode: TriangleMeshNode.BoundsMode = .triangle, groupSize: TriangleMeshNode.GroupSize = .two) throws {
+        goblin = try Goblin(skin: "goblin", boundsMode: boundsMode, groupSize: groupSize)
+        girl = try Goblin(skin: "goblingirl", boundsMode: boundsMode, groupSize: groupSize)
         super.init(size: exampleSize)
         scaleMode = .aspectFit
         backgroundColor = NSColor(calibratedRed: 0.065, green: 0.078, blue: 0.11, alpha: 1)
@@ -49,7 +49,7 @@ final class DemoScene: SKScene {
         let texture = checkerTexture()
         let reference = SKSpriteNode(texture: texture, size: CGSize(width: 128, height: 128))
         reference.anchorPoint = .zero; reference.position = CGPoint(x: 64, y: 71); addChild(reference)
-        let mesh = try TriangleMeshNode(texture: texture, positions: square, uvs: squareUV, indices: [0,1,2, 0,2,3])
+        let mesh = try TriangleMeshNode(texture: texture, positions: square, uvs: squareUV, indices: [0,1,2, 0,2,3], groupSize: groupSize)
         mesh.position = CGPoint(x: 254, y: 71); addChild(mesh)
         label("SKSpriteNode", at: CGPoint(x: 64, y: 210), size: 12)
         label("2 shader triangles", at: CGPoint(x: 254, y: 210), size: 12)
@@ -61,6 +61,7 @@ final class DemoScene: SKScene {
         try sample(0)
     }
     required init?(coder: NSCoder) { fatalError("Use init()") }
+    override func didMove(to view: SKView) { previousTime = nil }
     private func label(_ text: String, at position: CGPoint, size: CGFloat, color: NSColor = .white) {
         let node = SKLabelNode(fontNamed: "Menlo"); node.text = text; node.position = position
         node.fontSize = size; node.fontColor = color; node.horizontalAlignmentMode = .left; addChild(node)
@@ -194,6 +195,7 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
     }
     report.append(contentsOf: try verifyOptimizedBounds(view: view, output: output))
     report.append(try verifySharedMaterial(view: view))
+    report.append(try verifyTriangleGroups(view: view, output: output))
     var frameBytes: [[UInt8]] = []
     var snapshots: [[String: Any]] = []
     scene.playing = false
@@ -233,17 +235,30 @@ if let index = CommandLine.arguments.firstIndex(of: "--validate-benchmark") {
         try validateBenchmarkImages(output: URL(fileURLWithPath: CommandLine.arguments[index+1])); exit(0)
     } catch { fputs("Benchmark image validation failed: \(error)\n", stderr); exit(1) }
 }
-let benchmarkIndex = CommandLine.arguments.firstIndex(of: "--benchmark")
+var selectedGroupSize = TriangleMeshNode.GroupSize.two
+if let option = CommandLine.arguments.firstIndex(of: "--group-size") {
+    guard CommandLine.arguments.count > option+1, let count = Int(CommandLine.arguments[option+1]),
+          let selected = TriangleMeshNode.GroupSize(rawValue: count) else {
+        fputs("--group-size expects 1, 2 or 4\n", stderr); exit(1)
+    }
+    selectedGroupSize = selected
+}
+let benchmarkIndex = CommandLine.arguments.firstIndex(of: "--benchmark") ?? CommandLine.arguments.firstIndex(of: "--benchmark-groups")
+let verificationMode = CommandLine.arguments.contains("--verify") || CommandLine.arguments.contains("--verify-integration")
+let showsSceneSwitcher = benchmarkIndex == nil && !verificationMode
 let app = NSApplication.shared
 app.setActivationPolicy(.regular)
-let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: benchmarkIndex == nil ? 1100 : 960, height: benchmarkIndex == nil ? 760 : 540),
+let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: benchmarkIndex == nil ? 1100 : 960, height: benchmarkIndex == nil ? (showsSceneSwitcher ? 804 : 760) : 540),
                       styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: false)
 window.title = "Spine · Triangle Mesh Prototype"
 window.center()
-let view = SKView(frame: window.contentView!.bounds)
+let content = NSView(frame: window.contentView!.bounds)
+window.contentView = content
+let view = PrototypeView(frame: CGRect(x: 0,y: 0,width: content.bounds.width,height: content.bounds.height-(showsSceneSwitcher ? 44 : 0)))
 view.autoresizingMask = [.width, .height]
 view.ignoresSiblingOrder = CommandLine.arguments.contains("--ignore-sibling-order")
-window.contentView = view
+content.addSubview(view)
+var sceneSwitcher: SceneSwitcher?
 var demo: DemoScene?
 do {
     if benchmarkIndex == nil {
@@ -255,8 +270,23 @@ do {
             }
             mode = selected
         }
-        demo = try DemoScene(boundsMode: mode)
+        demo = try DemoScene(boundsMode: mode, groupSize: selectedGroupSize)
         view.presentScene(demo)
+        if showsSceneSwitcher || CommandLine.arguments.contains("--verify-integration") {
+            let switcher = SceneSwitcher(view: view,demo: demo!,boundsMode: mode,groupSize: selectedGroupSize)
+            sceneSwitcher = switcher
+            if showsSceneSwitcher {
+                let control = switcher.control!
+                control.frame = CGRect(x: 18,y: content.bounds.height-36,width: 310,height: 28)
+                control.autoresizingMask = [.minYMargin]
+                content.addSubview(control)
+                let hint = NSTextField(labelWithString: "Tab — switch scenes")
+                hint.textColor = .secondaryLabelColor
+                hint.frame = CGRect(x: 350,y: content.bounds.height-30,width: 260,height: 20)
+                hint.autoresizingMask = [.minYMargin]; content.addSubview(hint)
+            }
+            if CommandLine.arguments.contains("--integration") { switcher.select(1) }
+        }
     }
 } catch {
     fputs("Failed to load prototype: \(error)\n", stderr)
@@ -270,6 +300,13 @@ if let index = benchmarkIndex {
     let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output/benchmark"
     benchmarkRunner = BenchmarkRunner(view: view, output: URL(fileURLWithPath: path))
     DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { benchmarkRunner!.start() }
+} else if let index = CommandLine.arguments.firstIndex(of: "--verify-integration") {
+    let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output/integration"
+    demo!.playing = false
+    DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+        do { try verifyIntegration(view: view,switcher: sceneSwitcher!,output: URL(fileURLWithPath: path)); exit(0) }
+        catch { fputs("Integration verification failed: \(error)\n",stderr); exit(1) }
+    }
 } else if let index = CommandLine.arguments.firstIndex(of: "--verify") {
     let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output"
     demo!.playing = false

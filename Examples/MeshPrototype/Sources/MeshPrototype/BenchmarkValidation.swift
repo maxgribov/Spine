@@ -73,3 +73,40 @@ func validateBenchmarkRevision(reference: URL, output: URL) throws {
         .write(to: output.appendingPathComponent("revision-validation.json"))
     print("Revision validation: 12 image pairs passed, no channels differing by >2/255.")
 }
+
+/// Strict revision comparison on opaque-background SKRenderer captures.
+func validateGroupedBenchmarkImages(output: URL) throws {
+    var results: [[String: Any]] = []
+    for round in 1...2 {
+        for count in [1,10,50] {
+            func load(_ size: Int) throws -> CGImage {
+                let name = "gpu-r\(round)-\(count)-g\(size).png"
+                let data = try Data(contentsOf: output.appendingPathComponent(name))
+                guard let image = NSBitmapImageRep(data: data)?.cgImage else { throw PrototypeError("Invalid PNG: \(name)") }
+                return image
+            }
+            let reference = try load(1), a = try bitmap(reference)
+            let foreground = stride(from: 0,to: a.count,by: 4).filter { offset in
+                (0..<3).contains { abs(Int(a[offset+$0])-Int(a[$0])) > 8 }
+            }.count
+            guard foreground > 1000 else { throw PrototypeError("Grouped benchmark reference is blank") }
+            for size in [2,4] {
+                let candidate = try load(size)
+                guard reference.width == candidate.width, reference.height == candidate.height else { throw PrototypeError("Grouped capture sizes differ") }
+                let b = try bitmap(candidate)
+                var maximum = 0, different = 0
+                for index in a.indices {
+                    let delta = abs(Int(a[index])-Int(b[index]))
+                    maximum = max(maximum,delta)
+                    if delta > 2 { different += 1 }
+                }
+                results.append(["round": round,"actors": count,"groupSize": size,"foregroundPixels": foreground,
+                                "maximumChannelDifference": maximum,"channelsDifferingOver2": different])
+                guard different == 0 else { throw PrototypeError("Grouped benchmark r\(round)/\(count)/g\(size): \(different) channels >2/255, max \(maximum)") }
+            }
+        }
+    }
+    try JSONSerialization.data(withJSONObject: results, options: [.prettyPrinted,.sortedKeys])
+        .write(to: output.appendingPathComponent("group-image-validation.json"))
+    print("Grouped benchmark: 12 image pairs passed, no channels differing by >2/255.")
+}

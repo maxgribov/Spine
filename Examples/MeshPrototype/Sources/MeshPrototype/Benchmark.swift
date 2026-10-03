@@ -21,8 +21,8 @@ private final class BenchmarkScene: SKScene {
     private var cpu: [Double] = [], intervals: [Double] = [], areas: [Double] = [], triangles: [Double] = []
     let warmup = 30, measured = 120
 
-    init(count: Int, mode: TriangleMeshNode.BoundsMode) throws {
-        actors = try (0..<count).map { try Goblin(skin: $0.isMultiple(of: 2) ? "goblin" : "goblingirl", boundsMode: mode) }
+    init(count: Int, mode: TriangleMeshNode.BoundsMode, groupSize: TriangleMeshNode.GroupSize) throws {
+        actors = try (0..<count).map { try Goblin(skin: $0.isMultiple(of: 2) ? "goblin" : "goblingirl", boundsMode: mode, groupSize: groupSize) }
         super.init(size: CGSize(width: 1920, height: 1080))
         scaleMode = .aspectFit
         backgroundColor = NSColor(calibratedWhite: 0.1, alpha: 1)
@@ -99,12 +99,19 @@ final class BenchmarkRunner {
     private var results: [[String: Any]] = []
     private var index = 0
     private var activity: NSObjectProtocol?
-    private let configurations: [(count: Int, mode: TriangleMeshNode.BoundsMode, round: Int)] =
-        (0..<2).flatMap { round in
-            [1,10,50].flatMap { count in
-                (round == 0 ? [TriangleMeshNode.BoundsMode.mesh, .triangle] : [.triangle, .mesh]).map { (count, $0, round) }
+    private let groupExperiment = CommandLine.arguments.contains("--benchmark-groups")
+    private let configurations: [(count: Int, mode: TriangleMeshNode.BoundsMode, groupSize: TriangleMeshNode.GroupSize, round: Int)] = {
+        let groups = CommandLine.arguments.contains("--benchmark-groups")
+        return (0..<2).flatMap { round in
+            [1,10,50].flatMap { count -> [(Int, TriangleMeshNode.BoundsMode, TriangleMeshNode.GroupSize, Int)] in
+                if groups {
+                    let sizes: [TriangleMeshNode.GroupSize] = round == 0 ? [.one,.two,.four] : [.four,.two,.one]
+                    return sizes.map { (count,.triangle,$0,round) }
+                }
+                return (round == 0 ? [TriangleMeshNode.BoundsMode.mesh, .triangle] : [.triangle, .mesh]).map { (count,$0,selectedGroupSize,round) }
             }
         }
+    }()
     init(view: SKView, output: URL) { self.view = view; self.output = output }
     func start() {
         activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .latencyCritical], reason: "Spine renderer performance measurement")
@@ -120,17 +127,18 @@ final class BenchmarkRunner {
         guard index < configurations.count else {
             do {
                 try saveReport()
-                try validateBenchmarkImages(output: output)
+                if groupExperiment { try validateGroupedBenchmarkImages(output: output) }
+                else { try validateBenchmarkImages(output: output) }
                 if let activity = activity { ProcessInfo.processInfo.endActivity(activity) }
                 print("BENCHMARK COMPLETE: \(output.path)"); exit(0)
             }
             catch { fputs("Benchmark report failed: \(error)\n", stderr); exit(1) }
         }
         let configuration = configurations[index]
-        print("BENCHMARK round \(configuration.round+1), \(configuration.count) actors, \(configuration.mode.rawValue)")
+        print("BENCHMARK round \(configuration.round+1), \(configuration.count) actors, \(configuration.mode.rawValue), group \(configuration.groupSize.rawValue)")
         fflush(stdout)
         do {
-            let scene = try BenchmarkScene(count: configuration.count, mode: configuration.mode)
+            let scene = try BenchmarkScene(count: configuration.count, mode: configuration.mode, groupSize: configuration.groupSize)
             scene.onComplete = { [weak self, weak scene] native in
                 guard let self = self, let scene = scene else { return }
                 scene.onComplete = nil
@@ -138,9 +146,10 @@ final class BenchmarkRunner {
                 // renderer from competing for the GPU or updating the scene.
                 self.view.presentScene(nil)
                 do {
-                    let gpu = try self.measureGPU(scene, label: "r\(configuration.round+1)-\(configuration.count)-\(configuration.mode.rawValue)")
+                    let suffix = self.groupExperiment ? "g\(configuration.groupSize.rawValue)" : configuration.mode.rawValue
+                    let gpu = try self.measureGPU(scene, label: "r\(configuration.round+1)-\(configuration.count)-\(suffix)")
                     self.results.append(["actors": configuration.count, "mode": configuration.mode.rawValue,
-                                         "round": configuration.round+1, "skView": native, "offscreen": gpu])
+                                         "round": configuration.round+1, "groupSize": configuration.groupSize.rawValue, "skView": native, "offscreen": gpu])
                     try self.saveReport()
                     self.index += 1
                     DispatchQueue.main.asyncAfter(deadline: .now()+0.2) { self.runNext() }
@@ -214,14 +223,15 @@ final class BenchmarkRunner {
     }
     private func saveReport() throws {
         try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
-        let report: [String: Any] = ["schema": 1, "date": ISO8601DateFormatter().string(from: Date()),
+        let report: [String: Any] = ["schema": 2, "benchmarkType": groupExperiment ? "triangleGroups" : "bounds",
+            "groupSizes": groupExperiment ? [1,2,4] : [selectedGroupSize.rawValue], "date": ISO8601DateFormatter().string(from: Date()),
             "os": ProcessInfo.processInfo.operatingSystemVersionString,
             "nativeViewSizePoints": [Double(view.bounds.width), Double(view.bounds.height)],
             "backingScale": view.window?.backingScaleFactor ?? 1,
             "targetFPS": 60, "nativeWarmupFrames": 30, "nativeMeasuredFrames": 120,
             "gpuWarmupFrames": 30, "gpuMeasuredFrames": 60, "results": results,
             "appNapPrevented": true, "floatingWindow": true, "ignoresSiblingOrder": view.ignoresSiblingOrder,
-            "notes": "Release build recommended. Two rounds, reversed mode order. Geometry areas are proxies, not fragment counters. Native intervals are vsync-paced; GPU samples use SKRenderer, serialized command buffers, no readback. No measured draw-call counters."]
+            "notes": "Release build recommended. Two rounds, reversed variant order. Geometry areas are proxies, not fragment counters. Native intervals are vsync-paced; GPU samples use SKRenderer, serialized command buffers, no readback. No measured draw-call counters."]
         try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
             .write(to: output.appendingPathComponent("benchmark.json"))
     }

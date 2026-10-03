@@ -125,7 +125,7 @@ private struct Part {
 }
 
 final class Goblin: SKNode {
-    private static var materials: [TriangleMeshNode.BoundsMode: TriangleMeshNode.Material] = [:]
+    private static var materials: [String: TriangleMeshNode.Material] = [:]
     let skinName: String
     let duration: Float
     private let slots: [Object]
@@ -140,6 +140,17 @@ final class Goblin: SKNode {
     var submittedQuadArea: Double { parts.filter { !$0.node.isHidden }.reduce(0) { $0 + $1.node.submittedQuadArea } }
     var coveredTriangleArea: Double { parts.filter { !$0.node.isHidden }.reduce(0) { $0 + $1.node.coveredTriangleArea } }
 
+    /// Used by the integration scene; the original demo keeps its existing layers.
+    func confineDrawOrder(to span: CGFloat) {
+        precondition(span.isFinite && span > 0)
+        let step = span / CGFloat(slots.count+1)
+        for part in parts {
+            part.node.zPosition = CGFloat(part.slot)*step
+            part.node.setTriangleDepthSpan(step*0.5)
+        }
+        wire.zPosition = CGFloat(slots.count)*step
+    }
+
     func vertexSnapshot() -> [[String: Any]] {
         parts.filter { !$0.node.isHidden }.map { part in
             ["slot": slots[part.slot]["name"] as! String, "attachment": part.key,
@@ -148,7 +159,7 @@ final class Goblin: SKNode {
         }
     }
 
-    init(skin: String, boundsMode: TriangleMeshNode.BoundsMode = .triangle) throws {
+    init(skin: String, boundsMode: TriangleMeshNode.BoundsMode = .triangle, groupSize: TriangleMeshNode.GroupSize = .two) throws {
         skinName = skin
         let directory = Bundle.module.resourceURL!
         let json = try Data(contentsOf: directory.appendingPathComponent("goblins-pro.json"))
@@ -224,13 +235,14 @@ final class Goblin: SKNode {
         guard let image = NSImage(contentsOf: directory.appendingPathComponent("goblins.png")) else {
             throw PrototypeError("Missing atlas image")
         }
+        let materialKey = "\(boundsMode.rawValue)-\(groupSize.rawValue)"
         let material: TriangleMeshNode.Material
-        if let cached = Self.materials[boundsMode] { material = cached }
+        if let cached = Self.materials[materialKey] { material = cached }
         else {
             let texture = SKTexture(image: image)
             texture.filteringMode = .linear
-            material = TriangleMeshNode.Material(texture: texture, boundsMode: boundsMode)
-            Self.materials[boundsMode] = material
+            material = TriangleMeshNode.Material(texture: texture, boundsMode: boundsMode, groupSize: groupSize)
+            Self.materials[materialKey] = material
         }
         let skinMaps = Dictionary(uniqueKeysWithValues: skins.map { ($0["name"] as! String, $0["attachments"] as! [String: Object]) })
         guard let selected = skinMaps[skin] else { throw PrototypeError("Missing skin \(skin)") }

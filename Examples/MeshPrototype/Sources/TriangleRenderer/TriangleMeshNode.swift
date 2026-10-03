@@ -9,7 +9,9 @@ public enum MeshError: Error, Equatable {
 /// Triangle bounds reduce fragment work; mesh bounds remain as an A/B baseline.
 public final class TriangleMeshNode: SKNode {
     public enum BoundsMode: String, CaseIterable { case mesh, triangle }
+    public enum GroupSize: Int, CaseIterable { case one = 1, two = 2, four = 4 }
     public let boundsMode: BoundsMode
+    public let groupSize: GroupSize
     public let indices: [Int]
     public let uvs: [SIMD2<Float>]
     public private(set) var positions: [SIMD2<Float>]
@@ -18,6 +20,7 @@ public final class TriangleMeshNode: SKNode {
     public private(set) var submittedQuadArea: Double = 0
     public private(set) var coveredTriangleArea: Double = 0
 
+    private let grouped: TriangleGroups?
     private let sprites: [SKSpriteNode]
     private let values: [[SKAttributeValue]]
     private let attributeNames: [String]
@@ -36,20 +39,29 @@ public final class TriangleMeshNode: SKNode {
     /// It contains only immutable texture uniforms; transforms are per-node attributes.
     public final class Material {
         public let boundsMode: BoundsMode
+        public let groupSize: GroupSize
         fileprivate let shader: SKShader
         fileprivate static let names = ["a_e0", "a_e1", "a_e2", "a_uv0", "a_uv1", "a_uv2", "a_inverseArea", "a_rasterX", "a_rasterY"]
-        public init(texture: SKTexture, boundsMode: BoundsMode = .triangle) {
+        public init(texture: SKTexture, boundsMode: BoundsMode = .triangle, groupSize: GroupSize = .two) {
             self.boundsMode = boundsMode
+            self.groupSize = groupSize
             // Uniform samplers use linear filtering on the tested backend;
             // nearest sampling explicitly snaps to texel centers.
             let imageSize = texture.filteringMode == .nearest ? texture.cgImage() : nil
-            let source = TriangleMeshNode.source.replacingOccurrences(of: "MESH_POSITION", with:
+            let singleSource = TriangleMeshNode.source.replacingOccurrences(of: "MESH_POSITION", with:
                 boundsMode == .mesh ? "v_tex_coord" : "vec2(dot(a_rasterX, vec3(gl_FragCoord.xy, 1.0)), dot(a_rasterY, vec3(gl_FragCoord.xy, 1.0)))")
+            let source = groupSize == .one ? singleSource : TriangleGroups.source(size: groupSize.rawValue, boundsMode: boundsMode)
             shader = SKShader(source: source, uniforms: [
                 SKUniform(name: "u_image", texture: texture),
                 SKUniform(name: "u_pixelSize", vectorFloat2: SIMD2(Float(imageSize?.width ?? 1), Float(imageSize?.height ?? 1))),
                 SKUniform(name: "u_nearest", float: texture.filteringMode == .nearest ? 1 : 0)
             ])
+            if groupSize != .one {
+                shader.attributes = TriangleGroups.names(size: groupSize.rawValue).enumerated().map { index, name in
+                    SKAttribute(name: name, type: index < groupSize.rawValue*5 ? .vectorFloat4 : .vectorFloat3)
+                }
+                return
+            }
             shader.attributes = Self.names.prefix(boundsMode == .triangle ? 9 : 7).enumerated().map { index, name in
                 SKAttribute(name: name, type: index < 3 ? .vectorFloat4 : index < 6 ? .vectorFloat2 : index == 6 ? .float : .vectorFloat3)
             }
@@ -57,8 +69,8 @@ public final class TriangleMeshNode: SKNode {
     }
 
     public convenience init(texture: SKTexture, positions: [SIMD2<Float>], uvs: [SIMD2<Float>], indices: [Int],
-                            boundsMode: BoundsMode = .triangle) throws {
-        try self.init(material: Material(texture: texture, boundsMode: boundsMode), positions: positions, uvs: uvs, indices: indices)
+                            boundsMode: BoundsMode = .triangle, groupSize: GroupSize = .two) throws {
+        try self.init(material: Material(texture: texture, boundsMode: boundsMode, groupSize: groupSize), positions: positions, uvs: uvs, indices: indices)
     }
 
     public init(material: Material, positions: [SIMD2<Float>], uvs: [SIMD2<Float>], indices: [Int]) throws {
@@ -69,12 +81,14 @@ public final class TriangleMeshNode: SKNode {
         self.uvs = uvs
         self.indices = indices
         self.boundsMode = material.boundsMode
+        self.groupSize = material.groupSize
         normalized = positions
         lastWinding = [Bool?](repeating: nil, count: indices.count/3)
         let attributeNames = Array(Material.names.prefix(material.boundsMode == .triangle ? 9 : 7))
         self.attributeNames = attributeNames
         let shader = material.shader
-        sprites = stride(from: 0, to: indices.count, by: 3).map { _ in
+        grouped = material.groupSize == .one ? nil : TriangleGroups(shader: shader, white: Self.white, size: material.groupSize.rawValue, indices: indices, uvs: uvs)
+        sprites = stride(from: 0, to: material.groupSize == .one ? indices.count : 0, by: 3).map { _ in
             let sprite = SKSpriteNode(texture: Self.white)
             sprite.anchorPoint = .zero
             sprite.shader = shader
@@ -82,6 +96,7 @@ public final class TriangleMeshNode: SKNode {
         }
         values = sprites.map { _ in attributeNames.map { _ in SKAttributeValue() } }
         super.init()
+        if let grouped = grouped { addChild(grouped) }
         for (index, sprite) in sprites.enumerated() {
             // Preserve triangle order even with ignoresSiblingOrder enabled.
             sprite.zPosition = CGFloat(index) * 0.000001
@@ -91,6 +106,18 @@ public final class TriangleMeshNode: SKNode {
     }
 
     required init?(coder: NSCoder) { fatalError("Use init(texture:positions:uvs:indices:)") }
+
+    /// Reserve a bounded local z interval for this mesh inside a scene layer.
+    /// Must be positive and finite. Triangle order is preserved within [0, span).
+    public func setTriangleDepthSpan(_ span: CGFloat) {
+        precondition(span.isFinite && span > 0)
+        if let grouped = grouped { grouped.setDepthSpan(span) }
+        else {
+            for (index, sprite) in sprites.enumerated() {
+                sprite.zPosition = span * CGFloat(index) / CGFloat(triangleCount)
+            }
+        }
+    }
 
     public func updatePositions(_ positions: [SIMD2<Float>]) throws {
         guard positions.count == uvs.count, positions.allSatisfy(Self.finite) else { throw MeshError.invalidGeometry }
@@ -106,12 +133,19 @@ public final class TriangleMeshNode: SKNode {
         coveredTriangleArea = 0
         guard extent.x > 0, extent.y > 0 else {
             sprites.forEach { $0.isHidden = true }
+            grouped?.hideGeometry()
             return
         }
         updateRasterAttributes(minimum: minimum, extent: extent)
         for index in positions.indices { normalized[index] = (positions[index] - minimum) / extent }
         let inverse = localToPixels?.inverted() ?? .identity
         let padding = SIMD2<Float>(Float(abs(inverse.a)+abs(inverse.c)), Float(abs(inverse.b)+abs(inverse.d)))
+        if let grouped = grouped {
+            let area = grouped.update(positions: positions, normalized: normalized, minimum: minimum, maximum: maximum,
+                                      padding: padding, boundsMode: boundsMode)
+            submittedQuadArea = area.quad; coveredTriangleArea = area.triangle
+            return
+        }
         for (triangle, sprite) in sprites.enumerated() {
             let i0 = indices[triangle*3]
             var i1 = indices[triangle*3+1], i2 = indices[triangle*3+2]
@@ -168,6 +202,7 @@ public final class TriangleMeshNode: SKNode {
         guard [transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty].allSatisfy(\.isFinite),
               determinant.isFinite, abs(determinant) > 1e-12 else {
             sprites.forEach { $0.isHidden = true }
+            grouped?.hideGeometry()
             projectionWasSingular = true
             return
         }
@@ -188,6 +223,7 @@ public final class TriangleMeshNode: SKNode {
         let y = SIMD3(Float(inverse.b)/extent.y, Float(inverse.d)/extent.y, (Float(inverse.ty)-minimum.y)/extent.y)
         guard x != rasterX || y != rasterY || !rasterAttributesInitialized else { return }
         rasterX = x; rasterY = y; rasterAttributesInitialized = true
+        grouped?.setProjection(x: x, y: y)
         for (index, sprite) in sprites.enumerated() {
             values[index][7].vectorFloat3Value = x
             values[index][8].vectorFloat3Value = y

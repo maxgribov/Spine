@@ -1,0 +1,79 @@
+{
+  "depthBandsPassed" : true,
+  "frames" : [
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 0,
+      "height" : 1520,
+      "maximumChannelDifference" : 1,
+      "time" : 0,
+      "width" : 2200
+    },
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 1,
+      "height" : 1360,
+      "maximumChannelDifference" : 2,
+      "time" : 2,
+      "width" : 1800
+    },
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 2,
+      "height" : 1200,
+      "maximumChannelDifference" : 1,
+      "time" : 4,
+      "width" : 2400
+    },
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 3,
+      "height" : 1520,
+      "maximumChannelDifference" : 1,
+      "time" : 7.8499999999999996,
+      "width" : 2200
+    },
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 4,
+      "height" : 1360,
+      "maximumChannelDifference" : 1,
+      "time" : 9.8499999999999996,
+      "width" : 1800
+    },
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 5,
+      "height" : 1200,
+      "maximumChannelDifference" : 1,
+      "time" : 11.800000000000001,
+      "width" : 2400
+    },
+    {
+      "channelsDifferingOver2" : 1,
+      "channelsDifferingOver3" : 0,
+      "frame" : 6,
+      "height" : 1520,
+      "maximumChannelDifference" : 3,
+      "time" : 15.699999999999999,
+      "width" : 2200
+    },
+    {
+      "channelsDifferingOver2" : 0,
+      "channelsDifferingOver3" : 0,
+      "frame" : 7,
+      "height" : 1360,
+      "maximumChannelDifference" : 1,
+      "time" : 18,
+      "width" : 1800
+    }
+  ],
+  "sceneSwitchPreservesState" : true,
+  "treeFrontAndBehindPassed" : true
+}
