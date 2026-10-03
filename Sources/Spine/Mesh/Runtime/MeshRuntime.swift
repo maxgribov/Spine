@@ -36,6 +36,7 @@ final class MeshRuntime {
     let bones: [Bone]
     let slots: [Slot]
     let managedVisuals = SKNode()
+    private(set) var setupRenderer:MeshSetupRenderer?
     private(set) var epoch: UInt64 = 0
     private var nextExecutionID: UInt64 = 0
     private var completedExecutions: UInt64 = 0
@@ -71,6 +72,10 @@ final class MeshRuntime {
         }
         managedVisuals.name = "_spine_mesh_render"
         owner.addChild(managedVisuals)
+        if !compiled.attachments.isEmpty {
+            setupRenderer=try MeshSetupRenderer(compiled:compiled,resources:asset.rendererResources,bones:bones,slots:slots,root:managedVisuals,skin:selected)
+            activeAttachments=setupRenderer!.activeAttachments
+        }
     }
 
     var snapshot: MeshPlaybackSnapshot {
@@ -81,6 +86,9 @@ final class MeshRuntime {
 
     func action(named name: String, owner: Skeleton) throws -> SKAction {
         guard let clip = asset.compiled.clips.first(where: { $0.name == name }) else {
+            if asset.animationNames.contains(name) {
+                throw SpineRuntimeError(.unsupportedFeature,path:"/animations/"+SpineRuntimeError.pointerComponent(name),message:"Asset timeline playback is not connected yet; setup rendering is available.")
+            }
             throw SpineRuntimeError(.missingAnimation, path: "/animations/" + SpineRuntimeError.pointerComponent(name), message: "Animation not found.")
         }
         let binding = MeshActionBinding(owner: owner, epoch: epoch, clip: clip)
@@ -179,7 +187,7 @@ final class MeshRuntime {
 
     private func restoreSetup() {
         for bone in bones { bone.dropToDefaults() }
-        activeAttachments = asset.compiled.slots.map(\.attachment)
+        activeAttachments = setupRenderer?.activeAttachments ?? asset.compiled.slots.map(\.attachment)
         drawOrder = Array(asset.compiled.slots.indices)
         for slot in deform.indices {
             for component in deform[slot].indices { deform[slot][component] = 0 }
@@ -209,6 +217,12 @@ final class MeshRuntime {
         if let error = playbackError { managedVisuals.isHidden = true; throw error }
         guard context.isValid else {
             try rejectFrame(message: "Frame transform and positive integral pixel dimensions must be finite.", owner: owner)
+        }
+        do {try setupRenderer?.prepare(owner:owner,context:context)}
+        catch let error as SpineRuntimeError {
+            managedVisuals.isHidden=true
+            if frameError?.code != error.code || frameError?.path != error.path {frameError=error;owner.meshDiagnosticHandler?(error)}
+            throw error
         }
         frameError = nil; preparedContext = context
         managedVisuals.isHidden = context.isSingular

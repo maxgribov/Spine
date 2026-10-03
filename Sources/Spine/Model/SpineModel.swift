@@ -61,6 +61,7 @@ public struct SpineModel {
     let path: [PathConstraintModel]
     let events: [EventModel]
     let animations: [AnimationModel]
+    let featureIssues: [SpineFeatureIssue]
 }
 
 //MARK: - Decoding
@@ -82,6 +83,7 @@ extension SpineModel: Decodable {
     
     public init(from decoder: Decoder) throws {
         
+        featureIssues = SpineFeatureIssue.inspect(decoder)
         let container = try decoder.container(keyedBy: Keys.self)
         self.skeleton = try container.decode(SkeletonModel.self, forKey: .skeleton)
         self.bones = try container.decodeIfPresent([BoneModel].self, forKey: .bones) ?? []

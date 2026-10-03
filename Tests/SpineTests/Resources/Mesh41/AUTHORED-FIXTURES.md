@@ -1,0 +1,1 @@
+These synthetic JSON/PNG/atlas fixtures were authored for this repository. They contain no Esoteric Software runtime code or artwork. weighted-link covers six influences, linked chains and singular/reflected bones. deform-resources covers sparse/odd/empty deform keys, trim/rotation/multipage PMA, region/point/physics interop. Goblins files retain their separate original license.

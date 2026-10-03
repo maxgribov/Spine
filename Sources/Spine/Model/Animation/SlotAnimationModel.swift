@@ -11,6 +11,8 @@ struct SlotAnimationModel {
     
     let slot: String
     let timelines: [Timeline]
+    let numericTimelines: [NumericTimelineModel]
+    let meshDecodeErrors: [Error]
 }
 
 //MARK: - Types
@@ -37,6 +39,8 @@ extension SlotAnimationModel: SpineDecodableDictionary {
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
         
         var timelines = [Timeline]()
+        var numericTimelines: [NumericTimelineModel] = []
+        var meshDecodeErrors: [Error] = []
         
         for timelineKey in container.allKeys {
             
@@ -51,6 +55,20 @@ extension SlotAnimationModel: SpineDecodableDictionary {
                 }
                 timelines.append(.attachment(keyframes))
                 
+            case .rgb, .alpha:
+                do {
+                    let frames=try container.decode([SlotNumericKeyframeModel].self,forKey:timelineKey)
+                    let keys=try frames.map { frame -> NumericTimelineModel.Key in
+                        let values:[Float]
+                        if timelineKey == .alpha {values=[frame.value ?? 1]}
+                        else {
+                            guard let color=frame.color else {throw DecodingError.keyNotFound(SlotNumericKeyframeModel.Keys.color,.init(codingPath:container.codingPath+[timelineKey],debugDescription:"Missing RGB color."))}
+                            values=[Float(color.red),Float(color.green),Float(color.blue)]
+                        }
+                        return .init(time:frame.time,values:values,curves:frame.curves)
+                    }
+                    numericTimelines.append(.init(name:timelineKey.rawValue,keys:keys))
+                } catch {meshDecodeErrors.append(error)}
             case .rgba:
                 var keyframesContainer = try container.nestedUnkeyedContainer(forKey: .rgba)
                 var keyframes = [SlotKeyframeColorModel]()
@@ -59,6 +77,10 @@ extension SlotAnimationModel: SpineDecodableDictionary {
                     let keyframe = try keyframesContainer.decode(SlotKeyframeColorModel.self)
                     keyframes.append(keyframe)
                 }
+                numericTimelines.append(.init(name:"rgba",keys:keyframes.map {
+                    .init(time:$0.channels.first?.time ?? 0,values:$0.channels.map {Float($0.value)},curves:$0.channels.map(\.curve))
+                }))
+                meshDecodeErrors.append(contentsOf:keyframes.compactMap(\.meshCurveError))
                 let channelKeyframes = keyframes.map { $0.channels }.transposed()
                 var channelKeyframesAdjusted = [[SlotKeyframeColorModel.Channel]]()
                 for column in channelKeyframes {
@@ -87,6 +109,8 @@ extension SlotAnimationModel: SpineDecodableDictionary {
         
         self.slot = name
         self.timelines = timelines
+        self.numericTimelines = numericTimelines
+        self.meshDecodeErrors = meshDecodeErrors
     }
 }
 

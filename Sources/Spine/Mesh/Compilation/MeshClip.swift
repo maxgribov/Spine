@@ -109,11 +109,27 @@ struct MeshClip {
     }
 }
 
-/// Internal compiled input. Only tests construct this before the phase-3 compiler exists.
+/// Immutable source-independent setup data; lifecycle tests may supply a minimal compiled fixture.
 struct CompiledMeshSkeleton {
     let bones: [BoneModel]
     let slots: [SlotModel]
     let deformComponentCounts: [Int]
     let clips: [MeshClip]
     let skinNames: [String]
+    let attachments:[CompiledAttachment]
+    let skinAttachments:[String:[MeshAttachmentKey:Int]]
+    let sourceAnimationNames:[String]
+    let sourceAnimations:[AnimationModel]
+    let boneParents:[Int?]
+    let slotBones:[Int]
+
+    init(bones:[BoneModel],slots:[SlotModel],deformComponentCounts:[Int],clips:[MeshClip],skinNames:[String],
+         attachments:[CompiledAttachment]=[],skinAttachments:[String:[MeshAttachmentKey:Int]]=[:],
+         sourceAnimations:[AnimationModel]=[]) {
+        self.bones=bones;self.slots=slots;self.deformComponentCounts=deformComponentCounts;self.clips=clips;self.skinNames=skinNames
+        self.attachments=attachments;self.skinAttachments=skinAttachments;self.sourceAnimations=sourceAnimations
+        sourceAnimationNames=sourceAnimations.isEmpty ? clips.map(\.name):sourceAnimations.map(\.name).sorted()
+        boneParents=bones.map {bone in bone.parent.flatMap {name in bones.firstIndex {$0.name==name}}}
+        slotBones=slots.map {slot in bones.firstIndex {$0.name==slot.bone} ?? 0}
+    }
 }

@@ -1,0 +1,279 @@
+{
+  "skeleton": {
+    "hash": "authored-phase3",
+    "spine": "4.1.17",
+    "x": -100,
+    "y": -100,
+    "width": 200,
+    "height": 200
+  },
+  "bones": [
+    {
+      "name": "root",
+      "x": 2,
+      "y": 3,
+      "scaleX": -1
+    },
+    {
+      "name": "b1",
+      "parent": "root",
+      "x": 10,
+      "rotation": 20,
+      "scaleX": 2,
+      "scaleY": 0.5
+    },
+    {
+      "name": "b2",
+      "parent": "b1",
+      "y": 8,
+      "rotation": -35
+    },
+    {
+      "name": "b3",
+      "parent": "root",
+      "x": -4,
+      "y": 6,
+      "scaleX": 0
+    },
+    {
+      "name": "b4",
+      "parent": "root",
+      "x": 4,
+      "y": 4
+    },
+    {
+      "name": "b5",
+      "parent": "b4",
+      "x": 7,
+      "y": 3
+    }
+  ],
+  "slots": [
+    {
+      "name": "slot",
+      "bone": "b1",
+      "attachment": "chain"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "slot": {
+          "base": {
+            "type": "mesh",
+            "path": "plain",
+            "uvs": [
+              0.16666666666666666,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.3571428571428571,
+              0.16666666666666666,
+              0.3571428571428571
+            ],
+            "vertices": [
+              6,
+              0,
+              -10,
+              -10,
+              0.1,
+              1,
+              -8,
+              -11,
+              0.2,
+              2,
+              -6,
+              -12,
+              0.3,
+              3,
+              -4,
+              -13,
+              0.15,
+              4,
+              -2,
+              -14,
+              0.1,
+              5,
+              0,
+              -15,
+              0.25,
+              6,
+              0,
+              20,
+              -10,
+              0.1,
+              1,
+              22,
+              -11,
+              0.2,
+              2,
+              24,
+              -12,
+              0.3,
+              3,
+              26,
+              -13,
+              0.15,
+              4,
+              28,
+              -14,
+              0.1,
+              5,
+              30,
+              -15,
+              0.25,
+              6,
+              0,
+              20,
+              20,
+              0.1,
+              1,
+              22,
+              19,
+              0.2,
+              2,
+              24,
+              18,
+              0.3,
+              3,
+              26,
+              17,
+              0.15,
+              4,
+              28,
+              16,
+              0.1,
+              5,
+              30,
+              15,
+              0.25,
+              6,
+              0,
+              -10,
+              20,
+              0.1,
+              1,
+              -8,
+              19,
+              0.2,
+              2,
+              -6,
+              18,
+              0.3,
+              3,
+              -4,
+              17,
+              0.15,
+              4,
+              -2,
+              16,
+              0.1,
+              5,
+              0,
+              15,
+              0.25
+            ],
+            "triangles": [
+              0,
+              1,
+              2,
+              0,
+              2,
+              3,
+              0,
+              2,
+              1
+            ]
+          },
+          "middle": {
+            "type": "linkedmesh",
+            "parent": "base",
+            "timelines": false,
+            "path": "plain"
+          },
+          "chain": {
+            "type": "linkedmesh",
+            "parent": "middle",
+            "path": "rotated"
+          },
+          "independent": {
+            "type": "linkedmesh",
+            "parent": "chain",
+            "timelines": false,
+            "path": "pma-plain"
+          }
+        }
+      }
+    },
+    {
+      "name": "other",
+      "attachments": {
+        "slot": {
+          "chain": {
+            "type": "linkedmesh",
+            "parent": "base",
+            "path": "pma-rotated"
+          }
+        }
+      }
+    }
+  ],
+  "animations": {
+    "proof": {
+      "attachments": {
+        "default": {
+          "slot": {
+            "middle": {
+              "deform": [
+                {
+                  "offset": 1,
+                  "vertices": [
+                    2,
+                    3,
+                    4
+                  ],
+                  "curve": [
+                    0.1,
+                    0,
+                    0.4,
+                    1
+                  ]
+                },
+                {
+                  "time": 0.5,
+                  "offset": 3,
+                  "vertices": [
+                    -2,
+                    1
+                  ]
+                },
+                {
+                  "time": 1
+                }
+              ]
+            }
+          }
+        }
+      },
+      "bones": {
+        "root": {
+          "scale": [
+            {},
+            {
+              "time": 0.5,
+              "x": 0,
+              "y": 1
+            },
+            {
+              "time": 1,
+              "x": -1,
+              "y": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

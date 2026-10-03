@@ -17,8 +17,8 @@ public extension Skeleton {
         set { meshDiagnosticCallback = newValue }
     }
 
-    /// Mesh geometry/attachment lookup is connected in the following integration phase.
-    func meshAttachmentNode(named: String, inSlot: String) -> SKNode? { nil }
+    /// Inspect-only mesh renderer node from the selected/default skin.
+    func meshAttachmentNode(named: String, inSlot: String) -> SKNode? { meshRuntime?.setupRenderer?.meshNode(named:named,slot:inSlot) }
 
     /// Invalidate all previously obtained clip actions. Remove external action containers separately.
     func stopMeshAnimation(resetToSetupPose: Bool = false) {
@@ -32,7 +32,23 @@ public extension Skeleton {
         guard scene != nil, scene === view.scene else {
             try runtime.rejectFrame(message: "The Skeleton must belong to the SKView's current scene.", owner: self)
         }
-        throw SpineRuntimeError(.unsupportedFeature, path: "/runtime/frame", message: "Native framebuffer mapping is not implemented in the lifecycle shell. Use an explicit frame context.")
+        let scene=self.scene!
+        #if os(macOS)
+        let scale=view.window?.backingScaleFactor ?? view.convertToBacking(CGSize(width:1,height:1)).width
+        #else
+        let scale=view.contentScaleFactor
+        #endif
+        func pixel(_ point:CGPoint)->CGPoint {
+            let p=scene.convertPoint(toView:convert(point,to:scene))
+            #if os(macOS)
+            return CGPoint(x:(p.x-view.bounds.minX)*scale,y:(view.isFlipped ? p.y-view.bounds.minY:view.bounds.maxY-p.y)*scale)
+            #else
+            return CGPoint(x:(p.x-view.bounds.minX)*scale,y:(p.y-view.bounds.minY)*scale)
+            #endif
+        }
+        let origin=pixel(.zero),x=pixel(CGPoint(x:1024,y:0)),y=pixel(CGPoint(x:0,y:1024))
+        let transform=CGAffineTransform(a:(x.x-origin.x)/1024,b:(x.y-origin.y)/1024,c:(y.x-origin.x)/1024,d:(y.y-origin.y)/1024,tx:origin.x,ty:origin.y)
+        try runtime.prepare(SpineMeshFrameContext(skeletonToPixels:transform,pixelSize:CGSize(width:(view.bounds.width*scale).rounded(),height:(view.bounds.height*scale).rounded())),owner:self)
     }
     #endif
 

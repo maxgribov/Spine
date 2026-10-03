@@ -10,6 +10,7 @@ import Foundation
 struct SlotKeyframeColorModel {
 
     var channels: [Channel]
+    var meshCurveError: Error?
 
     init(channels: [Channel]) {
         
@@ -70,6 +71,7 @@ extension SlotKeyframeColorModel: Decodable {
                 
                 let channels = color.channels.map{ SlotKeyframeColorModel.Channel(time: time, value: $0, curve: .linear) }
                 self.init(channels: channels)
+                if container.contains(.curve) { self.meshCurveError = error }
             }
         }
     }

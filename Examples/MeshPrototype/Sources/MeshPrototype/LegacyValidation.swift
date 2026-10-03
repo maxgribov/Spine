@@ -126,7 +126,7 @@ private func compareLegacyJSON(_ expected: Any, _ actual: Any, path: String = ""
 
 /// Resolve symlinks before any output writes, including recording/bootstrap modes.
 /// Goldens and their descendants/ancestors are never an output staging directory.
-private func validateLegacyOutput(_ output: URL, baseline: URL) throws {
+func validateLegacyOutput(_ output: URL, baseline: URL) throws {
     // URL.resolvingSymlinksInPath alone leaves a nonexistent leaf unresolved.
     // Resolve its nearest existing ancestor first, then append the missing suffix.
     var ancestor = output.standardizedFileURL

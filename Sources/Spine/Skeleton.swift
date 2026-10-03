@@ -147,7 +147,7 @@ public class Skeleton: SKNode {
 
     //MARK: - Private
     
-    var slots: [Slot] { self["//\(Slot.prefix)*"].compactMap({ $0 as? Slot }) }
+    var slots: [Slot] { meshRuntime?.slots ?? self["//\(Slot.prefix)*"].compactMap({ $0 as? Slot }) }
     var skins: [Skin]
     var animations: [Animation]
     var meshRuntime: MeshRuntime?
@@ -292,7 +292,8 @@ extension Skeleton: Defaultable {
                 child.removeAllActions()
             }
             
-            if let defaultableChild = child as? Defaultable {
+            // MeshRuntime restores its own setup state; legacy slot reset uses a different depth contract.
+            if meshRuntime == nil, let defaultableChild = child as? Defaultable {
                 
                 defaultableChild.dropToDefaults()
             }

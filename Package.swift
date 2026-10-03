@@ -16,6 +16,7 @@ let package = Package(
                     resources: [
                         .process("Resources/spineboy-ess.json"),
                         .process("Resources/Compatibility"),
+                        .copy("Resources/Mesh41"),
                         .process("Resources/skeleton.json"),
                         .process("Resources/bones.json"),
                         .process("Resources/slots.json"),

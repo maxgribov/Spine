@@ -1,0 +1,169 @@
+{
+  "skeleton": {
+    "hash": "authored-phase3",
+    "spine": "4.1.17",
+    "x": -100,
+    "y": -100,
+    "width": 200,
+    "height": 200
+  },
+  "bones": [
+    {
+      "name": "root"
+    },
+    {
+      "name": "child",
+      "parent": "root",
+      "x": 20,
+      "y": 10,
+      "rotation": 25,
+      "scaleX": 1.3,
+      "scaleY": 0.7
+    }
+  ],
+  "slots": [
+    {
+      "name": "mesh",
+      "bone": "child",
+      "attachment": "mesh",
+      "color": "80ff80c0"
+    },
+    {
+      "name": "region",
+      "bone": "child",
+      "attachment": "region"
+    },
+    {
+      "name": "marker",
+      "bone": "child",
+      "attachment": "point"
+    },
+    {
+      "name": "box",
+      "bone": "root",
+      "attachment": "box"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "mesh": {
+          "mesh": {
+            "type": "mesh",
+            "path": "rotated",
+            "uvs": [
+              0.16666666666666666,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.3571428571428571,
+              0.16666666666666666,
+              0.3571428571428571
+            ],
+            "triangles": [
+              0,
+              1,
+              2,
+              0,
+              2,
+              3
+            ],
+            "vertices": [
+              -32,
+              -24,
+              32,
+              -24,
+              32,
+              24,
+              -32,
+              24
+            ],
+            "color": "ff808080"
+          }
+        },
+        "region": {
+          "region": {
+            "path": "pma-plain",
+            "width": 96,
+            "height": 112,
+            "x": 80,
+            "rotation": -15,
+            "scaleX": -1
+          }
+        },
+        "marker": {
+          "point": {
+            "type": "point",
+            "x": 12,
+            "y": 15,
+            "rotation": 30
+          }
+        },
+        "box": {
+          "box": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              -5,
+              -5,
+              5,
+              -5,
+              5,
+              5,
+              -5,
+              5
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "animations": {
+    "proof": {
+      "attachments": {
+        "default": {
+          "mesh": {
+            "mesh": {
+              "deform": [
+                {},
+                {
+                  "time": 0.5,
+                  "offset": 1,
+                  "vertices": [
+                    3,
+                    -2,
+                    4
+                  ],
+                  "curve": [
+                    0.6,
+                    0,
+                    0.9,
+                    1
+                  ]
+                },
+                {
+                  "time": 1
+                }
+              ]
+            }
+          }
+        }
+      },
+      "slots": {
+        "mesh": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 1,
+              "color": "ff808080"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

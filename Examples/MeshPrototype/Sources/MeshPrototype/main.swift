@@ -222,6 +222,13 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
     print("PASS: GPU pixel checks and Goblins animation smoke check. Artifacts: \(output.path)")
 }
 
+if let index=CommandLine.arguments.firstIndex(of:"--verify-library-mesh") {
+    do {
+        guard CommandLine.arguments.count>index+1 else {throw PrototypeError("Provide mesh validation output directory")}
+        try verifyLibraryMesh(output:URL(fileURLWithPath:CommandLine.arguments[index+1]));exit(0)
+    } catch {fputs("Library mesh validation failed: \(error)\n",stderr);exit(1)}
+}
+
 if let index = CommandLine.arguments.firstIndex(of: "--verify-library-legacy") ?? CommandLine.arguments.firstIndex(of: "--record-library-legacy-baseline") ?? CommandLine.arguments.firstIndex(of: "--benchmark-library-legacy") ?? CommandLine.arguments.firstIndex(of: "--record-library-legacy-benchmark") {
     _ = NSApplication.shared
     do {

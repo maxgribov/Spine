@@ -1,0 +1,23 @@
+authored-straight.png
+size: 32, 32
+filter: Nearest, Nearest
+pma: false
+plain
+bounds: 2, 3, 8, 6
+offsets: 2, 3, 12, 14
+rotated
+bounds: 16, 3, 8, 6
+offsets: 2, 3, 12, 14
+rotate: 90
+
+authored-pma.png
+size: 32, 32
+filter: Nearest, Nearest
+pma: true
+pma-plain
+bounds: 2, 3, 8, 6
+offsets: 2, 3, 12, 14
+pma-rotated
+bounds: 16, 3, 8, 6
+offsets: 2, 3, 12, 14
+rotate: true

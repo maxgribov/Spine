@@ -34,6 +34,10 @@ git diff --cached --check
 `git diff --check` covers tracked changes, not untracked files. Inspect newly
 added files as well. There is no configured standalone Swift lint recipe;
 compiler diagnostics, tests and whitespace checks are reported separately.
+For this inspection, preserve verbatim imported fixtures/license files and their
+hashes. A missing final newline in imported data or generated JSON is formatting
+information, not a build failure; validate generated JSON by parsing it. Trailing
+whitespace in authored source/docs remains a reported defect.
 
 Compile the library for all existing deployment minima, using separate scratch
 directories. These are compile checks, not simulator or physical-device tests.
@@ -85,8 +89,28 @@ reported for what they test, not as a replacement for that UI workflow.
 
 ## Result
 
+For phase 3, the setup-only mesh CLI and external oracle are now available.
+After the common checks, run the following from the repository root (using the
+`health_output` directory created above). Install the pinned oracle outside the
+repository; it is validation tooling, not a package dependency.
+
+```sh
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-mesh "$health_output/mesh"
+npm install --prefix "$health_output/oracle" --no-save @esotericsoftware/spine-core@4.1.56
+SPINE_CORE_4156_ENTRY="$health_output/oracle/node_modules/@esotericsoftware/spine-core/dist/index.js"
+node Examples/MeshPrototype/Scripts/compare-library-setup.mjs "$SPINE_CORE_4156_ENTRY" "$health_output/mesh"
+```
+
+Expect nine setup GPU comparisons and five snapshots across three fixtures.
+This is not the phase 4 animation timestamp grid. Follow the separate
+[physical iOS host instructions](../../../Examples/MeshDeviceProbe/README.md)
+for the mandatory phase 3 device subset. Compare every recorded production/host
+source hash with the current tree before accepting a reused device capture;
+old captures with source deltas are historical evidence only.
+
 Write a JSON report alongside this document containing phase/spec version,
 source revision and dirty scope, environment, command/exit code/result for each
 check, reused-run provenance, warnings, deferred gates and a phase-scoped status.
 Do not label the whole mesh feature complete from a phase 2 health pass.
 The first execution is recorded in [phase2-health.json](phase2-health.json).
+Setup integration checks are recorded in [phase3-health.json](phase3-health.json).
