@@ -222,6 +222,17 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
     print("PASS: GPU pixel checks and Goblins animation smoke check. Artifacts: \(output.path)")
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--verify-library-legacy") ?? CommandLine.arguments.firstIndex(of: "--record-library-legacy-baseline") ?? CommandLine.arguments.firstIndex(of: "--benchmark-library-legacy") ?? CommandLine.arguments.firstIndex(of: "--record-library-legacy-benchmark") {
+    _ = NSApplication.shared
+    do {
+        guard CommandLine.arguments.count > index+1 else { throw PrototypeError("Provide legacy validation output directory") }
+        let output = URL(fileURLWithPath: CommandLine.arguments[index+1])
+        if CommandLine.arguments.contains("--benchmark-library-legacy") || CommandLine.arguments.contains("--record-library-legacy-benchmark") { try benchmarkLibraryLegacy(output: output, record: CommandLine.arguments.contains("--record-library-legacy-benchmark")) }
+        else if try !runLegacyBundleHostIfNeeded(output: output) { try verifyLibraryLegacy(output: output, record: CommandLine.arguments.contains("--record-library-legacy-baseline")) }
+        exit(0)
+    } catch { fputs("Legacy validation failed: \(error)\n", stderr); exit(1) }
+}
+
 if let index = CommandLine.arguments.firstIndex(of: "--compare-benchmarks") {
     do {
         guard CommandLine.arguments.count > index+2 else { throw PrototypeError("Provide reference and candidate benchmark directories") }

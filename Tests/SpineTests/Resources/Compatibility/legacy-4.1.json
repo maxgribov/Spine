@@ -1,0 +1,264 @@
+{
+  "skeleton": {
+    "hash": "authored-legacy-characterization",
+    "spine": "4.1.17",
+    "x": 0,
+    "y": 0,
+    "width": 160,
+    "height": 160
+  },
+  "bones": [
+    {
+      "name": "root"
+    },
+    {
+      "name": "arm",
+      "parent": "root",
+      "x": 8,
+      "y": 12,
+      "rotation": 10
+    }
+  ],
+  "slots": [
+    {
+      "name": "body",
+      "bone": "root",
+      "attachment": "body"
+    },
+    {
+      "name": "hand",
+      "bone": "arm",
+      "attachment": "open"
+    },
+    {
+      "name": "hitbox",
+      "bone": "root",
+      "attachment": "box"
+    },
+    {
+      "name": "marker",
+      "bone": "arm",
+      "attachment": "point"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "body": {
+          "body": {
+            "width": 64,
+            "height": 80,
+            "path": "body"
+          }
+        },
+        "hand": {
+          "open": {
+            "width": 40,
+            "height": 18,
+            "x": 30,
+            "path": "open"
+          },
+          "closed": {
+            "width": 18,
+            "height": 25,
+            "x": 30,
+            "path": "closed"
+          }
+        },
+        "hitbox": {
+          "box": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              -20,
+              -20,
+              20,
+              -20,
+              20,
+              20,
+              -20,
+              20
+            ]
+          }
+        },
+        "marker": {
+          "point": {
+            "type": "point",
+            "x": 40,
+            "y": 12,
+            "rotation": 30
+          }
+        }
+      }
+    },
+    {
+      "name": "alternate",
+      "attachments": {
+        "body": {
+          "body": {
+            "width": 44.8,
+            "height": 56.0,
+            "path": "body"
+          }
+        },
+        "hand": {
+          "open": {
+            "width": 40,
+            "height": 18,
+            "x": 30,
+            "path": "open"
+          },
+          "closed": {
+            "width": 18,
+            "height": 25,
+            "x": 30,
+            "path": "closed"
+          }
+        },
+        "hitbox": {
+          "box": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              -20,
+              -20,
+              20,
+              -20,
+              20,
+              20,
+              -20,
+              20
+            ]
+          }
+        },
+        "marker": {
+          "point": {
+            "type": "point",
+            "x": 40,
+            "y": 12,
+            "rotation": 30
+          }
+        }
+      }
+    }
+  ],
+  "events": {
+    "step": {
+      "int": 1
+    }
+  },
+  "animations": {
+    "motion": {
+      "bones": {
+        "arm": {
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.5,
+              "value": 45
+            },
+            {
+              "time": 1,
+              "value": -15
+            }
+          ],
+          "translate": [
+            {},
+            {
+              "time": 0.5,
+              "x": 18,
+              "y": 10
+            },
+            {
+              "time": 1,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "scale": [
+            {},
+            {
+              "time": 0.5,
+              "x": 1.2,
+              "y": 0.8
+            },
+            {
+              "time": 1,
+              "x": 1,
+              "y": 1
+            }
+          ]
+        }
+      },
+      "slots": {
+        "body": {
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.5,
+              "color": "ff804080"
+            },
+            {
+              "time": 1,
+              "color": "ffffffff"
+            }
+          ]
+        },
+        "hand": {
+          "attachment": [
+            {
+              "name": "open"
+            },
+            {
+              "time": 0.4,
+              "name": "closed"
+            },
+            {
+              "time": 0.8
+            },
+            {
+              "time": 1,
+              "name": "open"
+            }
+          ]
+        }
+      },
+      "events": [
+        {
+          "name": "step",
+          "time": 0,
+          "int": 1
+        },
+        {
+          "name": "step",
+          "time": 0.5,
+          "int": 2
+        },
+        {
+          "name": "step",
+          "time": 1,
+          "int": 3
+        }
+      ],
+      "drawOrder": [
+        {
+          "time": 0.5,
+          "offsets": [
+            {
+              "slot": "body",
+              "offset": 1
+            }
+          ]
+        },
+        {
+          "time": 1
+        }
+      ]
+    }
+  }
+}

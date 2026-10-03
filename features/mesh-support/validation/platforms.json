@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "stage": "phase1 baseline",
+  "sdkVersion": "26.5",
+  "builds": [
+    {
+      "platform": "macOS",
+      "sdk": "macosx",
+      "triple": "x86_64-apple-macosx10.15",
+      "status": "passed",
+      "scope": "Spine library target compile; not device execution",
+      "command": "swift build --target Spine --triple x86_64-apple-macosx10.15 --sdk \"$(xcrun --sdk macosx --show-sdk-path)\" --scratch-path /tmp/spine-phase1-macos-build"
+    },
+    {
+      "platform": "iOS",
+      "sdk": "iphoneos",
+      "triple": "arm64-apple-ios13.0",
+      "status": "passed",
+      "scope": "Spine library target compile; not device execution",
+      "command": "swift build --target Spine --triple arm64-apple-ios13.0 --sdk \"$(xcrun --sdk iphoneos --show-sdk-path)\" --scratch-path /tmp/spine-phase1-ios-build"
+    },
+    {
+      "platform": "tvOS",
+      "sdk": "appletvos",
+      "triple": "arm64-apple-tvos13.0",
+      "status": "passed",
+      "scope": "Spine library target compile; not device execution",
+      "command": "swift build --target Spine --triple arm64-apple-tvos13.0 --sdk \"$(xcrun --sdk appletvos --show-sdk-path)\" --scratch-path /tmp/spine-phase1-tvos-build"
+    },
+    {
+      "platform": "watchOS",
+      "sdk": "watchos",
+      "triple": "arm64_32-apple-watchos6.0",
+      "status": "passed",
+      "scope": "Spine library target compile; not device execution",
+      "command": "swift build --target Spine --triple arm64_32-apple-watchos6.0 --sdk \"$(xcrun --sdk watchos --show-sdk-path)\" --scratch-path /tmp/spine-phase1-watchos-build"
+    }
+  ],
+  "iosHardware": {
+    "model": "iPhone Air",
+    "productType": "iPhone18,4",
+    "osVersion": "26.6.2",
+    "osBuild": "23G90",
+    "reality": "physical",
+    "connection": "connected",
+    "developerMode": "enabled",
+    "ddiServicesAvailable": true,
+    "discoveryCommand": "xcrun devicectl list devices; xcrun devicectl device info details --device <connected-device>",
+    "executionStatus": "not run",
+    "releaseGate": "pending real-device parity/lifecycle/render/performance; discovery is not a pass"
+  },
+  "meshUnsupportedPlatformGate": "not implemented; phase3"
+}

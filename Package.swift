@@ -15,6 +15,7 @@ let package = Package(
                     dependencies: ["Spine"],
                     resources: [
                         .process("Resources/spineboy-ess.json"),
+                        .process("Resources/Compatibility"),
                         .process("Resources/skeleton.json"),
                         .process("Resources/bones.json"),
                         .process("Resources/slots.json"),
