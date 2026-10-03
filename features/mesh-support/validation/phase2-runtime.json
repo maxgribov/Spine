@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-03",
+  "specVersion": 5,
+  "scope": "Phase 2 only: compiled fixture / SKAction lifecycle / frame-context state",
+  "implementation": "weak-owner immutable action binding; .run begin/end; customAction elapsed-only sample; execution/epoch/cursors on Skeleton",
+  "rootSuite": {
+    "command": "swift test",
+    "passed": 69,
+    "failed": 0,
+    "log": "/tmp/spine-phase2-testing-suite.log",
+    "completedAt": "2026-10-03T14:43:52.587Z",
+    "executor": "testing_machine"
+  },
+  "prototypeSuite": {
+    "command": "swift test --package-path Examples/MeshPrototype",
+    "passed": 10,
+    "failed": 0
+  },
+  "nativeSKView": {
+    "platform": "macOS 26.6, Apple M1 Max",
+    "suite": "NativeActionLifecycleTests",
+    "cases": 2,
+    "initialSpeed": 0.5,
+    "transitions": [
+      "pause",
+      "resume with speed 0",
+      "speed 1.5"
+    ],
+    "speedSurfaces": [
+      "SKNode.speed",
+      "outer SKAction container.speed"
+    ],
+    "repeatCount": 2,
+    "expectedBeginCount": 2,
+    "expectedEndCount": 2,
+    "expectedEvents": [
+      0,
+      1,
+      0,
+      1
+    ],
+    "leaseReleased": true,
+    "status": "passed",
+    "note": "Real SKView scene updates; not fixed-clock SKRenderer or manual runtime callbacks"
+  },
+  "legacyComparison": {
+    "command": "swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-legacy /tmp/spine-testing-machine-phase2",
+    "scenarios": 10,
+    "images": 70,
+    "numericTolerance": 1e-06,
+    "maximumRGBAChannelDifference": 0,
+    "goldensUpdated": false,
+    "evidence": "phase2-compatibility.json"
+  },
+  "specTests": {
+    "8": [
+      "ActionLifecycleTests.swift",
+      "NativeActionLifecycleTests.swift"
+    ],
+    "9": [
+      "ActionConflictTests.swift"
+    ],
+    "10": [
+      "ActionCancellationTests.swift"
+    ],
+    "11": [
+      "TimelineTests.swift"
+    ],
+    "19-state": [
+      "FrameContextTests.swift"
+    ],
+    "1-3-baseline": [
+      "Existing Compatibility tests and legacy runner"
+    ]
+  },
+  "deferred": {
+    "phase3": [
+      "JSON decoder mesh schema extensions",
+      "asset compilation",
+      "texture/atlas validation",
+      "geometry/rendering",
+      "real iOS subset"
+    ],
+    "phase4": [
+      "real attachment/skin timelines",
+      "native frame mapping and full GPU frame-context tests"
+    ]
+  },
+  "publicShells": "Data/model MeshAsset and texture/atlas constructors explicitly throw unsupportedFeature pending phase3 (unsupportedPlatform where applicable); matching-view native prepare explicitly throws unsupportedFeature pending native mapping; custom context state is implemented. No public shell pretends to load or render meshes.",
+  "platformBuilds": {
+    "ios": "passed",
+    "tvos": "passed",
+    "watchos": "passed",
+    "macos": "passed"
+  },
+  "reviewIteration": 2,
+  "frameErrorRegression": {
+    "test": "FrameContextTests.testNativeWrongViewRemainsHiddenThroughStopAndResetUntilValidPrepare",
+    "status": "passed",
+    "checks": [
+      "wrong-view diagnostic once per incident",
+      "hidden persists through stop and reset",
+      "successful prepare clears incident",
+      "new failure emits a new diagnostic"
+    ]
+  },
+  "healthReport": "phase2-health.json",
+  "initialEventCancellationRegression": {
+    "test": "ActionCancellationTests.testInitialEventResetInvalidatesRemainingCallbacksAndAllowsFreshExecution",
+    "status": "passed",
+    "checks": [
+      "reset during t=0 event stops remaining callbacks",
+      "stale action copies stay inert",
+      "new action reacquisition succeeds"
+    ]
+  }
+}

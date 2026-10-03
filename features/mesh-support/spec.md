@@ -1,13 +1,13 @@
 ---
 date: 2026-10-03
 model: GPT-6
-version: 4
+version: 5
 description: "Spec: opt-in Spine 4.1 meshes в SpriteKit с неизменным legacy API и единым загрузчиком JSON 4.1"
 ---
 
 # Spec: интеграция Spine meshes в библиотеку
 
-Реализует [ADR](adr.md). Существующие ESS-анимации 4.1 работают без изменений клиентского кода. Изменения v4: уточнены порядок последнего prepare и поэтапные validation gates. Сохраняется уточнение v3: текущая библиотека и целевые fixtures уже используют 4.1; смена формата и breaking release не планируются. Единственный существующий decoder дополняется mesh-полями 4.1, без второго загрузчика и без нового глобального version gate. Новая production mesh-реализация ещё отсутствует; прототип остаётся эталоном.
+Реализует [ADR](adr.md). Существующие ESS-анимации 4.1 работают без изменений клиентского кода. Changes from v4: receiver mesh-aware clip-action обязан быть создавшим его Skeleton; чужой receiver исключён из гарантий, границы execution используют SKAction.run, а pause/speed проверяются в native SKView. [Основание принятого уточнения](validation/phase2-action-investigation.md). Сохраняются порядок последнего prepare и поэтапные validation gates v4. Текущая библиотека и fixtures уже используют 4.1; смена формата, второй загрузчик, глобальный version gate и breaking release не планируются. Production-интеграция meshes ещё не завершена; прототип остаётся эталоном.
 
 Проверка формата: README уже указывает 4.1+, оба ESS/Pro fixtures — 4.1.17. Между официальными 4.0 и 4.1 подтверждены изменения deform hierarchy и linked inheritance flag; текущие mesh-модели остались частично на старой форме. Отсутствующие deform vertices разрешены в обеих версиях. [Аудит с pinned sources](validation/json-format-audit.json).
 
@@ -21,6 +21,7 @@ description: "Spec: opt-in Spine 4.1 meshes в SpriteKit с неизменным
 - **Mesh-aware** — Skeleton, созданный только через новый `init(meshAsset:skin:)`.
 - **Clip** — одна именованная Spine-анимация; обычный SKAction перемещения skeleton не является вторым clip.
 - **Execution** — одно выполнение clip-action; repeat создаёт последовательные executions одного действия.
+- **Owner** — Skeleton, создавший clip-action; обязательный receiver каждого запуска этого действия и его copies/containers.
 - **Epoch** — поколение clip-actions экземпляра skeleton; остановка инвалидирует действия предыдущего поколения.
 - **Canonical texture** — отдельная полная SKTexture с premultiplied RGBA; не скрытый subtexture внутреннего атласа SpriteKit.
 - **Frame context** — преобразование из локальных координат skeleton в реальные fragment coordinates целевого framebuffer.
@@ -69,6 +70,8 @@ public extension Skeleton {
     func prepareMeshes(for context: SpineMeshFrameContext) throws
 }
 // action(animation:), apply(skin:) и eventTriggered остаются точками входа и в новом режиме.
+// Precondition: mesh clip-action и его copies/containers запускаются только на создавшем их Skeleton.
+// Для другого Skeleton необходимо вызвать его собственный action(animation:).
 ```
 
 ### 3. Ресурсы — `Sources/Spine/Mesh/Resources/`
@@ -111,7 +114,8 @@ public struct SpineRuntimeError: Error, LocalizedError {
         case unsupportedPlatform, unsupportedVersion, unsupportedFeature
         case invalidData, invalidGeometry, invalidTimeline, linkedMeshCycle, missingAttachment
         case missingTexture, invalidTextureRegion, missingSkin, missingAnimation
-        case concurrentClip, wrongSkeleton, invalidRenderContext, mutatedNodeContract
+        case concurrentClip, invalidRenderContext, mutatedNodeContract
+        case wrongSkeleton // reserved; наличие case не обещает проверки чужого receiver
     }
     public let code: Code
     public let path: String            // JSON Pointer; node/slot path для runtime ошибок
@@ -127,6 +131,7 @@ let metalContext = SpineMeshFrameContext(
 let asset = try SpineMeshAsset(json: jsonData, textures: textureProvider)
 let character = try Skeleton(meshAsset: asset, skin: "goblin")
 scene.addChild(character)
+// Action получает и запускает один и тот же character (обязательное предусловие).
 character.run(.repeatForever(try character.action(animation: "walk")), withKey: "walk")
 // В SKScene.didFinishUpdate(), после собственных правок костей:
 try character.prepareMeshes(in: view)
@@ -150,10 +155,10 @@ character.removeAction(forKey: "walk")
 | Missing texture/page | missingTexture | `/textures/<escaped-name>` |
 | Corrupt PNG/metadata/provider error | invalidTextureRegion | `/textures/<escaped-name>`; message содержит исходную причину |
 | Missing skin/animation | missingSkin / missingAnimation | `/skins/<name>` или `/animations/<name>` |
-| Async conflict / wrong receiver | concurrentClip / wrongSkeleton | `/runtime/animations/<name>` |
+| Async conflict на owner | concurrentClip | `/runtime/animations/<name>` |
 | Bad frame context / mutated nodes | invalidRenderContext / mutatedNodeContract | `/runtime/frame` или `/runtime/nodes/<name>` |
 
-Во всех path действует JSON Pointer escaping: `~` → `~0`, `/` → `~1`. Runtime/load errors не включают адрес объекта или нестабильное описание texture. Format decoding errors оборачиваются только на входе MeshAsset; direct SpineModel decode сохраняет прежний error type.
+Во всех path действует JSON Pointer escaping: `~` → `~0`, `/` → `~1`. Runtime/load errors не включают адрес объекта или нестабильное описание texture. Format decoding errors оборачиваются только на входе MeshAsset; direct SpineModel decode сохраняет прежний error type. `wrongSkeleton` сохраняется как reserved case, без обязательного emission или гарантии validation чужого receiver.
 
 ### 5. Внутренние границы и диагностические данные
 
@@ -237,14 +242,14 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 
 | # | Rule |
 |---|---|
-| A.1 | Mesh-aware `action(animation:)` возвращает новое SKAction с immutable owner/epoch/clip binding, захваченным при создании; mutable execution ID/cursors создаются на owner при каждом begin; action хранит weak owner. Его elapsed time — единственный clock; compiled curves 4.1 и bone TRS/slot/deform применяются в фазе actions. `prepareMeshes` никогда повторно не оценивает timeline. |
+| A.1 | Mesh-aware `action(animation:)` возвращает новое SKAction с immutable owner/epoch/clip binding, захваченным при создании; mutable execution ID/cursors создаются на owner при каждом begin; action хранит weak owner. Begin/end выполняются однократно через `SKAction.run`, sample — через timed `SKAction.customAction`; elapsed time sample — единственный clock. Compiled curves 4.1 и bone TRS/slot/deform применяются в фазе actions. `prepareMeshes` никогда повторно не оценивает timeline. |
 | A.2 | На старте execution восстанавливается setup state костей/слотов/deform, затем применяется t=0; transform самого Skeleton не сбрасывается. Duration — max timestamp всех поддержанных timelines, включая deform-only/events/drawOrder. Интерполяция per-channel linear/stepped/10-segment Bezier соответствует 4.1; после последнего ключа значение удерживается. |
-| A.3 | Sequence, finite repeat, repeatForever положительной duration, pause/resume и nonnegative speed поддерживаются; каждый повтор имеет свежие cursors и стартовые события. Допустима одна execution Spine clip; другая одновременная execution → `concurrentClip` до её записи. Последовательный повторный запуск того же action/его copy в текущем epoch разрешён; одновременные копии конфликтуют как разные executions. Любой чужой receiver (включая legacy Skeleton/обычный SKNode) → no-op и один wrongSkeleton diagnostic на owner за activation; если owner освобождён — no-op. Ни owner, ни receiver не входят в fault и не меняют позу/actions. |
+| A.3 | Sequence, finite repeat, repeatForever положительной duration, pause/resume и nonnegative speed поддерживаются; каждый повтор имеет свежие cursors и стартовые события. Допустима одна execution Spine clip; другая одновременная execution → `concurrentClip` до её записи. Последовательный повторный запуск того же action/его copy в текущем epoch разрешён; одновременные копии конфликтуют как разные executions. Обязательное предусловие: receiver каждого запуска action, его copy и внешнего container — создавший action owner. Запуск на другом Skeleton или любом другом SKNode не поддерживается; гарантии no-op, diagnostic и отсутствия мутаций не предоставляются, включая одновременное выполнение на owner и чужом receiver. Для другого Skeleton запрашивается его собственный action. Если owner освобождён — callbacks no-op. |
 | A.4 | `stopMeshAnimation` увеличивает epoch, очищает lease/error/deform cursors, сохраняет текущие TRS/slot/deform при reset=false, а при true восстанавливает setup. Все ранее полученные clip-actions этого owner становятся no-op, включая ещё не запущенные; для нового запуска запрашивается новый action. Внешние SKAction-контейнеры и обычные действия метод не удаляет. |
 | A.5 | В новом режиме досрочное удаление внешнего clip-action сопровождается `stopMeshAnimation`; один `removeAction` замораживает позу, но не считается освобождением lease. Это ограничение не относится к legacy. `dropToDefaultsAction` останавливает действия как раньше и дополнительно сбрасывает mesh epoch/state. Завершение execution освобождает lease без ручного stop. |
 | A.6 | События идут в порядке ключей на интервале `(previousTime, currentTime]`, плюс t=0 один раз на execution; пропущенные между кадрами события не теряются, последний ключ не дублируется и не удлиняет duration. Перед/после каждого event callback проверяются epoch/execution ID: reentrant stop/reset прекращает оставшиеся события и записи старого execution; новый action из callback получает текущий epoch. Простая подготовка/пауза не генерирует события. Нулевая duration выполняется однократно; её повтор, reversed и пользовательская перенастройка timing/duration самого clip вне контракта. |
 | A.7 | У слота одно состояние active attachment/color/deform. Skin switch атомарно объединяет default skin с выбранным, сохраняет active key если доступен, иначе setup key/none; совместимый deform сохраняется только при одинаковом deformSourceID, иначе сбрасывается. На смене attachment состояние управляется идентичностью источника, не размером массива. |
-| A.8 | Ошибки загрузки/skin selection синхронно throwing и атомарны. Fatal ошибка callback SKAction (concurrentClip; wrongSkeleton исключён) записывается в `meshPlaybackError` без throw через SpriteKit; последующие mesh clip callbacks no-op, управляемые visuals скрываются, prepare бросает ту же ошибку до stop/reset. Поля code/path стабильны; human-readable message не сравнивается целиком. Все diagnostics доставляются через meshDiagnosticHandler owner один раз на incident; handler не сохраняется в общем asset. Ошибки существующих legacy API сохраняются. |
+| A.8 | Ошибки загрузки/skin selection синхронно throwing и атомарны. Fatal ошибка callback SKAction (`concurrentClip` при соблюдении предусловия receiver) записывается в `meshPlaybackError` без throw через SpriteKit; последующие mesh clip callbacks no-op, управляемые visuals скрываются, prepare бросает ту же ошибку до stop/reset. Поля code/path стабильны; human-readable message не сравнивается целиком. Все предусмотренные контрактом diagnostics доставляются через meshDiagnosticHandler owner один раз на incident; handler не сохраняется в общем asset. Ошибки существующих legacy API сохраняются. |
 
 ### G — Геометрия и публичные узлы нового режима
 
@@ -284,7 +289,8 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 - Полный Spine Pro: shear, non-normal inheritance, Spine constraints, mixing, clipping, sequences, dark tint и ненормальные blend modes.
 - Поддержка нескольких JSON major/minor версий, автоматический schema fallback и конвертация старых файлов внутри библиотеки. Target — 4.1; другой target требует новой версии контракта и migration notes.
 - Автоматическая обработка SKCropNode/SKEffectNode, освещение/normal maps, собственный Metal host, GPU skinning.
-- Несколько одновременных mesh-aware clips, перенос clip-action между skeleton, reverse/negative time и повтор zero-duration clips.
+- Несколько одновременных mesh-aware clips, reverse/negative time и повтор zero-duration clips.
+- Запуск mesh clip-action/copy/container на любом узле, кроме его owner, включая параллельный запуск на owner и чужом receiver; проверки, diagnostics и безопасность такого нарушения предусловия не гарантируются.
 - Генерация физических тел из meshes, поддержка новой mesh-функциональности на tvOS/watchOS до следующей итерации.
 - Удаление прототипа, переименование текущих public region/bone/slot API, новые SwiftPM products или runtime-зависимость от официального core.
 
@@ -299,8 +305,8 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 | 5 | `Mesh/GeometryValidationTests.swift` | NaN/Inf, индексы, неверные counts, отрицательные веса, необязательные поля; ошибка до node creation | D.4, A.8 |
 | 6 | `Mesh/LinkedMeshTests.swift` | Chains/cycles/missing parents, own path, timelines true/false, immutable sharing и isolated deform | C.5, D.5, A.7 |
 | 7 | `Mesh/TextureProviderTests.swift` | Rotated/trimmed/multipage corners, straight/PMA pages, corrupt/missing resources, opaque SKTextureAtlas rejection | D.6, R.1, R.2 |
-| 8 | `Mesh/ActionLifecycleTests.swift` | SKAction-only clock, positive repeat/sequence, pause/speed, zero-duration once, independent owner state | A.1, A.2, A.3, A.6, C.5 |
-| 9 | `Mesh/ActionConflictTests.swift` | Same/different concurrent clip/copies, wrong receiver of all node types: diagnostic без owner/receiver mutation; fatal конфликт hides только owner visuals | A.3, A.8 |
+| 8 | `Mesh/ActionLifecycleTests.swift` | SKAction-only clock, positive repeat/sequence, native SKView pause/resume и initial/dynamic nonnegative speed (включая 0 и 0.5), ровно один begin/end и освобождение lease на каждом repeat при начальном speed 0.5 и изменении через 0, zero-duration once, independent owner state | A.1, A.2, A.3, A.6, C.5 |
+| 9 | `Mesh/ActionConflictTests.swift` | Same/different concurrent clip/copies, все запускаются на создавшем их owner; fatal конфликт hides только owner visuals, другой Skeleton со своим action не затронут | A.3, A.8 |
 | 10 | `Mesh/ActionCancellationTests.swift` | stop/reset/dropToDefaults epoch, stale copies/actions no-op, reacquisition, remove+explicit stop, reentrant event stop/restart, ordinary actions unaffected | A.4, A.5, A.8 |
 | 11 | `Mesh/TimelineTests.swift` | Absolute multi-channel Bezier, stepped/linear, defaults, deform-only duration, event interval/last key/zero time | A.1, A.2, A.6, D.2 |
 | 12 | `Mesh/SlotStateTests.swift` | Active/nil attachment, skin merge/fallback, compatible vs incompatible deform identity, atomic failure, RGBA across region↔mesh | A.7, A.8, R.2 |
@@ -314,7 +320,7 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 | 20 | `Mesh/ResourceLifetimeTests.swift` | Per-frame reuse, no parsing/readback/shader compile; create/switch/destroy 100 times, weak refs released, state isolation | D.7, R.7, C.5 |
 | 21 | `--benchmark-library-mesh` + legacy bench | 1/10/50 CPU/GPU/callback records, matched warmup/rounds, no legacy >10% regression, image validation before pass | V.1, V.4 |
 | 22 | `validation/platforms.json` + build matrix | All legacy platform builds, unsupportedPlatform gate, real macOS/iOS device results and retained deployment targets | V.5 |
-| 23 | Documentation/example smoke | ESS 4.1 examples unchanged/no hook; общий loader и новый asset/stop/reacquire/prepare работают; документация подтверждает один формат 4.1 без обязательного re-export/изменения кода ESS | C.1, C.6, A.4, A.5, R.6, V.5 |
+| 23 | Documentation/example smoke | ESS 4.1 examples unchanged/no hook; общий loader и новый asset/stop/reacquire/prepare работают; документация подтверждает owner receiver precondition, один формат 4.1 без обязательного re-export/изменения кода ESS | C.1, C.6, A.3, A.4, A.5, R.6, V.5 |
 
 ## Execution
 
@@ -341,10 +347,10 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 **Objective.** Owner/epoch/lease и frame hook работают до подключения реальных meshes.
 **Work.**
 - Добавить opt-in внутренний runtime shell и публичные сигнатуры; test-only compiled fixture с одной костью и deform channel.
-- Реализовать begin/sample/end, sticky fault, stop/reset, stale action guards и snapshot; никаких независимых таймеров/дочерних actions, живущих дольше возвращённого clip-action.
+- Реализовать begin/end через `SKAction.run`, timed sample через `SKAction.customAction`, sticky fault, stop/reset, stale action guards и snapshot; никаких независимых таймеров/дочерних actions, живущих дольше возвращённого clip-action.
 **Dependencies.** Phase 1.
-**Risks.** Repeat копирует closures, remove не вызывает completion — обязательные owner/cancel tests; провал gate останавливает интеграцию, контракт не ослабляется молча.
-**Validation.** Tests 8–11, 19 (state cases); baseline characterization часть 1–3 (без нового decoder/MeshAsset gate) и full implemented suite green.
+**Risks.** Repeat копирует closures, remove не вызывает completion — обязательные owner/cancel tests. Zero-duration custom callback не является once-only boundary; native pause/speed обязательны. Провал gate останавливает интеграцию, контракт не ослабляется молча.
+**Validation.** Tests 8–11, 19 (state cases); Test 8 initial/dynamic speed и pause/resume — в native SKView, fixed-clock SKRenderer не заменяет эту проверку. Baseline characterization часть 1–3 (без нового decoder/MeshAsset gate) и full implemented suite green.
 **Done.** Конфликты/отмена не оставляют невидимый active lease после предусмотренного stop и не затрагивают legacy.
 
 ### Phase 3 — Загрузить и показать реальную mesh setup pose
@@ -385,5 +391,5 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 - Tests 1–23 пройдены; значения public API совпадают с Contract; нет обязательных изменений legacy client snippets для ESS 4.1; переэкспорт текущих ESS 4.1 не требуется.
 - Один JSON decoder 4.1 используется всеми loaders. Поддерживаемый ESS подтверждён baseline; нет глобального ужесточения версии, второго decoder, требования re-export или breaking changes этой задачи.
 - Geometry, image, lifecycle, resource lifetime и performance пороги выполнены; нет неучтённых исключений в golden comparisons.
-- Обе демо-сцены сохранены и имеют production-backed проверку; документация явно описывает hook, cancellation/reacquire и ограничения нового режима.
+- Обе демо-сцены сохранены и имеют production-backed проверку; документация явно описывает hook, cancellation/reacquire, owner receiver precondition и ограничения нового режима.
 - Сохранены JSON format audit, baseline, compatibility, parity, performance и platform отчёты; real-device iOS gate не заменён симулятором.

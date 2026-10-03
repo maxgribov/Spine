@@ -150,6 +150,8 @@ public class Skeleton: SKNode {
     var slots: [Slot] { self["//\(Slot.prefix)*"].compactMap({ $0 as? Slot }) }
     var skins: [Skin]
     var animations: [Animation]
+    var meshRuntime: MeshRuntime?
+    var meshDiagnosticCallback: ((SpineRuntimeError) -> Void)?
     
     init(skins: [Skin], animations: [Animation]) {
     
@@ -276,6 +278,7 @@ extension Skeleton {
 extension Skeleton: Defaultable {
     
     func dropToDefaults() {
+        meshRuntime?.stop(resetToSetupPose: true)
         
         if self.hasActions() {
             

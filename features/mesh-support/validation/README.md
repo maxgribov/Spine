@@ -1,7 +1,11 @@
 # Mesh integration validation
 
-Phase 1 characterizes the existing library before mesh integration. The production
-`Sources/Spine` tree is identical to `d1cbd6e`; no source fixes or golden updates
+The authorized [Swift / SpriteKit health scenario](swift-health-check.md) defines
+reproducible phase-aware checks. [Phase 2 health evidence](phase2-health.json)
+distinguishes executed checks, reused current test runs and deferred device gates.
+
+Phase 1 characterized the existing library before mesh integration. At that capture,
+the production `Sources/Spine` tree was identical to `d1cbd6e`; no source fixes or golden updates
 for new behavior are included. `baseline.json` records the revision/tree identity,
 fixture hashes, environment and commands. `platforms.json` separates SDK builds
 and hardware discovery from on-device execution.

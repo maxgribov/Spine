@@ -11,7 +11,7 @@ import SpriteKit
 public extension Skeleton {
     
     /// A list of all skin names stored in the character data model.
-    var skinsNames: [String] { skins.map { $0.name } }
+    var skinsNames: [String] { meshRuntime?.asset.skinNames ?? skins.map { $0.name } }
     
     /**
      Applies *default* skin.
@@ -22,6 +22,7 @@ public extension Skeleton {
      - throws: error if default skin can't be found.
      */
     func applyDefaultSkin() throws {
+        if let runtime = meshRuntime { try runtime.validateSkin("default"); return }
         
         apply(skin: try skin(named: SpineModel.defaultSkinName))
     }
@@ -36,6 +37,7 @@ public extension Skeleton {
      - throws: error if a skin can't be found.
      */
     func apply(skin named: String) throws {
+        if let runtime = meshRuntime { try runtime.validateSkin(named); return }
         
         apply(skin: try skin(named: named))
     }
@@ -51,6 +53,10 @@ public extension Skeleton {
      - throws: error if a skin can't be found.
      */
     func action(applySkin name: String) throws -> SKAction {
+        if let runtime = meshRuntime {
+            try runtime.validateSkin(name)
+            return SKAction.run { [weak self] in try? self?.apply(skin: name) }
+        }
         
         let skin = try skin(named: name)
         
