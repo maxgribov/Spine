@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-03",
+  "method": "Read local decoder/fixtures and compare official SkeletonJson sources; not an end-to-end decoder execution.",
+  "currentLibraryReadme": "Spine ESS v4.1+",
+  "fixtures": {
+    "Tests/SpineTests/Resources/spineboy-ess.json": "4.1.17",
+    "Examples/MeshPrototype/Sources/MeshPrototype/Resources/goblins-pro.json": "4.1.17"
+  },
+  "officialSources": {
+    "4.0": "https://github.com/EsotericSoftware/spine-runtimes/blob/425ce416bb218b28caeec47b317aa57cd7140375/spine-ts/spine-core/src/SkeletonJson.ts",
+    "4.1": "https://github.com/EsotericSoftware/spine-runtimes/blob/77a5db0ec6d16331f5efbaa7662bba9355bd3424/spine-ts/spine-core/src/SkeletonJson.ts"
+  },
+  "verifiedChanges": [
+    {
+      "field": "deform timelines",
+      "4.0": "animations.<animation>.deform.<skin>.<slot>.<attachment>[]",
+      "4.1": "animations.<animation>.attachments.<skin>.<slot>.<attachment>.deform[]",
+      "currentDecoder": "expects 4.0-style deform; 4.1 attachments is absent from AnimationModel.Keys"
+    },
+    {
+      "field": "linked mesh inheritance",
+      "4.0": "deform, default true",
+      "4.1": "timelines, default true",
+      "currentDecoder": "reads deform"
+    }
+  ],
+  "existingDecoderGap": {
+    "field": "deform key vertices",
+    "4.0": "optional",
+    "4.1": "optional",
+    "currentDecoder": "required",
+    "classification": "incomplete decoder, not a new 4.0-to-4.1 format change"
+  },
+  "conclusion": "Known ESS and PRO fixtures both use 4.1.17. Complete mesh fields in the single existing SpineModel decoder; do not add a legacy/versioned loader or tighten existing global loading. No format migration or breaking release is planned for this task. New mesh capability/version validation belongs only to the opt-in asset API. A future target-format change would be a separate possible breaking change."
+}
