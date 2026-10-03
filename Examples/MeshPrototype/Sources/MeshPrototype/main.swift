@@ -28,9 +28,9 @@ final class DemoScene: SKScene {
     var playing = true
     private var translucent = false
 
-    init(exampleSize: CGSize = CGSize(width: 1100, height: 760)) throws {
-        goblin = try Goblin(skin: "goblin")
-        girl = try Goblin(skin: "goblingirl")
+    init(exampleSize: CGSize = CGSize(width: 1100, height: 760), boundsMode: TriangleMeshNode.BoundsMode = .triangle) throws {
+        goblin = try Goblin(skin: "goblin", boundsMode: boundsMode)
+        girl = try Goblin(skin: "goblingirl", boundsMode: boundsMode)
         super.init(size: exampleSize)
         scaleMode = .aspectFit
         backgroundColor = NSColor(calibratedRed: 0.065, green: 0.078, blue: 0.11, alpha: 1)
@@ -76,6 +76,9 @@ final class DemoScene: SKScene {
         guard playing, let previous = previousTime else { return }
         do { try sample((playhead + Float(min(currentTime-previous, 0.1))).truncatingRemainder(dividingBy: goblin.duration)) }
         catch { fputs("Animation failed: \(error)\n", stderr); playing = false; status.text = "ERROR: \(error)" }
+    }
+    override func didFinishUpdate() {
+        if let view = view { prepareRasterCoordinates(scene: self, view: view) }
     }
     override func keyDown(with event: NSEvent) {
         do {
@@ -124,10 +127,7 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
     let texture = checkerTexture()
     var report: [String] = []
     func render(_ node: SKNode) throws -> CGImage {
-        guard let result = view.texture(from: node, crop: CGRect(x: -32, y: -32, width: 192, height: 192)) else {
-            throw PrototypeError("SKView did not render the test node")
-        }
-        return result.cgImage()
+        try capture(view: view, node: node, crop: CGRect(x: -32, y: -32, width: 192, height: 192))
     }
     // Compare hardware-rendered mesh pixels against SpriteKit's own quad.
     // Checking the interior includes the diagonal and a four-triangle junction.
@@ -159,24 +159,40 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
         let expectedImage = try render(referenceRoot), actualImage = try render(meshRoot)
         let expected = try bitmap(expectedImage), actual = try bitmap(actualImage)
         guard expectedImage.width == actualImage.width, expectedImage.height == actualImage.height else { throw PrototypeError("Different output sizes") }
-        var failures = 0, tested = 0, maxDifference = 0
+        var failures = 0, tested = 0, maxDifference = 0, samplingEdges = 0
         for pixel in 0..<(expected.count/4) {
             if expected[pixel*4+3] > 0 { tested += 1 }
-            for channel in 0..<4 {
-                let difference = abs(Int(expected[pixel*4+channel])-Int(actual[pixel*4+channel]))
-                maxDifference = max(maxDifference, difference)
-                if difference > 2 { failures += 1; break }
+            let differences = (0..<4).map { abs(Int(expected[pixel*4+$0])-Int(actual[pixel*4+$0])) }
+            maxDifference = max(maxDifference, differences.max()!)
+            if differences.max()! > 2 {
+                let x = pixel % expectedImage.width, y = pixel / expectedImage.width
+                var adjacentSample = false
+                if texture.filteringMode == .nearest && differences[3] == 0 {
+                    for row in max(0,y-1)...min(expectedImage.height-1,y+1) {
+                        for column in max(0,x-1)...min(expectedImage.width-1,x+1) {
+                            let neighbor = (row*expectedImage.width+column)*4
+                            if (0..<4).allSatisfy({ abs(Int(expected[neighbor+$0])-Int(actual[pixel*4+$0])) <= 2 }) {
+                                adjacentSample = true
+                            }
+                        }
+                    }
+                }
+                // Full-precision screen coordinates may select the other texel
+                // at a nearest-sampling discontinuity. Coverage must still match
+                // exactly; the color must equal an immediate reference neighbor.
+                if adjacentSample { samplingEdges += 1 } else { failures += 1 }
             }
         }
         try save(actualImage, to: output.appendingPathComponent("\(name).png"))
         try save(expectedImage, to: output.appendingPathComponent("\(name)-reference.png"))
-        report.append("\(name): \(tested) pixels, \(failures) mismatches (>2/255), max difference \(maxDifference)")
+        report.append("\(name): \(tested) pixels, \(failures) unexpected mismatches (>2/255), \(samplingEdges) nearest-boundary pixels, raw max difference \(maxDifference)")
         print(report.last!)
         guard tested > 1000, failures == 0 else {
             try report.joined(separator: "\n").write(to: output.appendingPathComponent("verification.txt"), atomically: true, encoding: .utf8)
             throw PrototypeError("Pixel comparison failed: \(name)")
         }
     }
+    report.append(contentsOf: try verifyOptimizedBounds(view: view, output: output))
     var frameBytes: [[UInt8]] = []
     var snapshots: [[String: Any]] = []
     scene.playing = false
@@ -185,8 +201,7 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
         for goblin in [scene.goblin, scene.girl] {
             snapshots.append(["skin": goblin.skinName, "time": Double(time), "parts": goblin.vertexSnapshot()])
         }
-        guard let rendered = view.texture(from: scene, crop: scene.frame) else { throw PrototypeError("Scene capture failed") }
-        let image = rendered.cgImage()
+        let image = try capture(view: view, node: scene, crop: scene.frame)
         frameBytes.append(try bitmap(image))
         try save(image, to: output.appendingPathComponent(String(format: "goblins-%.2f.png", time)))
     }
@@ -197,16 +212,23 @@ func verify(view: SKView, scene: DemoScene, output: URL) throws {
     }
     scene.goblin.showsWireframe = true; scene.girl.showsWireframe = true
     try scene.sample(0.25)
-    guard let wire = view.texture(from: scene, crop: scene.frame) else { throw PrototypeError("Wireframe capture failed") }
-    try save(wire.cgImage(), to: output.appendingPathComponent("goblins-wireframe.png"))
+    let wire = try capture(view: view, node: scene, crop: scene.frame)
+    try save(wire, to: output.appendingPathComponent("goblins-wireframe.png"))
     report.append("Goblins: eight time snapshots, animated pixels, \(scene.goblin.triangleCount + scene.girl.triangleCount) visible triangles. Use Scripts/compare-reference.mjs for pose and UV parity.")
     try report.joined(separator: "\n").write(to: output.appendingPathComponent("verification.txt"), atomically: true, encoding: .utf8)
     print("PASS: GPU pixel checks and Goblins animation smoke check. Artifacts: \(output.path)")
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--validate-benchmark") {
+    do {
+        guard CommandLine.arguments.count > index+1 else { throw PrototypeError("Provide benchmark output directory") }
+        try validateBenchmarkImages(output: URL(fileURLWithPath: CommandLine.arguments[index+1])); exit(0)
+    } catch { fputs("Benchmark image validation failed: \(error)\n", stderr); exit(1) }
+}
+let benchmarkIndex = CommandLine.arguments.firstIndex(of: "--benchmark")
 let app = NSApplication.shared
 app.setActivationPolicy(.regular)
-let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: 1100, height: 760),
+let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: benchmarkIndex == nil ? 1100 : 960, height: benchmarkIndex == nil ? 760 : 540),
                       styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: false)
 window.title = "Spine · Triangle Mesh Prototype"
 window.center()
@@ -216,8 +238,18 @@ view.ignoresSiblingOrder = false
 window.contentView = view
 var demo: DemoScene?
 do {
-    demo = try DemoScene()
-    view.presentScene(demo)
+    if benchmarkIndex == nil {
+        var mode = TriangleMeshNode.BoundsMode.triangle
+        if let option = CommandLine.arguments.firstIndex(of: "--bounds") {
+            guard CommandLine.arguments.count > option+1,
+                  let selected = TriangleMeshNode.BoundsMode(rawValue: CommandLine.arguments[option+1]) else {
+                throw PrototypeError("--bounds expects mesh or triangle")
+            }
+            mode = selected
+        }
+        demo = try DemoScene(boundsMode: mode)
+        view.presentScene(demo)
+    }
 } catch {
     fputs("Failed to load prototype: \(error)\n", stderr)
     exit(1)
@@ -225,7 +257,12 @@ do {
 window.makeKeyAndOrderFront(nil)
 window.makeFirstResponder(view)
 app.activate(ignoringOtherApps: true)
-if let index = CommandLine.arguments.firstIndex(of: "--verify") {
+var benchmarkRunner: BenchmarkRunner?
+if let index = benchmarkIndex {
+    let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output/benchmark"
+    benchmarkRunner = BenchmarkRunner(view: view, output: URL(fileURLWithPath: path))
+    DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { benchmarkRunner!.start() }
+} else if let index = CommandLine.arguments.firstIndex(of: "--verify") {
     let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output"
     demo!.playing = false
     DispatchQueue.main.asyncAfter(deadline: .now()+1) {

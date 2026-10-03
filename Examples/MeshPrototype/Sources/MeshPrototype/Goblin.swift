@@ -57,6 +57,8 @@ final class Goblin: SKNode {
     private let wire = SKShapeNode()
     var showsWireframe = false { didSet { wire.isHidden = !showsWireframe } }
     var triangleCount: Int { parts.filter { !$0.node.isHidden }.reduce(0) { $0 + $1.node.triangleCount } }
+    var submittedQuadArea: Double { parts.filter { !$0.node.isHidden }.reduce(0) { $0 + $1.node.submittedQuadArea } }
+    var coveredTriangleArea: Double { parts.filter { !$0.node.isHidden }.reduce(0) { $0 + $1.node.coveredTriangleArea } }
 
     func vertexSnapshot() -> [[String: Any]] {
         parts.filter { !$0.node.isHidden }.map { part in
@@ -66,7 +68,7 @@ final class Goblin: SKNode {
         }
     }
 
-    init(skin: String) throws {
+    init(skin: String, boundsMode: TriangleMeshNode.BoundsMode = .triangle) throws {
         skinName = skin
         let directory = Bundle.module.resourceURL!
         let json = try Data(contentsOf: directory.appendingPathComponent("goblins-pro.json"))
@@ -194,7 +196,7 @@ final class Goblin: SKNode {
                         throw PrototypeError("Fixture player only supports white tint and normal blending")
                     }
                 }
-                let node = try TriangleMeshNode(texture: texture, positions: influences.map { $0[0].position }, uvs: uv, indices: indices)
+                let node = try TriangleMeshNode(texture: texture, positions: influences.map { $0[0].position }, uvs: uv, indices: indices, boundsMode: boundsMode)
                 node.zPosition = CGFloat(slotIndex)
                 node.name = slotName + "/" + key
                 addChild(node)

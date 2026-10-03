@@ -28,4 +28,33 @@ final class TriangleMeshNodeTests: XCTestCase {
         XCTAssertTrue(node.children.allSatisfy { !$0.isHidden })
         XCTAssertTrue(zip(originalChildren, node.children).allSatisfy { $0 === $1 })
     }
+
+    func testTriangleBoundsReduceSubmittedAreaWithoutChangingTriangleArea() throws {
+        let positions: [SIMD2<Float>] = [SIMD2(0,0), SIMD2(100,0), SIMD2(100,100), SIMD2(0,100), SIMD2(50,50)]
+        let indices = [0,1,4, 1,2,4, 2,3,4, 3,0,4]
+        let texture = SKTexture(data: Data([255,255,255,255]), size: CGSize(width: 1, height: 1))
+        let baseline = try TriangleMeshNode(texture: texture, positions: positions, uvs: positions, indices: indices, boundsMode: .mesh)
+        let optimized = try TriangleMeshNode(texture: texture, positions: positions, uvs: positions, indices: indices, boundsMode: .triangle)
+        optimized.prepareForRendering(localToPixels: .identity)
+        XCTAssertLessThan(optimized.submittedQuadArea, baseline.submittedQuadArea * 0.6)
+        XCTAssertEqual(optimized.coveredTriangleArea, baseline.coveredTriangleArea, accuracy: 0.001)
+        XCTAssertEqual(optimized.children.count, baseline.children.count)
+    }
+
+    func testSingularProjectionHidesGeometryAndCanRecover() throws {
+        let node = try makeMesh()
+        node.prepareForRendering(localToPixels: CGAffineTransform(scaleX: 0, y: 1))
+        XCTAssertTrue(node.children.allSatisfy(\.isHidden))
+        node.prepareForRendering(localToPixels: .identity)
+        XCTAssertTrue(node.children.allSatisfy { !$0.isHidden })
+    }
+
+    func testChangingPixelDensityRecomputesPaddingWithoutChangingPose() throws {
+        let node = try makeMesh()
+        node.prepareForRendering(localToPixels: .identity)
+        let initialArea = node.submittedQuadArea
+        node.prepareForRendering(localToPixels: CGAffineTransform(scaleX: 4, y: 4))
+        XCTAssertLessThan(node.submittedQuadArea, initialArea)
+        XCTAssertEqual(node.positions, vertices)
+    }
 }
