@@ -28,9 +28,9 @@ public extension Skeleton {
     #if os(iOS) || os(macOS) || os(tvOS)
     func prepareMeshes(in view: SKView) throws {
         guard let runtime = meshRuntime else { return }
-        if let error = runtime.playbackError { throw error }
         guard scene != nil, scene === view.scene else {
-            try runtime.rejectFrame(message: "The Skeleton must belong to the SKView's current scene.", owner: self)
+            try runtime.prepare(SpineMeshFrameContext(skeletonToPixels:.identity,pixelSize:.zero),owner:self,viewError:"The Skeleton must belong to the SKView's current scene.")
+            return
         }
         let scene=self.scene!
         #if os(macOS)

@@ -8,7 +8,7 @@ final class MeshSlotState {
     let setupColor:SIMD4<Float>
     var color:SIMD4<Float>
     var deform:[Float]
-    var hadStaticPhysicsBody=false
+    var physics=MeshSlotPhysicsState()
     init(color:SIMD4<Float>,deformCount:Int,setupColor:SIMD4<Float>?=nil) {
         self.setupColor=setupColor ?? color;self.color=color;deform=Array(repeating:0,count:deformCount)
     }
@@ -18,7 +18,7 @@ final class MeshSlotState {
     }
     func copied()->MeshSlotState {
         let result=MeshSlotState(color:color,deformCount:deform.count,setupColor:setupColor)
-        result.activeName=activeName;result.attachmentID=attachmentID;result.deformSourceID=deformSourceID;result.deform=deform;result.hadStaticPhysicsBody=hadStaticPhysicsBody
+        result.activeName=activeName;result.attachmentID=attachmentID;result.deformSourceID=deformSourceID;result.deform=deform;result.physics=physics
         return result
     }
 }

@@ -1,13 +1,13 @@
 ---
-date: 2026-10-03
+date: 2026-10-04
 model: GPT-6
-version: 5
+version: 6
 description: "Spec: opt-in Spine 4.1 meshes в SpriteKit с неизменным legacy API и единым загрузчиком JSON 4.1"
 ---
 
 # Spec: интеграция Spine meshes в библиотеку
 
-Реализует [ADR](adr.md). Существующие ESS-анимации 4.1 работают без изменений клиентского кода. Changes from v4: receiver mesh-aware clip-action обязан быть создавшим его Skeleton; чужой receiver исключён из гарантий, границы execution используют SKAction.run, а pause/speed проверяются в native SKView. [Основание принятого уточнения](validation/phase2-action-investigation.md). Сохраняются порядок последнего prepare и поэтапные validation gates v4. Текущая библиотека и fixtures уже используют 4.1; смена формата, второй загрузчик, глобальный version gate и breaking release не планируются. Production-интеграция meshes ещё не завершена; прототип остаётся эталоном.
+Реализует [ADR](adr.md). Существующие ESS-анимации 4.1 работают без изменений клиентского кода. Changes from v5: одобрены ограниченное восстановление identity у принадлежащих библиотеке static-physics slots в prepare и допуск 0.1% к номинальным 30 callback FPS (нижняя граница 29.97 без округления); [основание](validation/phase5-physics-contract-gap.md). Owner-precondition actions из v5, один decoder 4.1, прежний API, отсутствие обязательного re-export и поэтапные gates сохраняются. Числовые лимиты коррекции ниже — контракт, а не признание незавершённого WIP исправленным.
 
 Проверка формата: README уже указывает 4.1+, оба ESS/Pro fixtures — 4.1.17. Между официальными 4.0 и 4.1 подтверждены изменения deform hierarchy и linked inheritance flag; текущие mesh-модели остались частично на старой форме. Отсутствующие deform vertices разрешены в обеих версиях. [Аудит с pinned sources](validation/json-format-audit.json).
 
@@ -25,6 +25,8 @@ description: "Spec: opt-in Spine 4.1 meshes в SpriteKit с неизменным
 - **Epoch** — поколение clip-actions экземпляра skeleton; остановка инвалидирует действия предыдущего поколения.
 - **Canonical texture** — отдельная полная SKTexture с premultiplied RGBA; не скрытый subtexture внутреннего атласа SpriteKit.
 - **Frame context** — преобразование из локальных координат skeleton в реальные fragment coordinates целевого framebuffer.
+- **Owned static slot** — logical slot с конкретным созданным библиотекой bounding-box body, для которого `slot.physicsBody === body`, `body.node === slot`, `isDynamic == false`; одной ссылки на прежнее наличие body недостаточно.
+- **Reconciliation** — проверка ограниченного числового остатка и запись canonical `slot.position = .zero`, `slot.zRotation = 0` по P.1–P.7; не новый источник pose/time.
 
 ## Contract
 
@@ -133,7 +135,8 @@ let character = try Skeleton(meshAsset: asset, skin: "goblin")
 scene.addChild(character)
 // Action получает и запускает один и тот же character (обязательное предусловие).
 character.run(.repeatForever(try character.action(animation: "walk")), withKey: "walk")
-// В SKScene.didFinishUpdate(), после собственных правок костей:
+// В SKScene.didFinishUpdate(), после physics и собственных правок:
+// Для owned static slots prepare может исправить только bounded residue по P.1–P.7.
 try character.prepareMeshes(in: view)
 // Досрочная остановка clip, затем удаление его внешнего SKAction-контейнера:
 character.stopMeshAnimation()
@@ -157,6 +160,7 @@ character.removeAction(forKey: "walk")
 | Missing skin/animation | missingSkin / missingAnimation | `/skins/<name>` или `/animations/<name>` |
 | Async conflict на owner | concurrentClip | `/runtime/animations/<name>` |
 | Bad frame context / mutated nodes | invalidRenderContext / mutatedNodeContract | `/runtime/frame` или `/runtime/nodes/<name>` |
+| Nonfinite/out-of-budget owned-slot residue, wrong ownership/hierarchy/scale/z | mutatedNodeContract | `/runtime/nodes/<slot-name>`; без correction этого плана; независимые валидные планы P.1 очищаются |
 
 Во всех path действует JSON Pointer escaping: `~` → `~0`, `/` → `~1`. Runtime/load errors не включают адрес объекта или нестабильное описание texture. Format decoding errors оборачиваются только на входе MeshAsset; direct SpineModel decode сохраняет прежний error type. `wrongSkeleton` сохраняется как reserved case, без обязательного emission или гарантии validation чужого receiver.
 
@@ -212,6 +216,32 @@ features/mesh-support/validation/platforms.json
 Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1, opt-in API, версия текущих assets не меняется
 ```
 
+### 7. Числовой контракт reconciliation и callback gate (не public API)
+
+```text
+positionLocalCap = 0.01                  // max(abs(local x), abs(local y))
+angleLocalCap = 0.00001                  // radians after IEEE remainder modulo 2*pi
+worldULPMultiplier = 32
+F: canonical slot-local -> physics-world points; checked slot is exactly identity.
+   Compose actual bone, Skeleton and external ancestor TRS forward; NEVER include
+   checked slot residue, SKScene TRS, camera, viewport or render context.
+   bbox vertices are immutable attachment metadata, evaluated at ideal identity.
+spaceID: attached -> exact SKScene identity; stop F before that scene.
+         detached -> (detached, exact topmost ancestor identity); include that
+         ancestor TRS, use its virtual unparented coordinate space.
+safeFrame: finite F and finite Float-representable ideal world coordinates;
+           sigmaMin(F.linear) > 1e-6 and sigmaMin/sigmaMax > 1e-6.
+           Singular values are evaluated without forming an inverse.
+Sx,Sy = max(1, abs(coordinate)) over F*(0,0) and every ideal bbox vertex.
+Tx,Ty = 32 * Float(Sx or Sy).ulp          // conversion/result must be finite
+Tangle = min(1e-5, 32 * Float(max(1,abs(rawSlotAngle),abs(atan2(F.b,F.a)))).ulp)
+position eligible iff local cap AND abs((F.linear * localPosition).x/y) <= Tx/Ty.
+angle eligible iff abs(remainder(rawSlotAngle,2*pi)) <= Tangle.
+No error-dependent, accumulated or empirically enlarged budget is permitted.
+callbackFPS(round) = 1000 / mean(all 120 measured callback intervals in ms)
+callback gate = mean(callbackFPS(round1),callbackFPS(round2)) >= 30*(1-0.001) = 29.97
+```
+
 ## Rules
 
 ### C — Совместимость и изоляция
@@ -258,8 +288,8 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 | G.1 | Для unweighted vertex `p = boneMatrix * (setup + deformDelta)`; для weighted — сумма `weight * boneMatrix * (influencePosition + influenceDelta)`. Деформация хранится в input space, sparse offsets считаются в скалярных компонентах; odd offsets разрешены при допустимом диапазоне. Пустой ключ — zero deltas, не отсутствие timeline. |
 | G.2 | Финальные матрицы строятся прямым перемножением актуальных локальных TRS по bone hierarchy, исключая Skeleton и внешних предков. Обращение нулевой матрицы кости не требуется. Mesh positions — skeleton-local; renderer branch под Skeleton применяет его transform ровно один раз. |
 | G.3 | Ручные bone TRS после actions/physics и до prepare учитываются в текущем кадре. Alpha/hidden костей и slot nodes одинаково влияют на regions/meshes, перемножаются до Skeleton, чьи внешние свойства SpriteKit применяет отдельно. Нулевой scale скрывает вырожденную геометрию без NaN и позволяет восстановление. |
-| G.4 | Bone/slot nodes сохраняют lookup names и реальные типы. В новом режиме slot TRS остаётся identity; ручная смена hierarchy/slot TRS/internal z → `mutatedNodeContract`. Mesh accessor возвращает служебный SKNode для чтения; legacy region accessor не возвращает mesh. Внутренняя render branch не участвует в поиске логических slots/bones. |
-| G.5 | Bounding box/point attachments в новом режиме сохраняют логическое размещение под slots; skin replacement атомарно обновляет соответствующие physics/point nodes. Новая physics mesh-форма из треугольников не создаётся. |
+| G.4 | Bone/slot lookup names и реальные типы сохраняются. Logical slots имеют canonical identity; исключение — bounded reconciliation owned static slots по P.1–P.7. Остальные изменения hierarchy/slot TRS/internal z → `mutatedNodeContract`. Микроправка внутри обеих precision bounds неотличима от residue и также нормализуется; гарантия диагностики такой правки не предоставляется. Mesh accessor inspect-only; render branch исключена из поиска logical nodes. |
+| G.5 | Bounding box/point attachments сохраняют логическое размещение под slots; `slot.physicsBody` и `body.node === slot` не переносятся на proxy. Skin replacement атомарно обновляет physics/point nodes, ownership и одноразовый removal token по P.3. Новые physics mesh-формы не создаются. |
 | G.6 | Nonfinite runtime bone TRS/matrices → invalidGeometry с `/runtime/nodes/<name>` до записи результата; managed visuals скрываются, прежние buffers не заменяются NaN. Исправление TRS и успешный prepare восстанавливают картинку без сброса времени. |
 
 ### R — Отрисовка и кадр
@@ -269,19 +299,31 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 | R.1 | Production default — последовательные пары треугольников одного attachment/texture/material; хвост из одного треугольника отключает пустой shader slot. `.one`/`.four` остаются внутренними диагностическими вариантами. Regions рисуются одним SKSpriteNode с корректной trim/rotation геометрией; при необходимости отдельный tint shader использует его primary texture. |
 | R.2 | Цвет — покомпонентное произведение slot RGBA и attachment RGBA. Для PMA sample: RGB умножается на tintRGB × tintAlpha × effectiveOpacity, alpha — на tintAlpha × effectiveOpacity. Для пары alpha применяется к каждому треугольнику ДО source-over; material uniforms immutable, per-instance параметры — attributes. |
 | R.3 | У нового skeleton drawOrder задаёт slot rank в `[0,1)`; весь slot и его группы помещаются в непересекающийся поддиапазон этого интервала. Ancestor bone z остаётся 0. Порядок attachment/group/triangle сохраняется при отражении/skin/deform; библиотека не изменяет ignoresSiblingOrder сцены. |
-| R.4 | Native prepare требует `skeleton.scene === view.scene`; учитывает camera/anchorPoint/scaleMode/resize/backingScale и актуальных предков. Custom context задаёт actual fragment convention и pixel size явно. Вызов выполняется на потоке SpriteKit после всех правок; повтор с той же позой/context идемпотентен, включая paused scene. |
-| R.5 | Invalid/nonfinite context → `invalidRenderContext` и скрытие managed visuals до следующего успешного prepare; finite singular projection скрывает mesh geometry без ошибки и восстанавливается после исправления. Legacy prepare/stop — no-op. Подготовка не меняет scene delegate, clock, physics или чужие nodes. |
-| R.6 | Вычисленные mesh buffers меняются только при prepare. SpriteKit может немедленно применить изменения самих nodes/предков/camera; после любой влияющей на изображение правки после hook требуется повторный prepare до рисования. Иначе согласованность регионов/meshes и framebuffer coordinates не гарантируется. Автоматический phase guard не обещается; examples выполняют hook последним. Effect/crop ancestors нового skeleton отклоняются как unsupportedFeature; custom context не объявляет автоматическую поддержку intermediate framebuffer. |
+| R.4 | Native prepare требует `skeleton.scene === view.scene` для отрисовки, учитывает camera/anchor/scaleMode/resize/backingScale и предков. Custom context задаёт actual fragment convention/pixels. Вызов после physics и всех правок на потоке SpriteKit; numeric stage P выполняется независимо от валидности render context. Повтор идемпотентен, включая паузу. |
+| R.5 | Invalid/nonfinite context → `invalidRenderContext`, managed visuals скрыты до успешного prepare; конечная singular projection скрывает geometry без ошибки при валидных logical nodes. Legacy prepare/stop — no-op. Единственное разрешённое изменение physics при prepare — P.1–P.7 для owned static slots; delegate, clock, bone/Skeleton/ancestor/camera TRS и чужие nodes не меняются. Контакты завершившегося physics step не переигрываются. |
+| R.6 | Mesh buffers меняются только при prepare. После любых поздних bone/Skeleton/ancestor/camera/skin правок требуется повторный prepare; previous safe frame P.2 ограничен одним предыдущим numeric stage. Автоматический phase guard/delegate hook не создаётся; examples вызывают hook последним после каждого physics/update. Effect/crop ancestors отклоняются как unsupportedFeature; custom context не обещает intermediate framebuffer. |
 | R.7 | Topology/UV/material переиспользуются, динамические буферы принадлежат экземпляру; не создаются новые triangle nodes при каждом кадре. Skin load/replacement освобождает недостижимые ресурсы; нет глобального бессрочного material cache. |
+
+### P — Ограниченная коррекция принадлежащих библиотеке static slots
+
+| # | Rule |
+|---|---|
+| P.1 | Только mesh-aware owned static slots получают correction: точные slot/body/parent identities, `body.node`, `isDynamic == false`, scale `(1,1)` и z `0` обязательны. Foreign/dynamic bodies и unowned slots не получают tolerance/correction; исключение после удаления — token P.3. До любых writes preflight всех slot plans. Затем корректируются НЕЗАВИСИМО валидные owned slots с валидной собственной ancestor chain; чужая ошибка не блокирует их cleanup. Невалидные slots не записываются. При любой возвращаемой scene/node/context/playback ошибке GPU buffers не обновляются. |
+| P.2 | На КАЖДОМ attempted numeric stage previous frame читается ровно один раз; он применим только при совпадении slot/body/parent И spaceID. Для каждого локально валидного owned slot cache немедленно ЗАМЕНЯЕТСЯ текущим eligible F либо nil; невалидная chain/ownership очищает его. Это происходит независимо от ошибки другого slot, context, sticky fault и общего успеха prepare; старый successful frame не сохраняется через ошибки. Позиция/угол проходят caps и bounds в одном из current/прочитанного previous safe frames. Token P.3 — отдельное точное разрешение, не продление frame cache. |
+| P.3 | При библиотечном удалении/замене body разрешён один token на slot: точные прежние slot/body/parent identities и spaceID, bbox metadata и конкретные position/angle, прошедшие Contract.7 до detach. На первом следующем numeric stage token применим лишь к неизменённым значениям того же slot/parent/spaceID и nil либо библиотечно установленному replacement static body; чужой/dynamic body запрещён. Token потребляется первым локально валидным numeric plan этого slot (даже при ошибке другого slot/render/playback); несовпадение values/identity, чужой body или новый переход инвалидируют его. Невалидный numeric plan может сохранить лишь тот же точный token без расширения limits; body отсутствует либо имеет новый библиотечный identity, поэтому старое разрешение не обновляется по накопленному drift. Stop/reset не расширяют bounds и не превращают бессрочный `hadBody`/accepted-residue history в разрешение. |
+| P.4 | При валидном плане prepare пишет только `slot.zRotation = 0` и `slot.position = .zero`, причём лишь отличающиеся значения. Полные обороты допускаются только через bounded remainder Contract.7. Bone/Skeleton/ancestor/camera pose, slots color/deform/active state, action time/lease/epoch/events и body masks/material/velocity/forces не записываются. Библиотека не запускает дополнительный physics step; implied body-transform update выполняет SpriteKit. |
+| P.5 | Numeric stage/preflight и cleanup локально валидных slots выполняются даже при wrong-view/invalid/singular context, ошибке другого slot или sticky playback fault. Возврат: existing sticky playback error неизменённым; иначе первый node error по compiled bone/slot order (render-branch errors после logical nodes); иначе context error. Sticky fault не заменяется вторым diagnostic. Invalid bone TRS/matrix → G.6 `invalidGeometry` с bone path; nonfinite Skeleton/external ancestor F либо ideal world coordinate (включая Float-unrepresentable) → `invalidRenderContext` `/runtime/frame` для зависимых plans. Это не мешает независимым валидным plans; invalid plans не пишут slot. Ошибка всегда предотвращает GPU uploads. |
+| P.6 | Pause, repeated prepare, stop(false)/reset(true) и skin replacement не накапливают tolerance и не разрешают arbitrary clamp. Каждый следующий prepare заново применяет P.1–P.5; reset восстанавливает заявленный setup state, но не даёт обхода malformed/out-of-budget slot validation. Если hook пропускался и накопленный drift вышел за caps, выдаётся typed error; caller восстанавливает identity или пересоздаёт Skeleton. Контакты/impulses уже завершённого physics step остаются доставленными как SpriteKit их вычислил; библиотека их не отменяет и не повторяет. |
+| P.7 | Единая decision table: (a) canonical position/rotation, валидная chain, finite F и Float-representable ideal world coordinates — разрешено, включая singular/near-singular F, без correction; (b) noncanonical residue + current/previous safe frame того же spaceID или точный P.3 token + обе caps/bounds — correction; (c) residue без такого разрешения, nonfinite/out-of-budget slot TRS — `mutatedNodeContract`; (d) nonfinite/unrepresentable F/world data — P.5, не молчаливый fallback. Отсутствие safe frame из-за conditioning само по себе не ошибка для (a). В normal fixture `(80,80), scale2` position/rotation `0.001` отклоняются; на больших координатах subprecision edits внутри обеих bounds могут нормализоваться. Требуются 3000-frame corrected traces и physical iOS proof; limits не расширяются по результату ошибки. |
 
 ### V — Проверяемые гарантии
 
 | # | Rule |
 |---|---|
-| V.1 | Legacy ABI не обещается, source compatibility обязательна: unchanged snippets/fixtures, timestamps/events/duration/order, snapshot numeric error ≤1e-6, RGBA channel max ≤1/255 на том же SDK. Golden поддерживаемых ESS 4.1 не обновляются для сокрытия регрессий; API/decoder breaking changes не допускаются этой задачей. Median frame CPU region-only не ухудшается >10% в том же стенде. |
+| V.1 | Legacy ABI не обещается, source compatibility обязательна: unchanged snippets/fixtures, timestamps/events/duration/order, numeric ≤1e-6, RGBA ≤1/255 на том же SDK. Golden не обновляются для маскировки регрессий. Median region-only frame CPU (combined update+encode, прежний стенд) не ухудшается >10%; update-only сохраняется отдельно как diagnostic. |
 | V.2 | World vertices против pinned 4.1.56: max error ≤0.005 Spine units, UV ≤1e-6, active identity/order exact. Fixtures: Goblins, authored weighted-link fixture (>4 влияний/сингулярные кости), authored deform/resources fixture (odd/sparse/empty offsets, curves, trim/rotation/multipage/tint). Все key times, середины интервалов, ±1e-5 около switching проверяются. |
 | V.3 | Renderer baseline `d1cbd6e`: групповые сравнения max RGBA-channel ≤2/255, камера ≤3/255 с подсчётом >2; внутренние shared-edge alpha error ≤2/255. Прежние nearest/silhouette allowances применяются только к прежним тестам; новые fixtures не получают исключений автоматически. |
-| V.4 | Для 50 Goblins на том же M1 Max Release: среднее двух p50 CPU pose ≤10.0 мс, scene update/encode ≤21.3 мс, GPU ≤0.52 мс, callback ≥30 FPS. Два раунда с обратным порядком вариантов, 30+120 native и 30+60 offscreen кадров, без timed readback; FPS callback не называется presented FPS. |
+| V.4 | Для 50 Goblins на том же M1 Max Release: среднее двух p50 CPU pose ≤10.0 мс, scene update/encode ≤21.3 мс, GPU ≤0.52 мс. Номинальные 30 callback FPS принимаются при среднем двух raw round FPS ≥29.97 (0.1% cadence tolerance, Contract.7); raw значения не округляются перед сравнением и сохраняются. Два обратных раунда, 30+120 native и 30+60 offscreen, без timed readback; callback не называется presented FPS. Другие thresholds/изображения этим допуском не изменяются. |
 | V.5 | Существующие package targets/deployment minimums сохраняются. Mesh-aware loading на tvOS/watchOS → unsupportedPlatform; legacy собирается и работает по прежнему контракту. macOS/iOS требуют отдельных проверок; iOS release блокируется до real-device parity/lifecycle и 1/10/50 отчёта с моделью/OS. Симулятор не подменяет этот gate. |
 
 ## Out of scope
@@ -312,15 +354,15 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 | 12 | `Mesh/SlotStateTests.swift` | Active/nil attachment, skin merge/fallback, compatible vs incompatible deform identity, atomic failure, RGBA across region↔mesh | A.7, A.8, R.2 |
 | 13 | `Mesh/SkinningTests.swift` | Unweighted/weighted >4, odd/sparse/empty deform, nonuniform/negative/zero ancestor scales; reusable buffers | G.1, G.2, G.3, D.4 |
 | 14 | `--verify-library-mesh` + external oracle | Three fixtures, complete timestamp grid, exact attachment/order, required position/UV tolerances | V.2, G.1, D.5, A.7 |
-| 15 | `Mesh/NodeBridgeTests.swift` | Post-actions manual bone edits, inherited alpha/hidden, no double transforms; slot/hierarchy/z mutation и nonfinite TRS diagnostics/recovery | G.2, G.3, G.4, G.6, R.3, A.8 |
-| 16 | `Mesh/AttachmentInteropTests.swift` | Real region sprite vs inspect-only mesh lookup, default skin, point/physics rebuilding without stale nodes | G.4, G.5, C.3, R.1 |
+| 15 | `Mesh/NodeBridgeTests.swift` | Post-actions manual bone edits, inherited alpha/hidden, no double transforms; slot/hierarchy/z mutation и nonfinite TRS diagnostics/recovery; `StaticPhysicsPrecisionTests`: 3000 frames origin/off-center/large parents, modulo turns, ownership/finite/cap boundaries, correction без bone/clock writes; плохой slot не блокирует движущийся валидный; cache expiry на failed attempts и запрет смены coordinate space | G.2, G.3, G.4, G.6, R.3, A.8, P.1, P.2, P.4, P.7 |
+| 16 | `Mesh/AttachmentInteropTests.swift` | Real region sprite vs inspect-only mesh lookup, default skin, point/physics rebuilding without stale nodes; exact body.node, one-shot removal/replacement tokens, foreign/dynamic rejection | G.4, G.5, C.3, R.1, P.1, P.3 |
 | 17 | `--verify-library-mesh` renderer cases | PMA/tint, folds/overlap, winding, degenerate recovery, tail slot, strict seam/coverage tests | R.1, R.2, V.3 |
 | 18 | `--verify-library-mesh` integration cases | Tree/fence order, animated drawOrder, camera/resize/view scale, mixed legacy/new characters; foreign scene nodes unchanged | R.3, R.4, R.5, V.3 |
-| 19 | `Mesh/FrameContextTests.swift` + GPU runner | Paused/manual/native/custom corner+pixel-center mapping, viewport offset/Y convention, legacy no-op, wrong view/NaN/singular recovery, repeated prepare после поздних bone/Skeleton/ancestor/camera правок, effect parents | R.4, R.5, R.6, G.6, A.1, A.6 |
+| 19 | `Mesh/FrameContextTests.swift` + GPU runner | Paused/manual/native/custom corner+pixel-center mapping, viewport offset/Y convention, legacy no-op, wrong view/NaN/singular recovery, repeated prepare после поздних bone/Skeleton/ancestor/camera правок, effect parents; correction при context/playback errors, pause/reset/repeat prepare, late/singular/near-singular ancestors, out-of-budget recovery/contact semantics; canonical singular vs unauthorized residue decision table, detached spaces и nonfinite ancestor paths | R.4, R.5, R.6, G.6, A.1, A.6, P.2, P.3, P.4, P.5, P.6, P.7 |
 | 20 | `Mesh/ResourceLifetimeTests.swift` | Per-frame reuse, no parsing/readback/shader compile; create/switch/destroy 100 times, weak refs released, state isolation | D.7, R.7, C.5 |
-| 21 | `--benchmark-library-mesh` + legacy bench | 1/10/50 CPU/GPU/callback records, matched warmup/rounds, no legacy >10% regression, image validation before pass | V.1, V.4 |
-| 22 | `validation/platforms.json` + build matrix | All legacy platform builds, unsupportedPlatform gate, real macOS/iOS device results and retained deployment targets | V.5 |
-| 23 | Documentation/example smoke | ESS 4.1 examples unchanged/no hook; общий loader и новый asset/stop/reacquire/prepare работают; документация подтверждает owner receiver precondition, один формат 4.1 без обязательного re-export/изменения кода ESS | C.1, C.6, A.3, A.4, A.5, R.6, V.5 |
+| 21 | `--benchmark-library-mesh` + legacy bench | 1/10/50 CPU/GPU/callback records, matched warmup/rounds, combined legacy update+encode ≤10% regression, raw callback formula/29.97 boundary (29.969 reject, 29.97 accept), other budgets unchanged, image validation before pass | V.1, V.4 |
+| 22 | `validation/platforms.json` + build matrix | All legacy platform builds, unsupportedPlatform gate, real macOS/iOS results including owned-static reconciliation/lifecycle, retained deployment targets | V.5, P.7 |
+| 23 | Documentation/example smoke | ESS 4.1 examples unchanged/no hook; общий loader и новый asset/stop/reacquire/prepare работают; документация подтверждает owner receiver precondition, один формат 4.1 без обязательного re-export/изменения кода ESS; correction/caps/subprecision/contact limitations и nominal callback tolerance | C.1, C.6, A.3, A.4, A.5, R.6, V.5, P.6, P.7 |
 
 ## Execution
 
@@ -379,17 +421,19 @@ Sources/Spine/Documentation.docc/Meshes.md       # единый формат 4.1
 
 **Objective.** Зафиксировать release evidence для заявленной поддержки.
 **Work.**
-- Выполнить matched legacy/mesh benchmarks, lifetime checks, четыре platform builds; исправлять измеренные регрессии без изменения старой семантики.
+- Реализовать P.1–P.7 до нового device gate: фиксированные caps, bounded correction вместо partial tolerance-only WIP, long traces и fault/context recovery.
+- Выполнить matched legacy/mesh benchmarks по V.1/V.4, lifetime checks, четыре platform builds; сохранить raw FPS и сравнить с 29.97 без округления, без изменения legacy семантики.
 - На реальном iOS устройстве выполнить parity/lifecycle/render и 1/10/50 замеры; сохранить отчёты и документацию возможностей/ограничений.
 **Dependencies.** Phase 4; устройство iOS выявляется ещё в Phase 1.
-**Risks.** Нет device или shader отличается — release gate остаётся незавершённым; FPS только callback — не переименовывать в presentation rate.
-**Validation.** Все Tests 1–23; full suite green; performance/image/platform gates соблюдены.
+**Risks.** Physics feedback — correction каждый numeric stage без расширения caps/history; out-of-domain → error. Нет device/shader parity — gate незавершён. FPS только callback с V.4 allowance, не presentation rate.
+**Validation.** Все Tests 1–23; full suite green; P long traces, fresh real-device lifecycle/render/performance, unchanged legacy и V.4 raw comparison обязательны. Старые uncorrected traces — отрицательная evidence, не pass.
 **Done.** macOS/iOS mesh-поддержка подтверждена отчётами, legacy работает без изменения кода на прежних платформах.
 
 ## Done criteria
 
 - Tests 1–23 пройдены; значения public API совпадают с Contract; нет обязательных изменений legacy client snippets для ESS 4.1; переэкспорт текущих ESS 4.1 не требуется.
 - Один JSON decoder 4.1 используется всеми loaders. Поддерживаемый ESS подтверждён baseline; нет глобального ужесточения версии, второго decoder, требования re-export или breaking changes этой задачи.
-- Geometry, image, lifecycle, resource lifetime и performance пороги выполнены; нет неучтённых исключений в golden comparisons.
+- Geometry, image, lifecycle, resource lifetime и performance пороги выполнены; raw native callback сравнивается с 29.97 по V.4, остальные thresholds неизменны; нет неучтённых golden exceptions.
+- P.1–P.7 проверены длинными traces и real-device run: bounded correction прекращает feedback, не меняет public physicsBody.node/API, bones/time/events/legacy; explicit subprecision/range/contact limitations задокументированы.
 - Обе демо-сцены сохранены и имеют production-backed проверку; документация явно описывает hook, cancellation/reacquire, owner receiver precondition и ограничения нового режима.
 - Сохранены JSON format audit, baseline, compatibility, parity, performance и platform отчёты; real-device iOS gate не заменён симулятором.

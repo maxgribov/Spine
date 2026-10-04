@@ -10,7 +10,9 @@ if(manifest.name!=='@esotericsoftware/spine-core'||manifest.version!=='4.1.56')t
 const core=await import(pathToFileURL(entry).href);
 const output=path.resolve(process.argv[3]??'/tmp/spine-phase4-oracle');
 const resources=path.join(root,'Tests/SpineTests/Resources/Mesh41');
-const snapshots=JSON.parse(fs.readFileSync(path.join(output,'animation-vertices.json'),'utf8'));
+const snapshotReport=JSON.parse(fs.readFileSync(path.join(output,'animation-vertices.json'),'utf8'));
+const snapshots=Array.isArray(snapshotReport)?snapshotReport:snapshotReport.payload;
+if(!Array.isArray(snapshots))throw new Error('Invalid animation snapshot payload');
 const results=[];
 for(const snapshot of snapshots){
  const atlas=new core.TextureAtlas(fs.readFileSync(path.join(resources,snapshot.atlas),'utf8'));
@@ -43,5 +45,6 @@ for(const snapshot of snapshots){
  results.push({fixture:snapshot.fixture,skin:snapshot.skin,time:snapshot.time,coordinates,maximumPositionError,maximumUVError,worstPosition,passed:maximumPositionError<=.005&&maximumUVError<=1e-6});
 }
 const report={runtime:'@esotericsoftware/spine-core@4.1.56',scope:'phase 4 full key/midpoint/switch-boundary grid through real SKAction scheduling',fixtures:new Set(snapshots.map(x=>x.fixture)).size,snapshots:results.length,results,passed:results.every(x=>x.passed)};
+if(!Array.isArray(snapshotReport)){report.runID=snapshotReport.runID;report.sourceManifestSHA256=snapshotReport.sourceManifestSHA256;}
 fs.writeFileSync(path.join(output,'animation-oracle.json'),JSON.stringify(report,null,2)+'\n');console.log({snapshots:results.length,maximumPositionError:Math.max(...results.map(x=>x.maximumPositionError)),maximumUVError:Math.max(...results.map(x=>x.maximumUVError)),failures:results.filter(x=>!x.passed),passed:report.passed});
 if(!report.passed)process.exitCode=1;

@@ -53,3 +53,24 @@ final class ResourceLifetimeTests:XCTestCase {
 
 }
 #endif
+
+#if os(macOS) || os(iOS)
+extension ResourceLifetimeTests {
+    func testPopulatedPhysicsProvenanceDoesNotRetainAttachedScenesAcrossSkinReplacement()throws {
+        for _ in 0..<100 {
+            weak var weakScene:SKScene?,weakOwner:Skeleton?,weakAsset:SpineMeshAsset?
+            try autoreleasepool {
+                let asset=try authoredAsset("slot-transitions"),owner=try Skeleton(meshAsset:asset),scene=SKScene(size:CGSize(width:256,height:256))
+                weakScene=scene;weakOwner=owner;weakAsset=asset
+                scene.addChild(owner);owner.position=CGPoint(x:80,y:80);owner.setScale(2)
+                try owner.prepareMeshes(for:validMeshContext)
+                owner.slotNode(named:"box")!.position=CGPoint(x:3.814697265625e-6,y:0)
+                try owner.apply(skin:"compatible")
+                try owner.prepareMeshes(for:validMeshContext)
+                // Release the attached graph as a whole; don't detach to hide a scene cycle.
+            }
+            XCTAssertNil(weakScene);XCTAssertNil(weakOwner);XCTAssertNil(weakAsset)
+        }
+    }
+}
+#endif

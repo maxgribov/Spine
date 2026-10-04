@@ -75,7 +75,7 @@ private final class DeviceGate {
         for (suffix,pixels) in [("actual",a),("reference",b)] {
             let provider=CGDataProvider(data:Data(pixels) as CFData)!
             let image=CGImage(width:width,height:height,bitsPerComponent:8,bitsPerPixel:32,bytesPerRow:width*4,space:CGColorSpaceCreateDeviceRGB(),bitmapInfo:CGBitmapInfo(rawValue:CGImageAlphaInfo.premultipliedFirst.rawValue|CGBitmapInfo.byteOrder32Little.rawValue),provider:provider,decode:nil,shouldInterpolate:false,intent:.defaultIntent)!
-            let url=FileManager.default.urls(for:.documentDirectory,in:.userDomainMask)[0].appendingPathComponent(name+"-"+suffix+".png")
+            let url=deviceOutput.appendingPathComponent(name+"-"+suffix+".png")
             try UIImage(cgImage:image).pngData()!.write(to:url)
         }
         guard occupied>100 else {throw ProbeFailure(message:"\(name) has no visible test geometry")}
@@ -108,10 +108,27 @@ private final class DeviceGate {
         let pair=try MeshTriangleNode(material:MeshTriangleNode.Material(texture:texture,pixelSize:texture.size()),positions:positions,uvs:uvFloat,indices:indices)
         for node in [one,pair] {node.position=CGPoint(x:40,y:-32);node.xScale = -1;node.alpha=0.6;node.setTint(SIMD4(0.7,0.3,1,0.8))}
         try compare("fold-reflection-odd-tail",pair,one)
+        // Real action-driven color/deform/draw-order and attachment transitions,
+        // including compatible/incompatible skins, on this physical GPU.
+        let transitionAsset=try authoredAsset("slot-transitions")
+        let transitionReference=SpineMeshAsset(compiled:transitionAsset.compiled,diagnosticGroupSize:.one)
+        func pose(_ asset:SpineMeshAsset,skin:String,time:Double)throws->Skeleton {
+            let h=try DeviceActionHarness(asset:asset);try h.skeleton.apply(skin:skin)
+            h.start(try h.skeleton.action(animation:"switches"));h.update(time)
+            h.skeleton.stopMeshAnimation();h.skeleton.removeAllActions();h.skeleton.removeFromParent()
+            h.skeleton.position=CGPoint(x:-40,y:-20);h.skeleton.setScale(2)
+            return h.skeleton
+        }
+        for skin in ["default","compatible","incompatible"] {
+            for (index,time) in [0.1,0.3,0.5,0.7,0.9].enumerated() {
+                try compare("animated-\(skin)-\(index)",pose(transitionAsset,skin:skin,time:time),pose(transitionReference,skin:skin,time:time))
+            }
+        }
     }
 }
 @UIApplicationMain final class MeshDeviceApp:UIResponder,UIApplicationDelegate {
     var window:UIWindow?
+    var releaseCoordinator:DeviceReleaseCoordinator?
     func application(_ application:UIApplication,didFinishLaunchingWithOptions options:[UIApplication.LaunchOptionsKey:Any]?)->Bool {
         application.isIdleTimerDisabled=true
         let window=UIWindow(frame:UIScreen.main.bounds),controller=UIViewController(),root=UIView(frame:window.bounds)
@@ -119,18 +136,37 @@ private final class DeviceGate {
         let label=UILabel(frame:CGRect(x:16,y:45,width:350,height:45));label.textColor = .white;label.text="Spine production device validation";label.numberOfLines=2;root.addSubview(label)
         let view=SKView(frame:CGRect(x:16,y:110,width:256,height:256));view.ignoresSiblingOrder=false;root.addSubview(view);window.makeKeyAndVisible()
         do {
+            let runID=ProcessInfo.processInfo.environment["SPINE_VALIDATION_RUN_ID"] ?? ""
+            let manifest=try Data(contentsOf:Bundle.main.bundleURL.appendingPathComponent("source-sha256.json"))
+            let context=try DeviceRunContext(base:FileManager.default.urls(for:.documentDirectory,in:.userDomainMask)[0],runID:runID,sourceManifest:manifest)
+            DeviceRunContext.current=context
             let skeleton=try Skeleton(meshAsset:SpineMeshAsset(json:meshJSON(),textures:ProbeTextures([128,64,32,128])))
             let scene=WarmupScene(skeleton:skeleton,size:view.bounds.size)
             scene.ready={
-                var report:[String:Any]=["phase":3,"productionRenderer":true,"os":UIDevice.current.systemVersion,"device":UIDevice.current.model,"nativeSKViewFrames":30,"nativePrepareFailures":scene.prepareFailures,"pixelSize":[Int(view.bounds.width*view.contentScaleFactor),Int(view.bounds.height*view.contentScaleFactor)],"readback":"SKRenderer on physical device with native SKView frame mapping"]
-                do {guard scene.prepareFailures==0 else {throw ProbeFailure(message:"Native warmup prepare failed")};let gate=try DeviceGate(view:view);defer {report["cases"]=gate.cases};try gate.run();report["status"]="passed";label.text="PASS: production pair / tint / trim / native frame"}
-                catch {report["status"]="failed";report["error"]=String(describing:error);label.text="FAIL: \(error)"}
-                let url=FileManager.default.urls(for:.documentDirectory,in:.userDomainMask)[0].appendingPathComponent("production-gate.json")
-                try? JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]).write(to:url)
-                // Keep the active validation host awake for artifact retrieval and follow-up checks.
+                var report:[String:Any]=["phase":5,"scope":"six setup cases plus fifteen action-driven synthetic transition cases on current sources","productionRenderer":true,"os":UIDevice.current.systemVersion,"device":UIDevice.current.model,"nativeSKViewFrames":30,"nativePrepareFailures":scene.prepareFailures,"pixelSize":[Int(view.bounds.width*view.contentScaleFactor),Int(view.bounds.height*view.contentScaleFactor)],"readback":"SKRenderer on physical device with native SKView frame mapping"]
+                var failure:Error?
+                do {guard scene.prepareFailures==0 else {throw ProbeFailure(message:"Native warmup prepare failed")};let gate=try DeviceGate(view:view);defer {report["cases"]=gate.cases};try gate.run();report["status"]="passed";label.text="PASS: setup + animated transitions"}
+                catch {failure=error;report["status"]="failed";report["error"]=String(describing:error);label.text="FAIL: \(error)"}
+                do {
+                    try deviceReport("production-gate.json",payload:report,status:failure==nil ? "completed":"failed")
+                    if let failure=failure {try context.fail(failure);application.isIdleTimerDisabled=false}
+                    else {
+                        try context.markCompleted("render")
+                        let release=DeviceReleaseCoordinator(view:view,label:label);self.releaseCoordinator=release
+                        DispatchQueue.main.async {release.start()}
+                    }
+                } catch {
+                    label.text="REPORT FAILURE: \(error)";print("Report failure",error)
+                    do {try context.fail(error)} catch {print("Could not persist failed run",error)}
+                    application.isIdleTimerDisabled=false
+                }
             }
             view.presentScene(scene)
-        } catch {label.text="Load failed: \(error)";application.isIdleTimerDisabled=false}
+        } catch {
+            label.text="Load failed: \(error)";print("Validation startup failed",error)
+            if let context=DeviceRunContext.current {do {try context.fail(error)} catch {print("Could not persist startup failure",error)}}
+            application.isIdleTimerDisabled=false
+        }
         return true
     }
 }

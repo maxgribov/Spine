@@ -1,0 +1,111 @@
+{
+  "baselineRevision": "d1cbd6e165749c50833fefe839c082204ad93add",
+  "currentRevision": "c685a5905a08c15ffc652a2a7ae6116160d697d6",
+  "harnessSHA256": "70cad47c088b08d8a3842ef1a37db7a26ada8abc06aef9fa0b15650224e0d512",
+  "commands": [
+    {
+      "command": [
+        "swift",
+        "build",
+        "-c",
+        "release",
+        "--package-path",
+        "Examples/MeshPrototype"
+      ],
+      "exitCode": 0,
+      "log": "/private/tmp/spine-phase5-legacy-matched/build-baseline.log"
+    },
+    {
+      "command": [
+        "swift",
+        "build",
+        "-c",
+        "release",
+        "--package-path",
+        "Examples/MeshPrototype"
+      ],
+      "exitCode": 0,
+      "log": "/private/tmp/spine-phase5-legacy-matched/build-current.log"
+    },
+    {
+      "command": [
+        "/private/tmp/spine-phase5-legacy-matched/baseline-source/Examples/MeshPrototype/.build/release/MeshPrototype",
+        "--benchmark-library-legacy",
+        "/private/tmp/spine-phase5-legacy-matched/round1-baseline"
+      ],
+      "exitCode": 0,
+      "log": "/private/tmp/spine-phase5-legacy-matched/round1-baseline.log"
+    },
+    {
+      "command": [
+        "/Users/maxgribov/Documents/spine/Examples/MeshPrototype/.build/release/MeshPrototype",
+        "--benchmark-library-legacy",
+        "/private/tmp/spine-phase5-legacy-matched/round1-current"
+      ],
+      "exitCode": 0,
+      "log": "/private/tmp/spine-phase5-legacy-matched/round1-current.log"
+    },
+    {
+      "command": [
+        "/Users/maxgribov/Documents/spine/Examples/MeshPrototype/.build/release/MeshPrototype",
+        "--benchmark-library-legacy",
+        "/private/tmp/spine-phase5-legacy-matched/round2-current"
+      ],
+      "exitCode": 0,
+      "log": "/private/tmp/spine-phase5-legacy-matched/round2-current.log"
+    },
+    {
+      "command": [
+        "/private/tmp/spine-phase5-legacy-matched/baseline-source/Examples/MeshPrototype/.build/release/MeshPrototype",
+        "--benchmark-library-legacy",
+        "/private/tmp/spine-phase5-legacy-matched/round2-baseline"
+      ],
+      "exitCode": 0,
+      "log": "/private/tmp/spine-phase5-legacy-matched/round2-baseline.log"
+    }
+  ],
+  "comparisons": [
+    {
+      "actors": 1,
+      "metric": "updateEncodeMedianMS",
+      "baselineMeanOfP50ms": 0.2717812458286062,
+      "currentMeanOfP50ms": 0.2635989512782544,
+      "ratio": 0.9698938220501359,
+      "passed": true,
+      "updateOnlyDiagnosticMS": {
+        "baseline": 0.018447914044372737,
+        "current": 0.018437480321154
+      }
+    },
+    {
+      "actors": 10,
+      "metric": "updateEncodeMedianMS",
+      "baselineMeanOfP50ms": 0.39985419425647706,
+      "currentMeanOfP50ms": 0.3852760564768687,
+      "ratio": 0.9635413658553308,
+      "passed": true,
+      "updateOnlyDiagnosticMS": {
+        "baseline": 0.10797394497785717,
+        "current": 0.10660414409358054
+      }
+    },
+    {
+      "actors": 50,
+      "metric": "updateEncodeMedianMS",
+      "baselineMeanOfP50ms": 0.9285104024456814,
+      "currentMeanOfP50ms": 0.9212031291099265,
+      "ratio": 0.9921301115027816,
+      "passed": true,
+      "updateOnlyDiagnosticMS": {
+        "baseline": 0.48596353735774755,
+        "current": 0.4859948094235733
+      }
+    }
+  ],
+  "passed": true,
+  "protocol": "Two reversed process rounds; each identical legacy harness has two reversed 1/10/50 rounds,30 warmup+120 measured fixed-clock updates; no timed readback; six immutable PNGs required each run.",
+  "rawReport": "/tmp/spine-phase5-legacy-matched/legacy-matched-performance.json",
+  "baselineSourceManifestSHA256": "123fc89a3e31fef79f9d83b871f3f810f6d9fd7d5bf7a0e4d3286d50b8001434",
+  "gateMetric": "Combined update+encode p50; update-only retained as diagnostic",
+  "recomputedFromUnchangedRawSamples": true
+}

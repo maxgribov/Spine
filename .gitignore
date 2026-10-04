@@ -1,1 +1,4 @@
 /.build/
+
+# Python validation helpers
+__pycache__/

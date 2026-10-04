@@ -27,5 +27,5 @@ public final class SpineMeshAsset {
         #endif
     }
 
-    init(compiled: CompiledMeshSkeleton) { self.compiled = compiled;rendererResources=MeshRendererResources(attachments:compiled.attachments) }
+    init(compiled: CompiledMeshSkeleton, diagnosticGroupSize:MeshTriangleNode.GroupSize = .two) { self.compiled = compiled;rendererResources=MeshRendererResources(attachments:compiled.attachments,groupSize:diagnosticGroupSize) }
 }

@@ -3,7 +3,7 @@
 The authorized [Swift / SpriteKit health scenario](swift-health-check.md) defines
 reproducible phase-aware checks. [Phase 2 health evidence](phase2-health.json)
 [Phase 3 health evidence](phase3-health.json) and [Phase 4 health evidence](phase4-health.json)
-distinguish executed checks,
+and [Phase 5 final automated health](phase5-health.json) distinguish executed checks,
 reused current test runs and deferred device gates.
 
 Phase 1 characterized the existing library before mesh integration. At that capture,

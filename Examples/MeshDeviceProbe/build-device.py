@@ -34,21 +34,22 @@ info = {'CFBundleIdentifier': args.bundle_id, 'CFBundleExecutable': 'MeshDeviceP
         'UIDeviceFamily': [1, 2], 'UILaunchScreen': {},
         'UISupportedInterfaceOrientations': ['UIInterfaceOrientationPortrait'], 'LSRequiresIPhoneOS': True}
 (app / 'Info.plist').write_bytes(plistlib.dumps(info))
-for filename in ['authored.atlas', 'authored-straight.png', 'authored-pma.png']:
+for filename in sorted(p.name for p in (repo / 'Tests/SpineTests/Resources/Mesh41').iterdir() if p.is_file()):
     shutil.copy(repo / 'Tests/SpineTests/Resources/Mesh41' / filename, app / filename)
 sources = sorted((repo / 'Sources/Spine').rglob('*.swift'))
-host = pathlib.Path(__file__).resolve().with_name('App.swift')
-manifest = {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest() for p in [host] + sources}
+hosts = sorted(pathlib.Path(__file__).resolve().parent.glob('*.swift'))
+manifest = {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest() for p in hosts + sources}
 (output / 'source-sha256.json').write_text(json.dumps(manifest, indent=2) + '\n')
+shutil.copy(output / 'source-sha256.json', app / 'source-sha256.json')
 sdk = subprocess.check_output(['xcrun', '--sdk', 'iphoneos', '--show-sdk-path'], text=True).strip()
 commands = [
     ('build', ['xcrun', '--sdk', 'iphoneos', 'swiftc', '-target', 'arm64-apple-ios13.0', '-sdk', sdk,
-               '-Onone', '-o', str(app / 'MeshDeviceProbe'), str(host)] + [str(p) for p in sources]),
+               '-O', '-whole-module-optimization', '-o', str(app / 'MeshDeviceProbe')] + [str(p) for p in hosts + sources]),
     ('sign', ['codesign', '--force', '--sign', args.identity, '--entitlements', str(output / 'entitlements.plist'),
               '--timestamp=none', str(app)])]
 if args.device:
     commands += [('install', ['xcrun', 'devicectl', 'device', 'install', 'app', '--device', args.device, str(app)]),
-                 ('launch', ['xcrun', 'devicectl', 'device', 'process', 'launch', '--device', args.device, args.bundle_id])]
+                 ('launch', ['python3', str(pathlib.Path(__file__).resolve().with_name('launch-device.py')), '--build-output', str(output), '--device', args.device])]
 for name, command in commands:
     with (output / (name + '.log')).open('w') as log:
         subprocess.run(command, stdout=log, stderr=log, check=True)

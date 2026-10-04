@@ -1,0 +1,128 @@
+{
+  "recordedUTC": "2026-10-03T21:21:22.840074+00:00",
+  "platform": "physical iPhone",
+  "os": "26.6.2",
+  "runID": "74207c4c-0900-4aa3-8e36-7da4f43f4852",
+  "sourceManifestSHA256": "026756bc05ee216b7ca983ff447900a16414e89142189f6bcbe9aa63a6db5f46",
+  "status": "failed lifecycle before performance",
+  "diagnostics": {
+    "afterPhysics": {
+      "bodyIsExpected": true,
+      "isDynamic": false,
+      "ownerPosition": [
+        80,
+        80
+      ],
+      "ownerScale": [
+        2,
+        2
+      ],
+      "parentIsRoot": true,
+      "position": [
+        3.814697265625e-06,
+        3.814697265625e-06
+      ],
+      "rootPosition": [
+        0,
+        0
+      ],
+      "rootRotation": 0,
+      "rotation": 0,
+      "scale": [
+        1,
+        1
+      ],
+      "z": 0
+    },
+    "afterPlacement": {
+      "bodyIsExpected": true,
+      "isDynamic": false,
+      "ownerPosition": [
+        80,
+        80
+      ],
+      "ownerScale": [
+        2,
+        2
+      ],
+      "parentIsRoot": true,
+      "position": [
+        0,
+        0
+      ],
+      "rootPosition": [
+        0,
+        0
+      ],
+      "rootRotation": 0,
+      "rotation": 0,
+      "scale": [
+        1,
+        1
+      ],
+      "z": 0
+    },
+    "atFailure": {
+      "bodyIsExpected": true,
+      "isDynamic": false,
+      "ownerPosition": [
+        80,
+        80
+      ],
+      "ownerScale": [
+        2,
+        2
+      ],
+      "parentIsRoot": true,
+      "position": [
+        3.814697265625e-06,
+        3.814697265625e-06
+      ],
+      "rootPosition": [
+        0,
+        0
+      ],
+      "rootRotation": 0,
+      "rotation": 0,
+      "scale": [
+        1,
+        1
+      ],
+      "z": 0
+    },
+    "beforePhysics": {
+      "bodyIsExpected": true,
+      "isDynamic": false,
+      "ownerPosition": [
+        80,
+        80
+      ],
+      "ownerScale": [
+        2,
+        2
+      ],
+      "parentIsRoot": true,
+      "position": [
+        0,
+        0
+      ],
+      "rootPosition": [
+        0,
+        0
+      ],
+      "rootRotation": 0,
+      "rotation": 0,
+      "scale": [
+        1,
+        1
+      ],
+      "z": 0
+    },
+    "initialBoxPosition": [
+      0,
+      0
+    ],
+    "phase": 0,
+    "time": 0
+  }
+}

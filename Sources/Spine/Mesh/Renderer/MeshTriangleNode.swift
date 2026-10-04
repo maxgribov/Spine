@@ -33,6 +33,8 @@ final class MeshTriangleNode: SKNode {
     private var meshExtent = SIMD2<Float>(repeating: 1)
     private var projectionWasSingular = false
     private var rasterAttributesInitialized = false
+    private var previousTint:SIMD4<Float>?
+    private var validationGeneration:UInt64=0
 
     /// Share a material between meshes using the same atlas page and bounds mode.
     /// It contains only immutable texture uniforms; transforms are per-node attributes.
@@ -120,6 +122,7 @@ final class MeshTriangleNode: SKNode {
     }
 
     func updatePositions(_ positions: [SIMD2<Float>]) throws {
+        validationGeneration &+= 1
         do {try validateDerivedValues(positions, transform:localToPixels)}
         catch {hideGeometry();throw error}
         for i in positions.indices { self.positions[i] = positions[i] }
@@ -127,6 +130,8 @@ final class MeshTriangleNode: SKNode {
     }
 
     func setTint(_ tint:SIMD4<Float>) {
+        guard previousTint != tint else {return}
+        previousTint=tint
         if let grouped=grouped {grouped.setTint(tint)}
         else {
             for (index,sprite) in sprites.enumerated() {
@@ -152,7 +157,7 @@ final class MeshTriangleNode: SKNode {
             grouped?.hideGeometry()
             return
         }
-        updateRasterAttributes(minimum: minimum, extent: extent)
+        updateRasterAttributes(minimum: minimum, extent: extent,deferGroupedCommit:true)
         for index in positions.indices { normalized[index] = (positions[index] - minimum) / extent }
         let inverse = localToPixels?.inverted() ?? .identity
         let padding = SIMD2<Float>(Float(abs(inverse.a)+abs(inverse.c)), Float(abs(inverse.b)+abs(inverse.d)))
@@ -208,6 +213,23 @@ final class MeshTriangleNode: SKNode {
         }
     }
 
+    struct ValidatedGeometry {
+        fileprivate let owner:MeshTriangleNode,transform:CGAffineTransform,positions:[SIMD2<Float>],singular:Bool
+        fileprivate let generation:UInt64
+    }
+    /// Pure preflight used by the renderer before committing any attachment.
+    func validateForRendering(localToPixels transform:CGAffineTransform,positions:[SIMD2<Float>])throws->ValidatedGeometry {
+        let determinant=transform.a*transform.d-transform.b*transform.c
+        guard [transform.a,transform.b,transform.c,transform.d,transform.tx,transform.ty,determinant].allSatisfy(\.isFinite) else {
+            throw SpineRuntimeError(.invalidRenderContext,path:"/runtime/frame",message:"Frame projection is not finite.")
+        }
+        if determinant==0 {
+            guard positions.count==uvs.count,positions.allSatisfy(Self.finite) else {throw geometryError("Nonfinite input geometry.")}
+        } else {try validateDerivedValues(positions,transform:transform)}
+        validationGeneration &+= 1
+        return ValidatedGeometry(owner:self,transform:transform,positions:positions,singular:determinant==0,generation:validationGeneration)
+    }
+
     /// Required for tight bounds after pose/ancestor/camera changes, before
     /// rendering. The transform maps mesh-local coordinates to framebuffer
     /// pixels in the actual target's fragment-coordinate convention. Shared screen coordinates avoid cracks from
@@ -215,22 +237,19 @@ final class MeshTriangleNode: SKNode {
     func prepareForRendering(localToPixels transform: CGAffineTransform, positions candidate:[SIMD2<Float>]? = nil) throws {
         let input=candidate ?? positions
         guard boundsMode == .triangle else {try updatePositions(input);return}
-        let determinant=transform.a*transform.d-transform.b*transform.c
-        guard [transform.a,transform.b,transform.c,transform.d,transform.tx,transform.ty,determinant].allSatisfy(\.isFinite) else {
-            hideGeometry()
-            throw SpineRuntimeError(.invalidRenderContext,path:"/runtime/frame",message:"Frame projection is not finite.")
-        }
-        if determinant==0 {
-            // No inverse/attributes are evaluated for a finite singular projection.
-            guard input.count==uvs.count,input.allSatisfy(Self.finite) else {
-                hideGeometry();throw geometryError("Nonfinite input geometry.")
-            }
-            hideGeometry();return
-        }
-        do {try validateDerivedValues(input,transform:transform)}
-        catch {hideGeometry();throw error}
-        // Commit only after every derived Float and sprite bound has been checked.
-        let geometryChanged=candidate != nil
+        do {
+            let validated=try validateForRendering(localToPixels:transform,positions:input)
+            commit(validated,geometryChanged:candidate != nil)
+        } catch {hideGeometry();throw error}
+    }
+
+    /// The token can only be constructed by this node's pure preflight.
+    func canCommit(_ validated:ValidatedGeometry)->Bool {validated.owner === self && validated.generation==validationGeneration}
+    func commit(_ validated:ValidatedGeometry,geometryChanged:Bool=true) {
+        precondition(canCommit(validated))
+        validationGeneration &+= 1
+        if validated.singular {hideGeometry();return}
+        let transform=validated.transform,input=validated.positions
         let paddingChanged=localToPixels?.a != transform.a || localToPixels?.b != transform.b
             || localToPixels?.c != transform.c || localToPixels?.d != transform.d
         localToPixels=transform
@@ -242,6 +261,7 @@ final class MeshTriangleNode: SKNode {
     }
 
     private func hideGeometry() {
+        validationGeneration &+= 1
         sprites.forEach {$0.isHidden=true};grouped?.hideGeometry();projectionWasSingular=true
     }
     private func geometryError(_ message:String)->SpineRuntimeError {
@@ -281,12 +301,12 @@ final class MeshTriangleNode: SKNode {
         return (x,y)
     }
 
-    private func updateRasterAttributes(minimum: SIMD2<Float>, extent: SIMD2<Float>) {
+    private func updateRasterAttributes(minimum: SIMD2<Float>, extent: SIMD2<Float>,deferGroupedCommit:Bool=false) {
         guard let inverse = localToPixels?.inverted(), boundsMode == .triangle else { return }
         let (x,y)=projection(inverse:inverse,minimum:minimum,extent:extent)
         guard x != rasterX || y != rasterY || !rasterAttributesInitialized else { return }
         rasterX = x; rasterY = y; rasterAttributesInitialized = true
-        grouped?.setProjection(x: x, y: y)
+        grouped?.setProjection(x: x, y: y,deferCommit:deferGroupedCommit)
         for (index, sprite) in sprites.enumerated() {
             values[index][7].vectorFloat3Value = x
             values[index][8].vectorFloat3Value = y

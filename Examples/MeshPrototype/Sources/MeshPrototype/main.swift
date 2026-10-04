@@ -261,7 +261,7 @@ if let option = CommandLine.arguments.firstIndex(of: "--group-size") {
     }
     selectedGroupSize = selected
 }
-let benchmarkIndex = CommandLine.arguments.firstIndex(of: "--benchmark") ?? CommandLine.arguments.firstIndex(of: "--benchmark-groups")
+let benchmarkIndex = CommandLine.arguments.firstIndex(of: "--benchmark") ?? CommandLine.arguments.firstIndex(of: "--benchmark-groups") ?? CommandLine.arguments.firstIndex(of:"--benchmark-library-mesh")
 let verificationMode = CommandLine.arguments.contains("--verify") || CommandLine.arguments.contains("--verify-integration")
 let showsSceneSwitcher = benchmarkIndex == nil && !verificationMode
 let app = NSApplication.shared
@@ -318,7 +318,14 @@ window.makeKeyAndOrderFront(nil)
 window.makeFirstResponder(view)
 app.activate(ignoringOtherApps: true)
 var benchmarkRunner: BenchmarkRunner?
-if let index = benchmarkIndex {
+var libraryBenchmarkRunner:LibraryBenchmarkRunner?
+if let index=CommandLine.arguments.firstIndex(of:"--benchmark-library-mesh") {
+    do {
+        guard CommandLine.arguments.count>index+1 else {throw PrototypeError("Provide production benchmark output directory")}
+        libraryBenchmarkRunner=try LibraryBenchmarkRunner(view:view,output:URL(fileURLWithPath:CommandLine.arguments[index+1]))
+        DispatchQueue.main.asyncAfter(deadline:.now()+0.5) {libraryBenchmarkRunner!.start()}
+    } catch {fputs("Production benchmark setup failed: \(error)\n",stderr);exit(1)}
+} else if let index = benchmarkIndex {
     let path = CommandLine.arguments.count > index+1 ? CommandLine.arguments[index+1] : "output/benchmark"
     benchmarkRunner = BenchmarkRunner(view: view, output: URL(fileURLWithPath: path))
     DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { benchmarkRunner!.start() }

@@ -265,7 +265,7 @@ final class MeshRuntime {
         let root=SKNode();root.name=managedVisuals.name
         let renderer=try MeshSetupRenderer(compiled:asset.compiled,resources:asset.rendererResources,bones:bones,slots:slots,root:root,skin:name)
         // Construction above touches neither live slot state nor logical point/physics nodes.
-        setupRenderer?.removeLogicalAttachments()
+        setupRenderer?.removeLogicalAttachments(states:slotStates)
         managedVisuals.removeFromParent();owner.addChild(root)
         managedVisuals=root;setupRenderer=renderer;slotStates=nextStates;skinLookup=lookup;selectedSkin=name
         root.isHidden=playbackError != nil || frameError != nil || preparedContext?.isSingular == true
@@ -281,12 +281,13 @@ final class MeshRuntime {
         throw error
     }
 
-    func prepare(_ context: SpineMeshFrameContext, owner: Skeleton) throws {
-        if let error = playbackError { managedVisuals.isHidden = true; throw error }
-        guard context.isValid else {
-            try rejectFrame(message: "Frame transform and positive integral pixel dimensions must be finite.", owner: owner)
-        }
+    func prepare(_ context: SpineMeshFrameContext, owner: Skeleton, viewError:String?=nil) throws {
+        let numericError=setupRenderer?.reconcile(owner:owner,states:slotStates)
+        if let error=playbackError {managedVisuals.isHidden=true;throw error}
         do {
+            if let error=numericError {throw error}
+            if let message=viewError {try rejectFrame(message:message,owner:owner)}
+            guard context.isValid else {try rejectFrame(message:"Frame transform and positive integral pixel dimensions must be finite.",owner:owner)}
             var ancestor=owner.parent
             while let node=ancestor {
                 let unsupported:Bool

@@ -1,0 +1,102 @@
+{
+  "specVersion": 6,
+  "recordedUTC": "2026-10-03T23:25:06.145920+00:00",
+  "status": "diagnostic only; fresh native acceptance pending",
+  "protocol": "50 actors, 330 fixed 1/30 SKRenderer steps; summary excludes first30; no foreground native timing",
+  "variants": {
+    "before": {
+      "rawPath": "/tmp/spine-v6-repeat-tail-before.json",
+      "groups": {
+        "repeatBoundary": {
+          "count": 10,
+          "medianMS": {
+            "actionMS": 5.716249928809702,
+            "prepareMS": 8.03014583652839,
+            "encodeMS": 21.38972916873172,
+            "totalCPUms": 35.35872919019312
+          },
+          "maxTotalCPUms": 36.87145828735083
+        },
+        "ordinary": {
+          "count": 290,
+          "medianMS": {
+            "actionMS": 1.4700416941195726,
+            "prepareMS": 8.002062502782792,
+            "encodeMS": 21.451104199513793,
+            "totalCPUms": 31.002458301372826
+          },
+          "maxTotalCPUms": 36.01220832206309
+        }
+      }
+    },
+    "no-transition": {
+      "rawPath": "/tmp/spine-v6-repeat-tail-no-transition.json",
+      "groups": {
+        "repeatBoundary": {
+          "count": 10,
+          "medianMS": {
+            "actionMS": 2.1487291087396443,
+            "prepareMS": 7.923145894892514,
+            "encodeMS": 21.95708337239921,
+            "totalCPUms": 32.247312483377755
+          },
+          "maxTotalCPUms": 33.66058331448585
+        },
+        "ordinary": {
+          "count": 290,
+          "medianMS": {
+            "actionMS": 0.5603333120234311,
+            "prepareMS": 7.832270814105868,
+            "encodeMS": 22.07314583938569,
+            "totalCPUms": 30.684125027619302
+          },
+          "maxTotalCPUms": 36.2674166681245
+        }
+      }
+    },
+    "setter-guards": {
+      "rawPath": "/tmp/spine-v6-repeat-tail-setter-guards.json",
+      "groups": {
+        "repeatBoundary": {
+          "count": 10,
+          "medianMS": {
+            "actionMS": 2.0874374895356596,
+            "prepareMS": 7.672437466681004,
+            "encodeMS": 21.92377089522779,
+            "totalCPUms": 31.972625001799315
+          },
+          "maxTotalCPUms": 38.05679164361209
+        },
+        "ordinary": {
+          "count": 290,
+          "medianMS": {
+            "actionMS": 0.5222083418630064,
+            "prepareMS": 7.692062528803945,
+            "encodeMS": 22.195166675373912,
+            "totalCPUms": 30.50524997524917
+          },
+          "maxTotalCPUms": 37.49266674276441
+        }
+      }
+    }
+  },
+  "conclusion": "Repeated ancestry authorization was evaluated before a no-op body transition at every sample; skipping only unchanged actual/expected body paths reduced synchronized repeat action time. Actual-value setter guards modestly reduce preparation median. Encode outliers remain; these traces do not establish native callback FPS.",
+  "validation": {
+    "rootTests": {
+      "passed": 144,
+      "skippedOptInDiagnostic": 1,
+      "exitCode": 0,
+      "log": "/tmp/spine-v6-repeat-fix-root.log"
+    },
+    "strictMeshGPUIntegration": {
+      "exitCode": 0,
+      "path": "/tmp/spine-v6-repeat-fix-mesh"
+    },
+    "setupAnd223AnimationOracle": {
+      "exitCodes": [
+        0,
+        0
+      ]
+    }
+  }
+}

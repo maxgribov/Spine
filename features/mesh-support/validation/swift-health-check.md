@@ -139,3 +139,44 @@ projection and is not a faithful viewport-offset fixture.
 
 Phase 3 physical-device hashes and captures remain historical after phase 4
 production changes. Final iOS parity/lifecycle/performance runs belong to phase 5.
+
+## Phase 5 performance and physical release gate
+
+Run the production benchmark and matched legacy script sequentially after builds:
+
+```sh
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --benchmark-library-mesh "$health_output/mesh-performance"
+python3 Examples/MeshPrototype/Scripts/benchmark-library-legacy-matched.py --output "$health_output/legacy-matched"
+```
+
+The mesh harness uses the canonical30+120 native and30+60 offscreen counts,
+separate CPU/action/preparation and encode intervals, completed GPU timestamps,
+and post-timing image guards. Internal `.one` reference images receive exactly
+the same compiled input as production `.two`; independent numeric validation
+remains the pinned4.1.56 oracle. The prototype image diagnostic does not replace
+the strict group comparison and is not promoted to a pass when it differs.
+The legacy archive comparison requires its immutable image guards every round.
+Record failed runs, clock/protocol differences, thermal/visibility metadata and
+raw unrounded callback FPS. Do not relax a threshold without an approved spec
+amendment. Current v5 strict callback failure is recorded in `phase5-checks.json`.
+
+Follow the updated physical-host instructions for the full current-source gate.
+Build/sign/install before requesting unlock, verify hashes, collect both device
+reports and PNGs, run the external oracle on its223 exported snapshots, and remove
+the host after evidence collection. Build success and a historical phase3 setup
+capture do not prove phase5 iOS release readiness.
+
+## Approved v6 acceptance and measurement conditions
+
+The nominal30 callback gate is now specified as the unrounded mean of the two
+round FPS values ≥30×(1−0.001)=29.97. Each round uses1000/mean(all120 intervals).
+CPU pose≤10ms, update/encode≤21.3ms, GPU≤0.52ms and all image thresholds are
+unchanged. Existing v5 failures remain historical raw evidence; the current acceptance script uses29.97 and rejects any inactive/occluded or
+non-nominal measured sample while preserving every sample.
+
+Owned-static reconciliation must pass spec P.1–P.7: fixed32-ULP world-coordinate
+budgets intersected with local position≤0.01 and modulo-angle≤1e-5 caps, no
+accumulated allowance, strict ownership/scale/depth, valid correction even when
+render context is invalid, and canonical state after each prepared physics step.
+Add3000-frame corrected traces, removal-token/near-singular/fault/contact cases
+and a fresh physical iOS run; the old uncorrected diagnostic traces are not passes.

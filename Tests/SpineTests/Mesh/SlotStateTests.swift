@@ -66,7 +66,7 @@ final class SlotStateTests:XCTestCase {
         XCTAssertFalse(slot.physicsBody!.isDynamic)
         XCTAssertLessThanOrEqual(abs(before),CGFloat(Float.ulpOfOne)*8)
         try h.skeleton.prepareMeshes(for:validMeshContext)
-        XCTAssertEqual(slot.zRotation,before) // preparation must not rewrite physics state
+        XCTAssertEqual(slot.zRotation,0) // v6 canonicalizes only bounded owned-static residue
         slot.zRotation=0.001
         assertMeshError(try h.skeleton.prepareMeshes(for:validMeshContext),.mutatedNodeContract,path:"/runtime/nodes/box")
         XCTAssertEqual(slot.zRotation,CGFloat(Float(0.001)))

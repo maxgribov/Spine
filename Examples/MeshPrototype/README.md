@@ -167,3 +167,37 @@ swift run -c release --package-path Examples/MeshPrototype MeshPrototype --bench
 Официальная [страница примеров Spine](https://esotericsoftware.com/spine-examples) ссылается на экспорт в репозитории runtimes. Здесь сохранены JSON, atlas, PNG и лицензия из [Goblins, revision 77a5db0ec6d16331f5efbaa7662bba9355bd3424](https://github.com/EsotericSoftware/spine-runtimes/tree/77a5db0ec6d16331f5efbaa7662bba9355bd3424/examples/goblins), ветка 4.1. Загрузчик не скачивает ничего при запуске.
 
 Copyright © 2013 Esoteric Software LLC. Изображения распространяются с оригинальным [goblins-license.txt](Sources/MeshPrototype/Resources/goblins-license.txt): разрешена передача вместе с лицензией, коммерческое использование изображений запрещено. Поэтому это демонстрационные assets, не графика для коммерческой игры. Лицензия корневой библиотеки не заменяет лицензию этих изображений.
+
+## Production performance validation
+
+```sh
+swift run -c release --package-path Examples/MeshPrototype MeshPrototype --benchmark-library-mesh /tmp/spine-library-performance
+python3 Examples/MeshPrototype/Scripts/benchmark-library-legacy-matched.py --output /tmp/spine-legacy-matched
+```
+
+Use fresh output directories and run these sequentially, without concurrent
+builds or other benchmarks. The mesh command generates independent single-triangle
+reference PNGs using a Release XCTest host **before** timing, then measures
+1/10/50 characters in two reversed variant rounds (30+120 native,30+60 offscreen).
+It validates all six pair/single images before accepting performance thresholds.
+Raw prototype comparisons remain separate diagnostics; callback FPS is not
+presented FPS. The native prototype reference now follows elapsed time, whereas
+the historical benchmark used tick/60 and slowed animation at lower cadence.
+
+The legacy script exports exact `d1cbd6e` library sources into its new temporary
+output directory, adds the identical validation harness, builds both revisions,
+and runs baseline/current then current/baseline. It creates no branch/worktree
+and never modifies library sources or immutable PNG goldens. Results include
+source hashes, explicit command exit codes, raw samples and CPU ratios.
+
+Current acceptance status and unresolved gates are recorded in
+[phase5.md](../../features/mesh-support/validation/phase5.md). A failed threshold
+makes the mesh command exit nonzero; a nearly30FPS callback result is not silently
+rounded into a pass.
+
+The approved spec v6 nominal30 callback criterion is an unrounded two-round mean
+of at least29.97FPS (0.1% allowance). Other CPU/GPU/image budgets are unchanged.
+The acceptance script applies this criterion to raw values. Keep the benchmark
+window active for the measured run (about60–90seconds); any inactive, occluded or
+non-nominal thermal sample rejects conditions without removing samples. Old v5
+failed measurements remain preserved as historical evidence.

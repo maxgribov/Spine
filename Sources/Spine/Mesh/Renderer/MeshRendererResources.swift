@@ -5,14 +5,14 @@ final class MeshRendererResources {
     private var materials:[ObjectIdentifier:MeshTriangleNode.Material]=[:]
     let regionShader:SKShader?
 
-    init(attachments:[CompiledAttachment]) {
+    init(attachments:[CompiledAttachment],groupSize:MeshTriangleNode.GroupSize = .two) {
         var needsRegions=false
         for attachment in attachments {
             guard let region=attachment.texture else {continue}
             switch attachment.content {
             case .mesh:
                 let key=ObjectIdentifier(region.texture)
-                if materials[key]==nil {materials[key]=MeshTriangleNode.Material(texture:region.texture,pixelSize:region.pixelSize)}
+                if materials[key]==nil {materials[key]=MeshTriangleNode.Material(texture:region.texture,pixelSize:region.pixelSize,groupSize:groupSize)}
             case .region:needsRegions=true
             default:break
             }

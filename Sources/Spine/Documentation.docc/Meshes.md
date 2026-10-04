@@ -78,3 +78,14 @@ scenes. **Tab** changes scene and **L** changes renderer. Library controls expos
 pause, transparency, reflection and reset; the environment also exposes camera
 motion and zoom. Phase 5 performance and final physical-device evidence remain a
 separate validation gate.
+
+The approved v6 contract additionally permits bounded reconciliation of
+library-owned static bounding-box slots in the final preparation step. The macOS regression checks cover this behavior; final release acceptance also
+requires current-source performance and physical-device validation. The body remains attached
+to the same slot; legacy characters are unaffected. Position/rotation residuals
+must satisfy both a fixed world-precision rule and local safety caps before being
+restored to identity. Small edits within that precision cannot be distinguished
+from solver residue. Unowned/dynamic bodies, hierarchy/scale/depth changes and
+out-of-budget values are not silently corrected. No animation time, bone pose or
+previously delivered contact is replayed. See spec P.1–P.7 for exact limits,
+invalid-context handling, body-removal transitions and singular-frame behavior.

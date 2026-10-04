@@ -9,7 +9,9 @@ final class MeshTriangleGroups: SKNode {
     let sprites: [SKSpriteNode]
     private let names: [String]
     private let values: [[SKAttributeValue]]
+    private let attributeMaps:[[String:SKAttributeValue]]
     private var lastWinding: [Bool?]
+    private var previousProjection:(SIMD3<Float>,SIMD3<Float>)?
 
     static func names(size: Int) -> [String] {
         (0..<size).flatMap { i in (0..<5).map { "a_t\(i)_\($0)" } } + ["a_rasterX", "a_rasterY", "a_tint"]
@@ -48,13 +50,18 @@ final class MeshTriangleGroups: SKNode {
 
     init(shader: SKShader, white: SKTexture, size: Int, indices: [Int], uvs: [SIMD2<Float>]) {
         groupSize = size; self.indices = indices; self.uvs = uvs
-        names = Self.names(size: size)
+        let attributeNames=Self.names(size:size)
+        names = attributeNames
         sprites = stride(from: 0, to: indices.count/3, by: size).map { _ in
             let sprite = SKSpriteNode(texture: white)
             sprite.anchorPoint = .zero; sprite.shader = shader
             return sprite
         }
-        values = sprites.map { _ in Self.names(size: size).map { _ in SKAttributeValue() } }
+        let rows=sprites.map { _ in attributeNames.indices.map {index in
+            (index==size*5 || index==size*5+1) ? SKAttributeValue(vectorFloat3:.zero):SKAttributeValue(vectorFloat4:.zero)
+        }}
+        values=rows
+        attributeMaps=rows.map {Dictionary(uniqueKeysWithValues:zip(attributeNames,$0))}
         lastWinding = [Bool?](repeating: nil, count: indices.count/3)
         super.init()
         for (index, sprite) in sprites.enumerated() {
@@ -62,6 +69,7 @@ final class MeshTriangleGroups: SKNode {
             addChild(sprite)
             // Unused slots in the last group remain explicitly disabled.
             for slot in 0..<size { set(SIMD4<Float>.zero, group: index, attribute: slot*5+4) }
+            sprite.attributeValues=attributeMaps[index]
         }
     }
     required init?(coder: NSCoder) { fatalError("Use designated initializer") }
@@ -74,21 +82,24 @@ final class MeshTriangleGroups: SKNode {
 
     func hideGeometry() { sprites.forEach { $0.isHidden = true } }
 
-    func setProjection(x: SIMD3<Float>, y: SIMD3<Float>) {
+    func setProjection(x: SIMD3<Float>, y: SIMD3<Float>,deferCommit:Bool=false) {
+        if let previous=previousProjection,previous.0==x,previous.1==y {return}
+        previousProjection=(x,y)
         for (group, sprite) in sprites.enumerated() {
             for (offset, vector) in [x,y].enumerated() {
                 let index = groupSize*5+offset
                 values[group][index].vectorFloat3Value = vector
-                sprite.setValue(values[group][index], forAttribute: names[index])
+
             }
+            if !deferCommit {sprite.attributeValues=attributeMaps[group]}
         }
     }
     func setTint(_ tint:SIMD4<Float>) {
-        for group in sprites.indices {set(tint,group:group,attribute:groupSize*5+2)}
+        for group in sprites.indices {set(tint,group:group,attribute:groupSize*5+2);sprites[group].attributeValues=attributeMaps[group]}
     }
     private func set(_ value: SIMD4<Float>, group: Int, attribute: Int) {
         values[group][attribute].vectorFloat4Value = value
-        sprites[group].setValue(values[group][attribute], forAttribute: names[attribute])
+
     }
 
     func update(positions: [SIMD2<Float>], normalized: [SIMD2<Float>], minimum: SIMD2<Float>, maximum: SIMD2<Float>,
@@ -133,6 +144,7 @@ final class MeshTriangleGroups: SKNode {
                 }
                 set(SIMD4(uvs[i2].x,uvs[i2].y,1/area,0), group: group, attribute: slot*5+4)
             }
+            sprite.attributeValues=attributeMaps[group]
             sprite.isHidden = !visible
             guard visible else { continue }
             if boundsMode == .mesh { low = minimum; high = maximum }
