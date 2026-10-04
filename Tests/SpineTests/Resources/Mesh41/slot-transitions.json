@@ -1,0 +1,397 @@
+{
+  "skeleton": {
+    "hash": "authored-phase3",
+    "spine": "4.1.17",
+    "x": -100,
+    "y": -100,
+    "width": 200,
+    "height": 200
+  },
+  "bones": [
+    {
+      "name": "root"
+    }
+  ],
+  "slots": [
+    {
+      "name": "visual",
+      "bone": "root",
+      "attachment": "base"
+    },
+    {
+      "name": "other",
+      "bone": "root",
+      "attachment": "region"
+    },
+    {
+      "name": "marker",
+      "bone": "root",
+      "attachment": "pointA"
+    },
+    {
+      "name": "box",
+      "bone": "root",
+      "attachment": "boxA"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "visual": {
+          "base": {
+            "type": "mesh",
+            "path": "plain",
+            "uvs": [
+              0.16666666666666666,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.3571428571428571,
+              0.16666666666666666,
+              0.3571428571428571
+            ],
+            "triangles": [
+              0,
+              1,
+              2,
+              0,
+              2,
+              3
+            ],
+            "vertices": [
+              -32,
+              -24,
+              32,
+              -24,
+              32,
+              24,
+              -32,
+              24
+            ],
+            "color": "ffffffff"
+          },
+          "inherited": {
+            "type": "linkedmesh",
+            "parent": "base",
+            "path": "rotated"
+          },
+          "independent": {
+            "type": "linkedmesh",
+            "parent": "base",
+            "timelines": false,
+            "path": "pma-plain"
+          },
+          "region": {
+            "path": "plain",
+            "width": 48,
+            "height": 56
+          }
+        },
+        "other": {
+          "region": {
+            "path": "pma-plain",
+            "width": 48,
+            "height": 56,
+            "x": 50
+          }
+        },
+        "marker": {
+          "pointA": {
+            "type": "point",
+            "x": 10
+          },
+          "pointB": {
+            "type": "point",
+            "x": 20
+          }
+        },
+        "box": {
+          "boxA": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              -5,
+              -5,
+              5,
+              -5,
+              5,
+              5,
+              -5,
+              5
+            ]
+          },
+          "boxB": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              -10,
+              -5,
+              10,
+              -5,
+              10,
+              5,
+              -10,
+              5
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "compatible",
+      "attachments": {
+        "visual": {
+          "base": {
+            "type": "linkedmesh",
+            "parent": "base",
+            "path": "rotated"
+          }
+        }
+      }
+    },
+    {
+      "name": "incompatible",
+      "attachments": {
+        "visual": {
+          "base": {
+            "type": "mesh",
+            "path": "pma-plain",
+            "uvs": [
+              0.16666666666666666,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.7857142857142857,
+              0.8333333333333334,
+              0.3571428571428571,
+              0.16666666666666666,
+              0.3571428571428571
+            ],
+            "triangles": [
+              0,
+              1,
+              2,
+              0,
+              2,
+              3
+            ],
+            "vertices": [
+              -32,
+              -24,
+              32,
+              -24,
+              32,
+              24,
+              -32,
+              24
+            ],
+            "color": "ffffffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "only",
+      "attachments": {
+        "visual": {
+          "special": {
+            "type": "linkedmesh",
+            "parent": "base",
+            "path": "plain"
+          }
+        }
+      }
+    }
+  ],
+  "events": {
+    "pulse": {
+      "int": 7,
+      "float": 1.5,
+      "string": "setup"
+    }
+  },
+  "animations": {
+    "switches": {
+      "bones": {
+        "root": {
+          "rotate": [
+            {
+              "value": 0
+            },
+            {
+              "time": 0.5,
+              "value": 20
+            },
+            {
+              "time": 1,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "slots": {
+        "visual": {
+          "attachment": [
+            {
+              "name": "base"
+            },
+            {
+              "time": 0.2,
+              "name": "inherited"
+            },
+            {
+              "time": 0.4,
+              "name": "region"
+            },
+            {
+              "time": 0.6,
+              "name": "independent"
+            },
+            {
+              "time": 0.8
+            },
+            {
+              "time": 1,
+              "name": "base"
+            }
+          ],
+          "rgba": [
+            {
+              "color": "ffffffff"
+            },
+            {
+              "time": 0.5,
+              "color": "8040ffc0"
+            },
+            {
+              "time": 1,
+              "color": "ffffffff"
+            }
+          ]
+        },
+        "other": {
+          "rgb": [
+            {
+              "color": "ff8040",
+              "curve": "stepped"
+            },
+            {
+              "time": 0.5,
+              "color": "80ff40"
+            },
+            {
+              "time": 1,
+              "color": "4080ff"
+            }
+          ],
+          "alpha": [
+            {
+              "value": 1
+            },
+            {
+              "time": 0.5,
+              "value": 0.25
+            },
+            {
+              "time": 1,
+              "value": 1
+            }
+          ]
+        },
+        "marker": {
+          "attachment": [
+            {
+              "name": "pointA"
+            },
+            {
+              "time": 0.3,
+              "name": "pointB"
+            },
+            {
+              "time": 0.7
+            },
+            {
+              "time": 1,
+              "name": "pointA"
+            }
+          ]
+        },
+        "box": {
+          "attachment": [
+            {
+              "name": "boxA"
+            },
+            {
+              "time": 0.3,
+              "name": "boxB"
+            },
+            {
+              "time": 0.7
+            },
+            {
+              "time": 1,
+              "name": "boxA"
+            }
+          ]
+        }
+      },
+      "drawOrder": [
+        {
+          "time": 0.25,
+          "offsets": [
+            {
+              "slot": "visual",
+              "offset": 1
+            }
+          ]
+        },
+        {
+          "time": 0.75
+        }
+      ],
+      "events": [
+        {
+          "name": "pulse"
+        },
+        {
+          "name": "pulse",
+          "time": 0.5,
+          "int": 2
+        },
+        {
+          "name": "pulse",
+          "time": 1
+        }
+      ],
+      "attachments": {
+        "default": {
+          "visual": {
+            "base": {
+              "deform": [
+                {
+                  "vertices": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "time": 0.5,
+                  "offset": 1,
+                  "vertices": [
+                    4,
+                    8,
+                    2
+                  ]
+                },
+                {
+                  "time": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

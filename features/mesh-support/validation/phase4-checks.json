@@ -1,0 +1,79 @@
+{
+  "phase": 4,
+  "specVersion": 5,
+  "baseRevision": "ce517e9fdd33c00b313a4cbc0f1bea3b41460bf2",
+  "recordedUTC": "2026-10-03T18:50:23.478005+00:00",
+  "status": "implementation checks and independent code/architecture reviews passed; automated health passed; human review pending",
+  "environment": {
+    "macOS": "26.6 (25G72)",
+    "Xcode": "26.6 (17F113)",
+    "Swift": "6.3.3",
+    "host": "arm64"
+  },
+  "checks": [
+    {
+      "command": "swift test",
+      "result": "128 tests, no failures",
+      "log": "/tmp/spine-phase4-testing-suite.log",
+      "executor": "testing_machine",
+      "exitCode": 0
+    },
+    {
+      "command": "swift test --package-path Examples/MeshPrototype",
+      "result": "10 tests, no failures",
+      "log": "/tmp/spine-phase4-prototype-tests.log"
+    },
+    {
+      "command": "swift build -c release --package-path Examples/MeshPrototype",
+      "result": "passed",
+      "log": "/tmp/spine-phase4-release-final.log"
+    },
+    {
+      "command": "MeshPrototype --verify-library-mesh /tmp/spine-phase4-mesh-final",
+      "result": "setup GPU, animation exports, native/custom context, mixed scene and eight production environment comparisons passed",
+      "log": "/tmp/spine-phase4-mesh-final/gpu-tests.log"
+    },
+    {
+      "command": "compare-library-animation.mjs spine-core@4.1.56 /tmp/spine-phase4-mesh-final",
+      "result": "223 snapshots passed",
+      "log": "/tmp/spine-phase4-animation-oracle-final.log"
+    },
+    {
+      "command": "compare-library-setup.mjs spine-core@4.1.56 /tmp/spine-phase4-mesh-final",
+      "result": "three fixtures, five setup snapshots passed",
+      "log": "/tmp/spine-phase4-setup-oracle-final.log"
+    },
+    {
+      "command": "MeshPrototype --verify-library-legacy /tmp/spine-phase4-legacy",
+      "result": "70 images, maximum RGBA error 0; state/events numeric <=1e-6",
+      "log": "/tmp/spine-phase4-legacy.log"
+    },
+    {
+      "command": "MeshPrototype --verify /tmp/spine-phase4-prototype-gpu",
+      "result": "original GPU checks passed; original documented edge allowances unchanged",
+      "log": "/tmp/spine-phase4-prototype-gpu.log"
+    },
+    {
+      "command": "MeshPrototype --verify-integration /tmp/spine-phase4-prototype-integration",
+      "result": "original eight environment comparisons and switcher passed",
+      "log": "/tmp/spine-phase4-prototype-integration.log"
+    }
+  ],
+  "platformBuilds": {
+    "macOS10.15": "passed /tmp/spine-phase4-build-macos.log",
+    "iOS13": "passed /tmp/spine-phase4-build-ios.log",
+    "tvOS13": "passed /tmp/spine-phase4-build-tvos.log",
+    "watchOS6": "passed /tmp/spine-phase4-build-watchos-final.log"
+  },
+  "sourceProvenance": "The last production delta is an os(watchOS) guard around SKScene.filter; root suite and watchOS build rerun afterward. Other target code paths are unchanged from their recorded runs. Final testing stage added only AnimationPlaybackTests.testLoadedEventResetAndSkinChangePreventOldTimelineWrites; full suite rerun (128/0), production and resource hashes unchanged.",
+  "diagnostics": [
+    "Supplemental opaque rotated-quad silhouette readbacks have one-pixel discrepancies in two cases, maximum 39/255; these are not reported as passing image gates. Strict acceptance camera evidence is the eight textured independent-prototype comparisons.",
+    "Cropping an SKScene changes its projection; the strict custom offset/Y test crops an ordinary SKNode subtree instead.",
+    "Owned static SKPhysicsBody can leave ~1.19e-7 slot rotation; a narrowly scoped Float-ULP tolerance accepts only owned-static-body residue, with a deliberate 0.001 mutation rejected."
+  ],
+  "deferred": [
+    "Phase5 performance and final physical iOS parity/lifecycle/render checks",
+    "Interactive macos-use UI workflow unavailable; automated readbacks and direct image inspection only"
+  ],
+  "physicalDevice": "Phase3 captures are historical and do not certify changed phase4 sources."
+}

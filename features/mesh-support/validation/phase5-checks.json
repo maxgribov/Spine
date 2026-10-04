@@ -1,0 +1,115 @@
+{
+  "phase": 5,
+  "specVersion": 5,
+  "baseRevision": "c685a5905a08c15ffc652a2a7ae6116160d697d6",
+  "recordedUTC": "2026-10-03T20:17:29.642215+00:00",
+  "status": "blocked by confirmed static-physics contract gap; partial iteration3 patch is not accepted",
+  "pendingGates": [
+    {
+      "gate": "V.4 native callback >=30FPS",
+      "status": "FAILED under unchanged v5 criterion",
+      "rawMeanFPS": 29.996801456414683,
+      "roundFPS": [
+        29.999969062078055,
+        29.993633850751312
+      ],
+      "note": "User clarification pending; comparator and spec not changed, no rounding to a pass."
+    },
+    {
+      "gate": "V.5 physical full lifecycle/performance",
+      "status": "failed native owned-static slot identity; contract amendment required",
+      "passedPartialStages": [
+        "21 GPU comparisons",
+        "223 snapshots passed external pinned4.1.56 oracle",
+        "100-owner lifetime"
+      ],
+      "performance": "not reached"
+    }
+  ],
+  "passedChecks": {
+    "rootTests": 130,
+    "prototypeTests": 10,
+    "deploymentBuilds": [
+      "macOS10.15",
+      "iOS13",
+      "tvOS13",
+      "watchOS6"
+    ],
+    "legacyImages": 70,
+    "legacyMaximumChannelDifference": 0,
+    "animationOracleSnapshots": 223,
+    "setupOracleSnapshots": 5,
+    "productionSetupGPUComparisons": 9,
+    "productionWorldComparisons": 8,
+    "originalPrototypeGPU": "passed with only original documented allowances",
+    "originalPrototypeIntegration": "eight comparisons passed",
+    "matchedLegacyCPURatios": [
+      {
+        "actors": 1,
+        "metric": "updateEncodeMedianMS",
+        "baselineMeanOfP50ms": 0.2717812458286062,
+        "currentMeanOfP50ms": 0.2635989512782544,
+        "ratio": 0.9698938220501359,
+        "passed": true,
+        "updateOnlyDiagnosticMS": {
+          "baseline": 0.018447914044372737,
+          "current": 0.018437480321154
+        }
+      },
+      {
+        "actors": 10,
+        "metric": "updateEncodeMedianMS",
+        "baselineMeanOfP50ms": 0.39985419425647706,
+        "currentMeanOfP50ms": 0.3852760564768687,
+        "ratio": 0.9635413658553308,
+        "passed": true,
+        "updateOnlyDiagnosticMS": {
+          "baseline": 0.10797394497785717,
+          "current": 0.10660414409358054
+        }
+      },
+      {
+        "actors": 50,
+        "metric": "updateEncodeMedianMS",
+        "baselineMeanOfP50ms": 0.9285104024456814,
+        "currentMeanOfP50ms": 0.9212031291099265,
+        "ratio": 0.9921301115027816,
+        "passed": true,
+        "updateOnlyDiagnosticMS": {
+          "baseline": 0.48596353735774755,
+          "current": 0.4859948094235733
+        }
+      }
+    ],
+    "benchmarkImages": "six paired-vs-single same-pose images passed <=2/255; separate prototype diagnostic remains max10 at50"
+  },
+  "mesh50MeanOfP50": {
+    "poseMS": 8.515083347447217,
+    "updateEncodeMS": 20.37841675337404,
+    "gpuMS": 0.5077917012386024
+  },
+  "logs": {
+    "root": "/tmp/spine-phase5-root.log",
+    "prototypeTests": "/tmp/spine-phase5-prototype-tests.log",
+    "platforms": "/tmp/spine-phase5-platforms/builds.json",
+    "meshCLI": "/tmp/spine-phase5-mesh-validation.log",
+    "legacy": "/tmp/spine-phase5-legacy-validation.log",
+    "oldGPU": "/tmp/spine-phase5-prototype-gpu.log",
+    "oldIntegration": "/tmp/spine-phase5-prototype-integration.log",
+    "oracle": "/tmp/spine-phase5-animation-oracle.log",
+    "benchmark": "/tmp/spine-phase5-mesh-pruned.log",
+    "profile": "/tmp/spine-phase5-cpu-profile.txt",
+    "matchedLegacy": "/tmp/spine-phase5-legacy-matched/legacy-matched-performance.json"
+  },
+  "notes": [
+    "All timed M1 measurements were serialized; no parallel builds or oracle jobs. Reference export precedes timing.",
+    "New native benchmark reference uses real elapsed time; historical prototype used tick/60, so walking was half-speed at30 callbacks. Both current variants start at phase0; population/layout/resolution stay matched.",
+    "Initial/profile/cached benchmark failures retained under /tmp/spine-phase5-{mesh-initial,profile-run,mesh-cached}; profile run is not accepted timing.",
+    "Current device host covers21 render comparisons,223 oracle exports,native speed/pause/repeat and reentrancy/conflict,100-owner lifetime and1/10/50 timings with six strict pair/single PNG comparisons. Execution remains pending.",
+    "No public API/spec/ADR changes; no commit or push."
+  ],
+  "currentTestState": "Last full suite green before partial numerical guard; current focused StaticPhysicsPrecisionTests is red (moving-parent feedback).",
+  "historicalEvidence": true,
+  "supersededForCurrentAcceptanceBy": "phase5-health.json",
+  "note": "Preserved earlier phase5/v5 checkpoint; its counts/failed gates are historical. Current v6 final suite:145 required passed,1 optional diagnostic skipped,0 failures; see phase5-health.json for exact provenance."
+}

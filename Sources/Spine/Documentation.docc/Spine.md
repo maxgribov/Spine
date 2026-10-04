@@ -10,6 +10,7 @@ This Swift library allows you to upload characters and their animations from the
 
 ### Getting Started
 - <doc:GettingStarted>
+- <doc:Meshes>
 
 ### Character
 - ``Skeleton``

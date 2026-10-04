@@ -13,7 +13,7 @@ struct MeshAttachmentModel: AttachmentTexturedModel {
     let fileName: String?
     let path: String?
     let uvs: [CGFloat]
-    let triangles: [UInt]
+    let triangles: [Int]
     let vertices: [CGFloat]
     let hull: UInt
     let edges: [UInt]?
@@ -38,9 +38,9 @@ extension MeshAttachmentModel: SpineDecodableDictionary {
         fileName = try container.decodeIfPresent(String.self, forKey: .name)
         path = try container.decodeIfPresent(String.self, forKey: .path)
         uvs = try container.decode([CGFloat].self, forKey: .uvs)
-        triangles = try container.decode([UInt].self, forKey: .triangles)
+        triangles = try container.decode([Int].self, forKey: .triangles)
         vertices = try container.decode([CGFloat].self, forKey: .vertices)
-        hull = try container.decode(UInt.self, forKey: .hull)
+        hull = try container.decodeIfPresent(UInt.self, forKey: .hull) ?? 0
         edges = try container.decodeIfPresent([UInt].self, forKey: .edges)
         color = try container.decodeIfPresent(ColorModel.self, forKey: .color) ?? .init(value: "FFFFFFFF")
         width = try container.decodeIfPresent(CGFloat.self, forKey: .width)

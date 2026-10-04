@@ -1,0 +1,98 @@
+[
+  {
+    "actors" : 1,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 9678,
+    "groupSize" : 2,
+    "maximumChannelDifference" : 0,
+    "round" : 1
+  },
+  {
+    "actors" : 1,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 9678,
+    "groupSize" : 4,
+    "maximumChannelDifference" : 0,
+    "round" : 1
+  },
+  {
+    "actors" : 10,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 97805,
+    "groupSize" : 2,
+    "maximumChannelDifference" : 0,
+    "round" : 1
+  },
+  {
+    "actors" : 10,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 97805,
+    "groupSize" : 4,
+    "maximumChannelDifference" : 0,
+    "round" : 1
+  },
+  {
+    "actors" : 50,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 489284,
+    "groupSize" : 2,
+    "maximumChannelDifference" : 0,
+    "round" : 1
+  },
+  {
+    "actors" : 50,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 489284,
+    "groupSize" : 4,
+    "maximumChannelDifference" : 0,
+    "round" : 1
+  },
+  {
+    "actors" : 1,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 9678,
+    "groupSize" : 2,
+    "maximumChannelDifference" : 0,
+    "round" : 2
+  },
+  {
+    "actors" : 1,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 9678,
+    "groupSize" : 4,
+    "maximumChannelDifference" : 0,
+    "round" : 2
+  },
+  {
+    "actors" : 10,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 97805,
+    "groupSize" : 2,
+    "maximumChannelDifference" : 0,
+    "round" : 2
+  },
+  {
+    "actors" : 10,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 97805,
+    "groupSize" : 4,
+    "maximumChannelDifference" : 0,
+    "round" : 2
+  },
+  {
+    "actors" : 50,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 489284,
+    "groupSize" : 2,
+    "maximumChannelDifference" : 0,
+    "round" : 2
+  },
+  {
+    "actors" : 50,
+    "channelsDifferingOver2" : 0,
+    "foregroundPixels" : 489284,
+    "groupSize" : 4,
+    "maximumChannelDifference" : 0,
+    "round" : 2
+  }
+]

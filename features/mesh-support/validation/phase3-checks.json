@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-03",
+  "phase": 3,
+  "specVersion": 5,
+  "sourceRevision": "31e41b9 + phase-3 working tree",
+  "scope": "mesh setup only; no source animation playback or skin-switch runtime",
+  "rootTests": {
+    "passed": 112,
+    "failed": 0,
+    "command": "swift test",
+    "log": "/tmp/spine-phase3-testing-full.log",
+    "logSHA256": "0d7c1120f06008b948603a0b00e85dff35d74575686c88741300a53db9183c70",
+    "completedAt": "2026-10-03T17:15:05.081Z",
+    "executor": "testing_machine_phase3"
+  },
+  "prototypeTests": {
+    "passed": 10,
+    "failed": 0,
+    "command": "swift test --package-path Examples/MeshPrototype"
+  },
+  "platformCompiles": {
+    "macOS10.15": "passed",
+    "iOS13": "passed",
+    "tvOS13": "passed",
+    "watchOS6": "passed"
+  },
+  "legacyComparison": "phase3-compatibility.json",
+  "gpuComparisons": "phase3-gpu.json",
+  "setupOracle": "phase3-setup-oracle.json",
+  "deviceSubset": "phase3-device.json",
+  "coverage": {
+    "4": "Decoder41Tests",
+    "5": "GeometryValidationTests",
+    "6": "LinkedMeshTests",
+    "7": "TextureProviderTests",
+    "13": "SkinningTests",
+    "15-16 setup": "NodeBridgeTests + SetupSmokeTests",
+    "17 setup": "GPUSetupTests + physical device host",
+    "20 setup": "ResourceLifetimeTests (100 cycles)",
+    "1-3": "Existing Compatibility tests and unchanged legacy GPU goldens"
+  },
+  "deferred": [
+    "Phase 4 real timelines/skin replacement and complete native/camera/integration validation",
+    "Phase 5 matched performance and full physical-device parity/lifecycle/performance"
+  ],
+  "notes": [
+    "Original prototype and both demo scenes preserved.",
+    "Current physical-device evidence matches the reviewed source exactly; no stale-source exception."
+  ],
+  "reviewIteration": 2,
+  "deviceExactSourceStatus": "passed: physical iPhone Air,30 native prepares,6 image comparisons; source/resource hashes match frozen iteration-2 code",
+  "reviewFixes": [
+    "Mesh reset does not run legacy slot-depth restoration; descendant actions are still removed.",
+    "Derived Float projection, bounds and normalized geometry are preflighted before mesh state/attribute updates.",
+    "Atlas numeric fields require exact token count and all tokens valid.",
+    "Curve decoding failures map to invalidTimeline only at the MeshAsset boundary."
+  ]
+}

@@ -23,7 +23,7 @@ public extension Skeleton {
      */
     var points: [SKNode]? {
         
-        slots.compactMap { slot in
+        return slots.compactMap { slot in
 
             slot.children.compactMap { (node) -> PointAttachment? in
 
@@ -55,8 +55,9 @@ public extension Skeleton {
      http://esotericsoftware.com/spine-point-attachments
      */
     var activePoints: [SKNode]? {
+        if let runtime=meshRuntime {return runtime.setupRenderer?.activePoints(states:runtime.slotStates) ?? []}
         
-       slots.compactMap { slot in
+       return slots.compactMap { slot in
             
             slot.children.first(where: { node in
                 

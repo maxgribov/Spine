@@ -1,0 +1,9 @@
+{
+  "runtime": "@esotericsoftware/spine-core@4.1.56",
+  "scope": "phase 4 full key/midpoint/switch-boundary grid through real SKAction scheduling",
+  "fixtures": 4,
+  "snapshots": 223,
+  "passed": true,
+  "maximumPositionError": 5.763036267580901e-05,
+  "maximumUVError": 5.960464477539063e-08
+}

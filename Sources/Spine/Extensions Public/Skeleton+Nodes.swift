@@ -60,6 +60,7 @@ public extension Skeleton {
      - Returns: region attachment node
      */
     func regionAttachmentNode(named: String) -> SKSpriteNode? {
+        if let runtime=meshRuntime {return runtime.setupRenderer?.regionNode(named:named)}
         
         let nodeName = RegionAttachment.generateName(named)
         guard let node = self["//\(nodeName)"].first as? SKSpriteNode else {
@@ -81,6 +82,7 @@ public extension Skeleton {
      - Returns: slot node
      */
     func slotNode(named: String) -> SKNode? {
+        if let runtime=meshRuntime {return runtime.slots.first {$0.model.name==named}}
         
         let nodeName = Slot.generateName(named)
         guard let node = self["//\(nodeName)"].first else {
@@ -102,6 +104,7 @@ public extension Skeleton {
      - Returns: bone node
      */
     func boneNode(named: String) -> SKSpriteNode? {
+        if let runtime=meshRuntime {return runtime.bones.first {$0.model.name==named}}
         
         let nodeName = Bone.generateName(named)
         guard let node = self["//\(nodeName)"].first as? SKSpriteNode else {

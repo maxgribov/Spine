@@ -1,0 +1,56 @@
+[
+  {
+    "actors" : 1,
+    "foregroundPixels" : 9678,
+    "fractionOfForeground" : 0,
+    "passed" : true,
+    "pixelsDifferingOver4" : 0,
+    "rawMaximumChannelDifference" : 1,
+    "round" : 1
+  },
+  {
+    "actors" : 10,
+    "foregroundPixels" : 97803,
+    "fractionOfForeground" : 1.022463523613795e-05,
+    "passed" : true,
+    "pixelsDifferingOver4" : 1,
+    "rawMaximumChannelDifference" : 14,
+    "round" : 1
+  },
+  {
+    "actors" : 50,
+    "foregroundPixels" : 489283,
+    "fractionOfForeground" : 1.2262841750071022e-05,
+    "passed" : true,
+    "pixelsDifferingOver4" : 6,
+    "rawMaximumChannelDifference" : 34,
+    "round" : 1
+  },
+  {
+    "actors" : 1,
+    "foregroundPixels" : 9678,
+    "fractionOfForeground" : 0,
+    "passed" : true,
+    "pixelsDifferingOver4" : 0,
+    "rawMaximumChannelDifference" : 1,
+    "round" : 2
+  },
+  {
+    "actors" : 10,
+    "foregroundPixels" : 97803,
+    "fractionOfForeground" : 1.022463523613795e-05,
+    "passed" : true,
+    "pixelsDifferingOver4" : 1,
+    "rawMaximumChannelDifference" : 14,
+    "round" : 2
+  },
+  {
+    "actors" : 50,
+    "foregroundPixels" : 489283,
+    "fractionOfForeground" : 1.2262841750071022e-05,
+    "passed" : true,
+    "pixelsDifferingOver4" : 6,
+    "rawMaximumChannelDifference" : 34,
+    "round" : 2
+  }
+]

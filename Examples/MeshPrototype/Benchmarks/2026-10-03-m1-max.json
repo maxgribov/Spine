@@ -1,0 +1,956 @@
+{
+  "appNapPrevented" : true,
+  "backingScale" : 2,
+  "date" : "2026-10-03T11:09:49Z",
+  "floatingWindow" : true,
+  "gpuMeasuredFrames" : 60,
+  "gpuWarmupFrames" : 30,
+  "nativeMeasuredFrames" : 120,
+  "nativeViewSizePoints" : [
+    960,
+    540
+  ],
+  "nativeWarmupFrames" : 30,
+  "notes" : "Release build recommended. Two rounds, reversed mode order. Geometry areas are proxies, not fragment counters. Native intervals are vsync-paced; GPU samples use SKRenderer, serialized command buffers, no readback. No measured draw-call counters.",
+  "os" : "Version 26.6 (Build 25G72)",
+  "results" : [
+    {
+      "actors" : 1,
+      "mode" : "mesh",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.1982499854639173,
+          "mean" : 0.19407707344119748,
+          "p50" : 0.15212502330541611,
+          "p95" : 0.25079166516661644,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 0.73787500150501728,
+          "mean" : 0.61862361423360801,
+          "p50" : 0.61175005976110697,
+          "p95" : 0.66483335103839636,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 1.0398332960903645,
+          "mean" : 0.86725416088787222,
+          "p50" : 0.86162507068365812,
+          "p95" : 0.98516664002090693,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 3.0662083299830556,
+          "mean" : 1.9731034718764324,
+          "p50" : 1.9219999667257071,
+          "p95" : 2.271000063046813,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 1,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 59.999643753768112,
+        "frameInterval_ms" : {
+          "max" : 17.651833361014724,
+          "mean" : 16.666765624540858,
+          "p50" : 16.667874995619059,
+          "p95" : 17.487916629761457,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 2.412083325907588,
+          "mean" : 1.2306760453308623,
+          "p50" : 1.1606666957959533,
+          "p95" : 1.9070416456088424,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 582091.2563646062,
+          "mean" : 501301.06613210333,
+          "p50" : 503389.79517703684,
+          "p95" : 580526.11165126215,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 16743.754682013656,
+          "mean" : 16604.834829642659,
+          "p50" : 16593.193042239847,
+          "p95" : 16707.191889793714,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 226
+      }
+    },
+    {
+      "actors" : 1,
+      "mode" : "triangle",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 0.27537497226148844,
+          "mean" : 0.096231953163320824,
+          "p50" : 0.092375092208385468,
+          "p95" : 0.098541728220880032,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 0.83845830522477627,
+          "mean" : 0.68901736522093415,
+          "p50" : 0.67012500949203968,
+          "p95" : 0.76349999289959669,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 1.1680833995342255,
+          "mean" : 0.89459652469183004,
+          "p50" : 0.86758332327008247,
+          "p95" : 0.97912503406405449,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 2.495291642844677,
+          "mean" : 1.9594006900054712,
+          "p50" : 1.8983333138749003,
+          "p95" : 2.1801249822601676,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 1,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 59.999358756336079,
+        "frameInterval_ms" : {
+          "max" : 17.678541596978903,
+          "mean" : 16.666844791810338,
+          "p50" : 16.666500014252961,
+          "p95" : 17.493374994955957,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 1.756291720084846,
+          "mean" : 1.1922524320349719,
+          "p50" : 1.1991249630227685,
+          "p95" : 1.4570415951311588,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 63766.505855570525,
+          "mean" : 60944.542211117761,
+          "p50" : 61025.284666639185,
+          "p95" : 63647.762854427565,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 16743.754682013656,
+          "mean" : 16604.834829642659,
+          "p50" : 16593.193042239847,
+          "p95" : 16707.191889793714,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 226
+      }
+    },
+    {
+      "actors" : 10,
+      "mode" : "mesh",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 0.45129167847335339,
+          "mean" : 0.35677360720001161,
+          "p50" : 0.34258328378200531,
+          "p95" : 0.42749999556690454,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 4.9661666853353381,
+          "mean" : 4.6908201475162059,
+          "p50" : 4.6696666395291686,
+          "p95" : 4.8883333802223206,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 6.5103750675916672,
+          "mean" : 5.9503249998670071,
+          "p50" : 5.8808333706110716,
+          "p95" : 6.2230416806414723,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 12.250375002622604,
+          "mean" : 11.595755559392273,
+          "p50" : 11.562125058844686,
+          "p95" : 12.087958282791078,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 1,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 60.02021180650852,
+        "frameInterval_ms" : {
+          "max" : 17.592624993994832,
+          "mean" : 16.661054166615941,
+          "p50" : 16.666583367623389,
+          "p95" : 17.223041621036828,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 4.9847082700580359,
+          "mean" : 4.7188531335753696,
+          "p50" : 4.6971249394118786,
+          "p95" : 4.8694167053326964,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 4012101.2609374085,
+          "mean" : 3896393.517781808,
+          "p50" : 3894155.7923687031,
+          "p95" : 4008221.6408687285,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 196408.52188602311,
+          "mean" : 196051.82294412292,
+          "p50" : 196077.56560421363,
+          "p95" : 196239.47430505877,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 1572
+      }
+    },
+    {
+      "actors" : 10,
+      "mode" : "triangle",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.3557500205934048,
+          "mean" : 0.20292013844785592,
+          "p50" : 0.1841250341385603,
+          "p95" : 0.19320833962410688,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 6.0050416504964232,
+          "mean" : 5.0841597219308214,
+          "p50" : 5.0546666607260704,
+          "p95" : 5.2174166776239872,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 6.5735833486542106,
+          "mean" : 6.0839180562955635,
+          "p50" : 6.0350000858306885,
+          "p95" : 6.3954166835173965,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 13.429458369500935,
+          "mean" : 11.943398619769141,
+          "p50" : 11.865749955177307,
+          "p95" : 12.341958354227245,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 1,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 60.000113749626614,
+        "frameInterval_ms" : {
+          "max" : 17.573541728779674,
+          "mean" : 16.666635069608066,
+          "p50" : 16.66616671718657,
+          "p95" : 16.91174996085465,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 6.1160416807979345,
+          "mean" : 5.3976232612815993,
+          "p50" : 5.3534166654571891,
+          "p95" : 5.8369582984596491,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 652176.61857879884,
+          "mean" : 647436.60781390092,
+          "p50" : 647402.67595091241,
+          "p95" : 651186.63269282109,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 196408.52188602311,
+          "mean" : 196051.82294412292,
+          "p50" : 196077.56560421363,
+          "p95" : 196239.47430505877,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 1572
+      }
+    },
+    {
+      "actors" : 50,
+      "mode" : "mesh",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 2.088458277285099,
+          "mean" : 1.1982409787985187,
+          "p50" : 1.1777500621974468,
+          "p95" : 1.2601250782608986,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 24.420166737399995,
+          "mean" : 23.619692367113505,
+          "p50" : 23.57970830053091,
+          "p95" : 24.080374976620078,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 31.883250107057393,
+          "mean" : 30.809796531684697,
+          "p50" : 30.686541693285108,
+          "p95" : 31.61354165058583,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 58.277749922126532,
+          "mean" : 56.752381958843522,
+          "p50" : 56.615083361975849,
+          "p95" : 57.913791737519205,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 1,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 14.999185669194889,
+        "frameInterval_ms" : {
+          "max" : 67.485041567124426,
+          "mean" : 66.670286111184396,
+          "p50" : 66.665458376519382,
+          "p95" : 67.085250047966838,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 120,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 25.32370830886066,
+          "mean" : 23.846331942089211,
+          "p50" : 23.74604158103466,
+          "p95" : 24.457958294078708,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 19601097.257956669,
+          "mean" : 19481967.588909041,
+          "p50" : 19483865.884371772,
+          "p95" : 19588496.568647102,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 980581.02350533276,
+          "mean" : 980259.11472061474,
+          "p50" : 980230.65830107557,
+          "p95" : 980548.8430046672,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 7860
+      }
+    },
+    {
+      "actors" : 50,
+      "mode" : "triangle",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.3327499618753791,
+          "mean" : 0.56294375293267274,
+          "p50" : 0.52887503989040852,
+          "p95" : 0.65775006078183651,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 26.911291643045843,
+          "mean" : 25.938104157103226,
+          "p50" : 25.862666661851108,
+          "p95" : 26.710958336479962,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 34.717833390459418,
+          "mean" : 32.103391676597916,
+          "p50" : 31.939166598021984,
+          "p95" : 33.090000040829182,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 63.712166622281075,
+          "mean" : 59.696713192776464,
+          "p50" : 59.491000021807849,
+          "p95" : 60.944500030018389,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 1,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 15.000035703063473,
+        "frameInterval_ms" : {
+          "max" : 67.687208415009081,
+          "mean" : 66.666507986762255,
+          "p50" : 66.665291669778526,
+          "p95" : 67.522708210162818,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 120,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 28.989333310164511,
+          "mean" : 27.308263890639257,
+          "p50" : 27.195333270356059,
+          "p95" : 28.358625015243888,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 3241958.5467170002,
+          "mean" : 3237183.0722466907,
+          "p50" : 3237091.1102551864,
+          "p95" : 3241402.5744604599,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 980581.02350533276,
+          "mean" : 980259.11472061474,
+          "p50" : 980230.65830107557,
+          "p95" : 980548.8430046672,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 7860
+      }
+    },
+    {
+      "actors" : 1,
+      "mode" : "triangle",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.2187500251457095,
+          "mean" : 0.11153958233383794,
+          "p50" : 0.092249945737421513,
+          "p95" : 0.096875010058283806,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 0.91462500859051943,
+          "mean" : 0.69139304299217963,
+          "p50" : 0.68604166153818369,
+          "p95" : 0.76712493319064379,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 1.1460416717454791,
+          "mean" : 0.9099020952514062,
+          "p50" : 0.89925003703683615,
+          "p95" : 1.0077917249873281,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 3.1854166882112622,
+          "mean" : 1.9885208263682823,
+          "p50" : 1.9423749763518572,
+          "p95" : 2.2620415547862649,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 2,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 59.999909999449692,
+        "frameInterval_ms" : {
+          "max" : 17.606791807338595,
+          "mean" : 16.66669166685703,
+          "p50" : 16.66637510061264,
+          "p95" : 17.124166712164879,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 1.6709583578631282,
+          "mean" : 1.1900135393564899,
+          "p50" : 1.2345833238214254,
+          "p95" : 1.4888748992234468,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 63766.505855570525,
+          "mean" : 60944.542211117761,
+          "p50" : 61025.284666639185,
+          "p95" : 63647.762854427565,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 16743.754682013656,
+          "mean" : 16604.834829642659,
+          "p50" : 16593.193042239847,
+          "p95" : 16707.191889793714,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 226
+      }
+    },
+    {
+      "actors" : 1,
+      "mode" : "mesh",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 0.23975002113729715,
+          "mean" : 0.15432291547767818,
+          "p50" : 0.15249999705702066,
+          "p95" : 0.16125000547617674,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 0.80316676758229733,
+          "mean" : 0.7044090423732996,
+          "p50" : 0.70229161065071821,
+          "p95" : 0.78437500633299351,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 1.2311666505411267,
+          "mean" : 0.96883818817635381,
+          "p50" : 0.97262498456984758,
+          "p95" : 1.1077083181589842,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 2.7208749670535326,
+          "mean" : 2.119849321510022,
+          "p50" : 2.1292082965373993,
+          "p95" : 2.37445835955441,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 2,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 59.999923752717713,
+        "frameInterval_ms" : {
+          "max" : 17.621208331547678,
+          "mean" : 16.666687846494217,
+          "p50" : 16.665374976582825,
+          "p95" : 17.075041658245027,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 3.1055416911840439,
+          "mean" : 1.1318336803621303,
+          "p50" : 1.1122917057946324,
+          "p95" : 1.6431666444987059,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 582091.2563646062,
+          "mean" : 501301.06613210333,
+          "p50" : 503389.79517703684,
+          "p95" : 580526.11165126215,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 16743.754682013656,
+          "mean" : 16604.834829642659,
+          "p50" : 16593.193042239847,
+          "p95" : 16707.191889793714,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 226
+      }
+    },
+    {
+      "actors" : 10,
+      "mode" : "triangle",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.4532083878293633,
+          "mean" : 0.24747917389807603,
+          "p50" : 0.18550001550465822,
+          "p95" : 0.67408336326479912,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 6.0139166889712214,
+          "mean" : 5.1000381878111511,
+          "p50" : 5.0470000132918358,
+          "p95" : 5.4473750060424209,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 6.8235833896324039,
+          "mean" : 6.2090750046384828,
+          "p50" : 6.1593333957716823,
+          "p95" : 6.5620832610875368,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 13.385499943979084,
+          "mean" : 12.12976667059896,
+          "p50" : 12.010541744530201,
+          "p95" : 13.03370832465589,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 2,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 60.000091251124637,
+        "frameInterval_ms" : {
+          "max" : 17.614958342164755,
+          "mean" : 16.666641319170594,
+          "p50" : 16.666416660882533,
+          "p95" : 16.929541598074138,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 6.1573750572279096,
+          "mean" : 5.3881191017959891,
+          "p50" : 5.3452916909009218,
+          "p95" : 5.7830833829939365,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 652176.61857879884,
+          "mean" : 647436.60781390092,
+          "p50" : 647402.67595091241,
+          "p95" : 651186.63269282109,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 196408.52188602311,
+          "mean" : 196051.82294412292,
+          "p50" : 196077.56560421363,
+          "p95" : 196239.47430505877,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 1572
+      }
+    },
+    {
+      "actors" : 10,
+      "mode" : "mesh",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.5860417624935508,
+          "mean" : 0.39370903396047652,
+          "p50" : 0.35075005143880844,
+          "p95" : 0.43112493585795164,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 5.348166567273438,
+          "mean" : 4.7143347270321101,
+          "p50" : 4.6863332390785217,
+          "p95" : 4.9442499876022339,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 6.6163750598207116,
+          "mean" : 6.046619442834829,
+          "p50" : 6.0219583101570606,
+          "p95" : 6.3204583711922169,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 13.147624908015132,
+          "mean" : 11.733743063329408,
+          "p50" : 11.659874930046499,
+          "p95" : 12.711333343759179,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 2,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 59.999922498927901,
+        "frameInterval_ms" : {
+          "max" : 17.538250074721873,
+          "mean" : 16.666688194770057,
+          "p50" : 16.666708397679031,
+          "p95" : 17.274333396926522,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 0,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 5.192666663788259,
+          "mean" : 4.7496718664964037,
+          "p50" : 4.727874998934567,
+          "p95" : 4.957416676916182,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 4012101.2609374085,
+          "mean" : 3896393.517781808,
+          "p50" : 3894155.7923687031,
+          "p95" : 4008221.6408687285,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 196408.52188602311,
+          "mean" : 196051.82294412292,
+          "p50" : 196077.56560421363,
+          "p95" : 196239.47430505877,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 1572
+      }
+    },
+    {
+      "actors" : 50,
+      "mode" : "triangle",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.2355000944808125,
+          "mean" : 0.54461874921495712,
+          "p50" : 0.52991672419011593,
+          "p95" : 0.63808332197368145,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 27.36991667188704,
+          "mean" : 25.922607632431511,
+          "p50" : 25.842166738584638,
+          "p95" : 26.354999979957938,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 34.004541696049273,
+          "mean" : 31.928421527845785,
+          "p50" : 31.812416622415185,
+          "p95" : 32.653291709721088,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 61.551833292469382,
+          "mean" : 59.485370824889593,
+          "p50" : 59.374291682615876,
+          "p95" : 60.958041693083942,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 2,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 14.999949297078675,
+        "frameInterval_ms" : {
+          "max" : 67.526374943554401,
+          "mean" : 66.666892013745382,
+          "p50" : 66.66691682767123,
+          "p95" : 66.944833262823522,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 120,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 27.945458306930959,
+          "mean" : 27.066272224571247,
+          "p50" : 27.012666687369347,
+          "p95" : 27.550166705623269,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 3241958.5467170002,
+          "mean" : 3237183.0722466907,
+          "p50" : 3237091.1102551864,
+          "p95" : 3241402.5744604599,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 980581.02350533276,
+          "mean" : 980259.11472061474,
+          "p50" : 980230.65830107557,
+          "p95" : 980548.8430046672,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 7860
+      }
+    },
+    {
+      "actors" : 50,
+      "mode" : "mesh",
+      "offscreen" : {
+        "alphaSum" : 528768000,
+        "device" : "Apple M1 Max",
+        "GPU_ms" : {
+          "max" : 1.2651249999180436,
+          "mean" : 1.1733687540981919,
+          "p50" : 1.1726251104846597,
+          "p95" : 1.2229999992996454,
+          "samples" : 60
+        },
+        "poseAndGeometryCPU_ms" : {
+          "max" : 24.505583336576819,
+          "mean" : 23.744273626167949,
+          "p50" : 23.664291715249419,
+          "p95" : 24.274250026792288,
+          "samples" : 60
+        },
+        "sceneUpdateAndEncodeCPU_ms" : {
+          "max" : 33.970041666179895,
+          "mean" : 31.266481241133686,
+          "p50" : 31.019583344459534,
+          "p95" : 32.448875019326806,
+          "samples" : 60
+        },
+        "serializedWall_ms" : {
+          "max" : 60.495958314277232,
+          "mean" : 57.283977077653013,
+          "p50" : 57.001708424650133,
+          "p95" : 58.445458300411701,
+          "samples" : 60
+        },
+        "sizePixels" : [
+          1920,
+          1080
+        ]
+      },
+      "round" : 2,
+      "skView" : {
+        "appActiveAtEnd" : true,
+        "effectiveFPS" : 15.001602593109613,
+        "frameInterval_ms" : {
+          "max" : 67.630541510879993,
+          "mean" : 66.65954479152181,
+          "p50" : 66.6669582715258,
+          "p95" : 67.166291642934084,
+          "samples" : 120
+        },
+        "intervalsOver25ms" : 120,
+        "occludedMeasuredFrames" : 0,
+        "poseAndGeometryCPU_ms" : {
+          "max" : 24.694416671991348,
+          "mean" : 23.82154270793156,
+          "p50" : 23.78924994263798,
+          "p95" : 24.326458340510726,
+          "samples" : 120
+        },
+        "submittedQuadArea_px2" : {
+          "max" : 19601097.257956669,
+          "mean" : 19481967.588909041,
+          "p50" : 19483865.884371772,
+          "p95" : 19588496.568647102,
+          "samples" : 120
+        },
+        "thermalEnd" : 0,
+        "thermalStart" : 0,
+        "triangleArea_px2" : {
+          "max" : 980581.02350533276,
+          "mean" : 980259.11472061474,
+          "p50" : 980230.65830107557,
+          "p95" : 980548.8430046672,
+          "samples" : 120
+        },
+        "visibleTrianglesLastFrame" : 7860
+      }
+    }
+  ],
+  "schema" : 1,
+  "targetFPS" : 60
+}

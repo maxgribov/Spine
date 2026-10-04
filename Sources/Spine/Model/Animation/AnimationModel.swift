@@ -11,6 +11,8 @@ struct AnimationModel {
     
     let name: String
     let groups: [Group]
+    let attachmentTimelines: [AttachmentTimelineModel]
+    let meshDecodeError: Swift.Error?
 }
 
 //MARK: - Types
@@ -40,7 +42,7 @@ extension AnimationModel: SpineDecodableDictionary {
     
     enum Keys: String, CodingKey {
         
-        case bones, slots, ik, transform, deform, events, drawOrder
+        case bones, slots, ik, transform, deform, events, drawOrder, attachments
     }
 
     typealias KeysType = Keys
@@ -48,6 +50,8 @@ extension AnimationModel: SpineDecodableDictionary {
     init(_ name: String, _ container: KeyedDecodingContainer<KeysType>) throws {
 
         var groups = [Group]()
+        var attachmentTimelines: [AttachmentTimelineModel] = []
+        var meshDecodeError: Swift.Error?
         
         for groupKey in container.allKeys {
             
@@ -56,6 +60,12 @@ extension AnimationModel: SpineDecodableDictionary {
             }
             
             switch groupType {
+            case .attachments:
+                // Preserve the former legacy unknown-field behavior on malformed new fields.
+                // MeshAsset surfaces the deferred error after the common decode.
+                do {
+                    attachmentTimelines = try AttachmentTimelineModel.decode(container.nestedContainer(keyedBy:SpineNameKey.self,forKey:.attachments))
+                } catch { meshDecodeError = error }
             case .bones:
                 let groupContainer = try container.nestedContainer(keyedBy: SpineNameKey.self, forKey: groupKey)
                 var animations = [BoneAnimationModel]()
@@ -133,6 +143,8 @@ extension AnimationModel: SpineDecodableDictionary {
         
         self.name = name
         self.groups = groups
+        self.attachmentTimelines = attachmentTimelines
+        self.meshDecodeError = meshDecodeError
     }
 }
 

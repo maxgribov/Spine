@@ -1,0 +1,18 @@
+{
+  "images" : 70,
+  "maximumChannelDifference" : 0,
+  "mode" : "verify",
+  "numericTolerance" : 9.9999999999999995e-07,
+  "scenarios" : [
+    "once",
+    "sequence",
+    "repeat",
+    "group",
+    "reuse",
+    "removal",
+    "pause",
+    "speed",
+    "reset",
+    "skin-texture-manual"
+  ]
+}

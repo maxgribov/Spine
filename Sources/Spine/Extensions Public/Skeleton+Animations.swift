@@ -13,16 +13,21 @@ public extension Skeleton {
     /**
      A list of all available animation names for this skeleton `Skeleton`.
      */
-    var animationsNames: [String] { animations.map({ $0.name }) }
+    var animationsNames: [String] { meshRuntime?.asset.animationNames ?? animations.map({ $0.name }) }
     
     /**
      Returns a `SKAction` for animation with a specific name.
+
+     In mesh-aware mode, this action and its copies or action containers must run
+     on the Skeleton that created it. Running them on another node is unsupported;
+     receiver validation and mutation safety are not guaranteed for that misuse.
      
      - parameter named: the name of the animation.
      
      - throws: error if animation with this name can't be found.
      */
     func action(animation name: String) throws -> SKAction {
+        if let runtime = meshRuntime { return try runtime.action(named: name, owner: self) }
         
         guard let animation = animations.first(where: { $0.name == name }) else {
             throw SpineError.missingAnimatonNamed(name)

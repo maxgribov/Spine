@@ -29,7 +29,7 @@ extension DeformKeyframeModel: Decodable {
         let container = try decoder.container(keyedBy: Keys.self)
         time = try container.decodeIfPresent(TimeInterval.self, forKey: .time) ?? 0
         offset = try container.decodeIfPresent(Int.self, forKey: .offset) ?? 0
-        vertices = try container.decode([CGFloat].self, forKey: .vertices)
+        vertices = try container.decodeIfPresent([CGFloat].self, forKey: .vertices) ?? []
         curve = try container.decodeIfPresent(CurveModel.self, forKey: .curve) ?? .linear
     }
 }

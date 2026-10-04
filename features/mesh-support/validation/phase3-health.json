@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "phase": 3,
+  "specVersion": 5,
+  "status": "passed",
+  "scope": "Phase 3 setup health; full feature and release remain incomplete",
+  "recordedAt": "2026-10-03T17:12:07.961549+00:00",
+  "source": {
+    "branch": "feat/mesh-support",
+    "head": "31e41b926338cf5c591f3107ef8925b56b78ed03",
+    "uncommitted": true,
+    "scope": "Phase 3 production, test, validation host and docs changes"
+  },
+  "environment": {
+    "os": "macOS 26.6 (25G72)",
+    "xcode": "26.6 (17F113)",
+    "swift": "6.3.3",
+    "sdk": "26.5",
+    "host": "Apple M1 Max"
+  },
+  "recipe": "swift-health-check.md",
+  "checks": [
+    {
+      "name": "macos-compile",
+      "command": "swift build --target Spine --triple x86_64-apple-macosx10.15 --sdk \"$(xcrun --sdk macosx --show-sdk-path)\" --scratch-path /tmp/spine-phase3-health-macos",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "log": "/tmp/spine-phase3-health-macos.log",
+      "logSHA256": "4e31faf1831db0285c246ac59c2bdebadfab432e35f86542680b4a353fef5c4c",
+      "scope": "Library compilation only, not physical execution"
+    },
+    {
+      "name": "ios-compile",
+      "command": "swift build --target Spine --triple arm64-apple-ios13.0 --sdk \"$(xcrun --sdk iphoneos --show-sdk-path)\" --scratch-path /tmp/spine-phase3-health-ios",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "log": "/tmp/spine-phase3-health-ios.log",
+      "logSHA256": "6057880a5dbdbe5be8afeec711709125812d359be10f0ef3e6a052806ee3b1a5",
+      "scope": "Library compilation only, not physical execution"
+    },
+    {
+      "name": "tvos-compile",
+      "command": "swift build --target Spine --triple arm64-apple-tvos13.0 --sdk \"$(xcrun --sdk appletvos --show-sdk-path)\" --scratch-path /tmp/spine-phase3-health-tvos",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "log": "/tmp/spine-phase3-health-tvos.log",
+      "logSHA256": "3bfd9e4979398c0551606c179573802960425db1fd155e5679c3c55c1fa2ee85",
+      "scope": "Library compilation only, not physical execution"
+    },
+    {
+      "name": "watchos-compile",
+      "command": "swift build --target Spine --triple arm64_32-apple-watchos6.0 --sdk \"$(xcrun --sdk watchos --show-sdk-path)\" --scratch-path /tmp/spine-phase3-health-watchos",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "log": "/tmp/spine-phase3-health-watchos.log",
+      "logSHA256": "e54956e44dcd2ecd3760786ccdf50419250d807f225ab4fe86d306d6bd759603",
+      "scope": "Library compilation only, not physical execution"
+    },
+    {
+      "name": "prototype",
+      "command": "swift test --package-path Examples/MeshPrototype",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "log": "/tmp/spine-phase3-health-prototype.log",
+      "logSHA256": "9f9d28d500cd36d2c896da2857a493d15a634ac5e46ca775777fbee1748d30e3",
+      "passedTests": 10
+    },
+    {
+      "name": "release",
+      "command": "swift build -c release --package-path Examples/MeshPrototype",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "log": "/tmp/spine-phase3-health-release.log",
+      "logSHA256": "6a515dbb2ec0b7ca4f4c75d3dcd764e96acc6fbd11457111e1ca2b5c739a76a7",
+      "passedTests": null
+    },
+    {
+      "name": "root-tests",
+      "command": "swift test",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "testing_machine_phase3",
+      "reused": true,
+      "provenance": "Final testing stage added three test-only regressions; fresh full suite passed. Production/host/resources unchanged.",
+      "log": "/tmp/spine-phase3-testing-full.log",
+      "logSHA256": "0d7c1120f06008b948603a0b00e85dff35d74575686c88741300a53db9183c70",
+      "passedTests": 112,
+      "failedTests": 0,
+      "completedAt": "2026-10-03T17:15:05.081Z"
+    },
+    {
+      "name": "legacy",
+      "command": "swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-legacy /tmp/spine-legacy-phase3-review2",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "coding_machine",
+      "reused": true,
+      "provenance": "Review iteration 2 final frozen source; health agent inspected log and compared source hashes",
+      "log": "/tmp/spine-phase3-review2-legacy.log",
+      "logSHA256": "110d1a822498eb445a51b84a48279345eff4f4696186bd060341b5c592ed5d5b",
+      "logModifiedAt": "2026-10-03T17:03:33.807927+00:00",
+      "evidence": "phase3-compatibility.json",
+      "images": 70,
+      "maximumChannelDifference": 0,
+      "numericTolerance": 1e-06
+    },
+    {
+      "name": "gpu",
+      "command": "swift run -c release --package-path Examples/MeshPrototype MeshPrototype --verify-library-mesh /tmp/spine-library-mesh-phase3-review2",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "coding_machine",
+      "reused": true,
+      "provenance": "Review iteration 2 final frozen source; health agent inspected log and compared source hashes",
+      "log": "/tmp/spine-phase3-review2-gpu.log",
+      "logSHA256": "5f4eef49db993ab42d301134e4e7d122b66041b42e6f1a226a5d42d4e622cf8d",
+      "logModifiedAt": "2026-10-03T17:03:38.573751+00:00",
+      "evidence": "phase3-gpu.json",
+      "comparisons": 9,
+      "maximumChannelDifference": 0
+    },
+    {
+      "name": "oracle",
+      "command": "node Examples/MeshPrototype/Scripts/compare-library-setup.mjs /tmp/spine-mesh-oracle/node_modules/@esotericsoftware/spine-core/dist/index.js /tmp/spine-library-mesh-phase3-review2",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "coding_machine",
+      "reused": true,
+      "provenance": "Review iteration 2 final frozen source; health agent inspected log and compared source hashes",
+      "log": "/tmp/spine-phase3-review2-oracle.log",
+      "logSHA256": "2a31d196f6c117da55925f90d15d44c6a2630fd97b12e5d1cae5825e87c276f3",
+      "logModifiedAt": "2026-10-03T17:03:38.640919+00:00",
+      "evidence": "phase3-setup-oracle.json",
+      "fixtures": 3,
+      "snapshots": 5,
+      "maximumPositionError": 5.444669415055614e-05,
+      "maximumUVError": 5.960464477539063e-08
+    },
+    {
+      "name": "git diff --check",
+      "command": "git diff --check",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "output": ""
+    },
+    {
+      "name": "git diff --cached --check",
+      "command": "git diff --cached --check",
+      "exitCode": 0,
+      "status": "passed",
+      "executor": "health_check_runner",
+      "output": ""
+    },
+    {
+      "name": "source-manifest",
+      "status": "passed",
+      "executor": "health_check_runner",
+      "command": "SHA-256 comparison of every source-sha256.json entry with current file contents",
+      "manifest": "/tmp/spine-device-phase3-review2/source-sha256.json",
+      "manifestSHA256": "9209683d8a70ab0e9d838feeefdf85b68bf801303d1c73fe855f766a47eff998",
+      "sourceChanges": []
+    },
+    {
+      "name": "untracked-text-whitespace",
+      "command": "UTF-8 scan of git ls-files --others --exclude-standard",
+      "status": "passed",
+      "executor": "health_check_runner",
+      "formattingNotes": [
+        "Tests/SpineTests/Resources/Mesh41/goblins-license.txt: missing final newline",
+        "Tests/SpineTests/Resources/Mesh41/goblins-pro.json: missing final newline",
+        "features/mesh-support/validation/phase3-compatibility.json: missing final newline",
+        "features/mesh-support/validation/phase3-gpu.json: missing final newline"
+      ],
+      "reason": "Only missing final newlines in verbatim imported license/fixture or generated JSON; preserve upstream hashes; generated JSON parsed successfully."
+    }
+  ],
+  "physicalDeviceGate": {
+    "status": "passed",
+    "executor": "coding_machine",
+    "reused": true,
+    "verifiedBy": "health_check_runner",
+    "provenance": "Device-produced report fields match archived evidence; every production/host manifest and resource hash independently matched current tree",
+    "evidence": "phase3-device.json",
+    "sourceManifest": "phase3-device-source-sha256.json",
+    "sourceManifestSHA256": "3b417d909d574ac789fdf1fda0bd6f553c4e97efd16f726408a016eca63e23cf",
+    "sourceChanges": [],
+    "resourceChanges": [],
+    "hardwareModel": "iPhone Air",
+    "os": "26.6.2",
+    "completedAt": "2026-10-03 20:08:23 Europe/Moscow",
+    "comparisons": 6,
+    "nativeSKViewFrames": 30,
+    "nativePrepareFailures": 0,
+    "maximumChannelDifference": 2,
+    "channelsOver2": 0,
+    "alphaOver2": 0,
+    "readback": "SKRenderer on physical device with native SKView frame mapping",
+    "command": "python3 Examples/MeshDeviceProbe/build-device.py --output /tmp/spine-device-phase3-review2 --profile \"$SPINE_PROVISIONING_PROFILE\" --identity \"$SPINE_SIGNING_IDENTITY\" --bundle-id \"$SPINE_PROBE_BUNDLE_ID\" --device \"$SPINE_DEVICE_ID\"",
+    "credentialNote": "Values remain private; see MeshDeviceProbe README for reproducible inputs",
+    "sourceReport": "/tmp/spine-device-phase3-review2-proof/production-gate.json",
+    "sourceReportSHA256": "f80131dc5f4e58d3a4479cfd4f3c3b306d85d00d64932fc2bce8c76f7eb4859f",
+    "applicationRemovedAfterCapture": true
+  },
+  "acceptance": {
+    "4": "Decoder41Tests",
+    "5": "GeometryValidationTests",
+    "6": "LinkedMeshTests",
+    "7": "TextureProviderTests",
+    "13": "SkinningTests",
+    "15-16 setup": "NodeBridgeTests and SetupSmokeTests",
+    "17 setup": "GPUSetupTests and physical-device subset",
+    "20 setup": "ResourceLifetimeTests 100 cycles",
+    "1-3": "Full compatibility tests and unchanged 70 legacy images"
+  },
+  "warnings": [
+    "Existing scanHexInt32 deprecation in all four SDK compiles; no new warning categories.",
+    "No standalone Swift lint command configured.",
+    "Existing SwiftPM warning: Tests/SpineTests/Info.plist is unhandled; does not fail tests."
+  ],
+  "failures": [],
+  "deferred": [
+    {
+      "gate": "Phase 4 source-animation timeline grid, skins and full scene/native integration",
+      "status": "pending"
+    },
+    {
+      "gate": "Phase 5 matched performance and full physical-device release evidence",
+      "status": "pending"
+    },
+    {
+      "gate": "Separate interactive visual-check",
+      "status": "unverified",
+      "reason": "macos-use unavailable; does not substitute for or invalidate automated GPU/native tests"
+    }
+  ],
+  "reuseConfirmation": "Final root run covers three added tests; production/host/resources unchanged, so platform/GPU/oracle/device evidence remains applicable."
+}
