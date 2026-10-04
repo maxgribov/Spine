@@ -12,7 +12,9 @@ Example of working with the library: [Sample project](https://github.com/maxgrib
 Learn more about working with the library: [Spine Wiki](https://github.com/maxgribov/Spine/wiki)
 You can also compile the documentation in Xcode
 
-![Hero](images/spine_readme_hero.png)
+![Two Goblins walking in the SpriteKit mesh demo](images/spine-mesh-preview.gif)
+
+Goblins artwork © Esoteric Software; see the [asset license](images/goblins-license.txt).
 
 ## Installing
 Spine Library can be installed using Swift Package Manager.
