@@ -1,13 +1,15 @@
 ---
 date: 2026-10-06
 model: GPT-6
-version: 1
+version: 2
 description: "Spec: region-композиция skins, предварительная проверка и публичное описание содержимого."
 ---
 
 # Spec: Skin composition
 
-Спецификация реализует [принятый ADR](adr.md) и [задание](task.md). Кодовая основа — `52e713e6458963ed6723b6cacf829352c4cd0e76`; изменения реализации ещё не выполнены.
+Спецификация реализует [принятый ADR](adr.md) и [задание](task.md). Исходная кодовая основа — `52e713e6458963ed6723b6cacf829352c4cd0e76`; реализация и согласованная MVP-проверка сохранены в ветке `codex/skin-composition`, включая commit `d40ea94`. Доказательства и ограничения приведены в [отчёте](validation/report.md).
+
+Версия 2 фиксирует уточнения владельца: 20 отдельных предметов, фиксированный комплект в матче, одна примерочная и отсутствие произвольного абсолютного лимита памяти. Публичный API и правила композиции не изменены.
 
 ## Goal
 
@@ -206,7 +208,7 @@ features/skin-composition/validation/
 | D.2 | Документация показывает создание Skeleton с базой, независимую смену/снятие/восстановление, CI validation/metadata, ошибки, приоритеты, сроки жизни nodes и финальный prepare. Проба запускается по README на macOS и iOS и позволяет pause/speed/repeat/reset, смену из события и два Skeleton на общем asset. |
 | D.3 | Отдельный клиентский тест с обычным `import Spine` компилирует Contract.4 и CI-пример, вызывает public validation/inspection и ловит новые error codes. Не используются `@testable` и internal fixture factories в этом файле; загружаются реальные JSON/PNG через public provider. |
 | D.4 | После прогрева 100 смен выполняются 1 000 чередований и 1 000 повторов одинакового комплекта. На одинаковых возвратных точках количество nodes/bodies/proxies совпадает; weak refs старых region trees без внешних владельцев освобождаются после drain autorelease pool. Provider/compile counts не увеличиваются; память полного asset, steady state и пик переключения измеряются отдельно. |
-| D.5 | Measurements заполняются commit/ОС/model/build/нагрузкой/числом состояний и сырыми samples apply+prepare отдельно, median/p95/max для cold/repeat/alternating. Поля null и пустые targets допустимы только при releaseGate=pending. Перед выпуском владелец задаёт targets/workload, разработчик фиксирует численные budgets и pass/fail для каждого target; отсутствие входных данных блокирует выпуск, но не функциональные фазы. |
+| D.5 | Measurements заполняются исходной ревизией, точными source hashes, ОС/model/build/нагрузкой/числом состояний и сырыми samples apply+prepare отдельно, median/p95/max для cold/repeat/alternating. Перед выпуском фиксируются targets/workload, критерий времени и pass/fail каждого target. Для согласованного MVP тёплый apply+prepare одного персонажа в примерочной имеет p95 ≤16,67 мс. Владелец отказался от произвольного абсолютного лимита памяти: budget-поля assetResidentBytes/peakSwitchBytes могут оставаться null при passed только с явной memoryBudgetPolicyOverride, численными операционными наблюдениями памяти и успешными проверками отсутствия удержания ресурсов. Отсутствие самих измерений, targets, workload или критериев оставляет gate pending. |
 | D.6 | macOS и физический iPhone: кадры сразу после apply+prepare совпадают с контрольным Skeleton на той же позе/запросах/комплекте; одинаковые пиксели RGBA на одном backend, отдельные baseline каждого устройства. Матрица включает nil, цвет, draw order, паузу и callback; видео подтверждает отсутствие скачка фазы. Нет коррекции sRGB/alpha ради прохождения. Старые geometry/image/physics критерии mesh spec сохраняются. |
 
 ## Out of scope
@@ -245,6 +247,16 @@ features/skin-composition/validation/
 | 19 | `Examples/SkinComposition/` + `validation/` | macOS/iPhone screenshots/video и native lifecycle; memory/timing samples и target-specific release gate | D.4, D.5, D.6 |
 
 ## Execution
+
+### Согласованный профиль MVP
+
+- Targets: Mac Studio `Mac13,1` и физический iPhone Air `iPhone18,4`.
+- Матч: 12 пиратов, до 6 нейтральных персонажей и 10 анимированных пропсов — до 28 Skeleton; смены одежды в матче нет.
+- Каталог: 20 отдельных косметических предметов на пирата; командные варианты и база учитываются отдельно. Переключается один персонаж в примерочной.
+- Измерительный fixture: 8 шляп, 8 предметов одежды, 4 серьги, 4 командных skin; synthetic-текстуры 256×256 RGBA. Проверяются 3 общих и 12 отдельных pirate-asset. Это границы тестовой нагрузки, а не размеры будущего игрового арта.
+- Память: прирост текущего allocator/physical footprint в свежем процессе после прогрева и загрузки полного каталога; staging наблюдается при создании regions и перед commit. Это process deltas и наблюдаемые максимумы, без гарантии точного object/GPU attribution или обнаружения каждого промежуточного пика. Ошибка любого sample отклоняет измерение.
+- Архивные proof содержат исходную ревизию и hashes проверенного дерева. Привязка к последующему commit не означает повторного запуска с clean commit. Исторические mesh-бенчмарки отделяются от текущих regression/oracle-проверок.
+- Ручной осмотр UI не подтверждён; автоматические RGBA-сравнения и native-прогоны обеих платформ подтверждены. Проверка будущего production-арта выходит за полученные результаты.
 
 ### Lock
 
@@ -303,11 +315,11 @@ features/skin-composition/validation/
 **Objective.** Получить воспроизводимые image/native/performance evidence и закрыть release gate.
 **Work.**
 - Снять контрольные кадры и native playback на macOS/физическом iPhone; сохранить raw data, commit и команды.
-- Получить targets/workload игры, измерить полный каталог и совместно зафиксировать численные бюджеты до оценки pass/fail; проверить memory peak и все режимы переключения.
+- Получить targets/workload игры, измерить полный каталог и зафиксировать критерии D.5 до оценки pass/fail; проверить наблюдаемые staging-пики и режимы переключения согласованной нагрузки.
 **Dependencies.** Phase 4; физический iPhone; входные данные владельца для release gate.
 **Risks.** Нет устройства или нагрузки — оставить gate pending, не объявлять выпуск; exceeded budget — оптимизация в границах контракта и повтор затронутых проверок, при смене архитектуры новый ADR.
 **Validation.** Tests 1–19, full suite green, старые mesh platform/image/physics gates; полный отчёт с pass/fail, без подмены physical-device simulator evidence.
-**Done.** Все targets имеют заполненные бюджеты и положительные результаты; releaseGate=passed.
+**Done.** Все согласованные targets имеют положительные результаты по D.5, численные наблюдения памяти и явную политику budget-полей; releaseGate=passed относится к опубликованному профилю MVP.
 
 ## Done criteria
 
@@ -315,4 +327,4 @@ features/skin-composition/validation/
 - Нет изменения legacy/single-skin поведения; mixed-base identity/physics/deform и reentrant playback подтверждены.
 - Fixtures, DocC, запускаемый пример и CI-validation пример доступны в репозитории без соседнего проекта.
 - Ни один контентный отказ не меняет живой комплект; no-op и lifetime/resource gates пройдены.
-- macOS и физический iPhone проверены, measurements/снимки/команды привязаны к итоговому commit, releaseGate=passed. До этого функциональные фазы могут быть готовы, но фича не считается выпущенной.
+- macOS и физический iPhone проверены; measurements/снимки/команды имеют точные source hashes и связь с commit реализации; releaseGate=passed по D.5 для опубликованного MVP-профиля. Результаты не расширяются автоматически на иной арт, нагрузку или устройство.

@@ -172,9 +172,9 @@ policy**, not because their operational observations are absent. Numeric observa
 are in all four memory runs. The 60 Hz combined latency budget remains numeric.
 `memoryBudgetPolicyOverride` names D.5, owner approval and the two exempt budget
 fields. Thus `releaseGate=passed` means the **agreed MVP assessment**, not literal
-unchanged conformance to D.5. Spec/ADR files have not been edited; backporting this
-clarification is a separate documentation decision. The composition architecture
-and behavior are unchanged.
+unchanged conformance to the original v1 D.5. Spec v2 and the ADR now record this
+owner policy, measured workload and the limits of the operational memory method.
+The composition architecture and behavior are unchanged.
 
 `verify-release.py` checks the aggregate approval, workload, numeric latency result,
 explicit D.5 exception, operational memory validity/release, current physical suite,
