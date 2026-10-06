@@ -6,6 +6,7 @@ public struct SpineRuntimeError: Error, LocalizedError {
         case invalidData, invalidGeometry, invalidTimeline, linkedMeshCycle, missingAttachment
         case missingTexture, invalidTextureRegion, missingSkin, missingAnimation
         case concurrentClip, wrongSkeleton, invalidRenderContext, mutatedNodeContract // wrongSkeleton is reserved
+        case invalidSkinComposition, missingSlot, incompleteSkinComposition, skinCompositionBaseMismatch
     }
     public let code: Code
     public let path: String

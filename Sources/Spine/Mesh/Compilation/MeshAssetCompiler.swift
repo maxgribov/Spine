@@ -144,7 +144,8 @@ struct MeshAssetCompiler {
             else if let point=draft.model as? PointAttachmentModel {content = .point(point)}
             else if let box=draft.model as? BoundingBoxAttachmentModel {content = .boundingBox(box)}
             else {try fail(.invalidData,draft.path,"Unable to compile attachment.")}
-            attachments.append(.init(id:draft.id,slot:draft.slot,name:draft.name,path:draft.path,color:color,texture:texture,content:content))
+            attachments.append(.init(id:draft.id,slot:draft.slot,name:draft.name,path:draft.path,color:color,texture:texture,content:content,
+                                     sourceKind:draft.model is LinkedMeshAttachmentModel ? .linkedMesh:nil))
         }
         let clips=try MeshClipCompiler(model:model,skinAttachments:skins,attachments:attachments).compile()
         let skinNames=model.skins.map(\.name)

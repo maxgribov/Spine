@@ -1,0 +1,695 @@
+{
+  "skeleton": {
+    "hash": "self-authored",
+    "spine": "4.1.17",
+    "x": 0,
+    "y": 0,
+    "width": 128,
+    "height": 128
+  },
+  "bones": [
+    {
+      "name": "root"
+    }
+  ],
+  "slots": [
+    {
+      "name": "hat-front",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "hat-back",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "torso",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "sleeves",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "bandana",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "earring",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "team",
+      "bone": "root",
+      "attachment": "front"
+    },
+    {
+      "name": "empty",
+      "bone": "root"
+    },
+    {
+      "name": "s/~",
+      "bone": "root"
+    }
+  ],
+  "skins": [
+    {
+      "name": "default",
+      "attachments": {
+        "hat-front": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "hat-back": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "torso": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "mesh": {
+            "type": "mesh",
+            "path": "swatch",
+            "uvs": [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            "vertices": [
+              0,
+              0,
+              16,
+              0,
+              0,
+              16
+            ],
+            "triangles": [
+              0,
+              1,
+              2
+            ]
+          },
+          "linked": {
+            "type": "linkedmesh",
+            "path": "swatch",
+            "parent": "mesh"
+          },
+          "chain": {
+            "type": "linkedmesh",
+            "path": "swatch",
+            "parent": "linked"
+          },
+          "point": {
+            "type": "point",
+            "x": 2,
+            "y": 3
+          },
+          "box": {
+            "type": "boundingbox",
+            "vertexCount": 4,
+            "vertices": [
+              0,
+              0,
+              16,
+              0,
+              16,
+              16,
+              0,
+              16
+            ]
+          }
+        },
+        "sleeves": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "bandana": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "earring": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "team": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "base",
+      "attachments": {
+        "hat-front": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "hat-back": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "torso": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "sleeves": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "bandana": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "earring": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        },
+        "team": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "hat/a",
+      "attachments": {
+        "hat-front": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff0000ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff0000ff"
+          }
+        },
+        "hat-back": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff0000ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff0000ff"
+          }
+        }
+      }
+    },
+    {
+      "name": "hat/b",
+      "attachments": {
+        "hat-front": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "00ff00ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "00ff00ff"
+          }
+        },
+        "hat-back": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "00ff00ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "00ff00ff"
+          }
+        }
+      }
+    },
+    {
+      "name": "clothes/a",
+      "attachments": {
+        "torso": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "0000ffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "0000ffff"
+          }
+        },
+        "sleeves": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "0000ffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "0000ffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "clothes/b",
+      "attachments": {
+        "torso": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffff00ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffff00ff"
+          }
+        },
+        "sleeves": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffff00ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffff00ff"
+          }
+        }
+      }
+    },
+    {
+      "name": "team/blue",
+      "attachments": {
+        "team": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "3366ffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "3366ffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "team/orange",
+      "attachments": {
+        "team": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff8800ff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff8800ff"
+          }
+        }
+      }
+    },
+    {
+      "name": "team/purple",
+      "attachments": {
+        "team": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "8833ffff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "8833ffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "team/pink",
+      "attachments": {
+        "team": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff66aaff"
+          },
+          "side": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ff66aaff"
+          }
+        }
+      }
+    },
+    {
+      "name": "empty",
+      "attachments": {}
+    },
+    {
+      "name": "partial",
+      "attachments": {
+        "hat-front": {
+          "front": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        }
+      }
+    },
+    {
+      "name": "escaped",
+      "attachments": {
+        "s/~": {
+          "a/~": {
+            "type": "region",
+            "path": "swatch",
+            "width": 16,
+            "height": 16,
+            "color": "ffffffff"
+          }
+        }
+      }
+    }
+  ],
+  "events": {
+    "change": {}
+  },
+  "animations": {
+    "walk": {
+      "slots": {
+        "hat-front": {
+          "attachment": [
+            {
+              "time": 0,
+              "name": "front"
+            },
+            {
+              "time": 0.5,
+              "name": "side"
+            },
+            {
+              "time": 0.75
+            },
+            {
+              "time": 1,
+              "name": "front"
+            }
+          ]
+        },
+        "torso": {
+          "rgba": [
+            {
+              "time": 0,
+              "color": "ffffffff"
+            },
+            {
+              "time": 1,
+              "color": "80ffffff"
+            }
+          ]
+        }
+      },
+      "drawOrder": [
+        {
+          "time": 0.5,
+          "offsets": [
+            {
+              "slot": "hat-front",
+              "offset": 1
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "time": 0.5,
+          "name": "change"
+        }
+      ],
+      "attachments": {
+        "default": {
+          "torso": {
+            "mesh": {
+              "deform": [
+                {
+                  "time": 0
+                },
+                {
+                  "time": 1,
+                  "vertices": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

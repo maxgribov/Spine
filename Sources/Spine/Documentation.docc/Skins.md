@@ -143,3 +143,55 @@ do {
 >Warning: The dimensions and position of the image are determined by the `SKSpriteNode` itself. By applying a new texture, you may find that it does not display exactly as you expected.
 
 >Warning: If you apply animations that switch the visibility of the character's skeleton attachments or apply skins, then what is displayed on the character may change.
+
+## Composition on compiled assets
+
+A composition describes the whole outfit over one fixed base skin. The base resolves
+`default` first, then its own entries. Layers run in order:
+
+- `overlay` adds the skin's own placeholders and overrides matching keys.
+- `replace` removes all earlier entries in selected slots and installs the skin's own entries.
+- `hide` removes entire slots. A later overlay restores only its own keys.
+
+Only regions can be introduced. A slot containing any non-region state in the resolved
+base is protected, including currently invisible states. Keep points, hitboxes and
+mesh attachments in separate slots from interchangeable clothing.
+
+### Validate a catalog
+
+Create a `SpineMeshAsset` once with its JSON and texture provider, then validate each
+item without constructing a Skeleton:
+
+```swift
+import Spine
+
+func validateHat(asset: SpineMeshAsset) throws {
+    let item = SpineSkinComposition(baseSkin: "base", layers: [
+        .replace(skin: "hat/a", slots: ["hat-front", "hat-back"]),
+        .hide(slots: ["bandana"])
+    ])
+    try asset.validate(skinComposition: item)
+    let description = try asset.skinDescription(named: "hat/a")
+    let actualSlots = Set(description.entries.map { $0.slot })
+    precondition(actualSlots == Set(["hat-front", "hat-back"]))
+    precondition(description.entries.allSatisfy { $0.kind == .region })
+}
+```
+
+Every replacement must cover all non-nil setup and attachment-timeline names in all
+compiled clips. Revalidate the catalog against each newly exported asset: adding a
+rare clip can invalidate an older item. Validation throws the first `SpineRuntimeError`
+with a stable code and JSON Pointer path. Later layers cannot repair an incomplete
+replacement. Nil states never require an image.
+
+`skinDescription(named:)` reports only own entries, in setup-slot and placeholder-name
+order, without `default` fallback. `linkedMesh` remains distinct from `mesh`. Names are
+logical placeholders, not texture paths. Neither inspection nor validation creates
+scene nodes or requests textures again. Serialize access to the asset; validation does
+not preflight a live scene or its render context.
+
+The game must additionally compare these slots with its catalog, include explicit
+hide areas, and reject forbidden overlaps. Intentional overlaps are legal for the
+library. Per-item completeness does not establish combination compatibility. The
+public-client test in `Tests/SpineTests/Skins/CompositionPublicAPITests.swift` demonstrates
+area checks, conflict rejection and all 32 fixture outfits using only `import Spine`.
