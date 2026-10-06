@@ -6,12 +6,15 @@
 - ``init(json:folder:skin:)``
 - ``init(_:_:)``
 - ``init(_:atlas:)``
+- ``init(meshAsset:skin:)``
 
 ### Skins
 - ``skinsNames``
 - ``applyDefaultSkin()``
 - ``apply(skin:)``
 - ``action(applySkin:)``
+- ``skinComposition``
+- ``apply(skinComposition:)``
 
 ### Animations
 - ``animationsNames``

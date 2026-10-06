@@ -115,9 +115,9 @@ struct MeshClip {
          attachments:[AttachmentTimeline]=[],drawOrders:[DrawOrderKey]=[],deforms:[DeformTimeline]=[]) throws {
         var previous: TimeInterval = -1
         for event in events {
-            guard event.time.isFinite, event.time >= 0, event.time > previous else {
+            guard event.time.isFinite, event.time >= 0, event.time >= previous else {
                 throw SpineRuntimeError(.invalidTimeline, path: "/animations/" + SpineRuntimeError.pointerComponent(name) + "/events",
-                                        message: "Event keys must be finite and strictly increasing.")
+                                        message: "Event keys must be finite and nondecreasing.")
             }
             previous = event.time
         }

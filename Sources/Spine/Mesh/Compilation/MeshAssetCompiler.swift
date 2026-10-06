@@ -2,6 +2,13 @@ import SpriteKit
 
 /// Validates every skin/animation before asking the texture provider for resources.
 struct MeshAssetCompiler {
+    private static let countLock=NSLock()
+    private static var compileInvocations=0
+    /// Internal resource-regression diagnostic; never affects asset or appearance state.
+    static var compilationCount:Int {
+        countLock.lock();defer {countLock.unlock()}
+        return compileInvocations
+    }
     private struct Draft {
         let id:Int,slot:Int
         let name:String,path:String
@@ -33,6 +40,7 @@ struct MeshAssetCompiler {
     }
 
     func compile(textures:SpineMeshTextureProvider)throws->CompiledMeshSkeleton {
+        Self.countLock.lock();Self.compileInvocations += 1;Self.countLock.unlock()
         guard model.skeleton.spine.range(of:"^4\\.1\\.[0-9]+$",options:.regularExpression) != nil else {
             try fail(.unsupportedVersion,"/skeleton/spine","Mesh assets require a declared Spine 4.1.x version.")
         }
@@ -144,7 +152,8 @@ struct MeshAssetCompiler {
             else if let point=draft.model as? PointAttachmentModel {content = .point(point)}
             else if let box=draft.model as? BoundingBoxAttachmentModel {content = .boundingBox(box)}
             else {try fail(.invalidData,draft.path,"Unable to compile attachment.")}
-            attachments.append(.init(id:draft.id,slot:draft.slot,name:draft.name,path:draft.path,color:color,texture:texture,content:content))
+            attachments.append(.init(id:draft.id,slot:draft.slot,name:draft.name,path:draft.path,color:color,texture:texture,content:content,
+                                     sourceKind:draft.model is LinkedMeshAttachmentModel ? .linkedMesh:nil))
         }
         let clips=try MeshClipCompiler(model:model,skinAttachments:skins,attachments:attachments).compile()
         let skinNames=model.skins.map(\.name)
@@ -213,7 +222,7 @@ struct MeshAssetCompiler {
                         }
                     }
                 case .events(let frames):
-                    try validateTimes(frames.map(\.time),path:root+"/events")
+                    try validateTimes(frames.map(\.time),path:root+"/events",allowEqual:true)
                     for (index,frame) in frames.enumerated() {
                         guard model.events.contains(where:{$0.name==frame.event}) else {try fail(.invalidData,root+"/events/\(index)/name","Animation event is missing.")}
                         let values=[Double(frame.float ?? 0),Double(frame.volume ?? 1),Double(frame.balance ?? 0)]
@@ -249,10 +258,12 @@ struct MeshAssetCompiler {
         }
     }
 
-    private func validateTimes(_ times:[TimeInterval],path:String)throws {
+    private func validateTimes(_ times:[TimeInterval],path:String,allowEqual:Bool=false)throws {
         var previous:TimeInterval = -1
         for (index,time) in times.enumerated() {
-            guard time.isFinite,Float(time).isFinite,time>=0,time>previous else {try fail(.invalidTimeline,path+"/\(index)/time","Timeline times must be finite, nonnegative and strictly increasing.")}
+            guard time.isFinite,Float(time).isFinite,time>=0,(allowEqual ? time>=previous:time>previous) else {
+                try fail(.invalidTimeline,path+"/\(index)/time",allowEqual ? "Event times must be finite, nonnegative and nondecreasing.":"Timeline times must be finite, nonnegative and strictly increasing.")
+            }
             previous=time
         }
     }

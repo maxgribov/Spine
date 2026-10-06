@@ -76,16 +76,14 @@ seeking and automatic frame hooks are not provided.
 The example's **Prototype / Library** selector retains both original prototype
 scenes. **Tab** changes scene and **L** changes renderer. Library controls expose
 pause, transparency, reflection and reset; the environment also exposes camera
-motion and zoom. Phase 5 performance and final physical-device evidence remain a
-separate validation gate.
+motion and zoom.
 
-The approved v6 contract additionally permits bounded reconciliation of
-library-owned static bounding-box slots in the final preparation step. The macOS regression checks cover this behavior; final release acceptance also
-requires current-source performance and physical-device validation. The body remains attached
+Library-owned static bounding-box slots support bounded reconciliation in the
+final preparation step. The body remains attached
 to the same slot; legacy characters are unaffected. Position/rotation residuals
 must satisfy both a fixed world-precision rule and local safety caps before being
 restored to identity. Small edits within that precision cannot be distinguished
 from solver residue. Unowned/dynamic bodies, hierarchy/scale/depth changes and
 out-of-budget values are not silently corrected. No animation time, bone pose or
-previously delivered contact is replayed. See spec P.1–P.7 for exact limits,
-invalid-context handling, body-removal transitions and singular-frame behavior.
+previously delivered contact is replayed. Invalid contexts and unsupported body
+edits remain explicit errors; singular frames temporarily hide visuals.

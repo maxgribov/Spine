@@ -1,51 +1,15 @@
-# CPU и общий материал для SpriteKit meshes
+# CPU Preparation and Shared Materials
 
-Изолированный macOS-прототип, 2026-10-03. Базовая версия — `a1ec0d6`; изменения production target `Spine` не требуются. Это продолжение [уменьшения overdraw](PERFORMANCE.md).
+Historical Release measurements from October 3, 2026 on Apple M1 Max and macOS 26.6. Animation data is prepared during loading, buffers are reused, and characters on the same atlas page share shader and texture resources. Per-character transforms remain independent.
 
-## Изменения
-
-- JSON/NSNumber, поиск родителей костей, распаковка sparse deform и подготовка десяти сегментов Bezier перенесены в загрузку fixture. В каждом кадре остаются поиск текущего ключа, интерполяция, матрицы и skinning. Буфер матриц костей переиспользуется; `CGMutablePath` создаётся только для wireframe.
-- `TriangleMeshNode.Material` позволяет всем meshes одной atlas page и bounds mode использовать **один объект SKShader** и одну atlas texture. В Goblins материал общий между skins и экземплярами персонажей. Renderer не использует глобальный кеш: временем жизни материала управляет вызывающий код; только fixture app хранит свои два режима до завершения процесса.
-- Матрица framebuffer → mesh перенесена из изменяемых uniforms в два per-node attributes. Изменение одной сетки не затрагивает соседние. В `.triangle` объявлено 9 атрибутов вместо 7, но неизменные UV больше не загружаются каждый кадр. Их порядок обновляется при смене winding, в том числе после вырождения.
-- Нормализованные вершины хранятся в переиспользуемом буфере; временные массивы индексов/пар рёбер на каждом треугольнике удалены. Повторная загрузка той же framebuffer-матрицы пропускается.
-- Порядок прозрачных треугольников, слотов и персонажей по `zPosition` сохранён. Один SpriteKit node на треугольник остаётся.
-
-Apple рекомендует [переиспользовать SKShader и передавать данные узлов через attributes](https://developer.apple.com/documentation/spritekit/skshader). [Правила batching SpriteKit](https://developer.apple.com/documentation/spritekit/maximizing-node-drawing-performance) зависят также от порядка и перекрытия узлов. Поэтому общий shader — устранение различий render state, а не доказательство конкретного числа draw calls.
-
-## Методика
-
-Apple M1 Max, macOS 26.6, Release, тот же стенд 1/10/50 Goblins. Перед финальным сравнением сборки и тесты завершены, другие запущенные нами экземпляры прототипа закрыты. Версии запускаются последовательно. Каждая выполняет два раунда с обратным порядком `mesh`/`triangle`, 30 прогревочных + 120 измеряемых native кадров, затем 30 + 60 offscreen кадров. App Nap отключён на время стенда; окно остаётся поверх других.
-
-Сводная таблица показывает среднее двух медиан в `.triangle`, время в миллисекундах. CPU pose + geometry включает skinning, обновление SpriteKit nodes/attributes и подготовку framebuffer-матриц. Отдельный `sceneUpdateAndEncodeCPU` измеряется в SKRenderer, GPU — по Metal timestamps. Значения из разных путей нельзя складывать в якобы измеренное время native кадра. FPS — частота callback сцены, не подтверждённые презентации drawable.
-
-| Персонажи | CPU pose + geometry, до → после | CPU scene update + encode, до → после | GPU, до → после | Callback FPS, до → после |
+| Characters | CPU pose before / after, ms | Scene update and encode before / after, ms | GPU before / after, ms | Callback FPS before / after |
 |---:|---:|---:|---:|---:|
-| 1 | 1.240 → 0.519 | 0.889 → 0.976 | 0.092 → 0.085 | 60.0 → 60.0 |
-| 10 | 5.322 → 2.120 | 6.032 → 6.007 | 0.186 → 0.149 | 60.0 → 60.0 |
-| 50 | 27.061 → 10.539 | 31.472 → 29.432 | 0.532 → 0.364 | 15.0 → 20.0 |
+| 1 | 1.240 / 0.519 | 0.889 / 0.976 | 0.092 / 0.085 | 60 / 60 |
+| 10 | 5.322 / 2.120 | 6.032 / 6.007 | 0.186 / 0.149 | 60 / 60 |
+| 50 | 27.061 / 10.539 | 31.472 / 29.432 | 0.532 / 0.364 | 15 / 20 |
 
-На 50 персонажах CPU-подготовка уменьшилась на 61%. Scene update/encode сократился примерно на 6.5%; на одном персонаже этот показатель вырос с 0.889 до 0.976 мс, на десяти практически не изменился. Поэтому ускорение подготовки позы не следует приписывать только batching. В обоих финальных запусках все измеряемые native кадры имели visible window, thermal state — nominal (0). Контрольные кадры ревизий отличаются максимум на 1/255; ни одного канала выше допуска 2/255.
+CPU pose preparation fell by approximately 61% for 50 characters. The separate update/encode path improved less; the measurements do not isolate the contribution of each optimization. Shared resources do not prove a particular draw-call count. Allowing arbitrary sibling order did not improve the measured result.
 
-Исходные данные: [до](Benchmarks/2026-10-03-cpu-before.json), [после](Benchmarks/2026-10-03-cpu-after.json), [эксперимент ignoresSiblingOrder](Benchmarks/2026-10-03-cpu-ignore-sibling-order.json), [сравнение ревизий](Benchmarks/2026-10-03-cpu-after-revision.json). Проверки PNG обоих bounds modes сохранены рядом в `*-images.json`. Ранние диагностические прогоны не используются в сводной таблице.
+Image differences stayed within the existing tolerance. These are prototype results from one fixture and device, not a general performance guarantee.
 
-
-## Batching и ограничение результата
-
-В финальном отчёте дополнительно записаны `uniqueShaderObjectsLastFrame` и `uniquePrimaryTextureObjectsLastFrame`. В каждом сценарии после оптимизации оба значения равны 1; на 50 персонажах видны 7860 sprite nodes. Они проверяют совместное использование ресурсов, **не считают draw calls**. В benchmark нет HUD/labels, поэтому счётчики относятся к персонажам.
-
-Эксперимент с `--ignore-sibling-order` выполнен отдельно: на 50 персонажах CPU pose 10.43 мс, scene update/encode 29.70 мс, GPU 0.364 мс, callback 20 FPS. Выигрыша относительно общего материала с обычной сортировкой не обнаружено. Параметр сохранён для воспроизведения, по умолчанию выключен. Контрольные изображения двух настроек совпали побитово. Нельзя просто назначить всем прозрачным треугольникам одинаковый z и разрешить произвольную перестановку: при складках mesh и перекрытии attachments порядок влияет на результат.
-
-Metal System Trace был опробован отдельно от замеров. Экспорт списка encoders не предоставил счётчика отдельных draw calls; число encoders не использовалось как его замена. Поэтому количественное улучшение batching по draw calls **не заявляется**. Измеряется суммарный эффект подготовки анимации, обновления атрибутов и совместного shader/texture state; вклад каждой правки отдельно не изолирован.
-
-Следующий предел — обработка множества SKSpriteNode в SpriteKit и render submission. Для дальнейшего ускорения нужен эксперимент с уменьшением числа узлов/групп, с обязательным сохранением порядка прозрачности. Простой переход на `ignoresSiblingOrder` эту проблему на данном стенде не решил.
-
-## Проверки
-
-- 8 unit tests, включая независимость матриц при общем shader и UV после смены winding/вырождения.
-- 10 исходных GPU-сценариев: 9 совпадают точно, rotated nearest сохраняет прежние 2 допустимых texel-boundary пикселя при совпадающей alpha.
-- 128 движущихся сравнений: 0 недопустимых внутренних расхождений, прежние 45 различий на однопиксельной границе alpha.
-- 16 кадров перекрывающихся и folded meshes: общий материал против отдельных — максимум 0/255.
-- Официальный Spine runtime 4.1.56: 16 поз, 6064 координаты; max error 0.000174059, UV 5.96e-8, активные attachments совпадают.
-- Все 12 контрольных PNG финальных benchmark-ревизий сравниваются через `--compare-benchmarks`, допуск 2/255 без исключений для силуэта. Проверка `mesh` против `triangle` также остаётся обязательной перед завершением benchmark.
-
-Это GPU-интеграционные проверки. Автоматизация живого UI/клавиатуры не выполнялась. Прочие ограничения fixture player, offscreen effects и переносимости на другие устройства остаются описанными в [README](README.md).
+Recorded data: [before](Benchmarks/2026-10-03-cpu-before.json), [after](Benchmarks/2026-10-03-cpu-after.json). Triangle grouping is summarized in [GROUP-PERFORMANCE.md](GROUP-PERFORMANCE.md).

@@ -33,7 +33,7 @@ final class MeshSetupRenderer {
     private let bones:[Bone]
     private let slots:[Slot]
     private let root:SKNode
-    private let proxyBones:[SKNode?]
+    private var proxyBones:[SKNode?]
     private var records:[Record]=[]
     private var contracts:[(SKNode,SKNode,CGFloat)]=[]
     private var matrices:[CGAffineTransform]
@@ -47,14 +47,20 @@ final class MeshSetupRenderer {
     private var physicsBodies:[Int:SKPhysicsBody]=[:]
     private(set) var activeAttachments:[String?]
 
-    init(compiled:CompiledMeshSkeleton,resources:MeshRendererResources,bones:[Bone],slots:[Slot],root:SKNode,skin:String)throws {
+    init(compiled:CompiledMeshSkeleton,resources:MeshRendererResources,bones:[Bone],slots:[Slot],root:SKNode,skin:String,
+         resolvedLookup:[MeshAttachmentKey:Int]?=nil,stageCheck:((SKNode)throws->Void)?=nil)throws {
         self.compiled=compiled;self.bones=bones;self.slots=slots;self.root=root
         matrices=Array(repeating:.identity,count:bones.count);opacity=Array(repeating:1,count:bones.count);hidden=Array(repeating:false,count:bones.count)
         boneValid=Array(repeating:true,count:bones.count);corrections=Array(repeating:false,count:slots.count)
         activeAttachments=[]
         ranks=Array(slots.indices);lastDrawOrder=Array(slots.indices)
-        var merged=compiled.skinAttachments["default"] ?? [:]
-        for (key,value) in compiled.skinAttachments[skin] ?? [:] {merged[key]=value}
+        let merged:[MeshAttachmentKey:Int]
+        if let resolvedLookup=resolvedLookup {merged=resolvedLookup}
+        else {
+            var single=compiled.skinAttachments["default"] ?? [:]
+            for (key,value) in compiled.skinAttachments[skin] ?? [:] {single[key]=value}
+            merged=single
+        }
         // Meshes already contain forward-transformed skeleton-local vertices.
         // Only real region sprites need a mirrored bone chain. Include every
         // possible region in the merged skin, not merely the active setup pose.
@@ -103,6 +109,7 @@ final class MeshSetupRenderer {
                 node.setValue(SKAttributeValue(float:region.texture.filteringMode == .nearest ? 1:0),forAttribute:"a_nearest")
                 proxyBones[compiled.slotBones[slot]]!.addChild(node)
                 records.append(Record(attachment,node:node))
+                try stageCheck?(node)
             case .point(let model):
                 let node=PointAttachment(model);node.name=PointAttachment.generateName(model.name);node.isHidden=true
                 logicalPoints.append((attachment.id,slot,node))
@@ -116,6 +123,45 @@ final class MeshSetupRenderer {
         remember(root)
         for record in records {record.contractIndex=contracts.firstIndex {$0.0 === record.node}!}
         for record in records {record.node.isHidden=activeAttachments[record.attachment.slot] != record.attachment.name}
+    }
+
+    func stageRegions(lookup:[MeshAttachmentKey:Int],slots changed:Set<Int>,resources:MeshRendererResources,
+                      check:((SKNode)throws->Void)?)throws->MeshSetupRenderer {
+        try MeshSetupRenderer(compiled:compiled,resources:resources,bones:bones,slots:slots,root:SKNode(),skin:"",
+                              resolvedLookup:lookup.filter {changed.contains($0.key.slot)},stageCheck:check)
+    }
+
+    func commitRegions(_ staged:MeshSetupRenderer,slots changed:Set<Int>) {
+        var removed=Set<ObjectIdentifier>()
+        for record in records where changed.contains(record.attachment.slot) {
+            removed.insert(ObjectIdentifier(record.node));record.node.removeFromParent()
+        }
+        records.removeAll {changed.contains($0.attachment.slot)}
+        // Reuse existing proxy chains; only newly needed ancestors are transferred.
+        for i in proxyBones.indices where proxyBones[i] == nil {
+            guard let node=staged.proxyBones[i] else {continue}
+            node.removeFromParent()
+            let parent=compiled.boneParents[i].flatMap {proxyBones[$0]} ?? root
+            parent.addChild(node);proxyBones[i]=node
+            contracts.append((node,parent,node.zPosition))
+        }
+        for record in staged.records {
+            record.node.removeFromParent()
+            let parent=proxyBones[compiled.slotBones[record.attachment.slot]]!
+            parent.addChild(record.node)
+            records.append(record);contracts.append((record.node,parent,record.node.zPosition))
+        }
+        var needed=Set<Int>()
+        for record in records where record.mesh == nil {
+            var index:Int?=compiled.slotBones[record.attachment.slot]
+            while let i=index {needed.insert(i);index=compiled.boneParents[i]}
+        }
+        for i in proxyBones.indices.reversed() where !needed.contains(i) {
+            if let node=proxyBones[i] {removed.insert(ObjectIdentifier(node));node.removeFromParent();proxyBones[i]=nil}
+        }
+        contracts.removeAll {removed.contains(ObjectIdentifier($0.0))}
+        for record in records {record.contractIndex=contracts.firstIndex {$0.0 === record.node}!}
+        staged.records=[];staged.contracts=[];staged.proxyBones=Array(repeating:nil,count:proxyBones.count)
     }
 
     func removeLogicalAttachments(states:[MeshSlotState]) {

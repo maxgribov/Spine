@@ -3,6 +3,7 @@ import Foundation
 /// One mutable attachment/color/deform state per slot, owned only by its Skeleton.
 final class MeshSlotState {
     var activeName:String?
+    var requestedName:String?
     var attachmentID:Int?
     var deformSourceID:Int?
     let setupColor:SIMD4<Float>
@@ -18,7 +19,7 @@ final class MeshSlotState {
     }
     func copied()->MeshSlotState {
         let result=MeshSlotState(color:color,deformCount:deform.count,setupColor:setupColor)
-        result.activeName=activeName;result.attachmentID=attachmentID;result.deformSourceID=deformSourceID;result.deform=deform;result.physics=physics
+        result.activeName=activeName;result.requestedName=requestedName;result.attachmentID=attachmentID;result.deformSourceID=deformSourceID;result.deform=deform;result.physics=physics
         return result
     }
 }

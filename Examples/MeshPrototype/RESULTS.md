@@ -1,32 +1,10 @@
-# Первая итерация прототипа — 2026-10-03
+# Initial Prototype Results
 
-Этот отчёт относится к исходному режиму общих bounds. Результаты новой реализации и замеры находятся в [PERFORMANCE.md](PERFORMANCE.md).
+Historical measurements from October 3, 2026 on Apple M1 Max, macOS 26.6, Xcode 26.6 and Swift 6.3.3. Numerical checks used a Debug build; the Release example also built and launched successfully.
 
-Среда: Apple M1 Max, macOS 26.6, Xcode 26.6, Swift 6.3.3. Debug build. Renderer — обычный `SKView`.
+- Three topology and recovery unit tests passed.
+- Ten GPU comparison scenarios matched the reference sprites exactly, including alpha, reflection, filtering and transformed geometry.
+- Both Goblins skins animated across eight sampled times.
+- Official Spine 4.1.56 comparison covered 16 poses and 6,064 coordinates. Maximum position error was 0.0001740588 against a 0.005 tolerance; maximum UV error was 5.9604645e-8 against 1e-6.
 
-Release build также успешно собран и запущен в интерактивном режиме; приведённые численные проверки выполнялись в Debug.
-
-| Проверка | Результат |
-|---|---|
-| Unit tests: malformed topology, invalid pose update, collapsed triangle recovery | 3 passed |
-| GPU: quad, reversed winding, centered fan, off-center fan | 0 отличающихся пикселей |
-| GPU: inherited alpha, reflection | 0 отличающихся пикселей |
-| GPU: minification, rotation, subpixel translation | 0 отличающихся пикселей |
-| GPU: nearest и linear filtering | 0 отличающихся пикселей |
-| Goblins Pro: оба skins, 8 timestamps, включая моргание и последний кадр | Кадры сохранены; персонажи анимируются |
-| Сравнение с `@esotericsoftware/spine-core@4.1.56` | 16 poses, 6064 координаты; attachments совпали |
-| Максимальная ошибка координат | 0.0001740588 единицы Spine, допуск 0.005 |
-| Максимальная ошибка UV | 5.9604645e-8, допуск 1e-6 |
-
-GPU сравнение выполняется с обычным `SKSpriteNode`, включая alpha и внешние прозрачные пиксели. Все десять сценариев дали максимальную разницу каналов **0/255** на этой машине. В большинстве сценариев проверено 65536 покрытых пикселей, minified — 9025, rotated — 65537; внешние пиксели сравниваются дополнительно.
-
-На обоих персонажах при t=0.25 вместе видно 314 треугольников. В renderer регионы также представлены двумя shader-треугольниками. Это число треугольников, не измеренное число draw calls.
-
-Изображения `output/goblins-0.25.png` и `output/goblins-wireframe.png` просмотрены как результаты GPU-рендеринга. Текстуры и сетки видны у обоих персонажей; диагностические панели помещаются в изображение. Автоматическое управление живым окном не проверено: отсутствует `macos-use`.
-
-Выявленные и исправленные расхождения:
-
-1. Texture uniform использовал linear sampling при `.nearest`. Явное округление UV к центрам texels устранило расхождение.
-2. Точное решение Bezier давало отличие позы до 0.54 единицы от официального runtime, который использует сегментную аппроксимацию. Для сравнимости реализована десятисегментная аппроксимация.
-
-Вывод ограничен данной машиной, fixture и сценариями. Измерений устойчивого FPS/GPU time и полного сравнения готовых изображений персонажей с официальным renderer пока нет. Следующая проверка — производительность и сокращение overdraw с повторным контролем швов.
+Nearest filtering and curve interpolation differences were corrected. Triangle counts were not treated as draw-call counts. These results cover the recorded fixture and machine; live UI automation was not performed. Later performance work is summarized in [PERFORMANCE.md](PERFORMANCE.md).

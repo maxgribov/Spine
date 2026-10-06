@@ -12,7 +12,7 @@ private final class MeshActionBinding {
     }
 }
 
-struct MeshPlaybackSnapshot {
+struct MeshPlaybackSnapshot: Equatable {
     let epoch: UInt64
     let executionID: UInt64?
     let beginCount: UInt64
@@ -21,6 +21,12 @@ struct MeshPlaybackSnapshot {
     let deform: [[Float]]
     let activeAttachments: [String?]
     let drawOrder: [Int]
+    let requestedAttachments: [String?]
+    let cursors: [Int]
+    let attachmentCursors: [Int]
+    let deformCursors: [Int]
+    let nextEvent: Int?
+    let previousTime: TimeInterval?
 }
 
 final class MeshRuntime {
@@ -54,6 +60,12 @@ final class MeshRuntime {
     var activeAttachments:[String?] {slotStates.map(\.activeName)}
     private(set) var drawOrder: [Int]
     private(set) var selectedSkin: String
+    private(set) var skinComposition: SpineSkinComposition?
+    private var compositionSlots = Set<Int>()
+    // Internal transaction fault seam; invoked only while nodes are detached.
+    var compositionStageCheck: ((SKNode) throws -> Void)?
+    // Internal allocation probe at the point where both old and complete staged trees are held.
+    var compositionStagingCompleted: (() -> Void)?
 
     init(asset: SpineMeshAsset, owner: Skeleton, skin: String?) throws {
         let compiled = asset.compiled
@@ -88,7 +100,10 @@ final class MeshRuntime {
     var snapshot: MeshPlaybackSnapshot {
         MeshPlaybackSnapshot(epoch: epoch, executionID: execution?.id, beginCount: nextExecutionID,
                              endCount: completedExecutions, time: time,
-                             deform: deform, activeAttachments: activeAttachments, drawOrder: drawOrder)
+                             deform: deform, activeAttachments: activeAttachments, drawOrder: drawOrder,
+                             requestedAttachments:slotStates.map(\.requestedName),cursors:execution?.cursors ?? [],
+                             attachmentCursors:execution?.attachmentCursors ?? [],deformCursors:execution?.deformCursors ?? [],
+                             nextEvent:execution?.nextEvent,previousTime:execution?.previousTime)
     }
 
     func action(named name: String, owner: Skeleton) throws -> SKAction {
@@ -229,6 +244,7 @@ final class MeshRuntime {
         return mesh.deformSourceID
     }
     private func selectAttachment(_ name:String?,slot:Int) {
+        slotStates[slot].requestedName=name
         let id=name.flatMap {skinLookup[.init(slot:slot,name:$0)]}
         let fixture=asset.compiled.attachments.isEmpty && asset.compiled.sourceAnimations.isEmpty && !asset.compiled.clips.isEmpty
         slotStates[slot].select(id != nil || fixture ? name:nil,id:id,source:sourceID(id))
@@ -251,7 +267,7 @@ final class MeshRuntime {
     }
     func applySkin(_ name:String,owner:Skeleton)throws {
         try validateSkin(name)
-        guard name != selectedSkin else {return}
+        guard name != selectedSkin || skinComposition != nil else {return}
         var lookup=asset.compiled.skinAttachments["default"] ?? [:]
         for (key,id) in asset.compiled.skinAttachments[name] ?? [:] {lookup[key]=id}
         let nextStates=slotStates.enumerated().map {slot,state->MeshSlotState in
@@ -260,6 +276,7 @@ final class MeshRuntime {
             let fallback=asset.compiled.slots[slot].attachment.flatMap {lookup[.init(slot:slot,name:$0)]}
             let id=old ?? fallback
             next.select(id.map {asset.compiled.attachments[$0].name},id:id,source:sourceID(id))
+            next.requestedName=next.activeName
             return next
         }
         let root=SKNode();root.name=managedVisuals.name
@@ -268,8 +285,30 @@ final class MeshRuntime {
         setupRenderer?.removeLogicalAttachments(states:slotStates)
         managedVisuals.removeFromParent();owner.addChild(root)
         managedVisuals=root;setupRenderer=renderer;slotStates=nextStates;skinLookup=lookup;selectedSkin=name
+        skinComposition=nil;compositionSlots=[]
         root.isHidden=playbackError != nil || frameError != nil || preparedContext?.isSingular == true
         renderer.installLogicalAttachments(states:slotStates)
+    }
+
+    func applyComposition(_ composition:SpineSkinComposition)throws {
+        if skinComposition == composition {return}
+        let result=try SkinCompositionResolver.resolve(composition,in:asset.compiled)
+        guard composition.baseSkin == selectedSkin else {
+            throw SpineRuntimeError(.skinCompositionBaseMismatch,path:"/composition/baseSkin",message:"Composition base must match the selected single skin '\(selectedSkin)'.")
+        }
+        let changed=compositionSlots.union(result.touchedSlots)
+        var nextStates=slotStates
+        for slot in changed {
+            let next=slotStates[slot].copied()
+            let id=next.requestedName.flatMap {result.lookup[.init(slot:slot,name:$0)]}
+            next.select(id.map {asset.compiled.attachments[$0].name},id:id,source:sourceID(id))
+            nextStates[slot]=next
+        }
+        let staged=try setupRenderer?.stageRegions(lookup:result.lookup,slots:changed,resources:asset.rendererResources,check:compositionStageCheck)
+        compositionStagingCompleted?()
+        // No throws, scene callbacks, physics transitions or resampling after this boundary.
+        if let staged=staged {setupRenderer?.commitRegions(staged,slots:changed)}
+        slotStates=nextStates;skinLookup=result.lookup;skinComposition=composition;compositionSlots=result.touchedSlots
     }
 
     /// All recoverable frame failures share one incident and stay hidden through stop/reset.

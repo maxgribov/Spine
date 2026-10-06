@@ -100,7 +100,7 @@ final class LibraryBenchmarkRunner {
     }
     private func exportReferences()throws {
         let root=URL(fileURLWithPath:#filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-        try validateLegacyOutput(output,baseline:root.appendingPathComponent("features/mesh-support/validation/legacy-baseline"))
+        try validateLegacyOutput(output,baseline:root.appendingPathComponent("Examples/MeshPrototype/Fixtures/legacy-baseline"))
         try FileManager.default.createDirectory(at:output,withIntermediateDirectories:true)
         let logURL=output.appendingPathComponent("reference-export.log")
         FileManager.default.createFile(atPath:logURL.path,contents:nil)
