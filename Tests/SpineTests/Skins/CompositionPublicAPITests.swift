@@ -32,6 +32,10 @@ final class CompositionPublicAPITests: XCTestCase {
             atlasText: String(contentsOf: root.appendingPathComponent("swatch.atlas"), encoding: .utf8),
             pageData: ["swatch.png": Data(contentsOf: root.appendingPathComponent("swatch.png"))])
         let asset = try SpineMeshAsset(json: Data(contentsOf: root.appendingPathComponent("wardrobe.json")), textures: provider)
+        let skeleton = try Skeleton(meshAsset: asset, skin: "base")
+        XCTAssertNil(skeleton.skinComposition)
+        try dress(skeleton, asset: asset)
+        XCTAssertNil(skeleton.skinComposition)
         let hat = CatalogItem(skin: "hat/a", slots: ["hat-front", "hat-back"], hidden: ["bandana"])
         let clothes = CatalogItem(skin: "clothes/a", slots: ["torso", "sleeves"], hidden: [])
         try validateCatalog([hat, clothes], asset: asset)
@@ -66,6 +70,21 @@ final class CompositionPublicAPITests: XCTestCase {
         } catch let error as SpineRuntimeError {
             XCTAssertEqual(error.code, .invalidSkinComposition)
         }
+    }
+
+    private func dress(_ skeleton: Skeleton, asset: SpineMeshAsset) throws {
+        let clothes = SpineSkinLayer.replace(skin: "clothes/a", slots: ["torso", "sleeves"])
+        let hat = SpineSkinLayer.replace(skin: "hat/a", slots: ["hat-front", "hat-back"])
+        let team = SpineSkinLayer.overlay(skin: "team/blue")
+        let look = SpineSkinComposition(baseSkin: "base", layers: [clothes, hat, .hide(slots: ["bandana", "earring"]), team])
+        try asset.validate(skinComposition: look)
+        _ = try asset.skinDescription(named: "hat/a").entries.map { ($0.slot, $0.name, $0.kind) }
+        try skeleton.apply(skinComposition: look)
+        let saved = try XCTUnwrap(skeleton.skinComposition)
+        try skeleton.apply(skinComposition: .init(baseSkin: "base", layers: [clothes, .replace(skin: "hat/b", slots: ["hat-front", "hat-back"]), .hide(slots: ["bandana"]), team]))
+        try skeleton.apply(skinComposition: saved)
+        try skeleton.apply(skinComposition: .init(baseSkin: "base", layers: []))
+        try skeleton.apply(skin: "base")
     }
 }
 #endif

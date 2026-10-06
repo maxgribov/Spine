@@ -25,3 +25,16 @@ public extension SpineMeshAsset {
         _ = try SkinCompositionResolver.resolve(skinComposition, in: compiled)
     }
 }
+
+public extension Skeleton {
+    var skinComposition: SpineSkinComposition? { meshRuntime?.skinComposition }
+
+    /// Atomically changes region layers, preserving playback. Finish with prepareMeshes
+    /// before rendering. Serialize with scene updates; Spine event callbacks are allowed.
+    func apply(skinComposition: SpineSkinComposition) throws {
+        guard let runtime=meshRuntime else {
+            throw SpineRuntimeError(.unsupportedFeature,path:"/runtime/skinComposition",message:"Skin composition requires a compiled mesh asset.")
+        }
+        try runtime.applyComposition(skinComposition)
+    }
+}
