@@ -1,0 +1,35 @@
+Command line invocation:
+    /Applications/Xcode-26.6.0.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /tmp/skin-xctest/Derived/Build/Products/SpineTests_iphoneos26.5-arm64.xctestrun -destination platform=iOS,id=<physical-device-id> -parallel-testing-enabled NO "-only-testing:SpineTests/CompositionMemoryProbeTests/testSharedCatalogMemory" -resultBundlePath /tmp/skin-xctest/MemoryShared.xcresult
+
+2026-10-06 20:17:40.791 xcodebuild[68235:2206893] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+Writing result bundle at path:
+	/tmp/skin-xctest/MemoryShared.xcresult
+
+2026-10-06 20:17:40.798 xcodebuild[68235:2206893] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-06 20:17:40.891 xcodebuild[68235:2206893] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS, arch:arm64e, id:<physical-device-id>, name:Max’s iPhone Air }
+{ platform:iOS, arch:arm64, id:<physical-device-id>, name:Max’s iPhone Air }
+2026-10-06 20:17:41.330 xcodebuild[68235:2206893] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-06 20:17:43.373642+0300 SkinTestHost[18537:16780280] [UIKit App Config] `UIScene` lifecycle will soon be required. Failure to adopt will result in an assert in the future.
+Test Suite 'Selected tests' started at 2026-10-06 20:17:43.468.
+Test Suite 'SpineTests.xctest' started at 2026-10-06 20:17:43.469.
+Test Suite 'CompositionMemoryProbeTests' started at 2026-10-06 20:17:43.469.
+Test Case '-[SpineTests.CompositionMemoryProbeTests testSharedCatalogMemory]' started.
+Test Case '-[SpineTests.CompositionMemoryProbeTests testSharedCatalogMemory]' passed (0.131 seconds).
+Test Suite 'CompositionMemoryProbeTests' passed at 2026-10-06 20:17:43.600.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.131 (0.132) seconds
+Test Suite 'SpineTests.xctest' passed at 2026-10-06 20:17:43.600.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.131 (0.132) seconds
+Test Suite 'Selected tests' passed at 2026-10-06 20:17:43.601.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.131 (0.132) seconds
+2026-10-06 20:17:43.733 xcodebuild[68235:2206893] [MT] IDETestOperationsObserverDebug: 2.400 elapsed -- Testing started completed.
+2026-10-06 20:17:43.734 xcodebuild[68235:2206893] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-06 20:17:43.734 xcodebuild[68235:2206893] [MT] IDETestOperationsObserverDebug: 2.400 sec, +2.400 sec -- end
+
+Test session results, code coverage, and logs:
+	/tmp/skin-xctest/MemoryShared.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

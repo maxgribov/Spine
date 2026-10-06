@@ -4,11 +4,13 @@
     "configuration" : "Release -O",
     "dirty" : true,
     "hashes" : {
-      "Examples\/SkinComposition\/App.swift" : "6f063bb2fcda20313c3f6ceba66063cc7979dfb25512bb364c647b7b1f49c8a8",
+      "Examples\/SkinComposition\/App.swift" : "f45aacb789bf15e61d7f7348bee205c99c57c0bcb8813116f5743318c423254a",
       "Examples\/SkinComposition\/Catalog.swift" : "97cc077c0d8d5b9ba80f8f3da249fd47dd8784d087263378eeffbc8277369848",
       "Examples\/SkinComposition\/ImageEvidence.swift" : "5ef5689fc97583e17fa6381d4a51dc33be37592ca438b221ae05f4d8979c52fb",
       "Examples\/SkinComposition\/Measurements.swift" : "b0a31cc5584ed018f46e67045581d3412e69c2cbd1e82322d933a74cba008bfb",
       "Examples\/SkinComposition\/NativeEvidence.swift" : "e9671d57f6ea3e44703a485dcb749587f41dd82edc05825a2e2d06ef96753229",
+      "Examples\/SkinComposition\/ScaledCatalog.swift" : "2565a733f508072913c20255c0d9447fb00d29c9788c4afdd28e592bb647fd0d",
+      "Examples\/SkinComposition\/ScaledWorkload.swift" : "0337f013868df1f48be00ab0879f14082191979b303422e1d3c18825e70b240e",
       "Examples\/SkinComposition\/WardrobeScene.swift" : "ed8416f304850a51fed54e55a9040261e780c6f87a9b370ac29a0b65609c30ab",
       "Sources\/Spine\/Animation.swift" : "4848122b1071e873f2ff98efe6819e18e9787189b0da86336847b84726f15b4d",
       "Sources\/Spine\/Attachment.swift" : "1f0904a1f2a020be75ca8e0195cdca58ec00dddd3e7ea0a4c44049d5d5b37de5",
@@ -39,7 +41,7 @@
       "Sources\/Spine\/Mesh\/Renderer\/MeshTriangleNode.swift" : "c852963e62227bb0dc9f3a86a0b55c18e612a5ae0913252e2c862b76fc2cdb67",
       "Sources\/Spine\/Mesh\/Resources\/SpineMeshTextureProvider.swift" : "ec0cb064f365e3bb6b42b0b23547da62a33e88cf1220f93ee5af1135b7c69f47",
       "Sources\/Spine\/Mesh\/Runtime\/MeshPhysicsReconciliation.swift" : "60fd0ca201775d1518f85d2ae110f57f7150d06f6dc03bb025be45abe7eb4da0",
-      "Sources\/Spine\/Mesh\/Runtime\/MeshRuntime.swift" : "7921e37431f73053f933f6b72479274ab5271e3a0cc08148bcfdf737988e14b4",
+      "Sources\/Spine\/Mesh\/Runtime\/MeshRuntime.swift" : "6f44403dcb07cef2e07846fbf611bc871d22a4d1943167238a95f1d73ac1fae6",
       "Sources\/Spine\/Mesh\/Runtime\/MeshSlotState.swift" : "7de226df2889ad0665f67013f500661d3f36888a3ecd6cf7690d9630430b4bda",
       "Sources\/Spine\/Mesh\/Runtime\/SpineMeshFrameContext.swift" : "f2566db56fc54996080fcf7957eb3d3343c0dfbb18d46920fd68ff40f9efec7c",
       "Sources\/Spine\/Mesh\/Runtime\/SpineRuntimeError.swift" : "c5bac5aa296c23881824133f4b1dec06d2e59f58b58c34aa50fc257906faa13b",
@@ -106,7 +108,7 @@
       "Tests\/SpineTests\/Resources\/Mesh41\/skin-composition\/wardrobe.json" : "4e8d8ec3aed0fe309b934102e038741d400757992299a3fbe779eb34cbb81e6a"
     },
     "platform" : "ios",
-    "sourceCommit" : "437785506b723e1e902ed053afbf427328efc3a6",
+    "sourceCommit" : "7a61ac8b96dc29b23f9f9b4f803e2e27b1cb7145",
     "target" : "arm64-apple-ios13.0"
   },
   "cases" : [

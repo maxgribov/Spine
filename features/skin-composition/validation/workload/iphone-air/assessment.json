@@ -1,0 +1,109 @@
+{
+  "criterion": "Warm preview apply+prepare p95 <= one 60Hz frame; memory has no owner-requested absolute ceiling",
+  "warmPreviewBudgetMs": 16.666666666666668,
+  "scenarios": {
+    "matchShared": {
+      "applyMs": {
+        "median": 0.00020826701074838638,
+        "p95": 0.00029173679649829865,
+        "p99": 0.00033318065106868744,
+        "max": 0.00033318065106868744
+      },
+      "prepareMs": {
+        "median": 0.8865208365023136,
+        "p95": 0.9450416546314955,
+        "p99": 0.9655416943132877,
+        "max": 1.0362500324845314
+      },
+      "combinedMs": {
+        "median": 0.8867292199283838,
+        "p95": 0.9452500380575657,
+        "p99": 0.965750077739358,
+        "max": 1.036541536450386
+      },
+      "nativeFrameMs": {
+        "median": 16.6724999435246,
+        "p95": 16.672500176355243,
+        "p99": 16.672500176355243,
+        "max": 16.672500176355243
+      },
+      "nativeMeanCallbackFPS": 59.97900734817666,
+      "intervalsLongerThanTwo60HzFrames": 0
+    },
+    "matchDistinct": {
+      "applyMs": {
+        "median": 0.00020838342607021332,
+        "p95": 0.00029173679649829865,
+        "p99": 0.00033318065106868744,
+        "max": 0.0003334134817123413
+      },
+      "prepareMs": {
+        "median": 0.9502082830294967,
+        "p95": 1.1501666158437729,
+        "p99": 1.3136665802448988,
+        "max": 1.3261251151561737
+      },
+      "combinedMs": {
+        "median": 0.9504375047981739,
+        "p95": 1.1504166759550571,
+        "p99": 1.313833286985755,
+        "max": 1.3262499123811722
+      },
+      "nativeFrameMs": {
+        "median": 16.6724999435246,
+        "p95": 16.672500176355243,
+        "p99": 16.672500176355243,
+        "max": 16.672500176355243
+      },
+      "nativeMeanCallbackFPS": 59.97900734817666,
+      "intervalsLongerThanTwo60HzFrames": 0
+    },
+    "preview": {
+      "applyMs": {
+        "median": 0.47187507152557373,
+        "p95": 0.5671251565217972,
+        "p99": 0.5995417013764381,
+        "max": 0.7585831917822361
+      },
+      "prepareMs": {
+        "median": 0.03716675564646721,
+        "p95": 0.05124998278915882,
+        "p99": 0.05766679532825947,
+        "max": 0.1147084403783083
+      },
+      "combinedMs": {
+        "median": 0.5093542858958244,
+        "p95": 0.618375139310956,
+        "p99": 0.6542084738612175,
+        "max": 0.8141666185110807
+      },
+      "nativeFrameMs": {
+        "median": 16.6724999435246,
+        "p95": 16.672500176355243,
+        "p99": 16.672500176355243,
+        "max": 16.672500176355243
+      },
+      "nativeMeanCallbackFPS": 59.97900734119663,
+      "intervalsLongerThanTwo60HzFrames": 0
+    }
+  },
+  "warmPreviewPassed": true,
+  "memory": {
+    "shared": {
+      "assetIncrementalPhysicalFootprintBytes": 40812568,
+      "assetIncrementalLiveHeapBytes": 20543408,
+      "peakObservedStagingHeapDeltaBytes": 44064,
+      "peakObservedStagingPhysicalFootprintDeltaBytes": 32768,
+      "ownerReleased": true,
+      "method": "Prewarmed, fully texture-preloaded process footprint delta; held-staging checkpoints; not exact global GPU attribution or between-checkpoint transient maximum"
+    },
+    "distinct": {
+      "assetIncrementalPhysicalFootprintBytes": 160710776,
+      "assetIncrementalLiveHeapBytes": 80433280,
+      "peakObservedStagingHeapDeltaBytes": 59392,
+      "peakObservedStagingPhysicalFootprintDeltaBytes": 49152,
+      "ownerReleased": true,
+      "method": "Prewarmed, fully texture-preloaded process footprint delta; held-staging checkpoints; not exact global GPU attribution or between-checkpoint transient maximum"
+    }
+  }
+}

@@ -64,6 +64,8 @@ final class MeshRuntime {
     private var compositionSlots = Set<Int>()
     // Internal transaction fault seam; invoked only while nodes are detached.
     var compositionStageCheck: ((SKNode) throws -> Void)?
+    // Internal allocation probe at the point where both old and complete staged trees are held.
+    var compositionStagingCompleted: (() -> Void)?
 
     init(asset: SpineMeshAsset, owner: Skeleton, skin: String?) throws {
         let compiled = asset.compiled
@@ -303,6 +305,7 @@ final class MeshRuntime {
             nextStates[slot]=next
         }
         let staged=try setupRenderer?.stageRegions(lookup:result.lookup,slots:changed,resources:asset.rendererResources,check:compositionStageCheck)
+        compositionStagingCompleted?()
         // No throws, scene callbacks, physics transitions or resampling after this boundary.
         if let staged=staged {setupRenderer?.commitRegions(staged,slots:changed)}
         slotStates=nextStates;skinLookup=result.lookup;skinComposition=composition;compositionSlots=result.touchedSlots

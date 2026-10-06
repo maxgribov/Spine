@@ -1,0 +1,60 @@
+{
+  "sourceCommit": "7a61ac8b96dc29b23f9f9b4f803e2e27b1cb7145",
+  "dirty": true,
+  "configuration": "Debug -Onone, ENABLE_TESTABILITY=YES, DEBUG; full applicable XCTest sources unchanged",
+  "device": {
+    "architecture": "arm64e",
+    "modelName": "iPhone Air",
+    "osBuildNumber": "23G90",
+    "osVersion": "26.6.2",
+    "platform": "iOS"
+  },
+  "fullSuite": {
+    "result": "Passed",
+    "totalTestCount": 173,
+    "passedTests": 173,
+    "failedTests": 0,
+    "skippedTests": 0,
+    "startTime": 1791307047.1,
+    "finishTime": 1791307051.001
+  },
+  "supplementalMemory": {
+    "shared": {
+      "result": "Passed",
+      "totalTestCount": 1,
+      "passedTests": 1,
+      "failedTests": 0,
+      "skippedTests": 0,
+      "startTime": 1791307061.075,
+      "finishTime": 1791307063.737
+    },
+    "distinct": {
+      "result": "Passed",
+      "totalTestCount": 1,
+      "passedTests": 1,
+      "failedTests": 0,
+      "skippedTests": 0,
+      "startTime": 1791307082.692,
+      "finishTime": 1791307085.442
+    }
+  },
+  "limitations": [
+    "macOS-only test suites remain excluded by their existing conditional compilation",
+    "Oracle exporters use their existing SPINE_MESH_ORACLE_OUTPUT environment override directed to host sandbox temporary directory",
+    "Supplemental memory methods run in separate test-without-building processes; diagnostic allocation numbers are Debug configuration",
+    "This XCTest pass is current-source regression evidence, not a repeat of the historical external pinned-runtime oracle or GPU-performance gate"
+  ],
+  "initialAttempt": {
+    "passed": 171,
+    "failed": 2,
+    "cause": "Pre-existing oracle exporters defaulted to forbidden /tmp on iOS; corrected via host environment adapter, no test/library edits"
+  },
+  "artifacts": {
+    "physical-tests.log": "d2fec7eec880dff92f1e48c371149d2fd29bb97c2b1a7ccca99d77faafab7ea8",
+    "memory-shared.json": "45d174b2845221e84f5f10f03e3e147ce8cf5c084ea9cb394af3f49863c7ccb5",
+    "memory-shared-tests.log": "e3e4facaecf68adb72adb5a2afe801d05ef57c5f2b682bb4829adfba3ff24a45",
+    "source-sha256.json": "a9bd6f030ab29f67b319caf340e16f0137a096a795308c28bd115b305ff94cb6",
+    "memory-distinct.json": "3854627d086c600427aa2fd300f8d1590202f30323d2fe7297bffe4c4ebc03d5",
+    "memory-distinct-tests.log": "05e1003f89e858116e07131b3961391ea6f1b425b24e8b05eed8a39ae1c9c28a"
+  }
+}

@@ -1,0 +1,3577 @@
+{
+  "runtime": "@esotericsoftware/spine-core@4.1.56",
+  "scope": "phase 4 full key/midpoint/switch-boundary grid through real SKAction scheduling",
+  "fixtures": 4,
+  "snapshots": 223,
+  "results": [
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003143978381103807,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 277.9169607477162,
+        "actual": 277.9169921875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.06665000319480896,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003991129202063348,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 145.49959387777048,
+        "actual": 145.4996337890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.13330000638961792,
+      "coordinates": 498,
+      "maximumPositionError": 0.000037170563615518404,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 22,
+        "expected": 139.9686670530692,
+        "actual": 139.9687042236328
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.16664999723434448,
+      "coordinates": 498,
+      "maximumPositionError": 0.00002545684750998589,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "right-hand-item2",
+        "attachment": "shield",
+        "index": 5,
+        "expected": 162.72094220489438,
+        "actual": 162.72091674804688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.20000000298023224,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003324628789869166,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 271.40634428144415,
+        "actual": 271.40631103515625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.21665000915527344,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003971330374952231,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 275.04923404924125,
+        "actual": 275.0491943359375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.23330000042915344,
+      "coordinates": 498,
+      "maximumPositionError": 0.000039428300112831494,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 345.74277624470636,
+        "actual": 345.74273681640625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.2666500210762024,
+      "coordinates": 498,
+      "maximumPositionError": 0.00004061205680727653,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 281.43870028002556,
+        "actual": 281.43865966796875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.30000001192092896,
+      "coordinates": 498,
+      "maximumPositionError": 0.000036873972248940845,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 132.60970433696525,
+        "actual": 132.6097412109375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.31665000319480896,
+      "coordinates": 498,
+      "maximumPositionError": 0.00002464940843083241,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 41,
+        "expected": 262.16379370996657,
+        "actual": 262.163818359375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.33329999446868896,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003353499141667271,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 288.22812191389767,
+        "actual": 288.22808837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.3499999940395355,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003271452999342728,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 5,
+        "expected": 286.2923911129675,
+        "actual": 286.2923583984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.3666999936103821,
+      "coordinates": 498,
+      "maximumPositionError": 0.000042185384927506675,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 102.8005025533846,
+        "actual": 102.80054473876953
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.43334999680519104,
+      "coordinates": 498,
+      "maximumPositionError": 0.00004463814190103221,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 23,
+        "expected": 325.5378864350169,
+        "actual": 325.537841796875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.5,
+      "coordinates": 498,
+      "maximumPositionError": 0.000051034314608955356,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 79.28376244224789,
+        "actual": 79.2838134765625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.5166499614715576,
+      "coordinates": 498,
+      "maximumPositionError": 0.000056666732263011,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 88.72670419752555,
+        "actual": 88.72676086425781
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.53329998254776,
+      "coordinates": 498,
+      "maximumPositionError": 0.000034425822974526454,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 95.36953344527078,
+        "actual": 95.36956787109375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.5666500329971313,
+      "coordinates": 498,
+      "maximumPositionError": 0.00005728192770959595,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 109.30075448565042,
+        "actual": 109.30081176757812
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6000000238418579,
+      "coordinates": 498,
+      "maximumPositionError": 0.000045029634634374816,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 275.9217369241659,
+        "actual": 275.92169189453125
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6166499853134155,
+      "coordinates": 498,
+      "maximumPositionError": 0.000023250783399930697,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 12,
+        "expected": 26.429465884958788,
+        "actual": 26.429489135742188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6332899928092957,
+      "coordinates": 498,
+      "maximumPositionError": 0.00001903862408880741,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 47,
+        "expected": 232.50675586371966,
+        "actual": 232.50677490234375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6333000063896179,
+      "coordinates": 498,
+      "maximumPositionError": 0.000054582660084179224,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 133.15131260483992,
+        "actual": 133.1513671875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6333100199699402,
+      "coordinates": 498,
+      "maximumPositionError": 0.000057483504122046725,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 0,
+        "expected": 130.5215794793865,
+        "actual": 130.52163696289062
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6499999761581421,
+      "coordinates": 498,
+      "maximumPositionError": 0.00005763036267580901,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 134.4427829458092,
+        "actual": 134.44284057617188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.666700005531311,
+      "coordinates": 498,
+      "maximumPositionError": 0.00005116916008773842,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 348.27394643283196,
+        "actual": 348.2738952636719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6833499670028687,
+      "coordinates": 498,
+      "maximumPositionError": 0.000023438336590686504,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 38,
+        "expected": 14.438579962847491,
+        "actual": 14.438603401184082
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.6999899744987488,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003136766264333346,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 349.0660103715689,
+        "actual": 349.06597900390625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.699999988079071,
+      "coordinates": 506,
+      "maximumPositionError": 0.00002241530512492318,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 12,
+        "expected": 28.253349777077688,
+        "actual": 28.253372192382812
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.7000100016593933,
+      "coordinates": 506,
+      "maximumPositionError": 0.00002724426087752363,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 5,
+        "expected": 271.8904691387921,
+        "actual": 271.89044189453125
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.7166500091552734,
+      "coordinates": 506,
+      "maximumPositionError": 0.000030119500877390237,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 147.54684488049912,
+        "actual": 147.546875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.733299970626831,
+      "coordinates": 506,
+      "maximumPositionError": 0.000028148028917485135,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 0,
+        "expected": 141.6390404554867,
+        "actual": 141.63906860351562
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.7666499614715576,
+      "coordinates": 506,
+      "maximumPositionError": 0.00003726160929318212,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 139.26757138096883,
+        "actual": 139.26760864257812
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.7999899983406067,
+      "coordinates": 506,
+      "maximumPositionError": 0.00002949461747903115,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 5,
+        "expected": 282.49435322508623,
+        "actual": 282.49432373046875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.800000011920929,
+      "coordinates": 498,
+      "maximumPositionError": 0.000032228242957899056,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 360.9693315446492,
+        "actual": 360.96929931640625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.8000100255012512,
+      "coordinates": 498,
+      "maximumPositionError": 0.000057495691265785354,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 131.55633898868373,
+        "actual": 131.556396484375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.8166500329971313,
+      "coordinates": 498,
+      "maximumPositionError": 0.00005437776457029031,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "right-foot",
+        "attachment": "right-foot",
+        "index": 8,
+        "expected": 5.609353083819258,
+        "actual": 5.6092987060546875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.833299994468689,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003813107218775258,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 363.5089492638847,
+        "actual": 363.5089111328125
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.8500000238418579,
+      "coordinates": 498,
+      "maximumPositionError": 0.00004691563219694217,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 27,
+        "expected": 363.7290508218822,
+        "actual": 363.72900390625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.8666999936103821,
+      "coordinates": 498,
+      "maximumPositionError": 0.000023284060844730448,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 22,
+        "expected": 99.99774893273603,
+        "actual": 99.99777221679688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 0.9333499670028687,
+      "coordinates": 498,
+      "maximumPositionError": 0.000026243052332119987,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 1,
+        "expected": 317.0619769266461,
+        "actual": 317.06195068359375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblin",
+      "time": 1,
+      "coordinates": 498,
+      "maximumPositionError": 0.00003143978381103807,
+      "maximumUVError": 5.960464477539063e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 277.9169607477162,
+        "actual": 277.9169921875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003143978381103807,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 277.9169607477162,
+        "actual": 277.9169921875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.06665000319480896,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003991129202063348,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 145.49959387777048,
+        "actual": 145.4996337890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.13330000638961792,
+      "coordinates": 256,
+      "maximumPositionError": 0.000037170563615518404,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 22,
+        "expected": 139.9686670530692,
+        "actual": 139.9687042236328
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.16664999723434448,
+      "coordinates": 256,
+      "maximumPositionError": 0.000029826127672549774,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 5,
+        "expected": 269.5636589765183,
+        "actual": 269.5636291503906
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.20000000298023224,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003324628789869166,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 271.40634428144415,
+        "actual": 271.40631103515625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.21665000915527344,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003971330374952231,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 275.04923404924125,
+        "actual": 275.0491943359375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.23330000042915344,
+      "coordinates": 256,
+      "maximumPositionError": 0.000039428300112831494,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 345.74277624470636,
+        "actual": 345.74273681640625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.2666500210762024,
+      "coordinates": 256,
+      "maximumPositionError": 0.00004061205680727653,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 281.43870028002556,
+        "actual": 281.43865966796875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.30000001192092896,
+      "coordinates": 256,
+      "maximumPositionError": 0.000036873972248940845,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 132.60970433696525,
+        "actual": 132.6097412109375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.31665000319480896,
+      "coordinates": 256,
+      "maximumPositionError": 0.000023787972317279582,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 6,
+        "expected": -32.550763076302395,
+        "actual": -32.55073928833008
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.33329999446868896,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003353499141667271,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 288.22812191389767,
+        "actual": 288.22808837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.3499999940395355,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003271452999342728,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 5,
+        "expected": 286.2923911129675,
+        "actual": 286.2923583984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.3666999936103821,
+      "coordinates": 256,
+      "maximumPositionError": 0.000042185384927506675,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 102.8005025533846,
+        "actual": 102.80054473876953
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.43334999680519104,
+      "coordinates": 256,
+      "maximumPositionError": 0.00004463814190103221,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 23,
+        "expected": 325.5378864350169,
+        "actual": 325.537841796875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.5,
+      "coordinates": 256,
+      "maximumPositionError": 0.000051034314608955356,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 79.28376244224789,
+        "actual": 79.2838134765625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.5166499614715576,
+      "coordinates": 256,
+      "maximumPositionError": 0.000056666732263011,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 88.72670419752555,
+        "actual": 88.72676086425781
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.53329998254776,
+      "coordinates": 256,
+      "maximumPositionError": 0.000034425822974526454,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 95.36953344527078,
+        "actual": 95.36956787109375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.5666500329971313,
+      "coordinates": 256,
+      "maximumPositionError": 0.00005728192770959595,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 109.30075448565042,
+        "actual": 109.30081176757812
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6000000238418579,
+      "coordinates": 256,
+      "maximumPositionError": 0.000045029634634374816,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 275.9217369241659,
+        "actual": 275.92169189453125
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6166499853134155,
+      "coordinates": 256,
+      "maximumPositionError": 0.000023250783399930697,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 12,
+        "expected": 26.429465884958788,
+        "actual": 26.429489135742188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6332899928092957,
+      "coordinates": 256,
+      "maximumPositionError": 0.0000218995932073085,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 7,
+        "expected": 275.5886316648599,
+        "actual": 275.5886535644531
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6333000063896179,
+      "coordinates": 256,
+      "maximumPositionError": 0.000054582660084179224,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 133.15131260483992,
+        "actual": 133.1513671875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6333100199699402,
+      "coordinates": 256,
+      "maximumPositionError": 0.000057483504122046725,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 0,
+        "expected": 130.5215794793865,
+        "actual": 130.52163696289062
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6499999761581421,
+      "coordinates": 256,
+      "maximumPositionError": 0.00005763036267580901,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 134.4427829458092,
+        "actual": 134.44284057617188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.666700005531311,
+      "coordinates": 256,
+      "maximumPositionError": 0.00005116916008773842,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 348.27394643283196,
+        "actual": 348.2738952636719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6833499670028687,
+      "coordinates": 256,
+      "maximumPositionError": 0.000024164057791153937,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 4,
+        "expected": 69.45501581396955,
+        "actual": 69.45503997802734
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.6999899744987488,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003136766264333346,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 349.0660103715689,
+        "actual": 349.06597900390625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.699999988079071,
+      "coordinates": 264,
+      "maximumPositionError": 0.00003365546723443913,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 1,
+        "expected": 202.88497611015777,
+        "actual": 202.885009765625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.7000100016593933,
+      "coordinates": 264,
+      "maximumPositionError": 0.00002724426087752363,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 5,
+        "expected": 271.8904691387921,
+        "actual": 271.89044189453125
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.7166500091552734,
+      "coordinates": 264,
+      "maximumPositionError": 0.000030119500877390237,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 26,
+        "expected": 147.54684488049912,
+        "actual": 147.546875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.733299970626831,
+      "coordinates": 264,
+      "maximumPositionError": 0.00003323903205654233,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 6,
+        "expected": -34.01737866749885,
+        "actual": -34.0173454284668
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.7666499614715576,
+      "coordinates": 264,
+      "maximumPositionError": 0.00003726160929318212,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 139.26757138096883,
+        "actual": 139.26760864257812
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.7999899983406067,
+      "coordinates": 264,
+      "maximumPositionError": 0.00002949461747903115,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 5,
+        "expected": 282.49435322508623,
+        "actual": 282.49432373046875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.800000011920929,
+      "coordinates": 256,
+      "maximumPositionError": 0.000032228242957899056,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 360.9693315446492,
+        "actual": 360.96929931640625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.8000100255012512,
+      "coordinates": 256,
+      "maximumPositionError": 0.000057495691265785354,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 24,
+        "expected": 131.55633898868373,
+        "actual": 131.556396484375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.8166500329971313,
+      "coordinates": 256,
+      "maximumPositionError": 0.00005437776457029031,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "right-foot",
+        "attachment": "right-foot",
+        "index": 8,
+        "expected": 5.609353083819258,
+        "actual": 5.6092987060546875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.833299994468689,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003813107218775258,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 25,
+        "expected": 363.5089492638847,
+        "actual": 363.5089111328125
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.8500000238418579,
+      "coordinates": 256,
+      "maximumPositionError": 0.00004691563219694217,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 27,
+        "expected": 363.7290508218822,
+        "actual": 363.72900390625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.8666999936103821,
+      "coordinates": 256,
+      "maximumPositionError": 0.000023284060844730448,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 22,
+        "expected": 99.99774893273603,
+        "actual": 99.99777221679688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 0.9333499670028687,
+      "coordinates": 256,
+      "maximumPositionError": 0.000029125220144976538,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "head",
+        "attachment": "head",
+        "index": 6,
+        "expected": -35.951567211157645,
+        "actual": -35.9515380859375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "goblins-pro",
+      "skin": "goblingirl",
+      "time": 1,
+      "coordinates": 256,
+      "maximumPositionError": 0.00003143978381103807,
+      "maximumUVError": 4.470348358154297e-8,
+      "worstPosition": {
+        "slot": "left-hand-item",
+        "attachment": "spear",
+        "index": 19,
+        "expected": 277.9169607477162,
+        "actual": 277.9169921875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "default",
+      "time": 0,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000014979397349179635,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 4,
+        "expected": -41.71427304334989,
+        "actual": -41.714271545410156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "default",
+      "time": 0.25,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000013985630573642993,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 4,
+        "expected": -19.75713678979841,
+        "actual": -19.75713539123535
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "default",
+      "time": 0.5,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000012708537404648723,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 5,
+        "expected": 28.4638894391887,
+        "actual": 28.46388816833496
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "default",
+      "time": 0.75,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000012708537404648723,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 5,
+        "expected": 28.4638894391887,
+        "actual": 28.46388816833496
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "default",
+      "time": 1,
+      "coordinates": 8,
+      "maximumPositionError": 0.000004915130318750016,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 4,
+        "expected": 46.11427197085601,
+        "actual": 46.11427688598633
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "other",
+      "time": 0,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000014979397349179635,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 4,
+        "expected": -41.71427304334989,
+        "actual": -41.714271545410156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "other",
+      "time": 0.25,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000013985630573642993,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 4,
+        "expected": -19.75713678979841,
+        "actual": -19.75713539123535
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "other",
+      "time": 0.5,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000012708537404648723,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 5,
+        "expected": 28.4638894391887,
+        "actual": 28.46388816833496
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "other",
+      "time": 0.75,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000012708537404648723,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 5,
+        "expected": 28.4638894391887,
+        "actual": 28.46388816833496
+      },
+      "passed": true
+    },
+    {
+      "fixture": "weighted-link",
+      "skin": "other",
+      "time": 1,
+      "coordinates": 8,
+      "maximumPositionError": 0.000004915130318750016,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "slot",
+        "attachment": "chain",
+        "index": 4,
+        "expected": 46.11427197085601,
+        "actual": 46.11427688598633
+      },
+      "passed": true
+    },
+    {
+      "fixture": "deform-resources",
+      "skin": "default",
+      "time": 0,
+      "coordinates": 16,
+      "maximumPositionError": 0.000010393941835218357,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "region",
+        "attachment": "region",
+        "index": 6,
+        "expected": 153.4308880794887,
+        "actual": 153.43087768554688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "deform-resources",
+      "skin": "default",
+      "time": 0.25,
+      "coordinates": 16,
+      "maximumPositionError": 0.000010393941835218357,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "region",
+        "attachment": "region",
+        "index": 6,
+        "expected": 153.4308880794887,
+        "actual": 153.43087768554688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "deform-resources",
+      "skin": "default",
+      "time": 0.5,
+      "coordinates": 16,
+      "maximumPositionError": 0.000010393941835218357,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "region",
+        "attachment": "region",
+        "index": 6,
+        "expected": 153.4308880794887,
+        "actual": 153.43087768554688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "deform-resources",
+      "skin": "default",
+      "time": 0.75,
+      "coordinates": 16,
+      "maximumPositionError": 0.000010393941835218357,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "region",
+        "attachment": "region",
+        "index": 6,
+        "expected": 153.4308880794887,
+        "actual": 153.43087768554688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "deform-resources",
+      "skin": "default",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 0.000010393941835218357,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "region",
+        "attachment": "region",
+        "index": 6,
+        "expected": 153.4308880794887,
+        "actual": 153.43087768554688
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.000009999999747378752,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026320229693510555,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 65.99994396221531,
+        "actual": 65.99994659423828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.10000000149011612,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000623345465555758,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 66.9553312909594,
+        "actual": 66.95533752441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.19999000430107117,
+      "coordinates": 16,
+      "maximumPositionError": 0.000003651417586070238,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 64.2444268905746,
+        "actual": 64.24443054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.20000000298023224,
+      "coordinates": 16,
+      "maximumPositionError": 0.000005150101586082201,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58446254756252,
+        "actual": 67.58445739746094
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.2000100016593933,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000017758050319116592,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58450902741762,
+        "actual": 67.58451080322266
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.22499999403953552,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004253154173738949,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 63.935954609150514,
+        "actual": 63.93595886230469
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.24999000132083893,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000029033466830696852,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77565292776075,
+        "actual": 67.77565002441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.25,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000023762024312645735,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77568291819462,
+        "actual": 67.77568054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.25001001358032227,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000018904434710975693,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77571295001378,
+        "actual": 67.77571105957031
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.2750000059604645,
+      "coordinates": 16,
+      "maximumPositionError": 0.000002073309197214712,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 6,
+        "expected": 31.84885199163221,
+        "actual": 31.848854064941406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.2999899983406067,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000407757949005827,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58354594769668,
+        "actual": 36.58354187011719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.30000001192092896,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004595497948400862,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58360593917002,
+        "actual": 36.58361053466797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.3000100255012512,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004185712398907526,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.88434256461865,
+        "actual": 67.88433837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.3500000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.000005185022061482414,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "inherited",
+        "index": 2,
+        "expected": 41.950555264367765,
+        "actual": 41.9505500793457
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.3999899923801422,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000045067972820334035,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.85348961421916,
+        "actual": 67.85348510742188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.4000000059604645,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000020686907689082545,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.238172692470066,
+        "actual": 61.2381706237793
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.40001001954078674,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004290180754651374,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.853450299663,
+        "actual": 67.85345458984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.44999998807907104,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000021589495702301065,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.71400235765199,
+        "actual": 67.71400451660156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.49998998641967773,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000034696202462214387,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 37.42184795204212,
+        "actual": 37.421844482421875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.5,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026717795549302537,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 5,
+        "expected": 30.090870667995375,
+        "actual": 30.09086799621582
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.5000100135803223,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000034696202462214387,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 37.42184795204212,
+        "actual": 37.421844482421875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.550000011920929,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000021589495702301065,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.71400235765199,
+        "actual": 67.71400451660156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.5999900102615356,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004231667105614179,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.85345035817664,
+        "actual": 67.85345458984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.6000000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026071935650406886,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.23817323097286,
+        "actual": 61.2381706237793
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.6000100374221802,
+      "coordinates": 16,
+      "maximumPositionError": 0.000003377529736781071,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.238354166415576,
+        "actual": 61.23835754394531
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.6499999761581421,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000020758092915684756,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.91026861510868,
+        "actual": 67.91027069091797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.6999899744987488,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004185712398907526,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.88434256461865,
+        "actual": 67.88433837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.699999988079071,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004595497948400862,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58360593917002,
+        "actual": 36.58361053466797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.7000100016593933,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000407757949005827,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58354594769668,
+        "actual": 36.58354187011719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.7250000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.000001794447253899989,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "independent",
+        "index": 3,
+        "expected": -17.45316494141991,
+        "actual": -17.453163146972656
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.7499899864196777,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000018904434710975693,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77571295001378,
+        "actual": 67.77571105957031
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.75,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000023762024312645735,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77568291819462,
+        "actual": 67.77568054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.7500100135803223,
+      "coordinates": 16,
+      "maximumPositionError": 0.000002858649096992849,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77565288306316,
+        "actual": 67.77565002441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.7749999761581421,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026289066497042768,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.08435558642538,
+        "actual": 36.08435821533203
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.7999899983406067,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000017758050319116592,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58450902741762,
+        "actual": 67.58451080322266
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.800000011920929,
+      "coordinates": 8,
+      "maximumPositionError": 0.000005080829595272007,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58446247829053,
+        "actual": 67.58445739746094
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.8000100255012512,
+      "coordinates": 8,
+      "maximumPositionError": 0.000003324627755318943,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58441592586053,
+        "actual": 67.58441925048828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.8999999761581421,
+      "coordinates": 8,
+      "maximumPositionError": 0.000006056233303297631,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 66.95533146818076,
+        "actual": 66.95533752441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 0.9999899864196777,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000027078755806542176,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 65.9999438863627,
+        "actual": 65.99994659423828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "default",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.000009999999747378752,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026320229693510555,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 65.99994396221531,
+        "actual": 65.99994659423828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.10000000149011612,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000623345465555758,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 66.9553312909594,
+        "actual": 66.95533752441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.19999000430107117,
+      "coordinates": 16,
+      "maximumPositionError": 0.000003651417586070238,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 64.2444268905746,
+        "actual": 64.24443054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.20000000298023224,
+      "coordinates": 16,
+      "maximumPositionError": 0.000005150101586082201,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58446254756252,
+        "actual": 67.58445739746094
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.2000100016593933,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000017758050319116592,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58450902741762,
+        "actual": 67.58451080322266
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.22499999403953552,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004253154173738949,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 63.935954609150514,
+        "actual": 63.93595886230469
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.24999000132083893,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000029033466830696852,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77565292776075,
+        "actual": 67.77565002441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.25,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000023762024312645735,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77568291819462,
+        "actual": 67.77568054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.25001001358032227,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000018904434710975693,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77571295001378,
+        "actual": 67.77571105957031
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.2750000059604645,
+      "coordinates": 16,
+      "maximumPositionError": 0.000002073309197214712,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 6,
+        "expected": 31.84885199163221,
+        "actual": 31.848854064941406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.2999899983406067,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000407757949005827,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58354594769668,
+        "actual": 36.58354187011719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.30000001192092896,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004595497948400862,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58360593917002,
+        "actual": 36.58361053466797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.3000100255012512,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004185712398907526,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.88434256461865,
+        "actual": 67.88433837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.3500000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.000005185022061482414,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "inherited",
+        "index": 2,
+        "expected": 41.950555264367765,
+        "actual": 41.9505500793457
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.3999899923801422,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000045067972820334035,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.85348961421916,
+        "actual": 67.85348510742188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.4000000059604645,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000020686907689082545,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.238172692470066,
+        "actual": 61.2381706237793
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.40001001954078674,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004290180754651374,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.853450299663,
+        "actual": 67.85345458984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.44999998807907104,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000021589495702301065,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.71400235765199,
+        "actual": 67.71400451660156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.49998998641967773,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000034696202462214387,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 37.42184795204212,
+        "actual": 37.421844482421875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.5,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026717795549302537,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 5,
+        "expected": 30.090870667995375,
+        "actual": 30.09086799621582
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.5000100135803223,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000034696202462214387,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 37.42184795204212,
+        "actual": 37.421844482421875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.550000011920929,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000021589495702301065,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.71400235765199,
+        "actual": 67.71400451660156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.5999900102615356,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004231667105614179,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.85345035817664,
+        "actual": 67.85345458984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.6000000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026071935650406886,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.23817323097286,
+        "actual": 61.2381706237793
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.6000100374221802,
+      "coordinates": 16,
+      "maximumPositionError": 0.000003377529736781071,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.238354166415576,
+        "actual": 61.23835754394531
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.6499999761581421,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000020758092915684756,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.91026861510868,
+        "actual": 67.91027069091797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.6999899744987488,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004185712398907526,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.88434256461865,
+        "actual": 67.88433837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.699999988079071,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004595497948400862,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58360593917002,
+        "actual": 36.58361053466797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.7000100016593933,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000407757949005827,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58354594769668,
+        "actual": 36.58354187011719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.7250000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.000001794447253899989,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "independent",
+        "index": 3,
+        "expected": -17.45316494141991,
+        "actual": -17.453163146972656
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.7499899864196777,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000018904434710975693,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77571295001378,
+        "actual": 67.77571105957031
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.75,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000023762024312645735,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77568291819462,
+        "actual": 67.77568054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.7500100135803223,
+      "coordinates": 16,
+      "maximumPositionError": 0.000002858649096992849,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77565288306316,
+        "actual": 67.77565002441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.7749999761581421,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026289066497042768,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.08435558642538,
+        "actual": 36.08435821533203
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.7999899983406067,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000017758050319116592,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58450902741762,
+        "actual": 67.58451080322266
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.800000011920929,
+      "coordinates": 8,
+      "maximumPositionError": 0.000005080829595272007,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58446247829053,
+        "actual": 67.58445739746094
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.8000100255012512,
+      "coordinates": 8,
+      "maximumPositionError": 0.000003324627755318943,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58441592586053,
+        "actual": 67.58441925048828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.8999999761581421,
+      "coordinates": 8,
+      "maximumPositionError": 0.000006056233303297631,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 66.95533146818076,
+        "actual": 66.95533752441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 0.9999899864196777,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000027078755806542176,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 65.9999438863627,
+        "actual": 65.99994659423828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "compatible",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.000009999999747378752,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026320229693510555,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 65.99994396221531,
+        "actual": 65.99994659423828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.10000000149011612,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000623345465555758,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 66.9553312909594,
+        "actual": 66.95533752441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.19999000430107117,
+      "coordinates": 16,
+      "maximumPositionError": 0.000003651417586070238,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 64.2444268905746,
+        "actual": 64.24443054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.20000000298023224,
+      "coordinates": 16,
+      "maximumPositionError": 0.000005150101586082201,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58446254756252,
+        "actual": 67.58445739746094
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.2000100016593933,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000017758050319116592,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58450902741762,
+        "actual": 67.58451080322266
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.22499999403953552,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004253154173738949,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 63.935954609150514,
+        "actual": 63.93595886230469
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.24999000132083893,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000029033466830696852,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77565292776075,
+        "actual": 67.77565002441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.25,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000023762024312645735,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77568291819462,
+        "actual": 67.77568054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.25001001358032227,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000018904434710975693,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77571295001378,
+        "actual": 67.77571105957031
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.2750000059604645,
+      "coordinates": 16,
+      "maximumPositionError": 0.000002073309197214712,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 6,
+        "expected": 31.84885199163221,
+        "actual": 31.848854064941406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.2999899983406067,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000407757949005827,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58354594769668,
+        "actual": 36.58354187011719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.30000001192092896,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004595497948400862,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58360593917002,
+        "actual": 36.58361053466797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.3000100255012512,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004185712398907526,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.88434256461865,
+        "actual": 67.88433837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.3500000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.000005185022061482414,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "inherited",
+        "index": 2,
+        "expected": 41.950555264367765,
+        "actual": 41.9505500793457
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.3999899923801422,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000045067972820334035,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.85348961421916,
+        "actual": 67.85348510742188
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.4000000059604645,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000020686907689082545,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.238172692470066,
+        "actual": 61.2381706237793
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.40001001954078674,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004290180754651374,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.853450299663,
+        "actual": 67.85345458984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.44999998807907104,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000021589495702301065,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.71400235765199,
+        "actual": 67.71400451660156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.49998998641967773,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000034696202462214387,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 37.42184795204212,
+        "actual": 37.421844482421875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.5,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026717795549302537,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 5,
+        "expected": 30.090870667995375,
+        "actual": 30.09086799621582
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.5000100135803223,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000034696202462214387,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 37.42184795204212,
+        "actual": 37.421844482421875
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.550000011920929,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000021589495702301065,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.71400235765199,
+        "actual": 67.71400451660156
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.5999900102615356,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004231667105614179,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.85345035817664,
+        "actual": 67.85345458984375
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.6000000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026071935650406886,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.23817323097286,
+        "actual": 61.2381706237793
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.6000100374221802,
+      "coordinates": 16,
+      "maximumPositionError": 0.000003377529736781071,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 61.238354166415576,
+        "actual": 61.23835754394531
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.6499999761581421,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000020758092915684756,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.91026861510868,
+        "actual": 67.91027069091797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.6999899744987488,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004185712398907526,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.88434256461865,
+        "actual": 67.88433837890625
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.699999988079071,
+      "coordinates": 16,
+      "maximumPositionError": 0.000004595497948400862,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58360593917002,
+        "actual": 36.58361053466797
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.7000100016593933,
+      "coordinates": 16,
+      "maximumPositionError": 0.00000407757949005827,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.58354594769668,
+        "actual": 36.58354187011719
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.7250000238418579,
+      "coordinates": 16,
+      "maximumPositionError": 0.000001794447253899989,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "independent",
+        "index": 3,
+        "expected": -17.45316494141991,
+        "actual": -17.453163146972656
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.7499899864196777,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000018904434710975693,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77571295001378,
+        "actual": 67.77571105957031
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.75,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000023762024312645735,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77568291819462,
+        "actual": 67.77568054199219
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.7500100135803223,
+      "coordinates": 16,
+      "maximumPositionError": 0.000002858649096992849,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.77565288306316,
+        "actual": 67.77565002441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.7749999761581421,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000026289066497042768,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 0,
+        "expected": 36.08435558642538,
+        "actual": 36.08435821533203
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.7999899983406067,
+      "coordinates": 16,
+      "maximumPositionError": 0.0000017758050319116592,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58450902741762,
+        "actual": 67.58451080322266
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.800000011920929,
+      "coordinates": 8,
+      "maximumPositionError": 0.000005080829595272007,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58446247829053,
+        "actual": 67.58445739746094
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.8000100255012512,
+      "coordinates": 8,
+      "maximumPositionError": 0.000003324627755318943,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 67.58441592586053,
+        "actual": 67.58441925048828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.8999999761581421,
+      "coordinates": 8,
+      "maximumPositionError": 0.000006056233303297631,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 2,
+        "expected": 66.95533146818076,
+        "actual": 66.95533752441406
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 0.9999899864196777,
+      "coordinates": 8,
+      "maximumPositionError": 0.0000027078755806542176,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "other",
+        "attachment": "region",
+        "index": 4,
+        "expected": 65.9999438863627,
+        "actual": 65.99994659423828
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    },
+    {
+      "fixture": "slot-transitions",
+      "skin": "incompatible",
+      "time": 1,
+      "coordinates": 16,
+      "maximumPositionError": 5.569224796886374e-7,
+      "maximumUVError": 0,
+      "worstPosition": {
+        "slot": "visual",
+        "attachment": "base",
+        "index": 0,
+        "expected": -31.99999944307752,
+        "actual": -32
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

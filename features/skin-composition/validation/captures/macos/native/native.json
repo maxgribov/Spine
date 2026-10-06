@@ -4,11 +4,13 @@
     "configuration" : "Release -O",
     "dirty" : true,
     "hashes" : {
-      "Examples\/SkinComposition\/App.swift" : "6f063bb2fcda20313c3f6ceba66063cc7979dfb25512bb364c647b7b1f49c8a8",
+      "Examples\/SkinComposition\/App.swift" : "f45aacb789bf15e61d7f7348bee205c99c57c0bcb8813116f5743318c423254a",
       "Examples\/SkinComposition\/Catalog.swift" : "97cc077c0d8d5b9ba80f8f3da249fd47dd8784d087263378eeffbc8277369848",
       "Examples\/SkinComposition\/ImageEvidence.swift" : "5ef5689fc97583e17fa6381d4a51dc33be37592ca438b221ae05f4d8979c52fb",
       "Examples\/SkinComposition\/Measurements.swift" : "b0a31cc5584ed018f46e67045581d3412e69c2cbd1e82322d933a74cba008bfb",
       "Examples\/SkinComposition\/NativeEvidence.swift" : "e9671d57f6ea3e44703a485dcb749587f41dd82edc05825a2e2d06ef96753229",
+      "Examples\/SkinComposition\/ScaledCatalog.swift" : "2565a733f508072913c20255c0d9447fb00d29c9788c4afdd28e592bb647fd0d",
+      "Examples\/SkinComposition\/ScaledWorkload.swift" : "0337f013868df1f48be00ab0879f14082191979b303422e1d3c18825e70b240e",
       "Examples\/SkinComposition\/WardrobeScene.swift" : "ed8416f304850a51fed54e55a9040261e780c6f87a9b370ac29a0b65609c30ab",
       "Sources\/Spine\/Animation.swift" : "4848122b1071e873f2ff98efe6819e18e9787189b0da86336847b84726f15b4d",
       "Sources\/Spine\/Attachment.swift" : "1f0904a1f2a020be75ca8e0195cdca58ec00dddd3e7ea0a4c44049d5d5b37de5",
@@ -39,7 +41,7 @@
       "Sources\/Spine\/Mesh\/Renderer\/MeshTriangleNode.swift" : "c852963e62227bb0dc9f3a86a0b55c18e612a5ae0913252e2c862b76fc2cdb67",
       "Sources\/Spine\/Mesh\/Resources\/SpineMeshTextureProvider.swift" : "ec0cb064f365e3bb6b42b0b23547da62a33e88cf1220f93ee5af1135b7c69f47",
       "Sources\/Spine\/Mesh\/Runtime\/MeshPhysicsReconciliation.swift" : "60fd0ca201775d1518f85d2ae110f57f7150d06f6dc03bb025be45abe7eb4da0",
-      "Sources\/Spine\/Mesh\/Runtime\/MeshRuntime.swift" : "7921e37431f73053f933f6b72479274ab5271e3a0cc08148bcfdf737988e14b4",
+      "Sources\/Spine\/Mesh\/Runtime\/MeshRuntime.swift" : "6f44403dcb07cef2e07846fbf611bc871d22a4d1943167238a95f1d73ac1fae6",
       "Sources\/Spine\/Mesh\/Runtime\/MeshSlotState.swift" : "7de226df2889ad0665f67013f500661d3f36888a3ecd6cf7690d9630430b4bda",
       "Sources\/Spine\/Mesh\/Runtime\/SpineMeshFrameContext.swift" : "f2566db56fc54996080fcf7957eb3d3343c0dfbb18d46920fd68ff40f9efec7c",
       "Sources\/Spine\/Mesh\/Runtime\/SpineRuntimeError.swift" : "c5bac5aa296c23881824133f4b1dec06d2e59f58b58c34aa50fc257906faa13b",
@@ -106,7 +108,7 @@
       "Tests\/SpineTests\/Resources\/Mesh41\/skin-composition\/wardrobe.json" : "4e8d8ec3aed0fe309b934102e038741d400757992299a3fbe779eb34cbb81e6a"
     },
     "platform" : "macos",
-    "sourceCommit" : "437785506b723e1e902ed053afbf427328efc3a6",
+    "sourceCommit" : "7a61ac8b96dc29b23f9f9b4f803e2e27b1cb7145",
     "target" : "arm64-apple-macosx10.15"
   },
   "frames" : [
@@ -121,284 +123,244 @@
       "time" : 0
     },
     {
-      "actualRootRotation" : -0.040728911757469177,
+      "actualRootRotation" : -0.040474012494087219,
       "changes" : 0,
       "compareRequired" : false,
-      "controlRootRotation" : -0.040728911757469177,
-      "differentBytes" : 23621,
-      "file" : "frame-0001.png",
-      "sha256" : "cbd6dc35c1a17867b454cbbf8dd455ed9f31a228adf08cb53fc6a39c9366d8e0",
-      "time" : 0.13332025001000147
-    },
-    {
-      "actualRootRotation" : -0.023272162303328514,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : -0.023272162303328514,
-      "differentBytes" : 23614,
-      "file" : "frame-0002.png",
-      "sha256" : "8fb30483c5a1c3d482ce4295360fcb821551f9f4e8ed17e5ecae9d66f64048bd",
-      "time" : 0.1833301666774787
-    },
-    {
-      "actualRootRotation" : -0.0058202054351568222,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : -0.0058202054351568222,
-      "differentBytes" : 23616,
-      "file" : "frame-0003.png",
-      "sha256" : "856fc3ccf7c280f79cdc89d5bcd7451a656efce90576c44cad5376addc7c02c4",
-      "time" : 0.23332633332756814
-    },
-    {
-      "actualRootRotation" : 0.011310986243188381,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : 0.011310986243188381,
-      "differentBytes" : 23624,
-      "file" : "frame-0004.png",
-      "sha256" : "cd503a2db17dd365c9ed025d5c1b68816ef3346bb00f0baa102051439cabddef",
-      "time" : 0.2824035833182279
-    },
-    {
-      "actualRootRotation" : 0.029086895287036896,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : 0.029086895287036896,
-      "differentBytes" : 23619,
-      "file" : "frame-0005.png",
-      "sha256" : "f82e853055ff1ece4314dae6e859c55ae9d46511ee7c688934d79a140aa3f015",
-      "time" : 0.33332783331570681
-    },
-    {
-      "actualRootRotation" : 0.040708914399147034,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : 0.040708914399147034,
-      "differentBytes" : 23618,
-      "file" : "frame-0006.png",
-      "sha256" : "3a423e29c0d72da110ba8efb039988e9ee36748ed245d4cfaa05eccb33662015",
-      "time" : 0.36662245834304485
-    },
-    {
-      "actualRootRotation" : 0.052100792527198792,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : 0.052100792527198792,
-      "differentBytes" : 23617,
-      "file" : "frame-0007.png",
-      "sha256" : "2af9f52a29e1c448695518332ba94127cbc3fd98db98507ce22dee73a9e3aac7",
-      "time" : 0.39925779165059794
-    },
-    {
-      "actualRootRotation" : 0.063992485404014587,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : 0.063992485404014587,
+      "controlRootRotation" : -0.040474012494087219,
       "differentBytes" : 23625,
+      "file" : "frame-0001.png",
+      "sha256" : "1c88440b219af55ea1bfd74c7f51bf92454ef8c3d3ded48ed5d2d00386c2bde3",
+      "time" : 0.13405049999710172
+    },
+    {
+      "actualRootRotation" : -0.028833042830228806,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : -0.028833042830228806,
+      "differentBytes" : 23620,
+      "file" : "frame-0002.png",
+      "sha256" : "70d80b37984914f0948cf37b2c5206de8bd31dad3cd2e7e81724635fba4fcb4b",
+      "time" : 0.16739941664854996
+    },
+    {
+      "actualRootRotation" : -0.017198136076331139,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : -0.017198136076331139,
+      "differentBytes" : 23613,
+      "file" : "frame-0003.png",
+      "sha256" : "cc6928b290da6b971e012242ad74e37115974181e46417f8f2b28ca595b208a5",
+      "time" : 0.20073095832776744
+    },
+    {
+      "actualRootRotation" : 0.00024223115178756416,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : 0.00024223115178756416,
+      "differentBytes" : 23616,
+      "file" : "frame-0004.png",
+      "sha256" : "c0ac810a70470eb214951b7f56575258b080a0a189b3ecfea68774208d0d367f",
+      "time" : 0.25069395832542796
+    },
+    {
+      "actualRootRotation" : 0.017709147185087204,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : 0.017709147185087204,
+      "differentBytes" : 23617,
+      "file" : "frame-0005.png",
+      "sha256" : "335d46fdbeab09304bc44ba4672c7eaa2554e7db444ed98d21d5b0cb08f73fb9",
+      "time" : 0.30073295831971336
+    },
+    {
+      "actualRootRotation" : 0.03482833132147789,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : 0.03482833132147789,
+      "differentBytes" : 23610,
+      "file" : "frame-0006.png",
+      "sha256" : "0701e24b5161b038f439b3367e06ae234d900e53ba878b5df1afc3af0984f55c",
+      "time" : 0.34977583331055939
+    },
+    {
+      "actualRootRotation" : 0.046796191483736038,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : 0.046796191483736038,
+      "differentBytes" : 23611,
+      "file" : "frame-0007.png",
+      "sha256" : "54eae957d428a9bf8baaf91cd84ce530bd9e2a7f2f639e51d6a6cff0bafbc9cb",
+      "time" : 0.38406120832951274
+    },
+    {
+      "actualRootRotation" : 0.064253173768520355,
+      "changes" : 0,
+      "compareRequired" : false,
+      "controlRootRotation" : 0.064253173768520355,
+      "differentBytes" : 23609,
       "file" : "frame-0008.png",
-      "sha256" : "6bfba03ed53f74f7f337ab669e8aa667dc49c9567f1ca4463a76d3bb40150b23",
-      "time" : 0.43332495834329166
+      "sha256" : "909d7b5d1e75026ec697d8120d52e7e8cb7269875158b8f6cdb0eb9b060e6b70",
+      "time" : 0.43407179164933041
     },
     {
-      "actualRootRotation" : 0.075627930462360382,
+      "actualRootRotation" : 0.081705018877983093,
       "changes" : 0,
       "compareRequired" : false,
-      "controlRootRotation" : 0.075627930462360382,
-      "differentBytes" : 23605,
+      "controlRootRotation" : 0.081705018877983093,
+      "differentBytes" : 23628,
       "file" : "frame-0009.png",
-      "sha256" : "e35950f9ee2b44782c7275644430c49ccb53791bd4cc599f1a30ee40eff4c040",
-      "time" : 0.46665804165240843
+      "sha256" : "ef29a4ded9443fe30bcd832e8cf4140bdecbcab2e3e769b7a9158210ea76f06b",
+      "time" : 0.48406762498780154
     },
     {
-      "actualRootRotation" : 0.087210416793823242,
-      "changes" : 0,
-      "compareRequired" : false,
-      "controlRootRotation" : 0.087210416793823242,
-      "differentBytes" : 23618,
-      "file" : "frame-0010.png",
-      "sha256" : "a5a43d82898ff4184b09bb136594660b2279fc7062edbc95a5011a61ed737da2",
-      "time" : 0.49983945833810139
-    },
-    {
-      "actualRootRotation" : 0.07575022429227829,
+      "actualRootRotation" : 0.081193305552005768,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.07575022429227829,
+      "controlRootRotation" : 0.081193305552005768,
+      "differentBytes" : 0,
+      "file" : "frame-0010.png",
+      "sha256" : "0ae8a3adc4d80c7dfd29e5215719dc994cb6a12a6faa5e8a2d54d44f835b6f4c",
+      "time" : 0.51739829166035634
+    },
+    {
+      "actualRootRotation" : 0.063739247620105743,
+      "changes" : 1,
+      "compareRequired" : true,
+      "controlRootRotation" : 0.063739247620105743,
       "differentBytes" : 0,
       "file" : "frame-0011.png",
-      "sha256" : "9247933d725b3fc9695aee03dae98ea1f8795ba8e92c805d4edcdaa4072d3b4f",
-      "time" : 0.53299158332811203
+      "sha256" : "34d36654c32fef7a950016b694988457b7e662bb88e534c8192fa3c243f6b7a3",
+      "time" : 0.5674004999891622
     },
     {
-      "actualRootRotation" : 0.063996300101280212,
+      "actualRootRotation" : 0.046479776501655579,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.063996300101280212,
+      "controlRootRotation" : 0.046479776501655579,
       "differentBytes" : 0,
       "file" : "frame-0012.png",
-      "sha256" : "461e53c0368d9e2b2282561cf17831000d163f9dc32cc566011ba61e02731c8b",
-      "time" : 0.56666412499907892
+      "sha256" : "f241ac6ac82727dcac16e198093b9f9e4760bc918d928eb91e5e481ec46f1497",
+      "time" : 0.61684524998418055
     },
     {
-      "actualRootRotation" : 0.052363593131303787,
+      "actualRootRotation" : 0.034651968628168106,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.052363593131303787,
+      "controlRootRotation" : 0.034651968628168106,
       "differentBytes" : 0,
       "file" : "frame-0013.png",
-      "sha256" : "a617c2311d0a12a1c49ac104c5f96ac3be35d01baf3dee7825034bab49b14175",
-      "time" : 0.59998933332099114
+      "sha256" : "af9b44f746acf7f9cb1da55402c6aff0262647d18dc101d8b27aa2717093650b",
+      "time" : 0.65072941666585393
     },
     {
-      "actualRootRotation" : 0.040727183222770691,
+      "actualRootRotation" : 0.017197653651237488,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.040727183222770691,
+      "controlRootRotation" : 0.017197653651237488,
       "differentBytes" : 0,
       "file" : "frame-0014.png",
-      "sha256" : "bf673b035fd1126c13764fe15a2c5da5cd5b378a4406d58f01a6f039e50bcc3d",
-      "time" : 0.6333252083422849
+      "sha256" : "b2e65b2438f182548bb9201f0520a935d7341d59535531d46e66e1d58ee11b30",
+      "time" : 0.70073233332368545
     },
     {
-      "actualRootRotation" : 0.029085047543048859,
+      "actualRootRotation" : -0.00025566347176209092,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.029085047543048859,
+      "controlRootRotation" : -0.00025566347176209092,
       "differentBytes" : 0,
       "file" : "frame-0015.png",
-      "sha256" : "a576581629c8d240d6e58d7efa3fef10a37cb563c9f8db958db07f803ccda2de",
-      "time" : 0.66667749999032822
+      "sha256" : "10430ee1a0c8e0be53220afa5f64d5f363ef08d382d023ef7187853edd32a52a",
+      "time" : 0.75073241666541435
     },
     {
-      "actualRootRotation" : 0.017454357817769051,
+      "actualRootRotation" : -0.011889932677149773,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.017454357817769051,
+      "controlRootRotation" : -0.011889932677149773,
       "differentBytes" : 0,
       "file" : "frame-0016.png",
-      "sha256" : "10a571a5528bc230f745e95aca73956ddd53c13f8b68edd73c589db936013c04",
-      "time" : 0.69999695834121667
+      "sha256" : "d341a59b3dcde57d1e700bbeb5f06387c1199464e02c0a259f1c49b195256542",
+      "time" : 0.78406216665462125
     },
     {
-      "actualRootRotation" : 0.0058210459537804127,
+      "actualRootRotation" : -0.023506557568907738,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : 0.0058210459537804127,
+      "controlRootRotation" : -0.023506557568907738,
       "differentBytes" : 0,
       "file" : "frame-0017.png",
-      "sha256" : "f210df44c55206408d3fd1d1cdcd0b3aec8b9aa155a95cf6c48e51ee9654845c",
-      "time" : 0.73332391666190233
+      "sha256" : "d728f2a44b12963b40ca670493e68e00250b655361ef4abe81e7a4bfcd162dd9",
+      "time" : 0.81734133332793135
     },
     {
-      "actualRootRotation" : -0.0058140968903899193,
+      "actualRootRotation" : -0.040979906916618347,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.0058140968903899193,
+      "controlRootRotation" : -0.040979906916618347,
       "differentBytes" : 0,
       "file" : "frame-0018.png",
-      "sha256" : "eefba2c187b18638d98f88fd2f67adc489511546e15123e046d3c8626ea96c20",
-      "time" : 0.76665616667014547
+      "sha256" : "eab525143bf9eb14db5c3b5132c1f105b37c21b5d9bfedbc16f5a53be43967b9",
+      "time" : 0.86739879165543243
     },
     {
-      "actualRootRotation" : -0.017449114471673965,
+      "actualRootRotation" : -0.052614841610193253,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.017449114471673965,
+      "controlRootRotation" : -0.052614841610193253,
       "differentBytes" : 0,
       "file" : "frame-0019.png",
-      "sha256" : "f4ddb151de265efb11f5e80be276aba1f1c5657c1b7a2fc07e72bcde3d537a23",
-      "time" : 0.79998804167553317
+      "sha256" : "f6a0c61336857c8c6453e9e66113a8b002c546ca126df51be20197db512e000b",
+      "time" : 0.90073041665891651
     },
     {
-      "actualRootRotation" : -0.02908596396446228,
+      "actualRootRotation" : -0.070068731904029846,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.02908596396446228,
+      "controlRootRotation" : -0.070068731904029846,
       "differentBytes" : 0,
       "file" : "frame-0020.png",
-      "sha256" : "d812b0d1e4b73b1f8bdbe373d84441d2ba274ccb710dd1a0242d8cc296e76b68",
-      "time" : 0.8333251666626893
+      "sha256" : "332084fee05c3b77f73d803cf699a84e27182f024ae4f8ec54cfaf434bd727e7",
+      "time" : 0.95073208333633374
     },
     {
-      "actualRootRotation" : -0.040721412748098373,
+      "actualRootRotation" : -0.087266460061073303,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.040721412748098373,
+      "controlRootRotation" : -0.087266460061073303,
       "differentBytes" : 0,
       "file" : "frame-0021.png",
-      "sha256" : "17dfadf28525b96370ff4af6b3958820175779ee3ce996d3e84b6e7603eb54f6",
-      "time" : 0.86665829167759512
+      "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
+      "time" : 1.0007370416569756
     },
     {
-      "actualRootRotation" : -0.052356231957674026,
+      "actualRootRotation" : -0.087266460061073303,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.052356231957674026,
+      "controlRootRotation" : -0.087266460061073303,
       "differentBytes" : 0,
       "file" : "frame-0022.png",
-      "sha256" : "d9cc2dc738e4bfef1689751c18200ffaaaa9006d9ddbb0ad6de1f23d06a56303",
-      "time" : 0.89998954164911993
+      "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
+      "time" : 1.0340679999790154
     },
     {
-      "actualRootRotation" : -0.063995629549026489,
+      "actualRootRotation" : -0.087266460061073303,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.063995629549026489,
+      "controlRootRotation" : -0.087266460061073303,
       "differentBytes" : 0,
       "file" : "frame-0023.png",
-      "sha256" : "0793c3d83c88522dfda98b09a5a2df09e1a5cac4213e1e5f19bd779d14b4b313",
-      "time" : 0.93333400000119582
+      "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
+      "time" : 1.0673965833266266
     },
     {
-      "actualRootRotation" : -0.081335335969924927,
+      "actualRootRotation" : -0.087266460061073303,
       "changes" : 1,
       "compareRequired" : true,
-      "controlRootRotation" : -0.081335335969924927,
+      "controlRootRotation" : -0.087266460061073303,
       "differentBytes" : 0,
       "file" : "frame-0024.png",
-      "sha256" : "da39674297c66eb285465495713b27bcf33ee6e5ac3e12e8f263df24d432af04",
-      "time" : 0.9830085416615475
-    },
-    {
-      "actualRootRotation" : -0.087266460061073303,
-      "changes" : 1,
-      "compareRequired" : true,
-      "controlRootRotation" : -0.087266460061073303,
-      "differentBytes" : 0,
-      "file" : "frame-0025.png",
       "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
-      "time" : 1.0157222083362285
-    },
-    {
-      "actualRootRotation" : -0.087266460061073303,
-      "changes" : 1,
-      "compareRequired" : true,
-      "controlRootRotation" : -0.087266460061073303,
-      "differentBytes" : 0,
-      "file" : "frame-0026.png",
-      "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
-      "time" : 1.0499923333409242
-    },
-    {
-      "actualRootRotation" : -0.087266460061073303,
-      "changes" : 1,
-      "compareRequired" : true,
-      "controlRootRotation" : -0.087266460061073303,
-      "differentBytes" : 0,
-      "file" : "frame-0027.png",
-      "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
-      "time" : 1.0830495833215537
-    },
-    {
-      "actualRootRotation" : -0.087266460061073303,
-      "changes" : 1,
-      "compareRequired" : true,
-      "controlRootRotation" : -0.087266460061073303,
-      "differentBytes" : 0,
-      "file" : "frame-0028.png",
-      "sha256" : "dda58166e1ec56174c710626fbdd9a0b9ac73d9dd420263c3af322ba0b093e2c",
-      "time" : 1.1166692499973578
+      "time" : 1.1007289999834029
     }
   ],
   "os" : "Version 26.6 (Build 25G72)",

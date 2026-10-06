@@ -1,0 +1,2321 @@
+{
+  "assetSharing" : "First: three pirate assets across four teams. Second: twelve distinct pirate assets. Both: six owners share one neutral asset; ten share one prop asset. The fourteen second-scenario assets remain resident during preview.",
+  "build" : {
+    "configuration" : "Release -O",
+    "dirty" : true,
+    "hashes" : {
+      "Examples\/SkinComposition\/App.swift" : "f45aacb789bf15e61d7f7348bee205c99c57c0bcb8813116f5743318c423254a",
+      "Examples\/SkinComposition\/Catalog.swift" : "97cc077c0d8d5b9ba80f8f3da249fd47dd8784d087263378eeffbc8277369848",
+      "Examples\/SkinComposition\/ImageEvidence.swift" : "5ef5689fc97583e17fa6381d4a51dc33be37592ca438b221ae05f4d8979c52fb",
+      "Examples\/SkinComposition\/Measurements.swift" : "b0a31cc5584ed018f46e67045581d3412e69c2cbd1e82322d933a74cba008bfb",
+      "Examples\/SkinComposition\/NativeEvidence.swift" : "e9671d57f6ea3e44703a485dcb749587f41dd82edc05825a2e2d06ef96753229",
+      "Examples\/SkinComposition\/ScaledCatalog.swift" : "2565a733f508072913c20255c0d9447fb00d29c9788c4afdd28e592bb647fd0d",
+      "Examples\/SkinComposition\/ScaledWorkload.swift" : "0337f013868df1f48be00ab0879f14082191979b303422e1d3c18825e70b240e",
+      "Examples\/SkinComposition\/WardrobeScene.swift" : "ed8416f304850a51fed54e55a9040261e780c6f87a9b370ac29a0b65609c30ab",
+      "Sources\/Spine\/Animation.swift" : "4848122b1071e873f2ff98efe6819e18e9787189b0da86336847b84726f15b4d",
+      "Sources\/Spine\/Attachment.swift" : "1f0904a1f2a020be75ca8e0195cdca58ec00dddd3e7ea0a4c44049d5d5b37de5",
+      "Sources\/Spine\/Bone.swift" : "62f36d2b893ec4a9ca8b857c6da9eed5c4e3ec7d2c6841dc65a5538a947f3551",
+      "Sources\/Spine\/Extensions Public\/Skeleton+Animations.swift" : "1c2487b061b7336baa2221f66890a9e66ec1f9374520876079b63c470477775d",
+      "Sources\/Spine\/Extensions Public\/Skeleton+Atlases.swift" : "37789bca60033ed936f2a2c32cdc21eff9ff9feac2c57abce2fb7518bae5fee9",
+      "Sources\/Spine\/Extensions Public\/Skeleton+Nodes.swift" : "fa3c7ec756b98b75123ad32c447b11eff4c575fe6642306f14e875c5dc0d6655",
+      "Sources\/Spine\/Extensions Public\/Skeleton+Physics.swift" : "e64bab1a868a6a949e92d26c8559144f273447d3d4f28513ba4609427eff5a27",
+      "Sources\/Spine\/Extensions Public\/Skeleton+Points.swift" : "0682aea48ecd49c69b5e2a20baa14e39bfc9a7c86b95d184aff9d8479662b3e0",
+      "Sources\/Spine\/Extensions Public\/Skeleton+Skins.swift" : "84cdd435d8b7953de1d19cc7760851bc89e5010ad74dbc5dc1b2b2fb95addd4b",
+      "Sources\/Spine\/Extensions Public\/SpineModel+Atlases.swift" : "7acc9fe213d30824c57be9937747f981ef9a8f6290c1d54b5f85b11a162c0949",
+      "Sources\/Spine\/Extensions\/CGPath+Extensions.swift" : "de7604423eacfb2b464cb35a4b6967830011ae69e26911cc7af59b1863f0ea8e",
+      "Sources\/Spine\/Extensions\/Collection+Extensions.swift" : "ef6de11e833a497cd2bfaf5b431371c773bd2436dd188861add7c7417804c1e9",
+      "Sources\/Spine\/Extensions\/Float+Extensions.swift" : "6fef256753c14b092d90a45ca21af8593040692f6cb514f07c4d38dafdd26037",
+      "Sources\/Spine\/Extensions\/RangeReplaceableCollection+Extensions.swift" : "72fe2563c40f0ca22903c6f5ed5fdb04c752a51313f3443d93778652f212071e",
+      "Sources\/Spine\/Extensions\/SKAction+Extensions.swift" : "218ffc92a6ec36db4345d0ead4fc1850b0d3a7ab6bb54a3cd501af23c371ed6c",
+      "Sources\/Spine\/Extensions\/SKColor+Extensions.swift" : "bf651e319ecba781a2370315278ba6e9e2c72937564edd12cd09382f8f90c982",
+      "Sources\/Spine\/Extensions\/SKNode+Extensions.swift" : "7d4b7ec72acc8ddc7a849f9afbbe49012da1751a3b65de848a32f26ea16004f7",
+      "Sources\/Spine\/Mesh\/Compilation\/CompiledAttachment.swift" : "da27c7a8375e8ba518f8aa50ab9fb44825a82d32c5c53f8111972d2466a04a13",
+      "Sources\/Spine\/Mesh\/Compilation\/MeshAssetCompiler.swift" : "63d48810da0d17f265805e45602eb67e5e7f12f356201da3c350d32d7623f550",
+      "Sources\/Spine\/Mesh\/Compilation\/MeshClip.swift" : "93c032fb94c609d9d4905f13a07e2569c3706f66de88f19616b80a799eb19adf",
+      "Sources\/Spine\/Mesh\/Compilation\/MeshClipCompiler.swift" : "cba14b24a42d1ee0a329b2dd5f75d5470d0af810d88241fe075df2de1c085a22",
+      "Sources\/Spine\/Mesh\/Compilation\/MeshDeform.swift" : "01d4a1d1a7d09b632b0c9e6b8daf042b38886811e40f9dc52beb83c1787ffbc7",
+      "Sources\/Spine\/Mesh\/Geometry\/MeshGeometry.swift" : "ec12196def73ad66dbc66b847f03a3e1a7996bfc4526645c2a082532a1cff986",
+      "Sources\/Spine\/Mesh\/Renderer\/MeshRendererResources.swift" : "08af40d20bfd594559ad2c75a95a940628f61842863a43876ef97650d5cb1b52",
+      "Sources\/Spine\/Mesh\/Renderer\/MeshSetupRenderer.swift" : "2bc5562e842e7be9c5f2613a9cac113bbc34d1050b3154586593b5815212e681",
+      "Sources\/Spine\/Mesh\/Renderer\/MeshTriangleGroups.swift" : "44c1ad7d1219ee54e9fb999368ccdb3fe627e2b58fcce66170019e3a6369b730",
+      "Sources\/Spine\/Mesh\/Renderer\/MeshTriangleNode.swift" : "c852963e62227bb0dc9f3a86a0b55c18e612a5ae0913252e2c862b76fc2cdb67",
+      "Sources\/Spine\/Mesh\/Resources\/SpineMeshTextureProvider.swift" : "ec0cb064f365e3bb6b42b0b23547da62a33e88cf1220f93ee5af1135b7c69f47",
+      "Sources\/Spine\/Mesh\/Runtime\/MeshPhysicsReconciliation.swift" : "60fd0ca201775d1518f85d2ae110f57f7150d06f6dc03bb025be45abe7eb4da0",
+      "Sources\/Spine\/Mesh\/Runtime\/MeshRuntime.swift" : "6f44403dcb07cef2e07846fbf611bc871d22a4d1943167238a95f1d73ac1fae6",
+      "Sources\/Spine\/Mesh\/Runtime\/MeshSlotState.swift" : "7de226df2889ad0665f67013f500661d3f36888a3ecd6cf7690d9630430b4bda",
+      "Sources\/Spine\/Mesh\/Runtime\/SpineMeshFrameContext.swift" : "f2566db56fc54996080fcf7957eb3d3343c0dfbb18d46920fd68ff40f9efec7c",
+      "Sources\/Spine\/Mesh\/Runtime\/SpineRuntimeError.swift" : "c5bac5aa296c23881824133f4b1dec06d2e59f58b58c34aa50fc257906faa13b",
+      "Sources\/Spine\/Mesh\/Skeleton+Meshes.swift" : "ada0c6ccb990fe253e4a2025887d1e3a3e21f441446c43226a048b2cf3cac0e2",
+      "Sources\/Spine\/Mesh\/SpineMeshAsset.swift" : "97509edd7638e4a7ee1f2055256efd965e1e3fdcaeea1ac7d6d3d909c7881c41",
+      "Sources\/Spine\/Model\/Animation\/AnimationModel.swift" : "9361dec9dde3403c93a0e69d053fcd5363dcafe4ba5940d98366ba3f70426461",
+      "Sources\/Spine\/Model\/Animation\/AttachmentTimelineModel.swift" : "84546cc5bdc4413ec3bd93974ee9aa4a8bd00cbfe4b336ed00d33819aeace385",
+      "Sources\/Spine\/Model\/Animation\/BoneAnimationModel.swift" : "d1b46c51891e10d97767a31210294bedae97ba4ff73c1636a22c538a3d8c1bc2",
+      "Sources\/Spine\/Model\/Animation\/DeformSkinAnimationModel.swift" : "5d979e13e1e603a320558f459b2812e3f7ecbf8a7c05f0509186ffbb2995ddb2",
+      "Sources\/Spine\/Model\/Animation\/IKConstraintAnimationModel.swift" : "aa185445623925805b96446aaa336f6e714d1a740e6fe0c0617912eed9674e9b",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Bone\/BoneKeyframeRotateModel.swift" : "f02fe1b9d69444c2dfa016027a951b0118e683f305958cf400a67df521b5e022",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Bone\/BoneKeyframeScaleModel.swift" : "77bb4fb8908c1e21765729c6e498affb298726d7885ebb17b01df2a76949fb83",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Bone\/BoneKeyframeShearModel.swift" : "a721e66e792cfdf24bb01d754f19f13b2dbafc38ef03315f57c6ed386fdf2def",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Bone\/BoneKeyframeTranslateModel.swift" : "7d54614869226a1836c3094bac0aca37cebea23b97fba40846b7e759a4897dbe",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Constraint\/IKConstraintKeyframeModel.swift" : "2b2176880a9722a4385f147ea9989a7e75e2b05ab1e6b12bc0a0b7ef9e2d5009",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Constraint\/TransformConstraintKeyframeModel.swift" : "3b761fe4f3d0c523ddde3230ead38bd86234d99f5f45b0ad887cfb978ac0d24a",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/DeformKeyframeModel.swift" : "27728a95cebc3cf5eb128b2e066e4156fa9ae9c0c7fbee0a5c2c578d0d574a80",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/DrawOrderKeyframeModel.swift" : "9b6da598bdb7c3e962394226fd5a880a1231dc6f1e9360ddf1394704be9903ab",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/EventKeyfarameModel.swift" : "e1da190fe3ea564e3480e7920b66a1918dae21961c372f40210ce4d93dcfaf5b",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/KeyframeModel.swift" : "41c4860290a1088acf7f4836cc3fad4f88220b3f0ffddd1d4014542ea3746d04",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Slot\/SlotKeyframeAttachmentModel.swift" : "fc26c0196eb1019637976288211f71f378dba33d8349dabc66a7ace2ef0b2ea5",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Slot\/SlotKeyframeColorDarkModel.swift" : "60b7ac0b0ffd263dd0635254fd700ca6cf1d488ed960867447b7065b822694b3",
+      "Sources\/Spine\/Model\/Animation\/Keyframes\/Slot\/SlotKeyframeColorModel.swift" : "fec10f3d5a178512d0f3f3cf0ddbc5f5d934896c8127d33764714395739819ff",
+      "Sources\/Spine\/Model\/Animation\/SlotAnimationModel.swift" : "f7157af13622326360af00d9dc169d66d1d0720ac4833a5dfd025efc8911552c",
+      "Sources\/Spine\/Model\/Animation\/SlotNumericKeyframeModel.swift" : "adb4d33151079240d1182d54df130dbd38e903336a152aa44b3aaabdf91f3454",
+      "Sources\/Spine\/Model\/Animation\/TransformConstraintAnimationModel.swift" : "7772d1c2516dcaf43fd5a7c1d3d6e7d720aae678e703543f25fb71e04f2e4536",
+      "Sources\/Spine\/Model\/BoneModel.swift" : "bf6a4e82f8e08fcb24b9731117aa2fe1997da88b190b0bd9bdf7d01929178fa9",
+      "Sources\/Spine\/Model\/Constraints\/IKConstraintModel.swift" : "f0e82f46f68ccb4a2641fc705e2d1aad67e3bce3c67443b809b7e3fbc8834fe3",
+      "Sources\/Spine\/Model\/Constraints\/PathConstraintModel.swift" : "6ffeb06cc0452d098f2b7f301f968a6d50431f6a25ccf6c9a5acfe665f9b149d",
+      "Sources\/Spine\/Model\/Constraints\/TransformConstraintModel.swift" : "3caf899b78d551016feefc252a8cdc0fb037ef0b06da87973ee9321f4c49164e",
+      "Sources\/Spine\/Model\/EventModel.swift" : "3f7e1bdca5ddf5dc7bd33538a6ef02be9db001a04978e68a5521c094bb87a55d",
+      "Sources\/Spine\/Model\/Protocols\/SpineDecodableArray.swift" : "70e280a9e0fbd7c201e9fe627e9da57235f50dcece74999c6d2cadc62aaa3494",
+      "Sources\/Spine\/Model\/Protocols\/SpineDecodableDictionary.swift" : "0b53e1b8c9df95382b2b32aeddd79cc5d30cf7d0c694c2d1331879e59d0cd4a2",
+      "Sources\/Spine\/Model\/SkeletonModel.swift" : "e79465368723d442e1a59c88109a246451f6bec569f2de5107c380fc0842d8c7",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/AttachmentModel.swift" : "242ac63a348f8cbae0abcd3e211e7b63ba6a9359a82afd39d7af113d8b622984",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/BoundingBoxAttachmentModel.swift" : "69085d064c7526943699e23d11a83c0bb765681452585fd27a6d4496dbe3a170",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/ClippingAttachmentModel.swift" : "b28b5c83b8d453be2f7a263f21795280f15db64cec4263a51bebbef5d798235f",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/LinkedMeshAttachmentModel.swift" : "a031e814a8c5e3f86adf8ccc4ce13cfc0cb9e5ea992b7da6b15a6f24ce8a7fee",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/MeshAttachmentModel.swift" : "4b225527242d42acd6669a0a4c6fe16c9cb848c25eb2ee24f0234dc696f25c8e",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/PathAttachmentModel.swift" : "1fd3bf5c975bc78fb6208bfce2b45eb86b5db3299f0b3e3447f5c353191c3114",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/PointAttachmentModel.swift" : "5b9c8b827f96cc0c0303393074545a1ac5f0097c4fe00713bf87ac2c38d79733",
+      "Sources\/Spine\/Model\/Skin\/Attachments\/RegionAttachementModel.swift" : "29120401f14eaf43d9a0b0391c4a902881332f8b3e797fe87ee29875e6717b47",
+      "Sources\/Spine\/Model\/Skin\/SkinModel.swift" : "28cd0663e7cd1f647c0ab4e57a7b3d1b22e1316062a4b1932ed3e5bbbd1b16ca",
+      "Sources\/Spine\/Model\/SlotModel.swift" : "1d02ab8e574abf45610c345410971eb352d067d2088574ca74bc804448a5fc8c",
+      "Sources\/Spine\/Model\/SpineFeatureIssue.swift" : "72743ae05546e26b0bfcec9c193551fb03c738f4838e60524071b85ca4c47f27",
+      "Sources\/Spine\/Model\/SpineModel.swift" : "b1d629ed24e4221a8955ddff384376786b563543da90c1fce3986c52b518fd8e",
+      "Sources\/Spine\/Model\/Types\/BezierCurveModel.swift" : "9798e3654cfedc454335857c470c38aa5edff353bc6c74e04038ef40bcc25134",
+      "Sources\/Spine\/Model\/Types\/BezierCurveSolver.swift" : "a8b7ecda6492fe1d7531c411b26d605aeff3993bda7e7793d15725be30316ccd",
+      "Sources\/Spine\/Model\/Types\/ColorModel.swift" : "23d7a3c33df349472d1fa02a98753d63c54cd9edf94ffcaab4283dde3da8d5d5",
+      "Sources\/Spine\/Model\/Types\/Constants.swift" : "e6703fd6495fa9cb703a7db74363eed57c63a530b825880f2692afc144adf281",
+      "Sources\/Spine\/Model\/Types\/CurveModel.swift" : "bf71410ebc9d65fa6a1cc1affa009be315396ed7f80b2b24d794e744bf79a3b6",
+      "Sources\/Spine\/Model\/Types\/SpineNameKey.swift" : "47588d243d093ea9a961f103f7333c2cde90adff189fa748962244f834040473",
+      "Sources\/Spine\/Protocols\/Defaultable.swift" : "ad32797ea89e3af4731ea11c5de22367bc52bb6863700da17ce8b3b3b6e80792",
+      "Sources\/Spine\/Protocols\/Prefixable.swift" : "580e5bc3af078a6277c86d345275a2187c0eb6ef7d9438dc1009c71d2dc42cdd",
+      "Sources\/Spine\/Skeleton.swift" : "0c28a9ba80c441fababb0c6f2f8cf35e402e5cbafd83763ec8e2b65673c008f6",
+      "Sources\/Spine\/Skin.swift" : "cbbf6bffef176533eab7815ec1caa06ebbd8ed8268aa6169c1f578fa6221588d",
+      "Sources\/Spine\/Skins\/SkinCompositionResolver.swift" : "b8bbbfbf63ae5be8157d38596d3a832745b18a0b80d14a4f7d9d92d9ac6c39e3",
+      "Sources\/Spine\/Skins\/SpineSkinComposition.swift" : "9a28399eae2b6f22016b9676b32e1696d85c761c3f336c0c759774ba179f8322",
+      "Sources\/Spine\/Skins\/SpineSkinDescription.swift" : "4ef22f7f8e44c8546929e94bba7540d10f3553dd933825a54e360669f6197295",
+      "Sources\/Spine\/Slot.swift" : "2462870cdb4df449cee3e45c91b02d4934c18d58ef760429812378aa78c665d4",
+      "Sources\/Spine\/SpineError.swift" : "6a8a7b136eff4aec66b58bf4c4ce1561868e7b14423c7838686da0f58527efb1",
+      "Tests\/SpineTests\/Resources\/Mesh41\/skin-composition\/swatch.atlas" : "3c38345c99f0e8d06ecf0ebce26c1fa7fbff9759725c023eb4d072dcb0f69b47",
+      "Tests\/SpineTests\/Resources\/Mesh41\/skin-composition\/swatch.png" : "490d32a15a092e7b85d8e93c788baf730f641ecb03493db0412fcec862d7a990",
+      "Tests\/SpineTests\/Resources\/Mesh41\/skin-composition\/wardrobe.json" : "4e8d8ec3aed0fe309b934102e038741d400757992299a3fbe779eb34cbb81e6a"
+    },
+    "platform" : "macos",
+    "sourceCommit" : "7a61ac8b96dc29b23f9f9b4f803e2e27b1cb7145",
+    "target" : "arm64-apple-macosx10.15"
+  },
+  "catalog" : {
+    "baseSkinsPerAsset" : 1,
+    "distinctAssetCount" : 14,
+    "distinctDecodedRGBABytes" : 79167488,
+    "distinctTextureCount" : 302,
+    "entriesPerNeutralOrProp" : 14,
+    "entriesPerPirate" : 94,
+    "pirateAssets" : 3,
+    "pirateItems" : 20,
+    "sharedAssetCount" : 5,
+    "sharedDecodedRGBABytes" : 20185088,
+    "sharedTextureCount" : 77,
+    "teams" : 4,
+    "teamSkinsPerPirate" : 4,
+    "textureHeight" : 256,
+    "textureWidth" : 256
+  },
+  "criterion" : {
+    "memoryAbsoluteCeiling" : null,
+    "warmPreviewCombinedP95Ms" : 16.666666666666668
+  },
+  "limitations" : [
+    "Synthetic 256x256 per-item textures and simple authored rig, not production art",
+    "Native frame intervals measure callbacks, not presented-frame GPU latency"
+  ],
+  "matchDistinct" : {
+    "owners" : 28,
+    "samples" : [
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.41437499749008566,
+        "nativeFrameMs" : 16.662750000250526,
+        "prepareMs" : 0.41433333535678685
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3972916747443378,
+        "nativeFrameMs" : 16.636000014841557,
+        "prepareMs" : 0.39720833592582494
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.41779165621846914,
+        "nativeFrameMs" : 15.891916656983085,
+        "prepareMs" : 0.41770833195187151
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40516666194889694,
+        "nativeFrameMs" : 17.476916662417352,
+        "prepareMs" : 0.40508333768229932
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.36320832441560924,
+        "nativeFrameMs" : 16.664874987327494,
+        "prepareMs" : 0.36316666228231043
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38329167000483721,
+        "nativeFrameMs" : 16.669541684677824,
+        "prepareMs" : 0.38320834573823959
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.37004167097620666,
+        "nativeFrameMs" : 16.664666676661,
+        "prepareMs" : 0.37004167097620666
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.37395833351183683,
+        "nativeFrameMs" : 16.667291652993299,
+        "prepareMs" : 0.37391665682662278
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.38729167135898024,
+        "nativeFrameMs" : 16.667250005411915,
+        "prepareMs" : 0.38716667040716857
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38429166306741536,
+        "nativeFrameMs" : 16.665166665916331,
+        "prepareMs" : 0.38420833880081773
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.34645834239199758,
+        "nativeFrameMs" : 16.666583323967643,
+        "prepareMs" : 0.34637500357348472
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.33674998849164695,
+        "nativeFrameMs" : 16.665833332808688,
+        "prepareMs" : 0.33666666422504932
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.32329166424460709,
+        "nativeFrameMs" : 16.66541668237187,
+        "prepareMs" : 0.32325000211130828
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38391667476389557,
+        "nativeFrameMs" : 16.67362499574665,
+        "prepareMs" : 0.38383333594538271
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.4074166645295918,
+        "nativeFrameMs" : 16.666708324919455,
+        "prepareMs" : 0.40733332571107894
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.40558332693763077,
+        "nativeFrameMs" : 16.662041656672955,
+        "prepareMs" : 0.40554166480433196
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.37762500869575888,
+        "nativeFrameMs" : 16.666083349264227,
+        "prepareMs" : 0.37754166987724602
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38920833321753889,
+        "nativeFrameMs" : 16.668333337293006,
+        "prepareMs" : 0.38912499439902604
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38791667611803859,
+        "nativeFrameMs" : 16.670458324369974,
+        "prepareMs" : 0.38783333729952574
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.37466666253749281,
+        "nativeFrameMs" : 16.662750000250526,
+        "prepareMs" : 0.37454166158568114
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.41108332516159862,
+        "nativeFrameMs" : 16.668000011122786,
+        "prepareMs" : 0.41108332516159862
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3412916703382507,
+        "nativeFrameMs" : 16.672583325998858,
+        "prepareMs" : 0.34120833151973784
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.34324999433010817,
+        "nativeFrameMs" : 16.659833316225559,
+        "prepareMs" : 0.34316667006351054
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.41587499435991049,
+        "nativeFrameMs" : 16.668875017785467,
+        "prepareMs" : 0.41579167009331286
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40887499926611781,
+        "nativeFrameMs" : 15.667541665607132,
+        "prepareMs" : 0.40879167499952018
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.41054165922105312,
+        "nativeFrameMs" : 17.663083330262452,
+        "prepareMs" : 0.41045833495445549
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40866667404770851,
+        "nativeFrameMs" : 16.670083321514539,
+        "prepareMs" : 0.40858333522919565
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3843333397526294,
+        "nativeFrameMs" : 16.665083356201649,
+        "prepareMs" : 0.38429167761933059
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.34345833410043269,
+        "nativeFrameMs" : 16.662916663335636,
+        "prepareMs" : 0.34337499528191984
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38716667040716857,
+        "nativeFrameMs" : 16.669291653670371,
+        "prepareMs" : 0.38708333158865571
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.32862499938346446,
+        "nativeFrameMs" : 16.663125003105961,
+        "prepareMs" : 0.32854167511686683
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38683332968503237,
+        "nativeFrameMs" : 16.669291682774201,
+        "prepareMs" : 0.38675000541843474
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40124999941326678,
+        "nativeFrameMs" : 16.669916658429429,
+        "prepareMs" : 0.40116667514666915
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38804166251793504,
+        "nativeFrameMs" : 16.665041650412604,
+        "prepareMs" : 0.38795833825133741
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.36562500463332981,
+        "nativeFrameMs" : 16.666416675434448,
+        "prepareMs" : 0.36554166581481695
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3617916809162125,
+        "nativeFrameMs" : 16.663166679791175,
+        "prepareMs" : 0.36170834209769964
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.36279165942687541,
+        "nativeFrameMs" : 16.667749994667247,
+        "prepareMs" : 0.36270833516027778
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.32254165853373706,
+        "nativeFrameMs" : 16.668291660607792,
+        "prepareMs" : 0.32245833426713943
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.36245833325665444,
+        "nativeFrameMs" : 16.665125003783032,
+        "prepareMs" : 0.36241667112335563
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.35087500873487443,
+        "nativeFrameMs" : 16.667500007315539,
+        "prepareMs" : 0.35079166991636157
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.37058333691675216,
+        "nativeFrameMs" : 15.72724997822661,
+        "prepareMs" : 0.37054166023153812
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39233334246091545,
+        "nativeFrameMs" : 17.609000002266839,
+        "prepareMs" : 0.39225000364240259
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40408333006780595,
+        "nativeFrameMs" : 16.663791684550233,
+        "prepareMs" : 0.40399999124929309
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.36725000245496631,
+        "nativeFrameMs" : 16.667708332533948,
+        "prepareMs" : 0.36712500150315464
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.46349999320227653,
+        "nativeFrameMs" : 16.672708312398754,
+        "prepareMs" : 0.46349999320227653
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40554166480433196,
+        "nativeFrameMs" : 16.663250004057772,
+        "prepareMs" : 0.40545834053773433
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39820832898840308,
+        "nativeFrameMs" : 16.667208343278617,
+        "prepareMs" : 0.39812499016989022
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.42158333235420287,
+        "nativeFrameMs" : 16.536708339117467,
+        "prepareMs" : 0.42149999353569001
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40170832653529942,
+        "nativeFrameMs" : 16.798333323094994,
+        "prepareMs" : 0.40162500226870179
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.35879167262464762,
+        "nativeFrameMs" : 15.66387499042321,
+        "prepareMs" : 0.35870833380613476
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.4036250029457733,
+        "nativeFrameMs" : 17.668708358542062,
+        "prepareMs" : 0.40354167867917567
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.45474999933503568,
+        "nativeFrameMs" : 15.838708335650153,
+        "prepareMs" : 0.45466667506843805
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.47933333553373814,
+        "nativeFrameMs" : 17.493124978500418,
+        "prepareMs" : 0.47924999671522528
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40929167880676687,
+        "nativeFrameMs" : 16.666583353071474,
+        "prepareMs" : 0.40920833998825401
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40545834053773433,
+        "nativeFrameMs" : 16.668666663463227,
+        "prepareMs" : 0.40537500171922147
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.37525000516325235,
+        "nativeFrameMs" : 16.661249988828786,
+        "prepareMs" : 0.37525000516325235
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3495833370834589,
+        "nativeFrameMs" : 16.668249998474494,
+        "prepareMs" : 0.34949999826494604
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.34545833477750421,
+        "nativeFrameMs" : 16.664541675709188,
+        "prepareMs" : 0.34537499595899135
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39062500582076609,
+        "nativeFrameMs" : 15.672208333853632,
+        "prepareMs" : 0.39054166700225323
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.36029166949447244,
+        "nativeFrameMs" : 17.663083315710537,
+        "prepareMs" : 0.3602499928092584
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.33337500644847751,
+        "nativeFrameMs" : 16.666041672579013,
+        "prepareMs" : 0.33329166762996465
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.34425000194460154,
+        "nativeFrameMs" : 16.665000017383136,
+        "prepareMs" : 0.34420832525938749
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.374625000404194,
+        "nativeFrameMs" : 16.66875000228174,
+        "prepareMs" : 0.37458333827089518
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.34358333505224437,
+        "nativeFrameMs" : 16.666416646330617,
+        "prepareMs" : 0.34354165836703032
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.338249999913387,
+        "nativeFrameMs" : 16.66612499684561,
+        "prepareMs" : 0.33816667564678937
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.35520833625923842,
+        "nativeFrameMs" : 16.668166688759811,
+        "prepareMs" : 0.35516667412593961
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3267083375249058,
+        "nativeFrameMs" : 16.665749993990175,
+        "prepareMs" : 0.32662499870639294
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.3377083339728415,
+        "nativeFrameMs" : 16.668833311996423,
+        "prepareMs" : 0.33762500970624387
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.30895833333488554,
+        "nativeFrameMs" : 15.662625024560839,
+        "prepareMs" : 0.30891665664967149
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.36929166526533663,
+        "nativeFrameMs" : 17.670166664174758,
+        "prepareMs" : 0.36920832644682378
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.32070833549369127,
+        "nativeFrameMs" : 16.666041658027098,
+        "prepareMs" : 0.32062499667517841
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.4049166600452736,
+        "nativeFrameMs" : 16.671333331032656,
+        "prepareMs" : 0.40483333577867597
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.37820833676960319,
+        "nativeFrameMs" : 16.663000016706064,
+        "prepareMs" : 0.37808333581779152
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.36529166391119361,
+        "nativeFrameMs" : 16.666708324919455,
+        "prepareMs" : 0.36520832509268075
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.37116666499059647,
+        "nativeFrameMs" : 16.667124989908189,
+        "prepareMs" : 0.37112500285729766
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3380416746949777,
+        "nativeFrameMs" : 16.666083334712312,
+        "prepareMs" : 0.33795833587646484
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.3753749915631488,
+        "nativeFrameMs" : 16.66391667095013,
+        "prepareMs" : 0.37529166729655117
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.33958333369810134,
+        "nativeFrameMs" : 16.667250005411915,
+        "prepareMs" : 0.33949999487958848
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.35291667154524475,
+        "nativeFrameMs" : 16.667624993715435,
+        "prepareMs" : 0.3528333327267319
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.32291666138917208,
+        "nativeFrameMs" : 16.66612499684561,
+        "prepareMs" : 0.32283333712257445
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.34187499841209501,
+        "nativeFrameMs" : 16.666250012349337,
+        "prepareMs" : 0.34174999746028334
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.3487083304207772,
+        "nativeFrameMs" : 16.668625001329929,
+        "prepareMs" : 0.34866665373556316
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.36041665589436889,
+        "nativeFrameMs" : 16.668333322741091,
+        "prepareMs" : 0.36037499376107007
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.39024998841341585,
+        "nativeFrameMs" : 16.663333342876285,
+        "prepareMs" : 0.39020832628011703
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3850833309115842,
+        "nativeFrameMs" : 16.670083336066455,
+        "prepareMs" : 0.38504166877828538
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.36599999293684959,
+        "nativeFrameMs" : 16.665041650412604,
+        "prepareMs" : 0.36599999293684959
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39291667053475976,
+        "nativeFrameMs" : 16.668208336341195,
+        "prepareMs" : 0.3928333317162469
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38333333213813603,
+        "nativeFrameMs" : 16.666833340423182,
+        "prepareMs" : 0.38324999331962317
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.4025416710646823,
+        "nativeFrameMs" : 15.929333341773599,
+        "prepareMs" : 0.40245833224616945
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.35595832741819322,
+        "nativeFrameMs" : 16.405666639911942,
+        "prepareMs" : 0.35587498859968036
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.34462500480003655,
+        "nativeFrameMs" : 17.660666679148562,
+        "prepareMs" : 0.34458334266673774
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3277916694059968,
+        "nativeFrameMs" : 16.66783333348576,
+        "prepareMs" : 0.32770833058748394
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.37620833609253168,
+        "nativeFrameMs" : 16.666333336615935,
+        "prepareMs" : 0.37616667395923287
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.40375000389758497,
+        "nativeFrameMs" : 16.672749989083968,
+        "prepareMs" : 0.40370834176428616
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3715833299793303,
+        "nativeFrameMs" : 16.665708331856877,
+        "prepareMs" : 0.37149999116081744
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3236666671000421,
+        "nativeFrameMs" : 16.661416681017727,
+        "prepareMs" : 0.32362500496674329
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.3277916694059968,
+        "nativeFrameMs" : 16.669000004185364,
+        "prepareMs" : 0.32770834513939917
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.32266667403746396,
+        "nativeFrameMs" : 16.664583323290572,
+        "prepareMs" : 0.32258333521895111
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.37100000190548599,
+        "nativeFrameMs" : 16.672666679369286,
+        "prepareMs" : 0.37087500095367432
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.33829167659860104,
+        "nativeFrameMs" : 16.660791661706753,
+        "prepareMs" : 0.33820833778008819
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3944583295378834,
+        "nativeFrameMs" : 16.67116665339563,
+        "prepareMs" : 0.39441666740458459
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.32504166301805526,
+        "nativeFrameMs" : 16.663250004057772,
+        "prepareMs" : 0.32491666206624359
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.31650000892113894,
+        "nativeFrameMs" : 16.665875009493902,
+        "prepareMs" : 0.3164583322359249
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.39024998841341585,
+        "nativeFrameMs" : 16.670666664140299,
+        "prepareMs" : 0.39020832628011703
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.33095834078267217,
+        "nativeFrameMs" : 16.661208326695487,
+        "prepareMs" : 0.33091666409745812
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.35504167317412794,
+        "nativeFrameMs" : 16.668374999426305,
+        "prepareMs" : 0.35499999648891389
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.37116666499059647,
+        "nativeFrameMs" : 16.666958341374993,
+        "prepareMs" : 0.37108332617208362
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40095833537634462,
+        "nativeFrameMs" : 16.66799999657087,
+        "prepareMs" : 0.40087499655783176
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.42870832839980721,
+        "nativeFrameMs" : 16.426541653345339,
+        "prepareMs" : 0.42870832839980721
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.42687499080784619,
+        "nativeFrameMs" : 16.908416670048609,
+        "prepareMs" : 0.42679166654124856
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40808333142194897,
+        "nativeFrameMs" : 16.665250019286759,
+        "prepareMs" : 0.40799999260343611
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.33508334308862686,
+        "nativeFrameMs" : 16.666708324919455,
+        "prepareMs" : 0.335000004270114
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.40037500730250031,
+        "nativeFrameMs" : 16.668666648911312,
+        "prepareMs" : 0.40033333061728626
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39216666482388973,
+        "nativeFrameMs" : 16.665666684275493,
+        "prepareMs" : 0.39208332600537688
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.42641667823772877,
+        "nativeFrameMs" : 15.868958333157934,
+        "prepareMs" : 0.42633333941921592
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.92945834330748767,
+        "nativeFrameMs" : 17.471791652496904,
+        "prepareMs" : 0.929333342355676
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 0.91483333380892873,
+        "nativeFrameMs" : 15.833333338377997,
+        "prepareMs" : 0.9146249940386042
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 1.0243333381367847,
+        "nativeFrameMs" : 16.985541675239801,
+        "prepareMs" : 1.0241249983664602
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 1.0226250014966354,
+        "nativeFrameMs" : 17.032625008141622,
+        "prepareMs" : 1.0224166617263108
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 0.94787499983794987,
+        "nativeFrameMs" : 16.812708316138014,
+        "prepareMs" : 0.94766666006762534
+      }
+    ],
+    "wardrobeChanges" : 0,
+    "warmupFrames" : 100
+  },
+  "matchShared" : {
+    "owners" : 28,
+    "samples" : [
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39324999670498073,
+        "nativeFrameMs" : 16.661541667417623,
+        "prepareMs" : 0.39316665788646787
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.3917499998351559,
+        "nativeFrameMs" : 16.664291644701734,
+        "prepareMs" : 0.39162499888334423
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.37229165900498629,
+        "nativeFrameMs" : 16.667666670400649,
+        "prepareMs" : 0.37220833473838866
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.37058332236483693,
+        "nativeFrameMs" : 15.96108335070312,
+        "prepareMs" : 0.3704999980982393
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.35404166555963457,
+        "nativeFrameMs" : 17.375458337482996,
+        "prepareMs" : 0.35395834129303694
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.3595000016503036,
+        "nativeFrameMs" : 16.663166650687344,
+        "prepareMs" : 0.35945832496508956
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3850833309115842,
+        "nativeFrameMs" : 16.668708340148441,
+        "prepareMs" : 0.38504166877828538
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.37216667260508984,
+        "nativeFrameMs" : 16.667541669448838,
+        "prepareMs" : 0.37204167165327817
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.37474998680409044,
+        "nativeFrameMs" : 16.664208320435137,
+        "prepareMs" : 0.37466666253749281
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.37283333949744701,
+        "nativeFrameMs" : 16.667916672304273,
+        "prepareMs" : 0.37275000067893416
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.36179166636429727,
+        "nativeFrameMs" : 16.667583346134052,
+        "prepareMs" : 0.36170832754578441
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 0.75900000229012221,
+        "nativeFrameMs" : 16.674666665494442,
+        "prepareMs" : 0.75879166251979768
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.36174998967908323,
+        "nativeFrameMs" : 15.956541654304601,
+        "prepareMs" : 0.3616666654124856
+      },
+      {
+        "applyMs" : 0.00024998735170811415,
+        "combinedMs" : 0.78550000034738332,
+        "nativeFrameMs" : 17.377208321704529,
+        "prepareMs" : 0.78525001299567521
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 0.82833334454335272,
+        "nativeFrameMs" : 15.900000013061799,
+        "prepareMs" : 0.82812500477302819
+      },
+      {
+        "applyMs" : 0.00033334072213619947,
+        "combinedMs" : 1.1582083388930187,
+        "nativeFrameMs" : 17.024708344251849,
+        "prepareMs" : 1.1578749981708825
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.39074999222066253,
+        "nativeFrameMs" : 16.17566664936021,
+        "prepareMs" : 0.39066666795406491
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38070834125392139,
+        "nativeFrameMs" : 17.557041661348194,
+        "prepareMs" : 0.38062500243540853
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38641666469629854,
+        "nativeFrameMs" : 16.666708354023285,
+        "prepareMs" : 0.38633332587778568
+      },
+      {
+        "applyMs" : 0.00020832521840929985,
+        "combinedMs" : 0.94474999059457332,
+        "nativeFrameMs" : 15.679458330851048,
+        "prepareMs" : 0.94454166537616402
+      },
+      {
+        "applyMs" : 0.00029166403692215681,
+        "combinedMs" : 0.92162500368431211,
+        "nativeFrameMs" : 17.104541650041938,
+        "prepareMs" : 0.92133333964738995
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.38004165980964899,
+        "nativeFrameMs" : 16.696958351531066,
+        "prepareMs" : 0.37991665885783732
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40695833740755916,
+        "nativeFrameMs" : 17.185541670187376,
+        "prepareMs" : 0.4068749985890463
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38866666727699339,
+        "nativeFrameMs" : 16.665374976582825,
+        "prepareMs" : 0.38858332845848054
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 1.2265416589798406,
+        "nativeFrameMs" : 16.667875010170974,
+        "prepareMs" : 1.2264999968465418
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.3861666627926752,
+        "nativeFrameMs" : 16.467666675453074,
+        "prepareMs" : 0.38608333852607757
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.32404166995547712,
+        "nativeFrameMs" : 16.867750004166737,
+        "prepareMs" : 0.32404166995547712
+      },
+      {
+        "applyMs" : 0.00029166403692215681,
+        "combinedMs" : 0.92229167057666928,
+        "nativeFrameMs" : 15.67637498374097,
+        "prepareMs" : 0.92200000653974712
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.38625000161118805,
+        "nativeFrameMs" : 17.154458328150213,
+        "prepareMs" : 0.38625000161118805
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38599999970756471,
+        "nativeFrameMs" : 17.176125023979694,
+        "prepareMs" : 0.38591666088905185
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38658332778140903,
+        "nativeFrameMs" : 16.654708320857026,
+        "prepareMs" : 0.38649998896289617
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.36987499333918095,
+        "nativeFrameMs" : 16.66724999086,
+        "prepareMs" : 0.36983333120588213
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.38962499820627272,
+        "nativeFrameMs" : 16.670875003910623,
+        "prepareMs" : 0.38958333607297391
+      },
+      {
+        "applyMs" : 0.00029166403692215681,
+        "combinedMs" : 0.97754165471997112,
+        "nativeFrameMs" : 16.676625004038215,
+        "prepareMs" : 0.97724999068304896
+      },
+      {
+        "applyMs" : 0.00025000190362334251,
+        "combinedMs" : 0.94187499780673534,
+        "nativeFrameMs" : 16.478041667141952,
+        "prepareMs" : 0.94162499590311199
+      },
+      {
+        "applyMs" : 0.00025000190362334251,
+        "combinedMs" : 1.0204583377344534,
+        "nativeFrameMs" : 16.914833322516643,
+        "prepareMs" : 1.02020833583083
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.40099999750964344,
+        "nativeFrameMs" : 16.608916688710451,
+        "prepareMs" : 0.40091665869113058
+      },
+      {
+        "applyMs" : 0.00025000190362334251,
+        "combinedMs" : 1.0785000049509108,
+        "nativeFrameMs" : 16.663874994264916,
+        "prepareMs" : 1.0782500030472875
+      },
+      {
+        "applyMs" : 0.00029167858883738518,
+        "combinedMs" : 0.98804167646449059,
+        "nativeFrameMs" : 16.27716665097978,
+        "prepareMs" : 0.98774999787565321
+      },
+      {
+        "applyMs" : 0.00029166403692215681,
+        "combinedMs" : 0.90179165999870747,
+        "nativeFrameMs" : 17.049291665898636,
+        "prepareMs" : 0.90149999596178532
+      },
+      {
+        "applyMs" : 0.00025000190362334251,
+        "combinedMs" : 0.88483333820477128,
+        "nativeFrameMs" : 16.155833349330351,
+        "prepareMs" : 0.88458333630114794
+      },
+      {
+        "applyMs" : 0.00020832521840929985,
+        "combinedMs" : 0.83208332944195718,
+        "nativeFrameMs" : 17.035249999025837,
+        "prepareMs" : 0.83187500422354788
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.43045832717325538,
+        "nativeFrameMs" : 16.810333327157423,
+        "prepareMs" : 0.43041666503995657
+      },
+      {
+        "applyMs" : 0.00029166403692215681,
+        "combinedMs" : 0.96170832694042474,
+        "nativeFrameMs" : 16.670833327225409,
+        "prepareMs" : 0.96141666290350258
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.35495833435561508,
+        "nativeFrameMs" : 15.664125021430664,
+        "prepareMs" : 0.35487499553710222
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.39145832124631852,
+        "nativeFrameMs" : 17.658041659160517,
+        "prepareMs" : 0.39137499697972089
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3387916658539325,
+        "nativeFrameMs" : 16.667666655848734,
+        "prepareMs" : 0.33870832703541964
+      },
+      {
+        "applyMs" : 0.00029167858883738518,
+        "combinedMs" : 0.934041672735475,
+        "nativeFrameMs" : 15.682666664361022,
+        "prepareMs" : 0.93374999414663762
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40716666262596846,
+        "nativeFrameMs" : 17.65383334713988,
+        "prepareMs" : 0.40708333835937083
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.41400000918656588,
+        "nativeFrameMs" : 16.114375001052395,
+        "prepareMs" : 0.41391667036805302
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.39029166509862989,
+        "nativeFrameMs" : 17.219916655449197,
+        "prepareMs" : 0.39016666414681822
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.41725000482983887,
+        "nativeFrameMs" : 15.670833337935619,
+        "prepareMs" : 0.41716666601132601
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.39162499888334423,
+        "nativeFrameMs" : 17.661583333392628,
+        "prepareMs" : 0.39149999793153256
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.39575000118929893,
+        "nativeFrameMs" : 16.66912499058526,
+        "prepareMs" : 0.39562500023748726
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.39029166509862989,
+        "nativeFrameMs" : 16.66799999657087,
+        "prepareMs" : 0.39020834083203226
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.34983333898708224,
+        "nativeFrameMs" : 16.658750013448298,
+        "prepareMs" : 0.34975000016856939
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.33945833274628967,
+        "nativeFrameMs" : 16.66783333348576,
+        "prepareMs" : 0.33941667061299086
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.34295833029318601,
+        "nativeFrameMs" : 16.003999990061857,
+        "prepareMs" : 0.34291666815988719
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.34174999746028334,
+        "nativeFrameMs" : 16.331458333297633,
+        "prepareMs" : 0.34170833532698452
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38695834518875927,
+        "nativeFrameMs" : 17.666875020950101,
+        "prepareMs" : 0.38687500637024641
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.37720832915510982,
+        "nativeFrameMs" : 16.667166666593403,
+        "prepareMs" : 0.37716666702181101
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.36912500218022615,
+        "nativeFrameMs" : 16.666458308463916,
+        "prepareMs" : 0.3690833254950121
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.37091666308697313,
+        "nativeFrameMs" : 16.66875000228174,
+        "prepareMs" : 0.37087500095367432
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.36020833067595959,
+        "nativeFrameMs" : 16.663750022416934,
+        "prepareMs" : 0.36016666854266077
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.34958332253154367,
+        "nativeFrameMs" : 16.566458332818002,
+        "prepareMs" : 0.34958332253154367
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.31491667323280126,
+        "nativeFrameMs" : 16.761624981882051,
+        "prepareMs" : 0.31487501109950244
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.34662499092519283,
+        "nativeFrameMs" : 16.671291683451273,
+        "prepareMs" : 0.34649998997338116
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.35445833054836839,
+        "nativeFrameMs" : 16.670083336066455,
+        "prepareMs" : 0.35437499172985554
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.37483334017451853,
+        "nativeFrameMs" : 15.666958308429457,
+        "prepareMs" : 0.37475000135600567
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3630833380157128,
+        "nativeFrameMs" : 16.666416675434448,
+        "prepareMs" : 0.36304167588241398
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.33000000985339284,
+        "nativeFrameMs" : 17.666458341409452,
+        "prepareMs" : 0.32991667103487998
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.34787500044330955,
+        "nativeFrameMs" : 16.664249997120351,
+        "prepareMs" : 0.34779166162479669
+      },
+      {
+        "applyMs" : 0.00025000190362334251,
+        "combinedMs" : 0.86349999764934182,
+        "nativeFrameMs" : 16.46162498218473,
+        "prepareMs" : 0.86324999574571848
+      },
+      {
+        "applyMs" : 0.00020833977032452822,
+        "combinedMs" : 0.82008333993144333,
+        "nativeFrameMs" : 16.260583346593194,
+        "prepareMs" : 0.81987500016111881
+      },
+      {
+        "applyMs" : 0.00029166403692215681,
+        "combinedMs" : 0.80358333070762455,
+        "nativeFrameMs" : 17.113166672061197,
+        "prepareMs" : 0.8032916666707024
+      },
+      {
+        "applyMs" : 0.00025000190362334251,
+        "combinedMs" : 0.95233334286604077,
+        "nativeFrameMs" : 15.881291663390584,
+        "prepareMs" : 0.95208334096241742
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.39979167922865599,
+        "nativeFrameMs" : 16.621874994598329,
+        "prepareMs" : 0.39975000254344195
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.38487499114125967,
+        "nativeFrameMs" : 17.662833328358829,
+        "prepareMs" : 0.38483332900796086
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.37108332617208362,
+        "nativeFrameMs" : 16.666583353071474,
+        "prepareMs" : 0.3710416640387848
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.41016665636561811,
+        "nativeFrameMs" : 16.667416668497026,
+        "prepareMs" : 0.41008333209902048
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39937499968800694,
+        "nativeFrameMs" : 16.668833311996423,
+        "prepareMs" : 0.39929166086949408
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.38916667108424008,
+        "nativeFrameMs" : 16.660458350088447,
+        "prepareMs" : 0.38912500895094126
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.40104165964294225,
+        "nativeFrameMs" : 16.671291668899357,
+        "prepareMs" : 0.40104165964294225
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39358333742711693,
+        "nativeFrameMs" : 16.666083320160396,
+        "prepareMs" : 0.39349999860860407
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.3931666724383831,
+        "nativeFrameMs" : 16.666916664689779,
+        "prepareMs" : 0.39308333361987025
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.42141665471717715,
+        "nativeFrameMs" : 16.66633335116785,
+        "prepareMs" : 0.42137499258387834
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.4072083393111825,
+        "nativeFrameMs" : 16.669583332259208,
+        "prepareMs" : 0.4072083393111825
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.41341666656080633,
+        "nativeFrameMs" : 16.714249984943308,
+        "prepareMs" : 0.41333332774229348
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38945833512116224,
+        "nativeFrameMs" : 16.618041656329297,
+        "prepareMs" : 0.38937499630264938
+      },
+      {
+        "applyMs" : 0,
+        "combinedMs" : 0.417874995036982,
+        "nativeFrameMs" : 15.818708357983269,
+        "prepareMs" : 0.417874995036982
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.3924999909941107,
+        "nativeFrameMs" : 16.575541667407379,
+        "prepareMs" : 0.39241666672751307
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.41287500062026083,
+        "nativeFrameMs" : 17.606624984182417,
+        "prepareMs" : 0.41279166180174798
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.42149999353569001,
+        "nativeFrameMs" : 16.671708333888091,
+        "prepareMs" : 0.42141666926909238
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39887499588076025,
+        "nativeFrameMs" : 16.660375011269934,
+        "prepareMs" : 0.3987916570622474
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.40658332000020891,
+        "nativeFrameMs" : 16.680750006344169,
+        "prepareMs" : 0.40649999573361129
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.41979167144745588,
+        "nativeFrameMs" : 16.653541650157422,
+        "prepareMs" : 0.41970833262894303
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39770833973307163,
+        "nativeFrameMs" : 16.664000009768642,
+        "prepareMs" : 0.39762500091455877
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.4148333246121183,
+        "nativeFrameMs" : 16.667458330630325,
+        "prepareMs" : 0.41475000034552068
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39100000867620111,
+        "nativeFrameMs" : 16.665291652316228,
+        "prepareMs" : 0.39091666985768825
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.4140833334531635,
+        "nativeFrameMs" : 16.673083329806104,
+        "prepareMs" : 0.41400000918656588
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.39779166399966925,
+        "nativeFrameMs" : 16.662791691487655,
+        "prepareMs" : 0.39770833973307163
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.4142916586715728,
+        "nativeFrameMs" : 16.316458335495554,
+        "prepareMs" : 0.41420833440497518
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38458334165625274,
+        "nativeFrameMs" : 17.023166641592979,
+        "prepareMs" : 0.38450000283773988
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.39291667053475976,
+        "nativeFrameMs" : 16.663125003105961,
+        "prepareMs" : 0.3928333317162469
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.38079166552051902,
+        "nativeFrameMs" : 16.662125010043383,
+        "prepareMs" : 0.38070832670200616
+      },
+      {
+        "applyMs" : 4.1676685214042664e-05,
+        "combinedMs" : 0.37758334656246006,
+        "nativeFrameMs" : 16.666416675434448,
+        "prepareMs" : 0.37754166987724602
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.37329166661947966,
+        "nativeFrameMs" : 16.665333314449526,
+        "prepareMs" : 0.37320834235288203
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38299999141599983,
+        "nativeFrameMs" : 16.667458330630325,
+        "prepareMs" : 0.3829166671494022
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.38124999264255166,
+        "nativeFrameMs" : 16.67008335061837,
+        "prepareMs" : 0.38120833050925285
+      },
+      {
+        "applyMs" : 0.00012500095181167126,
+        "combinedMs" : 0.39658333116676658,
+        "nativeFrameMs" : 16.665625007590279,
+        "prepareMs" : 0.39645833021495491
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38920833321753889,
+        "nativeFrameMs" : 16.670916651492007,
+        "prepareMs" : 0.38912500895094126
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.3487083304207772,
+        "nativeFrameMs" : 16.65625000896398,
+        "prepareMs" : 0.34862500615417957
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.3577499883249402,
+        "nativeFrameMs" : 16.670791665092111,
+        "prepareMs" : 0.35770832619164139
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.34804166352842003,
+        "nativeFrameMs" : 15.669041647925042,
+        "prepareMs" : 0.34795832470990717
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.35279167059343308,
+        "nativeFrameMs" : 17.663083344814368,
+        "prepareMs" : 0.35275000846013427
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.37449999945238233,
+        "nativeFrameMs" : 16.667833348037675,
+        "prepareMs" : 0.3744166751857847
+      },
+      {
+        "applyMs" : 8.333881851285696e-05,
+        "combinedMs" : 0.36358332727104425,
+        "nativeFrameMs" : 16.664291659253649,
+        "prepareMs" : 0.3634999884525314
+      },
+      {
+        "applyMs" : 8.3324266597628593e-05,
+        "combinedMs" : 0.38816666346974671,
+        "nativeFrameMs" : 16.66837498487439,
+        "prepareMs" : 0.38808333920314908
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.34437500289641321,
+        "nativeFrameMs" : 16.665708331856877,
+        "prepareMs" : 0.34433334076311439
+      },
+      {
+        "applyMs" : 4.1662133298814297e-05,
+        "combinedMs" : 0.36879166145808995,
+        "nativeFrameMs" : 16.67008335061837,
+        "prepareMs" : 0.36874999932479113
+      }
+    ],
+    "wardrobeChanges" : 0,
+    "warmupFrames" : 100
+  },
+  "os" : "Version 26.6 (Build 25G72)",
+  "preview" : {
+    "owners" : 1,
+    "samples" : [
+      {
+        "applyMs" : 0.28579166973941028,
+        "combinedMs" : 0.30520833388436586,
+        "nativeFrameMs" : 17.606374982278794,
+        "prepareMs" : 0.019416664144955575
+      },
+      {
+        "applyMs" : 0.6555833388119936,
+        "combinedMs" : 0.69866667035967112,
+        "nativeFrameMs" : 16.667666670400649,
+        "prepareMs" : 0.043083331547677517
+      },
+      {
+        "applyMs" : 0.24449999909847975,
+        "combinedMs" : 0.26495833299122751,
+        "nativeFrameMs" : 16.662875015754253,
+        "prepareMs" : 0.02045833389274776
+      },
+      {
+        "applyMs" : 0.17591666255611926,
+        "combinedMs" : 0.19008333038073033,
+        "nativeFrameMs" : 16.660624998621643,
+        "prepareMs" : 0.014166667824611068
+      },
+      {
+        "applyMs" : 0.18149999959859997,
+        "combinedMs" : 0.19674999930430204,
+        "nativeFrameMs" : 16.664499984472059,
+        "prepareMs" : 0.015249999705702066
+      },
+      {
+        "applyMs" : 0.20029165898449719,
+        "combinedMs" : 0.21670832938980311,
+        "nativeFrameMs" : 16.66858333919663,
+        "prepareMs" : 0.016416670405305922
+      },
+      {
+        "applyMs" : 0.23654165852349252,
+        "combinedMs" : 0.25541665672790259,
+        "nativeFrameMs" : 16.671875011525117,
+        "prepareMs" : 0.018874998204410076
+      },
+      {
+        "applyMs" : 0.2373750030528754,
+        "combinedMs" : 0.25770833599381149,
+        "nativeFrameMs" : 16.661083325743675,
+        "prepareMs" : 0.020333332940936089
+      },
+      {
+        "applyMs" : 0.19304166198708117,
+        "combinedMs" : 0.20887500431854278,
+        "nativeFrameMs" : 16.666666662786156,
+        "prepareMs" : 0.015833342331461608
+      },
+      {
+        "applyMs" : 0.19779166905209422,
+        "combinedMs" : 0.21420832490548491,
+        "nativeFrameMs" : 16.666083320160396,
+        "prepareMs" : 0.016416655853390694
+      },
+      {
+        "applyMs" : 0.16374999540857971,
+        "combinedMs" : 0.17749999824445695,
+        "nativeFrameMs" : 16.665500021190383,
+        "prepareMs" : 0.01375000283587724
+      },
+      {
+        "applyMs" : 0.16208333545364439,
+        "combinedMs" : 0.17562499851919711,
+        "nativeFrameMs" : 16.667624993715435,
+        "prepareMs" : 0.013541663065552711
+      },
+      {
+        "applyMs" : 0.67008333280682564,
+        "combinedMs" : 0.70958332798909396,
+        "nativeFrameMs" : 16.691291661118157,
+        "prepareMs" : 0.039499995182268322
+      },
+      {
+        "applyMs" : 0.69412500306498259,
+        "combinedMs" : 0.73079166759271175,
+        "nativeFrameMs" : 16.500500016263686,
+        "prepareMs" : 0.036666664527729154
+      },
+      {
+        "applyMs" : 0.28162500530015677,
+        "combinedMs" : 0.29991667543072253,
+        "nativeFrameMs" : 16.823958329041488,
+        "prepareMs" : 0.018291670130565763
+      },
+      {
+        "applyMs" : 0.62970833096187562,
+        "combinedMs" : 0.67333332845009863,
+        "nativeFrameMs" : 16.666124982293695,
+        "prepareMs" : 0.043624997488223016
+      },
+      {
+        "applyMs" : 0.1889166742330417,
+        "combinedMs" : 0.20420833607204258,
+        "nativeFrameMs" : 15.833124998607673,
+        "prepareMs" : 0.015291661839000881
+      },
+      {
+        "applyMs" : 0.62274999800138175,
+        "combinedMs" : 0.66595834505278617,
+        "nativeFrameMs" : 17.493708350230008,
+        "prepareMs" : 0.043208347051404417
+      },
+      {
+        "applyMs" : 0.54437499784398824,
+        "combinedMs" : 0.58308332518208772,
+        "nativeFrameMs" : 16.549250009120442,
+        "prepareMs" : 0.03870832733809948
+      },
+      {
+        "applyMs" : 0.51904167048633099,
+        "combinedMs" : 0.55625000095460564,
+        "nativeFrameMs" : 15.828416639124043,
+        "prepareMs" : 0.037208330468274653
+      },
+      {
+        "applyMs" : 0.25629166339058429,
+        "combinedMs" : 0.27708332345355302,
+        "nativeFrameMs" : 16.829875006806105,
+        "prepareMs" : 0.020791660062968731
+      },
+      {
+        "applyMs" : 0.22324999736156315,
+        "combinedMs" : 0.24133332772180438,
+        "nativeFrameMs" : 17.455250010243617,
+        "prepareMs" : 0.018083330360241234
+      },
+      {
+        "applyMs" : 0.16258333926089108,
+        "combinedMs" : 0.17625000327825546,
+        "nativeFrameMs" : 16.658541673677973,
+        "prepareMs" : 0.013666664017364383
+      },
+      {
+        "applyMs" : 0.16749999485909939,
+        "combinedMs" : 0.18187498790211976,
+        "nativeFrameMs" : 16.668958312948234,
+        "prepareMs" : 0.014374993043020368
+      },
+      {
+        "applyMs" : 0.20287500228732824,
+        "combinedMs" : 0.22008332598488778,
+        "nativeFrameMs" : 16.671083329129033,
+        "prepareMs" : 0.017208323697559536
+      },
+      {
+        "applyMs" : 0.20733333076350391,
+        "combinedMs" : 0.22362500021699816,
+        "nativeFrameMs" : 16.667791685904376,
+        "prepareMs" : 0.016291669453494251
+      },
+      {
+        "applyMs" : 0.21208332327660173,
+        "combinedMs" : 0.22941666247788817,
+        "nativeFrameMs" : 16.663458329276182,
+        "prepareMs" : 0.017333339201286435
+      },
+      {
+        "applyMs" : 0.23029166914056987,
+        "combinedMs" : 0.24929166829679161,
+        "nativeFrameMs" : 15.851041651330888,
+        "prepareMs" : 0.018999999156221747
+      },
+      {
+        "applyMs" : 0.19404166960157454,
+        "combinedMs" : 0.20970833429601043,
+        "nativeFrameMs" : 17.482875016867183,
+        "prepareMs" : 0.015666664694435894
+      },
+      {
+        "applyMs" : 0.17995834059547633,
+        "combinedMs" : 0.19420833268668503,
+        "nativeFrameMs" : 16.664499999023974,
+        "prepareMs" : 0.014249992091208696
+      },
+      {
+        "applyMs" : 0.17825000395532697,
+        "combinedMs" : 0.19266667368356138,
+        "nativeFrameMs" : 16.667124989908189,
+        "prepareMs" : 0.01441666972823441
+      },
+      {
+        "applyMs" : 0.16845832578837872,
+        "combinedMs" : 0.18166666268371046,
+        "nativeFrameMs" : 16.667708332533948,
+        "prepareMs" : 0.01320833689533174
+      },
+      {
+        "applyMs" : 0.20870834123343229,
+        "combinedMs" : 0.22487500973511487,
+        "nativeFrameMs" : 16.668625015881844,
+        "prepareMs" : 0.01616666850168258
+      },
+      {
+        "applyMs" : 0.22237499069888145,
+        "combinedMs" : 0.24037499679252505,
+        "nativeFrameMs" : 16.666416660882533,
+        "prepareMs" : 0.018000006093643606
+      },
+      {
+        "applyMs" : 0.23204166791401803,
+        "combinedMs" : 0.25029166135936975,
+        "nativeFrameMs" : 16.670874989358708,
+        "prepareMs" : 0.01824999344535172
+      },
+      {
+        "applyMs" : 0.22187500144354999,
+        "combinedMs" : 0.23929166491143405,
+        "nativeFrameMs" : 16.663458329276182,
+        "prepareMs" : 0.017416663467884064
+      },
+      {
+        "applyMs" : 0.24058333656284958,
+        "combinedMs" : 0.25983333762269467,
+        "nativeFrameMs" : 16.664041686453857,
+        "prepareMs" : 0.01925000105984509
+      },
+      {
+        "applyMs" : 0.20949999452568591,
+        "combinedMs" : 0.22699999681208283,
+        "nativeFrameMs" : 16.668083335389383,
+        "prepareMs" : 0.017500002286396921
+      },
+      {
+        "applyMs" : 0.17195833788719028,
+        "combinedMs" : 0.18554167763795704,
+        "nativeFrameMs" : 16.662083318806253,
+        "prepareMs" : 0.013583339750766754
+      },
+      {
+        "applyMs" : 0.18883333541452885,
+        "combinedMs" : 0.20387500990182161,
+        "nativeFrameMs" : 16.668458338244818,
+        "prepareMs" : 0.015041674487292767
+      },
+      {
+        "applyMs" : 0.22029166575521231,
+        "combinedMs" : 0.23941666586324573,
+        "nativeFrameMs" : 16.670000011799857,
+        "prepareMs" : 0.019125000108033419
+      },
+      {
+        "applyMs" : 0.20300000323913991,
+        "combinedMs" : 0.21974999981466681,
+        "nativeFrameMs" : 16.66333332832437,
+        "prepareMs" : 0.016749996575526893
+      },
+      {
+        "applyMs" : 0.16475000302307308,
+        "combinedMs" : 0.17783333896659315,
+        "nativeFrameMs" : 16.668749987729825,
+        "prepareMs" : 0.013083335943520069
+      },
+      {
+        "applyMs" : 0.2170000079786405,
+        "combinedMs" : 0.23595834500156343,
+        "nativeFrameMs" : 16.671041681547649,
+        "prepareMs" : 0.018958337022922933
+      },
+      {
+        "applyMs" : 0.20854166359640658,
+        "combinedMs" : 0.22575000184588134,
+        "nativeFrameMs" : 16.543666672077961,
+        "prepareMs" : 0.017208338249474764
+      },
+      {
+        "applyMs" : 0.20441667584236711,
+        "combinedMs" : 0.22066666861064732,
+        "nativeFrameMs" : 16.783166647655889,
+        "prepareMs" : 0.016249992768280208
+      },
+      {
+        "applyMs" : 0.16445832443423569,
+        "combinedMs" : 0.17787500109989196,
+        "nativeFrameMs" : 16.665708331856877,
+        "prepareMs" : 0.013416676665656269
+      },
+      {
+        "applyMs" : 0.22762500157114118,
+        "combinedMs" : 0.24562499311286956,
+        "nativeFrameMs" : 16.674791680998169,
+        "prepareMs" : 0.017999991541728377
+      },
+      {
+        "applyMs" : 0.16916666936594993,
+        "combinedMs" : 0.18266667029820383,
+        "nativeFrameMs" : 16.661708330502734,
+        "prepareMs" : 0.013500000932253897
+      },
+      {
+        "applyMs" : 0.2111249923473224,
+        "combinedMs" : 0.22808332869317383,
+        "nativeFrameMs" : 16.668999989633448,
+        "prepareMs" : 0.016958336345851421
+      },
+      {
+        "applyMs" : 0.19862499902956188,
+        "combinedMs" : 0.21516667038667947,
+        "nativeFrameMs" : 16.668208336341195,
+        "prepareMs" : 0.016541671357117593
+      },
+      {
+        "applyMs" : 0.20870832668151706,
+        "combinedMs" : 0.22529166017193347,
+        "nativeFrameMs" : 15.703416676842608,
+        "prepareMs" : 0.016583333490416408
+      },
+      {
+        "applyMs" : 0.22274999355431646,
+        "combinedMs" : 0.24029167252592742,
+        "nativeFrameMs" : 17.630125003051944,
+        "prepareMs" : 0.017541678971610963
+      },
+      {
+        "applyMs" : 0.24904166639316827,
+        "combinedMs" : 0.26899999647866935,
+        "nativeFrameMs" : 16.667374977259897,
+        "prepareMs" : 0.019958330085501075
+      },
+      {
+        "applyMs" : 0.25816667766775936,
+        "combinedMs" : 0.27950000367127359,
+        "nativeFrameMs" : 16.668541677063331,
+        "prepareMs" : 0.02133332600351423
+      },
+      {
+        "applyMs" : 0.27462499565444887,
+        "combinedMs" : 0.29783333593513817,
+        "nativeFrameMs" : 16.670083336066455,
+        "prepareMs" : 0.023208340280689299
+      },
+      {
+        "applyMs" : 0.26541666011326015,
+        "combinedMs" : 0.28679166280198842,
+        "nativeFrameMs" : 16.664958340697922,
+        "prepareMs" : 0.021375002688728273
+      },
+      {
+        "applyMs" : 0.25562499649822712,
+        "combinedMs" : 0.27687499823514372,
+        "nativeFrameMs" : 16.663624977809377,
+        "prepareMs" : 0.021250001736916602
+      },
+      {
+        "applyMs" : 0.24350000603590161,
+        "combinedMs" : 0.26337499730288982,
+        "nativeFrameMs" : 16.66520835715346,
+        "prepareMs" : 0.019874991266988218
+      },
+      {
+        "applyMs" : 0.2626249915920198,
+        "combinedMs" : 0.28462499903980643,
+        "nativeFrameMs" : 16.667624993715435,
+        "prepareMs" : 0.022000007447786629
+      },
+      {
+        "applyMs" : 0.27491667424328625,
+        "combinedMs" : 0.29791667475365102,
+        "nativeFrameMs" : 16.666083320160396,
+        "prepareMs" : 0.023000000510364771
+      },
+      {
+        "applyMs" : 0.25299999106209725,
+        "combinedMs" : 0.27424999279901385,
+        "nativeFrameMs" : 16.663208341924474,
+        "prepareMs" : 0.021250001736916602
+      },
+      {
+        "applyMs" : 0.20854166359640658,
+        "combinedMs" : 0.22591666493099183,
+        "nativeFrameMs" : 16.66762500826735,
+        "prepareMs" : 0.017375001334585249
+      },
+      {
+        "applyMs" : 0.16608333680778742,
+        "combinedMs" : 0.17987500177696347,
+        "nativeFrameMs" : 16.663749993313104,
+        "prepareMs" : 0.013791664969176054
+      },
+      {
+        "applyMs" : 0.22674999490845948,
+        "combinedMs" : 0.24550000671297312,
+        "nativeFrameMs" : 16.620874986983836,
+        "prepareMs" : 0.018750011804513633
+      },
+      {
+        "applyMs" : 0.16012501146178693,
+        "combinedMs" : 0.17262500477954745,
+        "nativeFrameMs" : 16.712125012418255,
+        "prepareMs" : 0.012499993317760527
+      },
+      {
+        "applyMs" : 0.22845833154860884,
+        "combinedMs" : 0.24808333546388894,
+        "nativeFrameMs" : 16.672250014380552,
+        "prepareMs" : 0.019625003915280104
+      },
+      {
+        "applyMs" : 0.19549998978618532,
+        "combinedMs" : 0.21141667093615979,
+        "nativeFrameMs" : 15.944208324071951,
+        "prepareMs" : 0.015916681149974465
+      },
+      {
+        "applyMs" : 0.2020833344431594,
+        "combinedMs" : 0.21866666793357581,
+        "nativeFrameMs" : 17.387708314345218,
+        "prepareMs" : 0.016583333490416408
+      },
+      {
+        "applyMs" : 0.18141666078008711,
+        "combinedMs" : 0.19595833146013319,
+        "nativeFrameMs" : 16.664041671901941,
+        "prepareMs" : 0.014541670680046082
+      },
+      {
+        "applyMs" : 0.17737499729264528,
+        "combinedMs" : 0.19266665913164616,
+        "nativeFrameMs" : 16.665541683323681,
+        "prepareMs" : 0.015291661839000881
+      },
+      {
+        "applyMs" : 0.20212501112837344,
+        "combinedMs" : 0.21925001055933535,
+        "nativeFrameMs" : 16.671458331984468,
+        "prepareMs" : 0.017124999430961907
+      },
+      {
+        "applyMs" : 0.16037499881349504,
+        "combinedMs" : 0.17366665997542441,
+        "nativeFrameMs" : 16.661916655721143,
+        "prepareMs" : 0.013291661161929369
+      },
+      {
+        "applyMs" : 0.18808332970365882,
+        "combinedMs" : 0.20379167108330876,
+        "nativeFrameMs" : 16.669000018737279,
+        "prepareMs" : 0.015708341379649937
+      },
+      {
+        "applyMs" : 0.19504166266415268,
+        "combinedMs" : 0.21208333782851696,
+        "nativeFrameMs" : 15.667333325836807,
+        "prepareMs" : 0.017041675164364278
+      },
+      {
+        "applyMs" : 0.17608334019314498,
+        "combinedMs" : 0.19104167586192489,
+        "nativeFrameMs" : 17.664124985458329,
+        "prepareMs" : 0.01495833566877991
+      },
+      {
+        "applyMs" : 0.20266666251700372,
+        "combinedMs" : 0.21979166194796562,
+        "nativeFrameMs" : 16.668791664415039,
+        "prepareMs" : 0.017124999430961907
+      },
+      {
+        "applyMs" : 0.17345833475701511,
+        "combinedMs" : 0.18779166566673666,
+        "nativeFrameMs" : 16.665000017383136,
+        "prepareMs" : 0.014333330909721553
+      },
+      {
+        "applyMs" : 0.20920833048876375,
+        "combinedMs" : 0.2271249977638945,
+        "nativeFrameMs" : 16.668374999426305,
+        "prepareMs" : 0.017916667275130749
+      },
+      {
+        "applyMs" : 0.16008332022465765,
+        "combinedMs" : 0.17312499403487891,
+        "nativeFrameMs" : 16.662624984746799,
+        "prepareMs" : 0.013041673810221255
+      },
+      {
+        "applyMs" : 0.18812499183695763,
+        "combinedMs" : 0.20333332940936089,
+        "nativeFrameMs" : 16.672791665769182,
+        "prepareMs" : 0.015208337572403252
+      },
+      {
+        "applyMs" : 0.18079167057294399,
+        "combinedMs" : 0.19612499454524368,
+        "nativeFrameMs" : 16.663916685502045,
+        "prepareMs" : 0.015333323972299695
+      },
+      {
+        "applyMs" : 0.18170832481700927,
+        "combinedMs" : 0.19629165763035417,
+        "nativeFrameMs" : 16.667125004460104,
+        "prepareMs" : 0.014583332813344896
+      },
+      {
+        "applyMs" : 0.17149999621324241,
+        "combinedMs" : 0.18545833881944418,
+        "nativeFrameMs" : 16.662083318806253,
+        "prepareMs" : 0.013958342606201768
+      },
+      {
+        "applyMs" : 0.20450000010896474,
+        "combinedMs" : 0.22204166452866048,
+        "nativeFrameMs" : 16.672166661010124,
+        "prepareMs" : 0.017541664419695735
+      },
+      {
+        "applyMs" : 0.17808334087021649,
+        "combinedMs" : 0.19187500583939254,
+        "nativeFrameMs" : 16.6693333449075,
+        "prepareMs" : 0.013791664969176054
+      },
+      {
+        "applyMs" : 0.20083332492504269,
+        "combinedMs" : 0.2166666672565043,
+        "nativeFrameMs" : 16.663416667142883,
+        "prepareMs" : 0.015833342331461608
+      },
+      {
+        "applyMs" : 0.17516667139716446,
+        "combinedMs" : 0.18883333541452885,
+        "nativeFrameMs" : 16.666083320160396,
+        "prepareMs" : 0.013666664017364383
+      },
+      {
+        "applyMs" : 0.18216666649095714,
+        "combinedMs" : 0.19670833717100322,
+        "nativeFrameMs" : 16.665916686179116,
+        "prepareMs" : 0.014541670680046082
+      },
+      {
+        "applyMs" : 0.24983333423733711,
+        "combinedMs" : 0.27274999592918903,
+        "nativeFrameMs" : 16.673708334565163,
+        "prepareMs" : 0.022916661691851914
+      },
+      {
+        "applyMs" : 0.20462500106077641,
+        "combinedMs" : 0.22075000742916018,
+        "nativeFrameMs" : 16.662791647831909,
+        "prepareMs" : 0.016125006368383765
+      },
+      {
+        "applyMs" : 0.21345833374653012,
+        "combinedMs" : 0.23008332937024534,
+        "nativeFrameMs" : 16.665583330905065,
+        "prepareMs" : 0.016624995623715222
+      },
+      {
+        "applyMs" : 0.24083333846647292,
+        "combinedMs" : 0.26033334142994136,
+        "nativeFrameMs" : 16.66729168209713,
+        "prepareMs" : 0.019500002963468432
+      },
+      {
+        "applyMs" : 0.21691666916012764,
+        "combinedMs" : 0.23370834242086858,
+        "nativeFrameMs" : 16.667333329678513,
+        "prepareMs" : 0.016791673260740936
+      },
+      {
+        "applyMs" : 0.26674999389797449,
+        "combinedMs" : 0.28708332683891058,
+        "nativeFrameMs" : 16.669041651766747,
+        "prepareMs" : 0.020333332940936089
+      },
+      {
+        "applyMs" : 0.27829165628645569,
+        "combinedMs" : 0.29954165802337229,
+        "nativeFrameMs" : 16.66970833321102,
+        "prepareMs" : 0.021250001736916602
+      },
+      {
+        "applyMs" : 0.24716666666790843,
+        "combinedMs" : 0.26604167942423373,
+        "nativeFrameMs" : 16.664875016431324,
+        "prepareMs" : 0.018875012756325305
+      },
+      {
+        "applyMs" : 0.28329166525509208,
+        "combinedMs" : 0.30483333102893084,
+        "nativeFrameMs" : 15.71791667083744,
+        "prepareMs" : 0.021541665773838758
+      },
+      {
+        "applyMs" : 0.23725000210106373,
+        "combinedMs" : 0.25866666692309082,
+        "nativeFrameMs" : 17.610749986488372,
+        "prepareMs" : 0.021416664822027087
+      },
+      {
+        "applyMs" : 0.21804166317451745,
+        "combinedMs" : 0.23554166546091437,
+        "nativeFrameMs" : 16.519750002771616,
+        "prepareMs" : 0.017500002286396921
+      },
+      {
+        "applyMs" : 0.20075000065844506,
+        "combinedMs" : 0.217541673919186,
+        "nativeFrameMs" : 16.814500006148592,
+        "prepareMs" : 0.016791673260740936
+      },
+      {
+        "applyMs" : 0.17549999756738544,
+        "combinedMs" : 0.19012499251402915,
+        "nativeFrameMs" : 16.664541675709188,
+        "prepareMs" : 0.01462499494664371
+      },
+      {
+        "applyMs" : 0.18533332331571728,
+        "combinedMs" : 0.20104166469536722,
+        "nativeFrameMs" : 16.665499977534637,
+        "prepareMs" : 0.015708341379649937
+      },
+      {
+        "applyMs" : 0.69924999843351543,
+        "combinedMs" : 0.77941667404957116,
+        "nativeFrameMs" : 16.704708352335729,
+        "prepareMs" : 0.080166675616055727
+      },
+      {
+        "applyMs" : 0.51349999557714909,
+        "combinedMs" : 0.57916666264645755,
+        "nativeFrameMs" : 15.645249994122423,
+        "prepareMs" : 0.06566666706930846
+      },
+      {
+        "applyMs" : 0.5442500114440918,
+        "combinedMs" : 0.58050001098308712,
+        "nativeFrameMs" : 17.233499995199963,
+        "prepareMs" : 0.036249999538995326
+      },
+      {
+        "applyMs" : 0.60458332882262766,
+        "combinedMs" : 0.64216666214633733,
+        "nativeFrameMs" : 17.102916652220301,
+        "prepareMs" : 0.037583333323709667
+      },
+      {
+        "applyMs" : 0.58283332327846438,
+        "combinedMs" : 0.62287499895319343,
+        "nativeFrameMs" : 15.838375024031848,
+        "prepareMs" : 0.040041675674729049
+      },
+      {
+        "applyMs" : 0.2502083225408569,
+        "combinedMs" : 0.27108332142233849,
+        "nativeFrameMs" : 16.49566667038016,
+        "prepareMs" : 0.020874998881481588
+      },
+      {
+        "applyMs" : 0.52462500752881169,
+        "combinedMs" : 0.5607083294307813,
+        "nativeFrameMs" : 17.658083306741901,
+        "prepareMs" : 0.036083321901969612
+      },
+      {
+        "applyMs" : 0.53554166515823454,
+        "combinedMs" : 0.57287499657832086,
+        "nativeFrameMs" : 16.664750000927597,
+        "prepareMs" : 0.037333331420086324
+      },
+      {
+        "applyMs" : 0.25804167671594769,
+        "combinedMs" : 0.28050001128576696,
+        "nativeFrameMs" : 15.67137501842808,
+        "prepareMs" : 0.022458334569819272
+      },
+      {
+        "applyMs" : 0.19425000937189907,
+        "combinedMs" : 0.20970833429601043,
+        "nativeFrameMs" : 17.654041672358289,
+        "prepareMs" : 0.015458324924111366
+      },
+      {
+        "applyMs" : 0.19341666484251618,
+        "combinedMs" : 0.20979165856260806,
+        "nativeFrameMs" : 16.666083320160396,
+        "prepareMs" : 0.016374993720091879
+      },
+      {
+        "applyMs" : 0.18770832684822381,
+        "combinedMs" : 0.20216665870975703,
+        "nativeFrameMs" : 16.663083326420747,
+        "prepareMs" : 0.014458331861533225
+      },
+      {
+        "applyMs" : 0.22720833658240736,
+        "combinedMs" : 0.24670833954587579,
+        "nativeFrameMs" : 16.674041675287299,
+        "prepareMs" : 0.019500002963468432
+      },
+      {
+        "applyMs" : 0.2024166751652956,
+        "combinedMs" : 0.21837500389665365,
+        "nativeFrameMs" : 16.667875010170974,
+        "prepareMs" : 0.015958328731358051
+      },
+      {
+        "applyMs" : 0.18287499551661313,
+        "combinedMs" : 0.19737500406336039,
+        "nativeFrameMs" : 16.662124980939552,
+        "prepareMs" : 0.014500008546747267
+      },
+      {
+        "applyMs" : 0.56487499387003481,
+        "combinedMs" : 0.60383333766367286,
+        "nativeFrameMs" : 16.680625019944273,
+        "prepareMs" : 0.038958343793638051
+      },
+      {
+        "applyMs" : 0.50666667812038213,
+        "combinedMs" : 0.5417500069597736,
+        "nativeFrameMs" : 15.892625000560656,
+        "prepareMs" : 0.03508332883939147
+      }
+    ],
+    "warmupFrames" : 100
+  },
+  "runID" : "1EDAC201-EB9B-4340-9985-A8C50709811A"
+}

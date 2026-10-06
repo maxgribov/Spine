@@ -135,3 +135,96 @@ another device. Read `build.json` provenance in each report before accepting it.
 Capture reports record SHA-256 for every PNG at capture time. Video encoding verifies
 those source frames and writes an MP4/native-report SHA-256 sidecar. The evidence
 verifier rejects corrupted or mixed PNG/video artifacts even when JSON pass flags remain.
+
+## Owner workload: 28 match actors and one fitting-room actor
+
+```sh
+python3 Examples/SkinComposition/build.py --platform macos --output /tmp/skin-scaled-mac
+/tmp/skin-scaled-mac/SkinComposition.app/Contents/MacOS/SkinComposition --workload /tmp/skin-workload.json
+```
+
+On the signed physical iOS app, launch with `--workload` instead of `--evidence`
+and export `Documents/skin-workload.json`. Keep the window/app visible for all
+three phases (about 11 seconds at 60 Hz; the desktop runner times out at 60 seconds).
+Each phase discards 100 warmup frames then records 120 native frames:
+
+1. 12 pirates sharing three archetype assets across four teams, six neutrals sharing
+   one asset, ten animated props sharing one asset: 28 owners, five assets.
+2. The same 28 owners with twelve distinct pirate assets: fourteen assets total.
+3. One fitting-room pirate, changing clothes once per native frame; all fourteen
+   assets remain loaded. This is more frequent than the owner's manual changes.
+
+The synthetic catalog has **20 separate cosmetic items per pirate**: eight hats,
+eight clothes and four earrings. Four team skins and the base are additional;
+no cache of outfit combinations is constructed. All 20 items are compiled even
+when not equipped. Unique item textures are synthetic 256×256 opaque RGBA, reused
+between that item's slots/states. There are 77 textures in the shared model and
+302 in the distinct model (20,185,088 and 79,167,488 decoded RGBA bytes respectively).
+These dimensions and this simple animated rig are stated stress-fixture assumptions,
+not measurements or guarantees for unseen production artwork.
+
+The operational latency criterion is warm single-preview apply+prepare p95 within
+one 60 Hz frame (16.67 ms). Native callback intervals are also recorded without
+filtering, but are not GPU presentation latency. The owner requested no arbitrary
+absolute memory ceiling; resource retention regressions remain prohibited.
+
+### Separate memory diagnostic and physical XCTest host
+
+The main app continues to use only public `import Spine`. A separate `@testable`
+probe records current allocator bytes, resident pages and physical footprint after
+framework warmup and texture preload, and at each detached region plus the final
+complete-staging checkpoint before commit. Run each sharing model in a fresh process:
+
+```sh
+python3 Examples/SkinComposition/Diagnostics/build-memory.py --output /tmp/skin-memory-probe
+/tmp/skin-memory-probe/MemoryProbe.app/Contents/MacOS/MemoryProbe /tmp/memory-shared.json
+/tmp/skin-memory-probe/MemoryProbe.app/Contents/MacOS/MemoryProbe --distinct /tmp/memory-distinct.json
+```
+
+The operational asset metric is the incremental process physical footprint across
+retaining/preloading the complete catalogs after framework warmup. This includes
+owned texture storage and associated framework allocations; it is not an exact
+object graph byte sum. Staging peak is the largest observed additional live allocator
+and footprint usage while old and staged trees coexist. Transient allocations
+between checkpoints and globally shared GPU residency are not claimed as exact.
+Reference release and after-drain samples distinguish retained objects from system
+caches. Sample storage is allocated/touched before the baseline to avoid measurement
+array growth contaminating the peak.
+
+To reproduce the full applicable physical-iOS XCTest suite and memory probes:
+
+```sh
+python3 Examples/SkinComposition/Diagnostics/generate-ios-tests.py \
+  --repo "$PWD" --output /tmp/skin-xctest --team "$SPINE_DEVELOPMENT_TEAM"
+xcodebuild -project /tmp/skin-xctest/SkinTests.xcodeproj -scheme SpineTests \
+  -destination 'generic/platform=iOS' -derivedDataPath /tmp/skin-xctest/Derived build-for-testing
+```
+
+Use the generated `.xctestrun` with `xcodebuild test-without-building` on the physical
+device. Exclude `SpineTests/CompositionMemoryProbeTests` from the full suite, then
+run its shared and distinct methods with separate `-only-testing` invocations for
+fresh test processes. The generated tests attach JSON and write it to Documents.
+The adapter preserves the repository test resources and maps `Bundle.module` to
+the XCTest bundle. macOS-only suites remain macOS-only; they are not counted as
+physical-iOS execution. Signing uses the caller's existing local team, without
+embedding profiles or device identifiers in the repository.
+
+For physical workload exports, also copy `Documents/skin-workload-status.json`.
+The app removes the previous result and writes `pending` with a fresh run ID before
+starting. Completion writes `passed`/`failed`; a 60-second native timeout fails the
+run. `summarize-workload.py` requires a passed status matching result run ID, source
+build and SHA-256, so an old result cannot be accepted after a failed launch.
+Rename the two exports to `workload.json` and `workload-status.json` in a run folder,
+then use `python3 Examples/SkinComposition/summarize-workload.py <run-folder>`.
+The memory probe refuses to publish deltas if either Mach task-info call fails for
+any baseline, held-staging or after-drain sample; unavailable memory is not zero.
+
+The generated physical test host sets `SPINE_MESH_ORACLE_OUTPUT` to its sandbox
+temporary directory before XCTest runs. This preserves the existing oracle tests
+without attempting forbidden `/tmp` exports on iOS. The host keeps its display
+awake during tests; this setting belongs to the temporary test host, not the game
+or public library. Infrastructure failures remain in the validation history.
+
+Aggregate agreed-MVP assessment (including the explicit owner D.5 memory-ceiling
+exception) is checked with `python3 Examples/SkinComposition/verify-release.py`.
+Standalone raw diagnostic reports do not independently approve release.

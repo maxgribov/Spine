@@ -27,6 +27,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 try collectMeasurements(to: URL(fileURLWithPath: CommandLine.arguments[index + 1]))
                 NSApp.terminate(nil); return
             }
+            if let index = CommandLine.arguments.firstIndex(of: "--workload"), index + 1 < CommandLine.arguments.count {
+                let view = SKView(frame: CGRect(x: 0, y: 0, width: 680, height: 520)); view.preferredFramesPerSecond = 60
+                let window = NSWindow(contentRect: view.frame, styleMask: [.titled], backing: .buffered, defer: false)
+                window.isReleasedWhenClosed = false; window.contentView = view; self.window = window
+                let scene = try ScaledWorkloadScene(output: URL(fileURLWithPath: CommandLine.arguments[index + 1]))
+                scene.completion = { error in if let error = error { fputs("\(error)\n", stderr); exit(1) }; NSApp.terminate(nil) }
+                view.presentScene(scene); window.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 60) { fputs("Workload timeout\n", stderr); exit(1) }
+                return
+            }
             let asset = try loadAsset()
             print("Validated \(try Wardrobe.validateAll(asset: asset)) outfits")
             if CommandLine.arguments.contains("--validate-catalog") { NSApp.terminate(nil); return }
@@ -64,12 +74,41 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         do {
-            let asset = try loadAsset(); _ = try Wardrobe.validateAll(asset: asset)
+            let asset = CommandLine.arguments.contains("--workload") ? nil : try loadAsset()
+            if let asset = asset { _ = try Wardrobe.validateAll(asset: asset) }
             let controller = UIViewController(), view = SKView(frame: UIScreen.main.bounds)
             controller.view = view
             let window = UIWindow(frame: UIScreen.main.bounds); window.rootViewController = controller
             self.window = window; window.makeKeyAndVisible()
-            if CommandLine.arguments.contains("--evidence") {
+            if CommandLine.arguments.contains("--workload") {
+                view.preferredFramesPerSecond = 60
+                let output = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("skin-workload.json")
+                let status = output.deletingLastPathComponent().appendingPathComponent("skin-workload-status.json")
+                let runID = UUID().uuidString
+                let build = try JSONSerialization.jsonObject(with: Data(contentsOf: Bundle.main.resourceURL!.appendingPathComponent("build.json")))
+                var completed = false
+                func record(_ state: String, error: Error? = nil) throws {
+                    var value: [String: Any] = ["runID": runID, "state": state, "build": build, "timestamp": Date().timeIntervalSince1970]
+                    if let error = error { value["error"] = String(describing: error) }
+                    if state == "passed" { value["resultSHA256"] = try evidenceSHA256(output) }
+                    try JSONSerialization.data(withJSONObject: value, options: [.prettyPrinted, .sortedKeys]).write(to: status, options: .atomic)
+                }
+                if FileManager.default.fileExists(atPath: output.path) { try FileManager.default.removeItem(at: output) }
+                try record("pending")
+                do {
+                    let scene = try ScaledWorkloadScene(output: output, runID: runID)
+                    scene.completion = { error in
+                        guard !completed else { return }; completed = true
+                        do { try record(error == nil ? "passed" : "failed", error: error) } catch { print(error) }
+                    }
+                    view.presentScene(scene)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+                        guard !completed else { return }; completed = true
+                        do { try record("failed", error: EvidenceError.unavailable("Native workload timeout; keep app visible and device unlocked")) }
+                        catch { print(error) }
+                    }
+                } catch { completed = true; try record("failed", error: error) }
+            } else if CommandLine.arguments.contains("--evidence") {
                 let output = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("skin-composition")
                 try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
                 do {
@@ -93,7 +132,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 } catch {
                     try JSONSerialization.data(withJSONObject: ["passed": false, "error": String(describing: error)]).write(to: output.appendingPathComponent("result.json"))
                 }
-            } else { view.presentScene(try WardrobeScene(asset: asset)) }
+            } else if let asset = asset { view.presentScene(try WardrobeScene(asset: asset)) }
         } catch { fatalError("Unable to load fixture: \(error)") }
         return true
     }
