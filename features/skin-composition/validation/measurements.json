@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "2f3d2bd0c0c7069ec7fea8c8ec9dc99a9cb38e29",
+  "sourceCommit": "437785506b723e1e902ed053afbf427328efc3a6",
   "releaseGate": "pending",
   "targets": [],
   "workload": {
@@ -15,5 +15,22 @@
     "assetResidentBytes": null,
     "peakSwitchBytes": null
   },
-  "runs": []
+  "runs": [
+    {
+      "platform": "macos",
+      "measurements": "captures/macos/measurements.json",
+      "paired": "captures/macos/paired/comparisons.json",
+      "native": "captures/macos/native/native.json",
+      "video": "captures/macos/native-playback.mp4",
+      "releaseAssessment": "pending target workload and budgets"
+    },
+    {
+      "platform": "iphone-air",
+      "measurements": "captures/iphone-air/measurements.json",
+      "paired": "captures/iphone-air/paired/comparisons.json",
+      "native": "captures/iphone-air/native/native.json",
+      "video": "captures/iphone-air/native-playback.mp4",
+      "releaseAssessment": "pending target workload and budgets"
+    }
+  ]
 }

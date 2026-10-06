@@ -88,4 +88,50 @@ measures CPU preparation, not native frame GPU rendering. Build metadata records
 source commit, dirty status and exact source/fixture hashes. Process resident samples
 are not isolated asset memory or the transient staging peak. Those require platform
 allocation tooling and the target workload in Phase 5. No measured result implies
-release approval: budgets, physical-iPhone images and workload remain pending.
+release approval: budgets, isolated memory and approved workload remain pending.
+Physical-iPhone fixture captures are recorded separately in the validation report.
+
+## Automated paired images and native phase recording
+
+```sh
+/tmp/skin-composition-mac/SkinComposition.app/Contents/MacOS/SkinComposition \
+  --capture /tmp/skin-paired
+/tmp/skin-composition-mac/SkinComposition.app/Contents/MacOS/SkinComposition \
+  --native-evidence /tmp/skin-native
+python3 Examples/SkinComposition/encode-video.py /tmp/skin-native /tmp/skin-native.mp4
+```
+
+Paired captures compare a Skeleton changed at the sampled time with a control
+wearing that outfit from clip start. Both use the same asset/backend, pose and
+requests. Six cases cover setup, color, side/draw order, nil, pause and an event
+callback. Raw pixel bytes must match exactly; the runner does not change color
+space, alpha or thresholds to obtain a pass. PNGs and `comparisons.json` retain
+source hashes and the backend description. Deterministic SKRenderer timestamps
+are distinct from native wall-clock playback.
+
+Native recording samples actual SKView `didFinishUpdate`, records the pose of both
+owners and compares pixels after the callback changes the outfit. It writes PNGs
+and wall-clock times to `native.json`. The optional `encode-video.py` requires an
+available `ffmpeg`; the MP4 uses recorded frame intervals. PNG comparisons remain
+the exact evidence; lossy MP4 is only playback presentation.
+
+After signing/installing the iOS build, launch the same evidence runner on an
+unlocked physical phone and leave it visible until export:
+
+```sh
+xcrun devicectl device process launch --terminate-existing --device "$SPINE_DEVICE_ID" \
+  "$SPINE_PROBE_BUNDLE_ID" -- --evidence
+xcrun devicectl device copy from --device "$SPINE_DEVICE_ID" --domain-type appDataContainer \
+  --domain-identifier "$SPINE_PROBE_BUNDLE_ID" --source Documents/skin-composition \
+  --destination /tmp/skin-phone-results
+python3 Examples/SkinComposition/encode-video.py /tmp/skin-phone-results/native /tmp/skin-phone.mp4
+```
+
+Check `result.json`, paired and native reports: launching or copying alone is not
+a pass. The native runner writes a timeout failure if the app cannot produce frames.
+Platform images are compared only to controls from their own backend, never to
+another device. Read `build.json` provenance in each report before accepting it.
+
+Capture reports record SHA-256 for every PNG at capture time. Video encoding verifies
+those source frames and writes an MP4/native-report SHA-256 sidecar. The evidence
+verifier rejects corrupted or mixed PNG/video artifacts even when JSON pass flags remain.

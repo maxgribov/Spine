@@ -14,6 +14,19 @@ private func residentBytes() -> UInt64? {
     return result == KERN_SUCCESS ? info.resident_size : nil
 }
 
+private func hardwareModel() -> String {
+    #if os(macOS)
+    let key = "hw.model"
+    #else
+    let key = "hw.machine"
+    #endif
+    var size = 0
+    guard sysctlbyname(key, nil, &size, nil, 0) == 0 else { return "unknown" }
+    var value = [CChar](repeating: 0, count: size)
+    guard sysctlbyname(key, &value, &size, nil, 0) == 0 else { return "unknown" }
+    return String(cString: value)
+}
+
 /// Diagnostic timing collector. Device/workload budgets are deliberately not inferred.
 func collectMeasurements(to output: URL) throws {
     let beforeAsset = residentBytes()
@@ -47,7 +60,7 @@ func collectMeasurements(to output: URL) throws {
     }
     let build = try JSONSerialization.jsonObject(with: Data(contentsOf: Bundle.main.resourceURL!.appendingPathComponent("build.json")))
     let report: [String: Any] = ["schemaVersion": 1, "releaseGate": "pending", "build": build,
-        "os": ProcessInfo.processInfo.operatingSystemVersionString, "processorCount": ProcessInfo.processInfo.processorCount,
+        "os": ProcessInfo.processInfo.operatingSystemVersionString, "model": hardwareModel(), "processorCount": ProcessInfo.processInfo.processorCount,
         "workload": ["skeletons": 1, "warmup": 100, "alternating": 1000, "repeat": 1000, "catalogSkins": asset.skinNames.count,
                      "states": try asset.skinNames.reduce(0) { try $0 + asset.skinDescription(named: $1).entries.count }],
         "assetLoadMs": loadMs,
