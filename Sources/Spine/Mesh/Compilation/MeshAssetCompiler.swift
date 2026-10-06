@@ -2,6 +2,13 @@ import SpriteKit
 
 /// Validates every skin/animation before asking the texture provider for resources.
 struct MeshAssetCompiler {
+    private static let countLock=NSLock()
+    private static var compileInvocations=0
+    /// Internal resource-regression diagnostic; never affects asset or appearance state.
+    static var compilationCount:Int {
+        countLock.lock();defer {countLock.unlock()}
+        return compileInvocations
+    }
     private struct Draft {
         let id:Int,slot:Int
         let name:String,path:String
@@ -33,6 +40,7 @@ struct MeshAssetCompiler {
     }
 
     func compile(textures:SpineMeshTextureProvider)throws->CompiledMeshSkeleton {
+        Self.countLock.lock();Self.compileInvocations += 1;Self.countLock.unlock()
         guard model.skeleton.spine.range(of:"^4\\.1\\.[0-9]+$",options:.regularExpression) != nil else {
             try fail(.unsupportedVersion,"/skeleton/spine","Mesh assets require a declared Spine 4.1.x version.")
         }

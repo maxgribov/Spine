@@ -26,3 +26,7 @@ swift build
 
 `CompositionPublicAPITests` uses the real atlas/PNG via the public provider, checks
 all 32 outfits and demonstrates catalog area/conflict checks without `@testable`.
+
+The rectangular parts have separate positions/sizes so both hats, clothing, the
+team badge and earring are distinguishable in the standalone public client at
+`Examples/SkinComposition`. `walk` also rotates the root for visible phase changes.

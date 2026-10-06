@@ -261,3 +261,14 @@ outfit; an externally retained old node is detached and no longer managed. Untou
 records, including mixed mesh/point/body slots, keep identity and physics ownership.
 An exactly equal descriptor is a no-op. The asset and textures can be shared across
 Skeletons; appearance and playback state belong to each instance.
+
+### Run the standalone public client
+
+The repository's `Examples/SkinComposition/README.md` provides native macOS and iOS
+build/run commands. The example imports only public API, displays two independent
+Skeletons sharing one asset, and exposes clothing, team, pause, speed, repeat, reset
+and event-driven changes. Its catalog check runs all 32 fixture outfits and rejects
+forbidden catalog overlaps independently of the library's ordered layer policy.
+The optional diagnostic collector exports raw apply/prepare samples with source
+hashes. Release budgets and physical-device image/memory validation remain separate
+requirements; successful builds or diagnostic samples do not satisfy them.

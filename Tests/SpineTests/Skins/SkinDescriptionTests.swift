@@ -7,6 +7,7 @@ final class SkinDescriptionTests: XCTestCase {
         let textures = TestMeshTextures()
         let asset = try SpineMeshAsset(json: meshResource("skin-composition/mixed.json"), textures: textures)
         let requests = textures.requests
+        let compilations = MeshAssetCompiler.compilationCount
         let description = try asset.skinDescription(named: "default")
         XCTAssertEqual(description.name, "default")
         let torso = description.entries.filter { $0.slot == "torso" }
@@ -20,6 +21,7 @@ final class SkinDescriptionTests: XCTestCase {
             try asset.validate(skinComposition: .init(baseSkin: "base", layers: [.replace(skin: "hat/a", slots: ["hat-front", "hat-back"])]))
         }
         XCTAssertEqual(textures.requests, requests)
+        XCTAssertEqual(MeshAssetCompiler.compilationCount, compilations)
         XCTAssertThrowsError(try asset.skinDescription(named: "missing/~")) {
             XCTAssertEqual(($0 as? SpineRuntimeError)?.code, .missingSkin)
             XCTAssertEqual(($0 as? SpineRuntimeError)?.path, "/skins/missing~1~0")

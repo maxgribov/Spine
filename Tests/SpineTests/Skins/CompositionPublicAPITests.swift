@@ -45,6 +45,14 @@ final class CompositionPublicAPITests: XCTestCase {
         XCTAssertThrowsError(try validateCatalog([CatalogItem(skin: "hat/a", slots: ["torso"], hidden: [])], asset: asset)) {
             guard case CatalogError.incorrectArea = $0 else { return XCTFail("Wrong catalog error") }
         }
+        // Metadata areas are disjoint, but a hide may still conflict with another
+        // item's replace area. The catalog must reject this in either input order.
+        let hidingHat = CatalogItem(skin: "hat/a", slots: ["hat-front", "hat-back"], hidden: ["torso"])
+        for items in [[hidingHat, clothes], [clothes, hidingHat]] {
+            XCTAssertThrowsError(try validateCatalog(items, asset: asset)) {
+                guard case CatalogError.forbiddenConflict = $0 else { return XCTFail("Hidden-area conflict was not detected") }
+            }
+        }
         var count = 0
         for hat in ["a", "b"] {
             for clothes in ["a", "b"] {
@@ -57,6 +65,9 @@ final class CompositionPublicAPITests: XCTestCase {
                             .overlay(skin: "team/" + team)
                         ])
                         try asset.validate(skinComposition: look)
+                        try skeleton.apply(skinComposition: look)
+                        try skeleton.prepareMeshes(for: SpineMeshFrameContext(skeletonToPixels: .identity, pixelSize: CGSize(width: 256, height: 256)))
+                        XCTAssertEqual(skeleton.skinComposition, look)
                         XCTAssertEqual(look, SpineSkinComposition(baseSkin: look.baseSkin, layers: look.layers))
                         count += 1
                     }

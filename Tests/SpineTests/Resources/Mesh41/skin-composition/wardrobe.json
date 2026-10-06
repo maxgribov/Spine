@@ -65,48 +65,60 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 46,
+            "height": 10,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 52
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 46,
+            "height": 10,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 52
           }
         },
         "hat-back": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 32,
+            "height": 14,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 62
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 32,
+            "height": 14,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 62
           }
         },
         "torso": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 40,
+            "height": 50,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 0
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 40,
+            "height": 50,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 0
           }
         },
         "sleeves": {
@@ -114,63 +126,79 @@
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "height": 30,
+            "color": "ffffffff",
+            "x": -30,
+            "y": 10
           },
           "side": {
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "height": 30,
+            "color": "ffffffff",
+            "x": -27,
+            "y": 10
           }
         },
         "bandana": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 44,
+            "height": 7,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 39
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 44,
+            "height": 7,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 39
           }
         },
         "earring": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 6,
+            "height": 12,
+            "color": "ffffffff",
+            "x": 27,
+            "y": 37
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 6,
+            "height": 12,
+            "color": "ffffffff",
+            "x": 30,
+            "y": 37
           }
         },
         "team": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 12,
+            "height": 18,
+            "color": "ffffffff",
+            "x": 8,
+            "y": 5
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 12,
+            "height": 18,
+            "color": "ffffffff",
+            "x": 11,
+            "y": 5
           }
         }
       }
@@ -182,48 +210,60 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 46,
+            "height": 10,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 52
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 46,
+            "height": 10,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 52
           }
         },
         "hat-back": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 32,
+            "height": 14,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 62
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 32,
+            "height": 14,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 62
           }
         },
         "torso": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 40,
+            "height": 50,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 0
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 40,
+            "height": 50,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 0
           }
         },
         "sleeves": {
@@ -231,63 +271,79 @@
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "height": 30,
+            "color": "ffffffff",
+            "x": -30,
+            "y": 10
           },
           "side": {
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "height": 30,
+            "color": "ffffffff",
+            "x": -27,
+            "y": 10
           }
         },
         "bandana": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 44,
+            "height": 7,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 39
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 44,
+            "height": 7,
+            "color": "ffffffff",
+            "x": 3,
+            "y": 39
           }
         },
         "earring": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 6,
+            "height": 12,
+            "color": "ffffffff",
+            "x": 27,
+            "y": 37
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 6,
+            "height": 12,
+            "color": "ffffffff",
+            "x": 30,
+            "y": 37
           }
         },
         "team": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 12,
+            "height": 18,
+            "color": "ffffffff",
+            "x": 8,
+            "y": 5
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 12,
+            "height": 18,
+            "color": "ffffffff",
+            "x": 11,
+            "y": 5
           }
         }
       }
@@ -299,32 +355,40 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff0000ff"
+            "width": 46,
+            "height": 10,
+            "color": "ff0000ff",
+            "x": 0,
+            "y": 52
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff0000ff"
+            "width": 46,
+            "height": 10,
+            "color": "ff0000ff",
+            "x": 3,
+            "y": 52
           }
         },
         "hat-back": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff0000ff"
+            "width": 32,
+            "height": 14,
+            "color": "ff0000ff",
+            "x": 0,
+            "y": 62
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff0000ff"
+            "width": 32,
+            "height": 14,
+            "color": "ff0000ff",
+            "x": 3,
+            "y": 62
           }
         }
       }
@@ -336,32 +400,40 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "00ff00ff"
+            "width": 46,
+            "height": 10,
+            "color": "00ff00ff",
+            "x": 0,
+            "y": 52
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "00ff00ff"
+            "width": 46,
+            "height": 10,
+            "color": "00ff00ff",
+            "x": 3,
+            "y": 52
           }
         },
         "hat-back": {
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "00ff00ff"
+            "width": 32,
+            "height": 14,
+            "color": "00ff00ff",
+            "x": 0,
+            "y": 62
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "00ff00ff"
+            "width": 32,
+            "height": 14,
+            "color": "00ff00ff",
+            "x": 3,
+            "y": 62
           }
         }
       }
@@ -373,16 +445,20 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "0000ffff"
+            "width": 40,
+            "height": 50,
+            "color": "0000ffff",
+            "x": 0,
+            "y": 0
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "0000ffff"
+            "width": 40,
+            "height": 50,
+            "color": "0000ffff",
+            "x": 3,
+            "y": 0
           }
         },
         "sleeves": {
@@ -390,15 +466,19 @@
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "0000ffff"
+            "height": 30,
+            "color": "0000ffff",
+            "x": -30,
+            "y": 10
           },
           "side": {
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "0000ffff"
+            "height": 30,
+            "color": "0000ffff",
+            "x": -27,
+            "y": 10
           }
         }
       }
@@ -410,16 +490,20 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffff00ff"
+            "width": 40,
+            "height": 50,
+            "color": "ffff00ff",
+            "x": 0,
+            "y": 0
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffff00ff"
+            "width": 40,
+            "height": 50,
+            "color": "ffff00ff",
+            "x": 3,
+            "y": 0
           }
         },
         "sleeves": {
@@ -427,15 +511,19 @@
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "ffff00ff"
+            "height": 30,
+            "color": "ffff00ff",
+            "x": -30,
+            "y": 10
           },
           "side": {
             "type": "region",
             "path": "swatch",
             "width": 16,
-            "height": 16,
-            "color": "ffff00ff"
+            "height": 30,
+            "color": "ffff00ff",
+            "x": -27,
+            "y": 10
           }
         }
       }
@@ -447,16 +535,20 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "3366ffff"
+            "width": 12,
+            "height": 18,
+            "color": "3366ffff",
+            "x": 8,
+            "y": 5
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "3366ffff"
+            "width": 12,
+            "height": 18,
+            "color": "3366ffff",
+            "x": 11,
+            "y": 5
           }
         }
       }
@@ -468,16 +560,20 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff8800ff"
+            "width": 12,
+            "height": 18,
+            "color": "ff8800ff",
+            "x": 8,
+            "y": 5
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff8800ff"
+            "width": 12,
+            "height": 18,
+            "color": "ff8800ff",
+            "x": 11,
+            "y": 5
           }
         }
       }
@@ -489,16 +585,20 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "8833ffff"
+            "width": 12,
+            "height": 18,
+            "color": "8833ffff",
+            "x": 8,
+            "y": 5
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "8833ffff"
+            "width": 12,
+            "height": 18,
+            "color": "8833ffff",
+            "x": 11,
+            "y": 5
           }
         }
       }
@@ -510,16 +610,20 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff66aaff"
+            "width": 12,
+            "height": 18,
+            "color": "ff66aaff",
+            "x": 8,
+            "y": 5
           },
           "side": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ff66aaff"
+            "width": 12,
+            "height": 18,
+            "color": "ff66aaff",
+            "x": 11,
+            "y": 5
           }
         }
       }
@@ -535,9 +639,11 @@
           "front": {
             "type": "region",
             "path": "swatch",
-            "width": 16,
-            "height": 16,
-            "color": "ffffffff"
+            "width": 46,
+            "height": 10,
+            "color": "ffffffff",
+            "x": 0,
+            "y": 52
           }
         }
       }
@@ -611,7 +717,25 @@
           "time": 0.5,
           "name": "change"
         }
-      ]
+      ],
+      "bones": {
+        "root": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": -5
+            },
+            {
+              "time": 0.5,
+              "value": 5
+            },
+            {
+              "time": 1,
+              "value": -5
+            }
+          ]
+        }
+      }
     }
   }
 }

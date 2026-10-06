@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "2f3d2bd0c0c7069ec7fea8c8ec9dc99a9cb38e29",
+  "releaseGate": "pending",
+  "targets": [],
+  "workload": {
+    "maxSkeletons": null,
+    "switchesPerSecond": null,
+    "catalogItems": null,
+    "teamVariants": 4
+  },
+  "budgets": {
+    "applyP95Ms": null,
+    "prepareP95Ms": null,
+    "assetResidentBytes": null,
+    "peakSwitchBytes": null
+  },
+  "runs": []
+}
