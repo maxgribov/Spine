@@ -195,3 +195,69 @@ hide areas, and reject forbidden overlaps. Intentional overlaps are legal for th
 library. Per-item completeness does not establish combination compatibility. The
 public-client test in `Tests/SpineTests/Skins/CompositionPublicAPITests.swift` demonstrates
 area checks, conflict rejection and all 32 fixture outfits using only `import Spine`.
+
+### Apply and restore an outfit
+
+Create the Skeleton with the descriptor's fixed base. Pass the entire next outfit
+on every change; removing a hide restores the current animation request, not setup.
+A nil animation request remains invisible.
+
+```swift
+let character = try Skeleton(meshAsset: asset, skin: "base")
+let clothes = SpineSkinLayer.replace(skin: "clothes/a", slots: ["torso", "sleeves"])
+let hat = SpineSkinLayer.replace(skin: "hat/a", slots: ["hat-front", "hat-back"])
+let team = SpineSkinLayer.overlay(skin: "team/blue")
+let look = SpineSkinComposition(baseSkin: "base", layers: [
+    clothes, hat, .hide(slots: ["bandana", "earring"]), team
+])
+try character.apply(skinComposition: look)
+let saved = character.skinComposition
+try character.apply(skinComposition: .init(baseSkin: "base", layers: [
+    clothes, .replace(skin: "hat/b", slots: ["hat-front", "hat-back"]),
+    .hide(slots: ["bandana"]), team
+])) // restore the earring without resetting animation
+if let saved = saved { try character.apply(skinComposition: saved) }
+try character.apply(skinComposition: .init(baseSkin: "base", layers: []))
+try character.apply(skin: "base") // leave composition, including when the base is unchanged
+```
+
+An empty layer list keeps composition active and resolves the base at current
+requests. A successful single-skin API or skin action exits composition, using its
+existing current-attachment/setup fallback. `skinComposition` is then nil.
+A different descriptor base fails with `skinCompositionBaseMismatch`; explicitly
+switch the single skin before entering composition on a new base. Legacy Skeletons
+reject composition with `unsupportedFeature`.
+
+### Playback, callbacks and frame preparation
+
+Applying an outfit preserves the current pose, clock, event cursors, action ownership,
+color, draw order, speed and pause. Begin, repeats and setup reset retain the outfit
+while resetting animation state. `stopMeshAnimation(resetToSetupPose: false)` freezes
+the current request and appearance; `true` retains the outfit and resolves setup
+through it. As before, stopping invalidates previously created animation actions;
+request a new action for a restart. Removing an action early still requires stop.
+
+Calls must be serialized with SpriteKit updates. You may change outfits outside
+updates during a serialized pause, or directly inside a Spine event callback.
+Several changes within a callback are allowed: the last successful change is visible
+to following callbacks. Content errors throw synchronously and keep the previous
+outfit; catch them inside the callback. Events with equal timestamps retain their
+source order and are delivered once per execution. Composition itself does not restart
+playback or clear frame/playback errors. Stop/restart from a callback retains the
+existing epoch guards against stale work.
+
+Do not call composition concurrently, during renderer preparation or from physics
+callbacks. Asset inspection/validation also requires serialized access; these APIs
+do not add background work or thread-safety guarantees.
+
+Finish each frame with the existing `prepareMeshes` call after actions, physics and
+manual changes (normally in `didFinishUpdate`). This is required on pause too. A late
+outfit change after prepare requires another prepare before drawing. Logical application
+is atomic; the new rendered image is guaranteed after successful prepare. Render-context
+errors are separate frame failures and do not roll back an accepted outfit.
+
+Affected region nodes may be replaced. Reacquire their references after applying an
+outfit; an externally retained old node is detached and no longer managed. Untouched
+records, including mixed mesh/point/body slots, keep identity and physics ownership.
+An exactly equal descriptor is a no-op. The asset and textures can be shared across
+Skeletons; appearance and playback state belong to each instance.

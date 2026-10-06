@@ -214,7 +214,7 @@ struct MeshAssetCompiler {
                         }
                     }
                 case .events(let frames):
-                    try validateTimes(frames.map(\.time),path:root+"/events")
+                    try validateTimes(frames.map(\.time),path:root+"/events",allowEqual:true)
                     for (index,frame) in frames.enumerated() {
                         guard model.events.contains(where:{$0.name==frame.event}) else {try fail(.invalidData,root+"/events/\(index)/name","Animation event is missing.")}
                         let values=[Double(frame.float ?? 0),Double(frame.volume ?? 1),Double(frame.balance ?? 0)]
@@ -250,10 +250,12 @@ struct MeshAssetCompiler {
         }
     }
 
-    private func validateTimes(_ times:[TimeInterval],path:String)throws {
+    private func validateTimes(_ times:[TimeInterval],path:String,allowEqual:Bool=false)throws {
         var previous:TimeInterval = -1
         for (index,time) in times.enumerated() {
-            guard time.isFinite,Float(time).isFinite,time>=0,time>previous else {try fail(.invalidTimeline,path+"/\(index)/time","Timeline times must be finite, nonnegative and strictly increasing.")}
+            guard time.isFinite,Float(time).isFinite,time>=0,(allowEqual ? time>=previous:time>previous) else {
+                try fail(.invalidTimeline,path+"/\(index)/time",allowEqual ? "Event times must be finite, nonnegative and nondecreasing.":"Timeline times must be finite, nonnegative and strictly increasing.")
+            }
             previous=time
         }
     }
