@@ -193,6 +193,7 @@ The table compares runtime behavior, not just JSON decoding. **Legacy** uses the
 | Tint color | Setup + partial animation support | Setup + RGB/RGBA/alpha timelines |
 | Dark tint | Unsupported | Unsupported |
 | Skin switching | Supported | Supported, with compatible deform state preserved |
+| Cosmetic skin composition | Unsupported | Ordered region items with atomic outfit changes and catalog validation |
 | **Attachments** | | |
 | Region | Supported | Supported |
 | Ordinary mesh | Unsupported | Supported + deform animation |
@@ -215,6 +216,9 @@ The table compares runtime behavior, not just JSON decoding. **Legacy** uses the
 Mesh runtime restrictions and required scene integration are described in [Mesh Usage](#mesh-usage).
 
 ## Documentation
+
+A concise overview of implemented capabilities is available in the [feature catalog](docs/index.md).
+
 The Spine library is pretty well documented. You can find the documentation both in the source code files themselves and compile the documentation for displaying it in the Developer Documentation in Xcode.
 
 To compile the documentation use the menu: `Product` > `Build Documentation`

@@ -80,7 +80,7 @@ public class Skeleton: SKNode {
         self.createSlots(model)
     }
     /**
-     Сreates a skeleton node based on the `json` file stored in the bundle application.
+     Creates a skeleton node based on the `json` file stored in the bundle application.
      
      The initializer may fail, so returning value *optional*
      
@@ -113,7 +113,7 @@ public class Skeleton: SKNode {
     }
     
     /**
-     Сreates a skeleton node based on the `json` file stored in the bundle application.
+     Creates a skeleton node based on the `json` file stored in the bundle application.
      
      The initializer may fail, so returning value *optional*
      

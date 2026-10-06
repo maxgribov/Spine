@@ -17,7 +17,7 @@ with tarfile.open(fileobj=io.BytesIO(archive)) as tar: tar.extractall(baseline,f
 # Only validation tooling is grafted onto the archive. Sources/Spine remains exact.
 for path in ['Examples/MeshPrototype/Package.swift','Examples/MeshPrototype/Sources/MeshPrototype/LegacyValidation.swift','Tests/SpineTests/Resources/Compatibility/legacy-4.1.json']:
  dest=baseline/path;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy(root/path,dest)
-shutil.copytree(root/'features/mesh-support/validation/legacy-baseline',baseline/'features/mesh-support/validation/legacy-baseline')
+shutil.copytree(root/'Examples/MeshPrototype/Fixtures/legacy-baseline',baseline/'Examples/MeshPrototype/Fixtures/legacy-baseline')
 main=baseline/'Examples/MeshPrototype/Sources/MeshPrototype/main.swift'
 text=main.read_text()
 marker='var selectedGroupSize'

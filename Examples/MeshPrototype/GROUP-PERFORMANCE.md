@@ -1,58 +1,23 @@
-# Несколько треугольников в одном SpriteKit node
+# Triangle Grouping
 
-Эксперимент от 2026-10-03, продолжение [оптимизации CPU](CPU-PERFORMANCE.md). Исходный renderer — `c7aa840`, один `SKSpriteNode` на треугольник. Production target `Spine` не изменён.
+The prototype can render one, two or four consecutive triangles per SpriteKit node. Two triangles per node are the default; the other modes remain available for comparison. Groups preserve attachment boundaries, drawing order and transparency.
 
-## Реализация
+Historical Release measurements from October 3, 2026 on Apple M1 Max and macOS 26.6:
 
-`TriangleMeshNode.GroupSize` задаёт `.one`, `.two` или `.four`; значение фиксируется в общем `Material`. По результатам эксперимента выбрана `.two` как значение по умолчанию. Вариант `.one` сохраняет прежний алгоритм для сравнения. `TriangleGroups.swift` реализует группировку последовательных треугольников исходного index buffer. Группы не пересекают границы meshes/attachments и не меняют порядок индексов.
-
-Один sprite покрывает AABB группы с прежним защитным отступом. Shader проверяет каждый треугольник и вычисляет его barycentric UV. Результаты смешиваются в исходном порядке через premultiplied source-over; inherited alpha применяется к каждому треугольнику **до** смешивания. Поэтому пересекающиеся треугольники на складках сохраняют порядок и накопление прозрачности. Умножение общей alpha только в конце дало бы другой результат.
-
-Коэффициенты общих рёбер и правило полуоткрытого покрытия сохранены. Данные одного треугольника упакованы в пять `vec4` attributes: три уравнения рёбер, две пары UV, третья UV и inverse area. Два дополнительных `vec3` задают framebuffer → mesh. Итого 12 attributes для группы 2 и 22 для группы 4. Последняя неполная группа имеет явно отключённые пустые slots; вырожденные треугольники также отключаются и могут восстановиться.
-
-[Контракт shader SpriteKit](https://developer.apple.com/documentation/spritekit/creating-a-custom-fragment-shader) предполагает premultiplied output; групповой renderer использует обычный alpha blending. Другие blend modes и индивидуальные изменения дочерних triangle nodes этим экспериментом не поддерживаются. Произвольное встраивание сторонних узлов между треугольниками одной группы не предусмотрено.
-
-## Измерение
-
-Apple M1 Max, macOS 26.6, Release. Команда:
-
-```sh
-swift run -c release --package-path Examples/MeshPrototype MeshPrototype --benchmark-groups Examples/MeshPrototype/output/groups-benchmark
-```
-
-Все варианты используют `.triangle` bounds и `ignoresSiblingOrder = false`. Два раунда: группы 1/2/4, затем 4/2/1, для 1/10/50 персонажей. 18 сценариев в одном процессе; в каждом прежние 30 + 120 native кадров и 30 + 60 offscreen кадров. Во время прогона сборки/тесты не запускались, другие запущенные нами экземпляры прототипа закрыты. App Nap предотвращён, окно поверх других.
-
-Ниже — среднее двух медиан времени, мс. CPU подготовки позы измерен в SKView; CPU scene update/encode и GPU — отдельно через SKRenderer. Эти значения нельзя складывать в измеренное время native кадра. Callback FPS — частота обновления сцены, не подтверждённые презентации drawable.
-
-| Персонажи | Треугольников на node | Видимых sprite nodes | CPU pose | CPU scene update/encode | GPU | Callback FPS |
+| Characters | Triangles per node | Sprite nodes | CPU pose, ms | Update and encode, ms | GPU, ms | Callback FPS |
 |---:|---:|---:|---:|---:|---:|---:|
-| 1 | 1 | 226 | 0.599 | 0.951 | 0.084 | 60.0 |
-| 1 | 2 | 117 | 0.539 | 0.690 | 0.090 | 60.0 |
-| 1 | 4 | 63 | 0.561 | 0.773 | 0.105 | 60.0 |
-| 10 | 1 | 1572 | 2.127 | 6.005 | 0.149 | 60.0 |
-| 10 | 2 | 806 | 2.067 | 3.978 | 0.172 | 60.0 |
-| 10 | 4 | 471 | 1.967 | 3.958 | 0.201 | 60.0 |
-| 50 | 1 | 7860 | 10.447 | 29.573 | 0.366 | 20.0 |
-| 50 | 2 | 4030 | 9.010 | 19.363 | 0.466 | 30.0 |
-| 50 | 4 | 2355 | 8.525 | 19.164 | 0.565 | 30.0 |
+| 1 | 1 | 226 | 0.599 | 0.951 | 0.084 | 60 |
+| 1 | 2 | 117 | 0.539 | 0.690 | 0.090 | 60 |
+| 1 | 4 | 63 | 0.561 | 0.773 | 0.105 | 60 |
+| 10 | 1 | 1572 | 2.127 | 6.005 | 0.149 | 60 |
+| 10 | 2 | 806 | 2.067 | 3.978 | 0.172 | 60 |
+| 10 | 4 | 471 | 1.967 | 3.958 | 0.201 | 60 |
+| 50 | 1 | 7860 | 10.447 | 29.573 | 0.366 | 20 |
+| 50 | 2 | 4030 | 9.010 | 19.363 | 0.466 | 30 |
+| 50 | 4 | 2355 | 8.525 | 19.164 | 0.565 | 30 |
 
-Все измеряемые native кадры — visible window, thermal state nominal (0). Все 12 контрольных сравнений прошли; максимум отличия — 0/255, ни одного канала выше допуска 2/255.
+Two-triangle groups provided the preferred CPU/GPU tradeoff on this fixture. Four-triangle groups reduced node counts further without increasing callback FPS. Node counts are not draw-call counts, and callback FPS is not a measurement of presented frames.
 
-[Исходный benchmark](Benchmarks/2026-10-03-triangle-groups.json), [сравнения изображений](Benchmarks/2026-10-03-triangle-groups-images.json).
+Nine unit tests and existing image checks passed. Another 160 grouping comparisons stayed within the existing 2/255 tolerance; official Spine pose checks also passed. These prototype measurements do not predict performance on other devices.
 
-Для 50 персонажей группа 2 сокращает число sprite nodes на 49%, CPU scene update/encode — примерно на 35%, CPU подготовки — на 14%. GPU-время растёт с 0.366 до 0.466 мс, а callback сцены — с 20 до 30 FPS. Группа 4 сокращает число sprite nodes на 70%, однако encoding почти не улучшается относительно группы 2, GPU занимает 0.565 мс, callback остаётся 30 FPS.
-
-На этом стенде **группа 2 — предпочтительный компромисс**. Группа 4 немного уменьшает CPU подготовки, но не улучшает частоту обновления и требует больше GPU-времени. Это измерение конкретного fixture на одном устройстве; значения не являются прогнозом для других meshes. Выбрана группа 2 по умолчанию для API renderer, demo и обычного benchmark; `--group-size 1` сохраняет доступ к исходному renderer, `--group-size 4` — к экспериментальному варианту. Стенд `--benchmark-groups` по-прежнему явно сравнивает все три варианта.
-
-
-Количество sprite nodes не равно draw calls. Объединение в одном shader уменьшает количество узлов, но не предоставляет прямого контроля над batching SpriteKit. Сумма площадей групповых AABB также не измеряет число GPU-инструкций: даже при меньшей площади один fragment проверяет несколько треугольников.
-
-## Корректность и ограничения
-
-- 9 unit tests, включая уменьшение числа sprite nodes, отключение пустых slots, вырождение/восстановление и сингулярную проекцию групп.
-- Все прежние GPU-проверки проходят: 10 базовых случаев, 128 moving-bounds сравнений, 16 shared-material сравнений. Прежние допуски nearest/силуэта не изменялись.
-- 160 новых сравнений группы 2/4 против группы 1: оба bounds modes, folds, разные UV/цвета, parent alpha, зеркалирование, поворот, исчезновение/восстановление треугольников, неполные группы и 16 поз каждого Goblins skin. Максимальное отличие — 1/255; допуск — 2/255 без отдельных исключений на границах.
-- Сравнение поз с официальным Spine runtime 4.1.56: 16 поз, 6064 координаты, max error 0.000174059; UV и активные attachments совпадают в прежнем допуске.
-- Контрольные кадры всех 18 benchmark-сценариев сохраняются после измерений, readback исключён из времени. Проверяются 12 пар относительно группы 1, включая непустой эталон и совпадение размеров.
-
-Source-over внутри shader уменьшает число промежуточных округлений framebuffer, поэтому побитовое совпадение с отдельными draw calls не гарантируется. Проверена одна macOS/Metal конфигурация: лимиты attributes, стоимость shader и выигрыш на iOS/tvOS пока неизвестны. Это эксперимент внутри SpriteKit, не обещание универсального ускорения или полной поддержки Spine meshes.
+Recorded data: [benchmark](Benchmarks/2026-10-03-triangle-groups.json), [image comparisons](Benchmarks/2026-10-03-triangle-groups-images.json).

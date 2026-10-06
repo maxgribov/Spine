@@ -86,10 +86,9 @@ The optional collector writes raw **apply** and **prepare** milliseconds separat
 cold/repeat/alternating statistics and process-resident snapshots. Its custom context
 measures CPU preparation, not native frame GPU rendering. Build metadata records
 source commit, dirty status and exact source/fixture hashes. Process resident samples
-are not isolated asset memory or the transient staging peak. Those require platform
-allocation tooling and the target workload in Phase 5. No measured result implies
-release approval: budgets, isolated memory and approved workload remain pending.
-Physical-iPhone fixture captures are recorded separately in the validation report.
+are not isolated asset memory or the transient staging peak. Use the separate memory
+diagnostic and a defined workload for those observations. A standalone collector
+does not approve a release or predict costs for different artwork and devices.
 
 ## Automated paired images and native phase recording
 
@@ -223,8 +222,7 @@ The generated physical test host sets `SPINE_MESH_ORACLE_OUTPUT` to its sandbox
 temporary directory before XCTest runs. This preserves the existing oracle tests
 without attempting forbidden `/tmp` exports on iOS. The host keeps its display
 awake during tests; this setting belongs to the temporary test host, not the game
-or public library. Infrastructure failures remain in the validation history.
+or public library.
 
-Aggregate agreed-MVP assessment (including the explicit owner D.5 memory-ceiling
-exception) is checked with `python3 Examples/SkinComposition/verify-release.py`.
-Standalone raw diagnostic reports do not independently approve release.
+Standalone raw diagnostic reports do not independently approve release. The
+implemented feature overview is available in the documentation catalog.

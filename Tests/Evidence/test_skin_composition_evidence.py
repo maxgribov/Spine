@@ -10,6 +10,7 @@ corresponding stage. The positive test proves both unchanged captures reach exit
 No collaborator spies: this exercises the real public CLI and filesystem boundary.
 """
 
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -22,17 +23,18 @@ from dataclasses import dataclass
 
 
 REPO = Path(__file__).resolve().parents[2]
-CAPTURES = REPO / "features/skin-composition/validation/captures"
+CAPTURES = REPO / "Tests/Evidence/Fixtures/skin-composition"
 VERIFIER = REPO / "Examples/SkinComposition/verify-evidence.py"
 
 
 @dataclass
 class VerificationHarness:
     evidence: Path
+    source_repo: Path
 
     def run(self):
         return subprocess.run(
-            [sys.executable, str(VERIFIER), str(self.evidence), "--repo", str(REPO)],
+            [sys.executable, str(VERIFIER), str(self.evidence), "--repo", str(self.source_repo)],
             text=True, capture_output=True, check=False,
         )
 
@@ -48,7 +50,25 @@ def make_sut(platform="macos"):
     with tempfile.TemporaryDirectory(prefix="skin-evidence-test-") as directory:
         evidence = Path(directory) / platform
         shutil.copytree(CAPTURES / platform, evidence)
-        yield VerificationHarness(evidence=evidence)
+        # Artifact tests use an isolated source fixture, not the changing library.
+        source_repo = Path(directory) / "source-repo"
+        source_name = "Examples/SkinComposition/ImageEvidence.swift"
+        source = source_repo / source_name
+        source.parent.mkdir(parents=True)
+        source.write_text("// Source provenance fixture for evidence verification.\n")
+        hashes = {source_name: hashlib.sha256(source.read_bytes()).hexdigest()}
+        for name in ("paired/comparisons.json", "native/native.json", "measurements.json"):
+            path = evidence / name
+            report = json.loads(path.read_text())
+            report["build"]["hashes"] = hashes
+            path.write_text(json.dumps(report))
+        seal_path = evidence / "native-playback.mp4.sha256.json"
+        seal = json.loads(seal_path.read_text())
+        seal["nativeReportSHA256"] = hashlib.sha256(
+            (evidence / "native/native.json").read_bytes()
+        ).hexdigest()
+        seal_path.write_text(json.dumps(seal))
+        yield VerificationHarness(evidence=evidence, source_repo=source_repo)
 
 
 class SkinCompositionEvidenceTests(unittest.TestCase):

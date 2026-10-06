@@ -166,7 +166,7 @@ private func saveLegacyCandidate(_ image: CGImage, to url: URL) throws {
 func verifyLibraryLegacy(output: URL, record: Bool) throws {
     let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
     let fixture = root.appendingPathComponent("Tests/SpineTests/Resources/Compatibility/legacy-4.1.json")
-    let baseline = root.appendingPathComponent("features/mesh-support/validation/legacy-baseline")
+    let baseline = root.appendingPathComponent("Examples/MeshPrototype/Fixtures/legacy-baseline")
     try validateLegacyOutput(output, baseline: baseline)
     let data = try Data(contentsOf: fixture)
     try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
@@ -236,7 +236,7 @@ func verifyLibraryLegacy(output: URL, record: Bool) throws {
 
 func benchmarkLibraryLegacy(output: URL, record: Bool = false) throws {
     let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-    let baseline = root.appendingPathComponent("features/mesh-support/validation/legacy-baseline")
+    let baseline = root.appendingPathComponent("Examples/MeshPrototype/Fixtures/legacy-baseline")
     try validateLegacyOutput(output, baseline: baseline)
     if !record {
         // Fail before benchmarking/writing when even one reference is absent or corrupt.
@@ -276,7 +276,7 @@ func benchmarkLibraryLegacy(output: URL, record: Bool = false) throws {
             func median(_ values: [Double]) -> Double { let sorted = values.sorted(); return (sorted[59]+sorted[60])/2 }
             let imageName = "benchmark-\(round)-\(count).png"
             let image = try harness.image()
-            let referenceURL = root.appendingPathComponent("features/mesh-support/validation/legacy-baseline/" + imageName)
+            let referenceURL = root.appendingPathComponent("Examples/MeshPrototype/Fixtures/legacy-baseline/" + imageName)
             var imageVerified = false
             if !record {
                 guard let reference = NSImage(contentsOf: referenceURL)?.cgImage(forProposedRect: nil, context: nil, hints: nil) else { throw PrototypeError("Invalid legacy benchmark golden") }
@@ -297,7 +297,7 @@ func benchmarkLibraryLegacy(output: URL, record: Bool = false) throws {
 func runLegacyBundleHostIfNeeded(output: URL) throws -> Bool {
     guard Bundle.main.bundleURL.pathExtension != "app" else { return false }
     let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-    try validateLegacyOutput(output, baseline: root.appendingPathComponent("features/mesh-support/validation/legacy-baseline"))
+    try validateLegacyOutput(output, baseline: root.appendingPathComponent("Examples/MeshPrototype/Fixtures/legacy-baseline"))
     let host = FileManager.default.temporaryDirectory.appendingPathComponent("SpineLegacy-" + UUID().uuidString + ".app")
     let contents = host.appendingPathComponent("Contents")
     let executable = contents.appendingPathComponent("MacOS/MeshPrototype")
